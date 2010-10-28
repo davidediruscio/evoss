@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmlns:uml2tools.notation="http://www.eclipse.org/mdt/uml2tools/gmf/notation/ext/2008">
+  <notation:Diagram xmi:id="_-iST0AmhEd-3u7mEq6XqdQ" type="UMLClass" measurementUnit="Pixel">
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_-iST0QmhEd-3u7mEq6XqdQ"/>
+    <styles xmi:type="uml2tools.notation:U2TDiagramCanonicalStyle" xmi:id="_-iST0gmhEd-3u7mEq6XqdQ"/>
+    <styles xmi:type="notation:FilteringStyle" xmi:id="_-iST0wmhEd-3u7mEq6XqdQ"/>
+    <element xmi:type="uml:Model" href="model.uml#_9XGTEAmhEd-3u7mEq6XqdQ"/>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="__FDCoAmhEd-3u7mEq6XqdQ" type="UMLClass" measurementUnit="Pixel">
+    <styles xmi:type="notation:DiagramStyle" xmi:id="__FDCoQmhEd-3u7mEq6XqdQ"/>
+    <styles xmi:type="uml2tools.notation:U2TDiagramCanonicalStyle" xmi:id="__FDCogmhEd-3u7mEq6XqdQ"/>
+    <styles xmi:type="notation:FilteringStyle" xmi:id="__FDCowmhEd-3u7mEq6XqdQ"/>
+    <element xmi:type="uml:Package" href="model.uml#_9XGTGQmhEd-3u7mEq6XqdQ"/>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="__YQ5kAmhEd-3u7mEq6XqdQ" type="UMLClass" measurementUnit="Pixel">
+    <styles xmi:type="notation:DiagramStyle" xmi:id="__YRgoAmhEd-3u7mEq6XqdQ"/>
+    <styles xmi:type="uml2tools.notation:U2TDiagramCanonicalStyle" xmi:id="__YRgoQmhEd-3u7mEq6XqdQ"/>
+    <styles xmi:type="notation:FilteringStyle" xmi:id="__YRgogmhEd-3u7mEq6XqdQ"/>
+    <element xmi:type="uml:Package" href="model.uml#_9XGTGgmhEd-3u7mEq6XqdQ"/>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="__ria4AmhEd-3u7mEq6XqdQ" type="UMLClass" measurementUnit="Pixel">
+    <styles xmi:type="notation:DiagramStyle" xmi:id="__rjB8AmhEd-3u7mEq6XqdQ"/>
+    <styles xmi:type="uml2tools.notation:U2TDiagramCanonicalStyle" xmi:id="__rjB8QmhEd-3u7mEq6XqdQ"/>
+    <styles xmi:type="notation:FilteringStyle" xmi:id="__rjB8gmhEd-3u7mEq6XqdQ"/>
+    <element xmi:type="uml:Package" href="model.uml#_9XGTGwmhEd-3u7mEq6XqdQ"/>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_A4L0MAmiEd-3u7mEq6XqdQ" type="UMLClass" measurementUnit="Pixel">
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_A4L0MQmiEd-3u7mEq6XqdQ"/>
+    <styles xmi:type="uml2tools.notation:U2TDiagramCanonicalStyle" xmi:id="_A4L0MgmiEd-3u7mEq6XqdQ"/>
+    <styles xmi:type="notation:FilteringStyle" xmi:id="_A4L0MwmiEd-3u7mEq6XqdQ"/>
+    <element xmi:type="uml:Package" href="model.uml#_9XGTHAmhEd-3u7mEq6XqdQ"/>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_xjGy8HSREd-mKbFb3qVytg" type="UMLClass" measurementUnit="Pixel">
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_xjHaAHSREd-mKbFb3qVytg"/>
+    <styles xmi:type="uml2tools.notation:U2TDiagramCanonicalStyle" xmi:id="_xjHaAXSREd-mKbFb3qVytg"/>
+    <styles xmi:type="notation:FilteringStyle" xmi:id="_xjHaAnSREd-mKbFb3qVytg"/>
+    <element xmi:type="uml:Package" href="model.uml#_9XGTGQmhEd-3u7mEq6XqdQ"/>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_x6-gYHSREd-mKbFb3qVytg" type="UMLClass" measurementUnit="Pixel">
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_x6-gYXSREd-mKbFb3qVytg"/>
+    <styles xmi:type="uml2tools.notation:U2TDiagramCanonicalStyle" xmi:id="_x6-gYnSREd-mKbFb3qVytg"/>
+    <styles xmi:type="notation:FilteringStyle" xmi:id="_x6-gY3SREd-mKbFb3qVytg"/>
+    <element xmi:type="uml:Package" href="model.uml#_9XGTGgmhEd-3u7mEq6XqdQ"/>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_yJRbEHSREd-mKbFb3qVytg" type="UMLClass" measurementUnit="Pixel">
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_yJRbEXSREd-mKbFb3qVytg"/>
+    <styles xmi:type="uml2tools.notation:U2TDiagramCanonicalStyle" xmi:id="_yJRbEnSREd-mKbFb3qVytg"/>
+    <styles xmi:type="notation:FilteringStyle" xmi:id="_yJRbE3SREd-mKbFb3qVytg"/>
+    <element xmi:type="uml:Package" href="model.uml#_9XGTGwmhEd-3u7mEq6XqdQ"/>
+  </notation:Diagram>
+</xmi:XMI>

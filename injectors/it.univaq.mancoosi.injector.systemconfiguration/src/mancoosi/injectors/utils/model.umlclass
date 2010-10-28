@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmlns:uml2tools.notation="http://www.eclipse.org/mdt/uml2tools/gmf/notation/ext/2008">
+  <notation:Diagram xmi:id="_kzo-oAmREd-3u7mEq6XqdQ" type="UMLClass" measurementUnit="Pixel">
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_kzo-oQmREd-3u7mEq6XqdQ"/>
+    <styles xmi:type="uml2tools.notation:U2TDiagramCanonicalStyle" xmi:id="_kzo-ogmREd-3u7mEq6XqdQ"/>
+    <styles xmi:type="notation:FilteringStyle" xmi:id="_kzo-owmREd-3u7mEq6XqdQ"/>
+    <element xmi:type="uml:Model" href="model.uml#_jznFAAmREd-3u7mEq6XqdQ"/>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_lqTg4AmREd-3u7mEq6XqdQ" type="UMLClass" measurementUnit="Pixel">
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_lqTg4QmREd-3u7mEq6XqdQ"/>
+    <styles xmi:type="uml2tools.notation:U2TDiagramCanonicalStyle" xmi:id="_lqTg4gmREd-3u7mEq6XqdQ"/>
+    <styles xmi:type="notation:FilteringStyle" xmi:id="_lqTg4wmREd-3u7mEq6XqdQ"/>
+    <element xmi:type="uml:Package" href="model.uml#_jznFCQmREd-3u7mEq6XqdQ"/>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_l9eUgAmREd-3u7mEq6XqdQ" type="UMLClass" measurementUnit="Pixel">
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_l9eUgQmREd-3u7mEq6XqdQ"/>
+    <styles xmi:type="uml2tools.notation:U2TDiagramCanonicalStyle" xmi:id="_l9eUggmREd-3u7mEq6XqdQ"/>
+    <styles xmi:type="notation:FilteringStyle" xmi:id="_l9eUgwmREd-3u7mEq6XqdQ"/>
+    <element xmi:type="uml:Package" href="model.uml#_jznFCgmREd-3u7mEq6XqdQ"/>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_mUpeYAmREd-3u7mEq6XqdQ" type="UMLClass" measurementUnit="Pixel">
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_mUpeYQmREd-3u7mEq6XqdQ"/>
+    <styles xmi:type="uml2tools.notation:U2TDiagramCanonicalStyle" xmi:id="_mUpeYgmREd-3u7mEq6XqdQ"/>
+    <styles xmi:type="notation:FilteringStyle" xmi:id="_mUpeYwmREd-3u7mEq6XqdQ"/>
+    <element xmi:type="uml:Package" href="model.uml#_jznFCwmREd-3u7mEq6XqdQ"/>
+  </notation:Diagram>
+</xmi:XMI>

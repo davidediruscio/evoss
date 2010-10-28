@@ -1,0 +1,808 @@
+@namespace(uri="mancoosi", prefix="mancoosi")
+package mancoosi;
+
+abstract class NamedElement {
+  !unique !ordered attr String[1] name;
+}
+
+class Configuration extends NamedElement {
+  !ordered val InstalledPackage[*] installedPackages;
+  !ordered val FileSystem[1]#configuration fileSystem;
+  !ordered val Environment[1]#configuration environment;
+  !ordered val NotInstalledPackage[*] notInstalledPackages;
+  attr String creationTime;
+  attr String systemType;
+}
+
+class InstalledPackage extends Package {
+  !unique !ordered attr int[1] installedSize;
+  !unique !ordered attr String[1] maintainer;
+  !unique !ordered attr String[1] architecture;
+  !unique !ordered attr int[1] fileSize;
+  !unique !ordered attr String[1] checkSum;
+  !unique !ordered attr String[1] description;
+  !unique !ordered attr String[1] section;
+  !unique !ordered attr String[1] tag;
+  !unique !ordered attr PriorityType[1] priority;
+  !unique !ordered attr StatusType[1] status;
+  !unique !ordered attr String[1] uploaders;
+  !ordered ref SrcPackage[1] sourcePackage;
+  !ordered val Dependence depends;
+  !ordered ref InstalledPackage[*] recommends;
+  !ordered ref InstalledPackage[*] suggests;
+  !ordered ref InstalledPackage[*] enhances;
+  !ordered ref InstalledPackage[*] predepends;
+  !ordered ref VirtualPackage[1] provides;
+  !ordered ref InstalledPackage[*] replaces;
+  !ordered ref File[*] files;
+  !ordered val DocumentationFile[*]#pkg documentationFiles;
+  !ordered val PreinstScript#pkg PreinstScript;
+  !ordered val PostinstScript#pkg PostinstScript;
+  !ordered val PrermScript#pkg PrermScript;
+  !ordered val PostrmScript#pkg PostrmScript;
+  !ordered val ConfigScript#pkg configScript;
+  val Conflict conflict;
+}
+
+class NotInstalledPackage extends Package {
+}
+
+class SrcPackage extends InstalledPackage {
+  !ordered ref BinPackage[*] buildDepends;
+  !ordered ref BinPackage[*] buildConflicts;
+}
+
+class BinPackage extends InstalledPackage {
+  !ordered ref SrcPackage[1] srcRef;
+}
+
+class VirtualPackage extends InstalledPackage {
+  !ordered ref InstalledPackage[+] impPackage;
+}
+
+abstract class Dependence {
+  !ordered val AndDep#dependence andDep;
+  !ordered val OrDep#dependence orDep;
+  !ordered val SingleDep[1]#dependence singleDep;
+  !ordered ref InstalledPackage[1] pkg;
+}
+
+class AndDep extends Dependence {
+  !ordered val Dependence[2..*] ops;
+  !ordered ref Dependence[1]#andDep dependence;
+}
+
+class OrDep extends Dependence {
+  !ordered val Dependence[2..*] ops;
+  !ordered ref Dependence[1]#orDep dependence;
+}
+
+class SingleDep extends Dependence {
+  !ordered ref Dependence[1]#singleDep dependence;
+  !unique !ordered attr VersionType[1] version;
+  !unique !ordered attr String[1] value;
+}
+
+class Script extends NamedElement {
+  !ordered val Invariant pre;
+  !ordered val Invariant post;
+  !ordered val Statement[*]#script statements;
+  !ordered val InputParameter[*]#script inputParameters;
+}
+
+class InputParameter extends NamedElement {
+  !ordered ref Script[1]#inputParameters script;
+}
+
+class PreinstScript extends Script {
+  !ordered ref InstalledPackage[1]#PreinstScript pkg;
+}
+
+class PostinstScript extends Script {
+  !ordered ref InstalledPackage[1]#PostinstScript pkg;
+}
+
+class PrermScript extends Script {
+  !ordered ref InstalledPackage[1]#PrermScript pkg;
+}
+
+class PostrmScript extends Script {
+  !ordered ref InstalledPackage[1]#PostrmScript pkg;
+}
+
+class ConfigScript extends Script {
+  !ordered ref InstalledPackage[1]#configScript pkg;
+}
+
+class Invariant extends NamedElement {
+  !ordered ref Atom atomEl;
+  !ordered ref AndInv and;
+  !ordered ref OrInv or;
+  !ordered ref NotInv not;
+}
+
+class Atom extends NamedElement {
+}
+
+class AndInv {
+  !ordered ref Invariant[1] left;
+  !ordered ref Invariant[1] right;
+}
+
+class OrInv {
+  !ordered ref Invariant[1] left;
+  !ordered ref Invariant[1] right;
+}
+
+class NotInv {
+  !ordered ref Invariant[1] elem;
+}
+
+abstract class Statement extends NamedElement {
+  !ordered ref Script[1]#statements script;
+  !unique !ordered attr boolean[1] isStart;
+  !ordered ref Statement previous;
+  !ordered ref Statement next;
+}
+
+abstract class ControlStatement extends Statement {
+}
+
+abstract class Case extends ControlStatement {
+  !unique !ordered attr String[1] selector;
+  !ordered val DefaultCaseCondition[1] default;
+}
+
+abstract class Condition {
+  !ordered val Statement[1] action;
+}
+
+class DefaultCaseCondition extends Condition {
+}
+
+class CasePrerm extends Case {
+  !ordered val CasePrermCondition[*] conditions;
+}
+
+class CasePrermCondition extends Condition {
+  !unique !ordered attr CasePrermConditionValue[1] value;
+}
+
+class CasePostrm extends Case {
+  !ordered val CasePostrmCondition[*] conditions;
+}
+
+class CasePostrmCondition extends Condition {
+  !unique !ordered attr CasePostrmConditionValue[1] value;
+}
+
+class CasePreinst extends Case {
+  !ordered val CasePreinstCondition[*] conditions;
+}
+
+class CasePreinstCondition extends Condition {
+  !unique !ordered attr CasePreinstConditionValue[1] value;
+}
+
+class CasePostinst extends Case {
+  !ordered val CasePostinstCondition[*] conditions;
+}
+
+class CasePostinstCondition extends Condition {
+  !unique !ordered attr CasePostinstConditionValue[1] value;
+}
+
+class BasicCase extends ControlStatement {
+  !ordered val BasicCaseCondition[*] conditions;
+}
+
+class BasicCaseCondition extends Condition {
+  !unique !ordered attr String[1] value;
+}
+
+class If extends ControlStatement {
+  !ordered val BooleanExpression[1] condition;
+  !ordered val Statement[*] then;
+  !ordered val Statement[*] else;
+}
+
+class BooleanExpression {
+  !unique !ordered attr String[1] value;
+}
+
+class Return extends ControlStatement {
+  !unique !ordered attr ReturnStatementValue[1] value;
+}
+
+abstract class Iterator extends ControlStatement {
+}
+
+class DirectoryIterator extends Iterator {
+  !ordered ref File[1] directory;
+}
+
+class FileContentIterator extends Iterator {
+  !ordered ref File[1] file;
+}
+
+class InputParameterIterator extends Iterator {
+  !ordered ref InputParameter[+] inputParameters;
+}
+
+class EnumerationIterator extends Iterator {
+  !ordered ref Enumeration[1] enumeration;
+}
+
+class StringIterator extends Iterator {
+}
+
+class Enumeration {
+  ref EnumerationElement[+] elements;
+}
+
+class EnumerationElement {
+  !unique !ordered attr int[1] index;
+  !unique !ordered attr String[1] value;
+}
+
+abstract class FileSystemStatement extends Statement {
+  !ordered ref File[+] files;
+}
+
+class AdditionFileSytemStatement extends FileSystemStatement {
+}
+
+class DeletionFileSystemStatement extends FileSystemStatement {
+}
+
+class UpdateFileSytemStatement extends FileSystemStatement {
+}
+
+abstract class EnvironmentStatement extends Statement {
+  !ordered ref Environment[1] environment;
+}
+
+class AdditionEnvironmentStatement extends EnvironmentStatement {
+}
+
+class DeletionEnvironmentStatement extends EnvironmentStatement {
+}
+
+class UpdateEnvironmentStatement extends EnvironmentStatement {
+}
+
+abstract class PackageSettingStatement extends Statement {
+  !ordered ref PackageSetting[1] pkgsetting;
+}
+
+class AdditionPackageSettingStatement extends PackageSettingStatement {
+}
+
+class DeletionPackageSettingStatement extends PackageSettingStatement {
+}
+
+class UpdatePackageSettingStatement extends PackageSettingStatement {
+}
+
+abstract class NeutralStatement extends Statement {
+}
+
+class Message extends NeutralStatement {
+}
+
+class Comment extends NeutralStatement {
+}
+
+class Environment extends NamedElement {
+  !ordered ref Service[*]#env runningServices;
+  !ordered val Alternative[*]#env alternatives;
+  !ordered val User[+]#env users;
+  !ordered val Group[+]#env groups;
+  !ordered val EmacsPackage[1]#env emacspkg;
+  !ordered val IconCache[1]#env iconCache;
+  !ordered val DesktopDB[1]#env desktopDb;
+  !ordered val MimeTypeHandlerCache[1]#env mimeTypeHandlerCache;
+  !ordered val LibraryCache[1]#env libraryCache;
+  !ordered val SkeeperCatalog[1]#env skeeperCatalog;
+  !ordered val SGMLCatalog[1]#env sgmlCatalog;
+  !ordered ref Configuration[1]#environment configuration;
+  !ordered val ModuleCache[+]#env moduleCache;
+  !ordered val XFontCache[+]#env xfontCaches;
+  !ordered val GConf[1]#env gconf;
+  !ordered val Menu[1]#env menu;
+}
+
+class FileSystem extends NamedElement {
+  !ordered val File[1]#fs root;
+  !ordered ref Configuration[1]#fileSystem configuration;
+  ref File[*] allFiles;
+}
+
+class GConf {
+  !ordered ref File[*] confFiles;
+  !ordered ref File[*] schemas;
+  !ordered ref Environment[1]#gconf env;
+}
+
+class ApplicationMenuCatalog extends NamedElement {
+  !ordered ref Menu[1]#catalog menu;
+}
+
+class Menu {
+  !ordered val MenuEntry[*]#menu entries;
+  !ordered val ApplicationMenuCatalog[1]#menu catalog;
+  !ordered ref Environment[1]#menu env;
+}
+
+class MenuEntry extends NamedElement {
+  !ordered ref Menu[1]#entries menu;
+  !ordered ref File[1] executable;
+  !ordered ref MenuEntry[1] parent;
+}
+
+class Boot {
+  !ordered ref Service[+] services;
+}
+
+class Service extends NamedElement {
+  !ordered ref File[1] executable;
+  !ordered ref Environment[1]#runningServices env;
+}
+
+class File extends NamedElement {
+  !unique !ordered attr String[1] extension;
+  !unique !ordered attr String[1] description;
+  !unique !ordered attr int[1] size;
+  !unique !ordered attr String[1] checkSum;
+  !unique !ordered attr boolean[1] isDirectory;
+  !unique !ordered attr boolean[1] suid;
+  !unique !ordered attr boolean[1] guid;
+  !unique !ordered attr String[1] permission;
+  !unique !ordered attr String[1] location;
+  !ordered ref FileSystem[1]#root fs;
+  !ordered val File[*]#parent childs;
+  !ordered ref File[1]#childs parent;
+  ref User[1] owner;
+  ref Group[1] group;
+  attr boolean isMissing;
+  ref PackageSetting[*]#files pkgSettings;
+}
+
+class DocumentationFile extends File {
+  !ordered ref InstalledPackage[1]#documentationFiles pkg;
+}
+
+class InformationFile extends File {
+}
+
+class Alternative extends NamedElement {
+  !ordered ref File[1] current;
+  !ordered ref File[1] location;
+  !ordered ref Environment[1]#alternatives env;
+}
+
+class PackageSetting extends NamedElement {
+  !ordered ref Service[*] services;
+  !ordered ref File[*]#pkgSettings files;
+  !ordered ref Package[1]#packageSettings pkg;
+  !ordered ref PackageSetting[*] dependences;
+}
+
+class IconCache {
+  !unique !ordered attr String[1] mtime;
+  !ordered ref Environment[1]#iconCache env;
+  !ordered ref File[1] icons;
+}
+
+class DesktopDB {
+  !ordered ref Environment[1]#desktopDb env;
+  !ordered ref File[1] applications;
+}
+
+class MimeTypeHandlerCache {
+  !ordered ref Environment[1]#mimeTypeHandlerCache env;
+  !ordered val MimeTypeHandler[*]#cache handlers;
+  val MimeType[*]#cache mimeTypes;
+}
+
+class MimeTypeHandler {
+  !ordered ref File[1] handler;
+  ref MimeType#mimeTypeHandlers type;
+  ref MimeTypeHandlerCache[1]#handlers cache;
+}
+
+class MimeType {
+  attr String name;
+  attr String extension;
+  ref MimeTypeHandler[*]#type mimeTypeHandlers;
+  ref MimeTypeHandlerCache[1]#mimeTypes cache;
+}
+
+class XFontCache {
+  !ordered val XFont[+]#xfontCache xfonts;
+  !unique !ordered attr String[1] location;
+  !ordered ref Environment[1]#xfontCaches env;
+}
+
+class XFont extends NamedElement {
+  !ordered ref XFontCache[1]#xfonts xfontCache;
+  !ordered ref File[+] file;
+}
+
+class LibraryCache {
+  !ordered ref File[*] locations;
+  !ordered val SharedLibrary[*]#libraryCache sharedLibraries;
+  !ordered ref Environment[1]#libraryCache env;
+}
+
+class SharedLibrary {
+  !unique !ordered attr String[1] name;
+  !ordered ref File[1] file;
+  !unique !ordered attr String[1] version;
+  !ordered ref LibraryCache[1]#sharedLibraries libraryCache;
+}
+
+class ModuleCache {
+  !unique !ordered attr String[1] version;
+  !ordered val Module[*]#moduleCache modules;
+  !ordered ref Environment[1]#moduleCache env;
+}
+
+class Module extends NamedElement {
+  !ordered ref File[1] file;
+  !ordered ref ModuleCache[1]#modules moduleCache;
+}
+
+class SGMLCatalog extends NamedElement {
+  !ordered ref Environment[1]#sgmlCatalog env;
+  !ordered ref SGMLDocument[*] documents;
+}
+
+class SGMLDocument extends NamedElement {
+  !ordered ref File[1] location;
+  !ordered ref File[1] document;
+}
+
+class SkeeperCatalog extends NamedElement {
+  !ordered ref Environment[1]#skeeperCatalog env;
+  !ordered ref SkeeperDocument[*] documents;
+}
+
+class SkeeperDocument extends NamedElement {
+  !ordered ref File[1] location;
+  !ordered ref File[1] document;
+}
+
+class EmacsPackage extends NamedElement {
+  !ordered val File[+] files;
+  !ordered ref Environment[1]#emacspkg env;
+}
+
+class User extends NamedElement {
+  !ordered ref Environment[1]#users env;
+  !ordered ref Group[+]#users groups;
+  !ordered ref File[1] home;
+}
+
+class Group extends NamedElement {
+  !ordered ref Environment[1]#groups env;
+  !ordered ref User[*]#groups users;
+}
+
+class PostinstDesktop extends UpdateEnvironmentStatement {
+}
+
+class PostinstDocBase extends AdditionEnvironmentStatement {
+  !ordered ref File[1] document;
+}
+
+class PostinstEmacsen extends UpdateEnvironmentStatement, UpdatePackageSettingStatement {
+  !ordered ref File[1] ~package;
+}
+
+class PostinstGconf extends UpdatePackageSettingStatement {
+  !ordered ref File[+] schemas;
+}
+
+class PostinstGconfDefaults extends UpdatePackageSettingStatement {
+}
+
+class PostinstIcons extends UpdateEnvironmentStatement {
+  !ordered ref File[+] directories;
+}
+
+class PostinstInfo extends UpdateEnvironmentStatement {
+  !ordered ref File[1] file;
+}
+
+class PostinstInit extends UpdateEnvironmentStatement {
+  !ordered ref Script[1] scriptParam;
+  !ordered ref Param[*] initParams;
+}
+
+class PostinstInitNostart extends UpdateEnvironmentStatement {
+  !ordered ref Script[1] scriptParam;
+  !ordered ref Param[*] initParams;
+  !ordered ref File[1] errorHandler;
+}
+
+class PostinstInitRestart extends UpdateEnvironmentStatement {
+  !ordered ref Script[1] scriptParam;
+  !ordered ref Param[*] initParams;
+  !ordered ref File[1] errorHandler;
+}
+
+class PostinstMakeshlibs extends UpdateEnvironmentStatement {
+}
+
+class PostinstMenu extends UpdateEnvironmentStatement {
+}
+
+class PostinstMenuMethod extends UpdateEnvironmentStatement {
+  !ordered ref InstalledPackage[1] ~package;
+}
+
+class PostinstMime extends UpdateEnvironmentStatement {
+}
+
+class PostinstModules extends UpdateEnvironmentStatement {
+  !ordered ref StringParam[1] kvers;
+}
+
+class PostinstPython extends UpdateEnvironmentStatement {
+  !ordered ref IntParam[1] pyver;
+  !ordered ref File[+] dirlist;
+}
+
+class PostinstScrollkeeper extends UpdateEnvironmentStatement {
+}
+
+class PostinstSgmlcatalog extends UpdateEnvironmentStatement {
+  !ordered ref File[1] centralcat;
+  !ordered ref File[1] ordcats;
+}
+
+class PostinstSharedmimeinfo extends UpdateEnvironmentStatement {
+}
+
+class PostinstSuid extends UpdateEnvironmentStatement, UpdateFileSytemStatement {
+  !ordered ref InstalledPackage[1] ~package;
+  !ordered ref File[1] file;
+  !ordered ref StringParam[1] owner;
+  !ordered ref StringParam[1] group;
+  !ordered ref StringParam[1] perms;
+}
+
+class PostinstUdev extends UpdateFileSytemStatement {
+  !ordered ref File[1] old;
+  !ordered ref File[1] rule;
+}
+
+class PostinstUsrlocal extends UpdateFileSytemStatement {
+  !ordered ref StringParam[1] dir;
+  !ordered ref StringParam[1] mode;
+  !ordered ref StringParam[1] user;
+  !ordered ref StringParam[1] group;
+}
+
+class PostinstWm extends UpdateEnvironmentStatement {
+  !ordered ref StringParam[1] wm;
+  !ordered ref StringParam[1] wmman;
+  !ordered ref StringParam[1] priority;
+}
+
+class PostinstWmNoman extends UpdateEnvironmentStatement {
+  !ordered ref StringParam[1] wm;
+  !ordered ref StringParam[1] priority;
+}
+
+class PostinstXfonts extends UpdateEnvironmentStatement {
+  !ordered ref Statement[*] cmds;
+}
+
+class PostrmDebconf extends UpdateEnvironmentStatement {
+}
+
+class PostrmDesktop extends UpdateEnvironmentStatement {
+}
+
+class PostrmGconf extends DeletionFileSystemStatement {
+  !ordered ref File[+] schemas;
+}
+
+class PostrmGconfDefaults extends UpdateEnvironmentStatement {
+}
+
+class PostrmIcons extends UpdateEnvironmentStatement {
+  !ordered ref File[+] dirs;
+}
+
+class PostrmInit extends UpdateEnvironmentStatement, DeletionFileSystemStatement {
+  !ordered ref Script[1] scriptParam;
+}
+
+class PostrmMakeshlibs extends UpdateEnvironmentStatement {
+}
+
+class PostrmMenu extends UpdateEnvironmentStatement {
+}
+
+class PostrmMenuMethod extends UpdateEnvironmentStatement, UpdateFileSytemStatement {
+  !ordered ref InstalledPackage[1] ~package;
+}
+
+class PostrmMime extends UpdateEnvironmentStatement {
+}
+
+class PostrmModules extends UpdateEnvironmentStatement {
+  !ordered ref IntParam[1] kvers;
+}
+
+class PostrmScrollkeeper extends UpdateEnvironmentStatement {
+}
+
+class PostrmSgmlcatalog extends UpdateFileSytemStatement {
+  !ordered ref File[1] centralcat;
+}
+
+class PostrmSharedmimeinfo extends UpdateEnvironmentStatement {
+}
+
+class PostrmSuid extends UpdateEnvironmentStatement {
+  !ordered ref InstalledPackage[1] ~package;
+  !ordered ref File[1] file;
+}
+
+class PostrmXfonts extends UpdateEnvironmentStatement {
+  !ordered ref Statement[*] cmds;
+}
+
+class PreinstUdev extends DeletionFileSystemStatement {
+  !ordered ref File[1] old;
+  !ordered ref File[1] rule;
+  !ordered ref InstalledPackage[1] ~package;
+}
+
+class PreinstUser extends UpdateFileSytemStatement {
+  !ordered ref StringParam[1] dir;
+  !ordered ref StringParam[1] mode;
+  !ordered ref StringParam[1] user;
+  !ordered ref StringParam[1] group;
+}
+
+class PrermDocBase extends UpdateEnvironmentStatement {
+  !ordered ref File[1] doc;
+}
+
+class PrermEmacsen extends UpdateEnvironmentStatement, UpdatePackageSettingStatement {
+  !ordered ref InstalledPackage[1] ~package;
+}
+
+class PrermGconf extends UpdatePackageSettingStatement {
+  !ordered ref File[*] schemas;
+}
+
+class PrermInfo extends UpdateEnvironmentStatement, DeletionPackageSettingStatement {
+  !ordered ref File[1] file;
+}
+
+class PrermInit extends UpdateEnvironmentStatement {
+  !ordered ref File[1] scriptParam;
+}
+
+class PrermInitNorestart extends UpdateEnvironmentStatement {
+  !ordered ref File[1] scriptParam;
+}
+
+class PrermPython extends DeletionFileSystemStatement {
+  !ordered ref InstalledPackage[1] ~package;
+}
+
+class PrermSgmlcatalog extends UpdateEnvironmentStatement, DeletionPackageSettingStatement {
+  !ordered ref File[1] centralcat;
+}
+
+class PrermUsrlocal extends DeletionFileSystemStatement {
+}
+
+class PrermWm extends DeletionPackageSettingStatement {
+  !ordered ref StringParam[1] wm;
+}
+
+class Param {
+  !unique !ordered attr String[1] value;
+}
+
+class StringParam extends Param {
+}
+
+class IntParam extends Param {
+}
+
+enum PriorityType {
+  standard = 1;
+  required = 2;
+  important = 3;
+  optional = 4;
+  extra = 5;
+}
+
+enum StatusType {
+  installed = 1;
+  none = 2;
+}
+
+enum VersionType {
+  eq = 1;
+  ge = 2;
+  le = 3;
+  lt = 4;
+  llt = 5;
+  gt = 6;
+  ggt = 7;
+}
+
+enum ReturnStatementValue {
+  zero = 1;
+  one = 2;
+}
+
+enum CasePrermConditionValue {
+  remove = 1;
+  upgrade = 2;
+  deconfigure = 3;
+  failed_upgrade = 4;
+}
+
+enum CasePostrmConditionValue {
+  purge = 1;
+  remove = 2;
+  upgrade = 3;
+  failed = 4;
+  abort_install = 5;
+  abort_upgrade = 6;
+  disappear = 7;
+}
+
+enum CasePreinstConditionValue {
+  install = 1;
+  upgrade = 2;
+  abort_upgrade = 3;
+}
+
+enum CasePostinstConditionValue {
+  configure = 1;
+  abort_upgrade = 2;
+  abort_remove = 3;
+  abort_deconfigure = 4;
+}
+
+class SingleConflict extends Conflict {
+  ref Conflict[1]#singleConflict conflict;
+  attr VersionType[1] version;
+  attr String value;
+}
+
+abstract class Conflict {
+  val AndConflict#conflict andConflict;
+  val OrConflict#conflict orConflict;
+  val SingleConflict#conflict singleConflict;
+  ref Package[1] pkg;
+}
+
+class AndConflict extends Conflict {
+  val Conflict[2..*] ops;
+  ref Conflict[1]#andConflict conflict;
+}
+
+class OrConflict extends Conflict {
+  val Conflict[2..*] ops;
+  ref Conflict[1]#orConflict conflict;
+}
+
+abstract class Package extends NamedElement {
+  !unique !ordered attr String[1] version;
+  !ordered ref Configuration configuration;
+  !ordered val PackageSetting[1]#pkg packageSettings;
+}
+
