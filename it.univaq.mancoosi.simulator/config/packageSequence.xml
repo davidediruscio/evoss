@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<sequence>
+	<package name="swi-prolog">
+	  <action>install</action>
+	</package>
+	<!--<package name="swi-prolog_error">
+	  <action>install</action>
+	</package>-->
+	<!--<package name="swi-prolog"> 
+	  <action>remove</action>
+	</package>-->
+</sequence>
+

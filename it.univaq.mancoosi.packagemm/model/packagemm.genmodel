@@ -1,0 +1,543 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/it.univaq.mancoosi.packagemm/src"
+    modelPluginID="it.univaq.mancoosi.packagemm" modelName="Packagemm" modelPluginClass=""
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0" copyrightFields="false">
+  <foreignModel>file:/home/max/workspace/it.univaq.mancoosi.simulator/modelTypes/packagemm.ecore</foreignModel>
+  <genPackages prefix="Packagemm" basePackage="it.univaq.mancoosi" disposableProviderFactory="true"
+      loadInitialization="true" literalsInterface="false" fileExtensions="packagemm"
+      ecorePackage="packagemm.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="packagemm.ecore#//PriorityType">
+      <genEnumLiterals ecoreEnumLiteral="packagemm.ecore#//PriorityType/standard"/>
+      <genEnumLiterals ecoreEnumLiteral="packagemm.ecore#//PriorityType/required"/>
+      <genEnumLiterals ecoreEnumLiteral="packagemm.ecore#//PriorityType/important"/>
+      <genEnumLiterals ecoreEnumLiteral="packagemm.ecore#//PriorityType/optional"/>
+      <genEnumLiterals ecoreEnumLiteral="packagemm.ecore#//PriorityType/extra"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="packagemm.ecore#//StatusType">
+      <genEnumLiterals ecoreEnumLiteral="packagemm.ecore#//StatusType/installed"/>
+      <genEnumLiterals ecoreEnumLiteral="packagemm.ecore#//StatusType/none"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="packagemm.ecore#//VersionType">
+      <genEnumLiterals ecoreEnumLiteral="packagemm.ecore#//VersionType/eq"/>
+      <genEnumLiterals ecoreEnumLiteral="packagemm.ecore#//VersionType/ge"/>
+      <genEnumLiterals ecoreEnumLiteral="packagemm.ecore#//VersionType/le"/>
+      <genEnumLiterals ecoreEnumLiteral="packagemm.ecore#//VersionType/lt"/>
+      <genEnumLiterals ecoreEnumLiteral="packagemm.ecore#//VersionType/llt"/>
+      <genEnumLiterals ecoreEnumLiteral="packagemm.ecore#//VersionType/gt"/>
+      <genEnumLiterals ecoreEnumLiteral="packagemm.ecore#//VersionType/ggt"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="packagemm.ecore#//ReturnStatementValue">
+      <genEnumLiterals ecoreEnumLiteral="packagemm.ecore#//ReturnStatementValue/zero"/>
+      <genEnumLiterals ecoreEnumLiteral="packagemm.ecore#//ReturnStatementValue/one"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="packagemm.ecore#//CasePrermConditionValue">
+      <genEnumLiterals ecoreEnumLiteral="packagemm.ecore#//CasePrermConditionValue/remove"/>
+      <genEnumLiterals ecoreEnumLiteral="packagemm.ecore#//CasePrermConditionValue/upgrade"/>
+      <genEnumLiterals ecoreEnumLiteral="packagemm.ecore#//CasePrermConditionValue/deconfigure"/>
+      <genEnumLiterals ecoreEnumLiteral="packagemm.ecore#//CasePrermConditionValue/failed_upgrade"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="packagemm.ecore#//CasePostrmConditionValue">
+      <genEnumLiterals ecoreEnumLiteral="packagemm.ecore#//CasePostrmConditionValue/purge"/>
+      <genEnumLiterals ecoreEnumLiteral="packagemm.ecore#//CasePostrmConditionValue/remove"/>
+      <genEnumLiterals ecoreEnumLiteral="packagemm.ecore#//CasePostrmConditionValue/upgrade"/>
+      <genEnumLiterals ecoreEnumLiteral="packagemm.ecore#//CasePostrmConditionValue/failed"/>
+      <genEnumLiterals ecoreEnumLiteral="packagemm.ecore#//CasePostrmConditionValue/abort_install"/>
+      <genEnumLiterals ecoreEnumLiteral="packagemm.ecore#//CasePostrmConditionValue/abort_upgrade"/>
+      <genEnumLiterals ecoreEnumLiteral="packagemm.ecore#//CasePostrmConditionValue/disappear"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="packagemm.ecore#//CasePreinstConditionValue">
+      <genEnumLiterals ecoreEnumLiteral="packagemm.ecore#//CasePreinstConditionValue/install"/>
+      <genEnumLiterals ecoreEnumLiteral="packagemm.ecore#//CasePreinstConditionValue/upgrade"/>
+      <genEnumLiterals ecoreEnumLiteral="packagemm.ecore#//CasePreinstConditionValue/abort_upgrade"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="packagemm.ecore#//CasePostinstConditionValue">
+      <genEnumLiterals ecoreEnumLiteral="packagemm.ecore#//CasePostinstConditionValue/configure"/>
+      <genEnumLiterals ecoreEnumLiteral="packagemm.ecore#//CasePostinstConditionValue/abort_upgrade"/>
+      <genEnumLiterals ecoreEnumLiteral="packagemm.ecore#//CasePostinstConditionValue/abort_remove"/>
+      <genEnumLiterals ecoreEnumLiteral="packagemm.ecore#//CasePostinstConditionValue/abort_deconfigure"/>
+    </genEnums>
+    <genClasses image="false" ecoreClass="packagemm.ecore#//NamedElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//NamedElement/name"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//Package">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//Package/version"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//Package/installedSize"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//Package/maintainer"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//Package/architecture"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//Package/fileSize"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//Package/checkSum"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//Package/description"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//Package/section"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//Package/tag"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//Package/priority"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//Package/status"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//Package/uploaders"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//Package/recommends"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//Package/suggests"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//Package/enhances"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//Package/predepends"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//Package/replaces"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//Package/files"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//Package/documentationFiles"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//Package/PreinstScript"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//Package/PostinstScript"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//Package/PrermScript"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//Package/PostrmScript"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//Package/configScript"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//Package/conflict"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//Package/depends"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//Package/conffiles"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//Script">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//Script/statements"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//Script/inputParameters"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//InputParameter">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference packagemm.ecore#//InputParameter/script"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="packagemm.ecore#//Dependence">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//Dependence/andDep"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//Dependence/orDep"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//Dependence/singleDep"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//Dependence/pkg"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//AndDep">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//AndDep/ops"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference packagemm.ecore#//AndDep/dependence"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//OrDep">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//OrDep/ops"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference packagemm.ecore#//OrDep/dependence"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//SingleDep">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference packagemm.ecore#//SingleDep/dependence"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//SingleDep/version"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//SingleDep/value"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//PreinstScript">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference packagemm.ecore#//PreinstScript/pkg"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//PostinstScript">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference packagemm.ecore#//PostinstScript/pkg"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//PrermScript">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference packagemm.ecore#//PrermScript/pkg"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//PostrmScript">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference packagemm.ecore#//PostrmScript/pkg"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//ConfigScript">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference packagemm.ecore#//ConfigScript/pkg"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="packagemm.ecore#//Statement">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference packagemm.ecore#//Statement/script"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//Statement/isStart"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference packagemm.ecore#//Statement/previous"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference packagemm.ecore#//Statement/next"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="packagemm.ecore#//ControlStatement"/>
+    <genClasses image="false" ecoreClass="packagemm.ecore#//Case">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//Case/selector"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//Case/default"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="packagemm.ecore#//Condition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//Condition/action"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//DefaultCaseCondition"/>
+    <genClasses ecoreClass="packagemm.ecore#//CasePrerm">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//CasePrerm/conditions"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//CasePrermCondition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//CasePrermCondition/value"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//CasePostrm">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//CasePostrm/conditions"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//CasePostrmCondition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//CasePostrmCondition/value"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//CasePreinst">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//CasePreinst/conditions"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//CasePreinstCondition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//CasePreinstCondition/value"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//CasePostinst">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//CasePostinst/conditions"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//CasePostinstCondition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//CasePostinstCondition/value"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//BasicCase">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//BasicCase/conditions"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//BasicCaseCondition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//BasicCaseCondition/value"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//If">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//If/condition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//If/then"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//If/else"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//BooleanExpression">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//BooleanExpression/not"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//FileExistsBoolean">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//FileExistsBoolean/file"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//RegularFileBoolean">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//RegularFileBoolean/file"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//FileNotZeroSizeBoolean">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//FileNotZeroSizeBoolean/file"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//IsDirectoryBoolean">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//IsDirectoryBoolean/file"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//FileBlockDeviceBoolean">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//FileBlockDeviceBoolean/file"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//FileCharacterDeviceBoolean">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//FileCharacterDeviceBoolean/file"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//FilePipeBoolean">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//FilePipeBoolean/file"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//FileSymbolicLinkBoolean">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//FileSymbolicLinkBoolean/file"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//FileSocketBoolean">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//FileSocketBoolean/file"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//FileTerminalDeviceBoolean">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//FileTerminalDeviceBoolean/file"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//FileReadPermissionBoolean">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//FileReadPermissionBoolean/file"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//FileWritePermissionBoolean">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//FileWritePermissionBoolean/file"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//FileExecutePermissionBoolean">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//FileExecutePermissionBoolean/file"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//IntegerEqualBoolean">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//IntegerEqualBoolean/firstOp"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//IntegerEqualBoolean/secondOp"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//IntegerNotEqualBoolean">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//IntegerNotEqualBoolean/firstOp"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//IntegerNotEqualBoolean/secondOp"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//IntegerGreaterBoolean">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//IntegerGreaterBoolean/firstOp"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//IntegerGreaterBoolean/secondOp"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//IntegerGreaterEqualBoolean">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//IntegerGreaterEqualBoolean/firstOp"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//IntegerGreaterEqualBoolean/secondOp"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//IntegerLessBoolean">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//IntegerLessBoolean/firstOp"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//IntegerLessBoolean/secondOp"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//IntegerLessEqualBoolean">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//IntegerLessEqualBoolean/firstOp"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//IntegerLessEqualBoolean/secondOp"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//StringEqualBoolean">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//StringEqualBoolean/firstOp"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//StringEqualBoolean/secondOp"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//StringNotEqualBoolean">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//StringNotEqualBoolean/firstOp"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//StringNotEqualBoolean/secondOp"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//StringGreaterBoolean">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//StringGreaterBoolean/firstOp"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//StringGreaterBoolean/secondOp"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//StringLessBoolean">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//StringLessBoolean/firstOp"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//StringLessBoolean/secondOp"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//StrinNotNullBoolean">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//StrinNotNullBoolean/string"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//StringNullBoolean">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//StringNullBoolean/string"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//AndBooleanExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//AndBooleanExpression/exps"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//OrBooleanExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//OrBooleanExpression/exps"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//StatementBoolean"/>
+    <genClasses ecoreClass="packagemm.ecore#//StatementExistsBoolean">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//StatementExistsBoolean/statement"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//Return">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//Return/value"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="packagemm.ecore#//Iterator"/>
+    <genClasses ecoreClass="packagemm.ecore#//DirectoryIterator">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference packagemm.ecore#//DirectoryIterator/directory"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//FileContentIterator">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference packagemm.ecore#//FileContentIterator/file"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//InputParameterIterator">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference packagemm.ecore#//InputParameterIterator/inputParameters"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//EnumerationIterator">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference packagemm.ecore#//EnumerationIterator/enumeration"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//StringIterator"/>
+    <genClasses ecoreClass="packagemm.ecore#//Enumeration">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference packagemm.ecore#//Enumeration/elements"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//EnumerationElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//EnumerationElement/index"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//EnumerationElement/value"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="packagemm.ecore#//FileSystemStatement">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference packagemm.ecore#//FileSystemStatement/files"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//AdditionFileSystemStatement"/>
+    <genClasses ecoreClass="packagemm.ecore#//DeletionFileSystemStatement"/>
+    <genClasses ecoreClass="packagemm.ecore#//UpdateFileSystemStatement"/>
+    <genClasses image="false" ecoreClass="packagemm.ecore#//EnvironmentStatement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//EnvironmentStatement/environment"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//AdditionEnvironmentStatement"/>
+    <genClasses ecoreClass="packagemm.ecore#//DeletionEnvironmentStatement"/>
+    <genClasses ecoreClass="packagemm.ecore#//UpdateEnvironmentStatement"/>
+    <genClasses image="false" ecoreClass="packagemm.ecore#//PackageSettingStatement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//PackageSettingStatement/pkgsetting"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//AdditionPackageSettingStatement"/>
+    <genClasses ecoreClass="packagemm.ecore#//DeletionPackageSettingStatement"/>
+    <genClasses ecoreClass="packagemm.ecore#//UpdatePackageSettingStatement"/>
+    <genClasses image="false" ecoreClass="packagemm.ecore#//NeutralStatement"/>
+    <genClasses ecoreClass="packagemm.ecore#//Message"/>
+    <genClasses ecoreClass="packagemm.ecore#//Comment"/>
+    <genClasses ecoreClass="packagemm.ecore#//File">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//File/extension"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//File/description"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//File/size"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//File/checkSum"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//File/isDirectory"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//File/suid"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//File/guid"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//File/permission"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//File/location"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//File/childs"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference packagemm.ecore#//File/parent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//File/owner"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//File/group"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//File/isMissing"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//DocumentationFile">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference packagemm.ecore#//DocumentationFile/pkg"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//InformationFile"/>
+    <genClasses ecoreClass="packagemm.ecore#//PostinstDesktop"/>
+    <genClasses ecoreClass="packagemm.ecore#//PostinstDocBase">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PostinstDocBase/document"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//PostinstEmacsen">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PostinstEmacsen/package"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//PostinstGconf">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PostinstGconf/schemas"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//PostinstGconfDefaults"/>
+    <genClasses ecoreClass="packagemm.ecore#//PostinstIcons">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PostinstIcons/directories"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//PostinstInfo">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PostinstInfo/file"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//PostinstInit">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PostinstInit/scriptParam"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PostinstInit/initParams"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PostinstInit/errorHandler"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//PostinstInitNostart">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PostinstInitNostart/scriptParam"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PostinstInitNostart/initParams"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PostinstInitNostart/errorHandler"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//PostinstInitRestart">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PostinstInitRestart/scriptParam"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PostinstInitRestart/initParams"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PostinstInitRestart/errorHandler"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//PostinstMakeshlibs"/>
+    <genClasses ecoreClass="packagemm.ecore#//PostinstMenu"/>
+    <genClasses ecoreClass="packagemm.ecore#//PostinstMenuMethod">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PostinstMenuMethod/package"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//PostinstMime"/>
+    <genClasses ecoreClass="packagemm.ecore#//PostinstModules">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PostinstModules/kvers"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//PostinstPython">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PostinstPython/pyver"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference packagemm.ecore#//PostinstPython/dirlist"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//PostinstScrollkeeper"/>
+    <genClasses ecoreClass="packagemm.ecore#//PostinstSgmlcatalog">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PostinstSgmlcatalog/centralcat"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PostinstSgmlcatalog/ordcats"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//PostinstSharedmimeinfo"/>
+    <genClasses ecoreClass="packagemm.ecore#//PostinstSuid">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PostinstSuid/package"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PostinstSuid/file"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PostinstSuid/owner"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PostinstSuid/group"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PostinstSuid/perms"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//PostinstUdev">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PostinstUdev/old"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PostinstUdev/rule"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//PostinstUsrlocal">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference packagemm.ecore#//PostinstUsrlocal/dirlist"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//PostinstWm">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PostinstWm/wm"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PostinstWm/wmman"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PostinstWm/priority"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//PostinstWmNoman">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PostinstWmNoman/wm"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PostinstWmNoman/priority"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//PostinstXfonts">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PostinstXfonts/cmds"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//PostrmDebconf"/>
+    <genClasses ecoreClass="packagemm.ecore#//PostrmDesktop"/>
+    <genClasses ecoreClass="packagemm.ecore#//PostrmGconf">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PostrmGconf/schemas"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//PostrmGconfDefaults"/>
+    <genClasses ecoreClass="packagemm.ecore#//PostrmIcons">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PostrmIcons/dirs"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//PostrmInit">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PostrmInit/scriptParam"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PostrmInit/errorHandler"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//PostrmMakeshlibs"/>
+    <genClasses ecoreClass="packagemm.ecore#//PostrmMenu"/>
+    <genClasses ecoreClass="packagemm.ecore#//PostrmMenuMethod">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PostrmMenuMethod/package"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//PostrmMime"/>
+    <genClasses ecoreClass="packagemm.ecore#//PostrmModules">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PostrmModules/kvers"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//PostrmScrollkeeper"/>
+    <genClasses ecoreClass="packagemm.ecore#//PostrmSgmlcatalog">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PostrmSgmlcatalog/centralcat"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//PostrmSharedmimeinfo"/>
+    <genClasses ecoreClass="packagemm.ecore#//PostrmSuid">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PostrmSuid/package"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PostrmSuid/file"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//PostrmXfonts">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PostrmXfonts/cmds"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//PreinstUdev">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PreinstUdev/old"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PreinstUdev/rule"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PreinstUdev/package"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//PreinstUser">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PreinstUser/dir"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PreinstUser/mode"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PreinstUser/user"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PreinstUser/group"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//PrermDocBase">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PrermDocBase/document"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//PrermEmacsen">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PrermEmacsen/package"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//PrermGconf">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PrermGconf/schemas"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//PrermInfo">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PrermInfo/file"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//PrermInit">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PrermInit/scriptParam"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PrermInit/errorHandler"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//PrermInitNorestart">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PrermInitNorestart/scriptParam"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PrermInitNorestart/errorHandler"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//PrermPython">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PrermPython/package"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//PrermSgmlcatalog">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PrermSgmlcatalog/centralcat"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//PrermUsrlocal">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference packagemm.ecore#//PrermUsrlocal/dirlist"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//PrermWm">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PrermWm/wm"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//UpdatePythonModules">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//UpdatePythonModules/file"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//PostinstAddAlternative">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PostinstAddAlternative/master"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//PostinstAddAlternative/slave"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//AddAlternative">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//AddAlternative/link"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//AddAlternative/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//AddAlternative/path"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//AddAlternative/priority"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//Param">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//Param/value"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//StringParam"/>
+    <genClasses ecoreClass="packagemm.ecore#//IntParam"/>
+    <genClasses ecoreClass="packagemm.ecore#//SingleConflict">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference packagemm.ecore#//SingleConflict/conflict"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//SingleConflict/version"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//SingleConflict/value"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="packagemm.ecore#//Conflict">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//Conflict/andConflict"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//Conflict/orConflict"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//Conflict/singleConflict"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//Conflict/pkg"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//AndConflict">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//AndConflict/ops"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference packagemm.ecore#//AndConflict/conflict"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//OrConflict">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference packagemm.ecore#//OrConflict/ops"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference packagemm.ecore#//OrConflict/conflict"/>
+    </genClasses>
+    <genClasses ecoreClass="packagemm.ecore#//Assignment">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//Assignment/assigned"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute packagemm.ecore#//Assignment/expression"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
