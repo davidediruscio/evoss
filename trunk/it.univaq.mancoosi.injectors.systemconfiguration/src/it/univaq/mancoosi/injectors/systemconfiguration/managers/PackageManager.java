@@ -116,7 +116,6 @@ import it.univaq.mancoosi.mancoosimm.PackageSetting;
 				
 				if (pkgSetting != null) {
 					EList<File> confFilesList = pkgSetting.getFiles();
-					File confFile = null;
 					
 					for (int i=0; i < confFilesList.size(); i++) {
 						System.out.println("Deleting file " + confFilesList.get(i) );

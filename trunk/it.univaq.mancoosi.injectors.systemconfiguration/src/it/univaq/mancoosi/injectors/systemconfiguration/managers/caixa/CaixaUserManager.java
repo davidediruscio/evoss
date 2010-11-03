@@ -2,7 +2,6 @@ package it.univaq.mancoosi.injectors.systemconfiguration.managers.caixa;
 
 
 import java.io.IOException;
-import java.util.HashMap;
 
 import it.univaq.mancoosi.injectors.systemconfiguration.managers.UserManager;
 

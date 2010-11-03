@@ -273,7 +273,7 @@ public class CaixaPackageManager extends PackageManager {
 	protected void processPackageConfig(BufferedReader packageInfo, InstalledPackage installedPackage) throws IOException {
 		Scanner scanner = new Scanner(packageInfo);
 		String line = new String();
-		String[] lineFragments;
+		//String[] lineFragments;
 		String conffile;
 		String[] auxConffile;
 		
@@ -283,7 +283,7 @@ public class CaixaPackageManager extends PackageManager {
 		    	  line = scanner.nextLine();
 		    	  
 	    		  // A list of configuration files is create
-	    		  List<String> conffilesBlock = new ArrayList();
+	    		  List<String> conffilesBlock = new ArrayList<String>();
 	    		  PackageSetting pkgSetting = factory.createPackageSetting();
 	    		  installedPackage.setPackageSettings(pkgSetting);
 	    
@@ -355,7 +355,7 @@ public class CaixaPackageManager extends PackageManager {
 	    	  } else if (lineFragments[0].equals("Conffiles")) {
 	    
 	    		  // A list of configuration files is create
-	    		  List<String> conffilesBlock = new ArrayList();
+	    		  List<String> conffilesBlock = new ArrayList<String>();
 	    		  PackageSetting pkgSetting = factory.createPackageSetting();
 	    		  installedPackage.setPackageSettings(pkgSetting);
 	    
@@ -392,7 +392,7 @@ public class CaixaPackageManager extends PackageManager {
 	}
 	
 	public void setFeaturesOfInstalledPackages() throws IOException {
-		String cmd;
+		//String cmd;
 		InstalledPackage pkg;
 
 		//Set attributes and references for all the installed packages
@@ -452,7 +452,7 @@ public class CaixaPackageManager extends PackageManager {
     		BufferedReader pkgInfo =
     			new BufferedReader
     			(new InputStreamReader(p2.getInputStream()));
-    		String templine = pkgInfo.readLine();
+    	//	String templine = pkgInfo.readLine();
     		if (pkgInfo != null){
     			processPackageConfig(pkgInfo, pkg);	
     		}

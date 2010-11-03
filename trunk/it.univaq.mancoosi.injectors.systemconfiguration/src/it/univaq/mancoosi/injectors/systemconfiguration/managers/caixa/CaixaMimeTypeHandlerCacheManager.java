@@ -24,8 +24,8 @@ public class CaixaMimeTypeHandlerCacheManager extends MimeTypeHandlerCacheManage
 		    MimeType mt;
 		    String[] mimeTypeInfo;
 		    File file;
-		    BufferedReader input, input2,input_which=null;
-		    Process p, p2,p3 = null,p4=null;
+		    BufferedReader input, input_which=null;
+		    Process p, p3 = null,p4=null;
 
 		    System.out.println("Processing MimeTypes....");
 			try {

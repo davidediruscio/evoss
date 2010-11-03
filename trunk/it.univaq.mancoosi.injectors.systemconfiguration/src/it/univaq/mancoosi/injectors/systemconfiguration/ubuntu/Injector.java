@@ -1,7 +1,6 @@
 package it.univaq.mancoosi.injectors.systemconfiguration.ubuntu;
 
 import it.univaq.mancoosi.injectors.systemconfiguration.managers.PackageManager;
-import it.univaq.mancoosi.injectors.systemconfiguration.managers.UserManager;
 import it.univaq.mancoosi.injectors.systemconfiguration.managers.ubuntu.UbuntuAlternativesManager;
 import it.univaq.mancoosi.injectors.systemconfiguration.managers.ubuntu.UbuntuConfigurationManager;
 import it.univaq.mancoosi.injectors.systemconfiguration.managers.ubuntu.UbuntuEnvironmentManager;
@@ -11,7 +10,6 @@ import it.univaq.mancoosi.injectors.systemconfiguration.managers.ubuntu.UbuntuPa
 import it.univaq.mancoosi.injectors.systemconfiguration.managers.ubuntu.UbuntuPackageSettingDependenciesManager;
 import it.univaq.mancoosi.injectors.systemconfiguration.managers.ubuntu.UbuntuUserManager;
 import it.univaq.mancoosi.injectors.systemconfiguration.utils.FailureDetector;
-import it.univaq.mancoosi.injectors.systemconfiguration.utils.ubuntu.*;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -23,7 +21,6 @@ import java.util.GregorianCalendar;
 import it.univaq.mancoosi.mancoosimm.Configuration;
 import it.univaq.mancoosi.mancoosimm.Environment;
 import it.univaq.mancoosi.mancoosimm.FileSystem;
-import it.univaq.mancoosi.mancoosimm.MancoosiFactory;
 import it.univaq.mancoosi.mancoosimm.MimeTypeHandlerCache;
 import it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl;
 
@@ -43,8 +40,6 @@ public class Injector {
 		// initialize model and dependencies
 		MancoosiPackageImpl.init();
 					
-		// retrieve the default Mancoosi factory singleton
-		MancoosiFactory factory = MancoosiFactory.eINSTANCE; 
 		Configuration configuration = null;
 	
 		URI fileURI = URI.createFileURI("model/systemModel.mancoosimm");
@@ -120,13 +115,6 @@ public class Injector {
 			out.println("Model injection completed !");
 		}
 		
-		
-		//FileSystemManager.getInstance().deleteFile("/etc/acpi/always-mute.sh");
-	
-		
-
-	//	if (PackageManager.getInstance().removePackageElement("apturl"))
-	//		System.out.println("PackageDeleted");
 		out.close();
 		
 		FailureDetector.getInstance().start();	

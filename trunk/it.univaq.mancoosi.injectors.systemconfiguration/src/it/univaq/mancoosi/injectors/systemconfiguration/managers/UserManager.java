@@ -22,7 +22,7 @@ public abstract class UserManager {
 	
 	protected UserManager(){
 	//	this.configuration = ConfigurationManager.getInstance().getConfiguration();
-		this.userMap = new HashMap();
+		this.userMap = new HashMap<String, User>();
 	//	this.groupManager = GroupManager.getInstance();
 	}
 
