@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_jznFAAmREd-3u7mEq6XqdQ">
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_jznFAQmREd-3u7mEq6XqdQ" name="boolean"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_jznFAgmREd-3u7mEq6XqdQ" name="byte"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_jznFAwmREd-3u7mEq6XqdQ" name="char"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_jznFBAmREd-3u7mEq6XqdQ" name="double"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_jznFBQmREd-3u7mEq6XqdQ" name="float"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_jznFBgmREd-3u7mEq6XqdQ" name="int"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_jznFBwmREd-3u7mEq6XqdQ" name="long"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_jznFCAmREd-3u7mEq6XqdQ" name="short"/>
+  <packagedElement xmi:type="uml:Package" xmi:id="_jznFCQmREd-3u7mEq6XqdQ" name="mancoosi">
+    <packagedElement xmi:type="uml:Package" xmi:id="_jznFCgmREd-3u7mEq6XqdQ" name="injectors">
+      <packagedElement xmi:type="uml:Package" xmi:id="_jznFCwmREd-3u7mEq6XqdQ" name="utils">
+        <packagedElement xmi:type="uml:Class" xmi:id="_jznFDAmREd-3u7mEq6XqdQ" name="FileMap">
+          <ownedOperation xmi:id="_jznFDQmREd-3u7mEq6XqdQ" name="setModelFileElement" visibility="public">
+            <ownedParameter xmi:id="_jznFDgmREd-3u7mEq6XqdQ" name="modelFileElement" type="_jznsKgmREd-3u7mEq6XqdQ"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_jznFDwmREd-3u7mEq6XqdQ" name="getModelFileElement" visibility="public">
+            <ownedParameter xmi:id="_jznFEAmREd-3u7mEq6XqdQ" name="return" type="_jznsKgmREd-3u7mEq6XqdQ" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_jznFEQmREd-3u7mEq6XqdQ" name="addFile" visibility="public">
+            <ownedParameter xmi:id="_jznFEgmREd-3u7mEq6XqdQ" name="name" type="_jznsKwmREd-3u7mEq6XqdQ"/>
+            <ownedParameter xmi:id="_jznFEwmREd-3u7mEq6XqdQ" name="isDirectory" type="_jznsLAmREd-3u7mEq6XqdQ"/>
+            <ownedParameter xmi:id="_jznFFAmREd-3u7mEq6XqdQ" name="modelFileElement" type="_jznsKgmREd-3u7mEq6XqdQ"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_jznsEAmREd-3u7mEq6XqdQ" name="getAllChilds" visibility="public">
+            <ownedParameter xmi:id="_jznsEQmREd-3u7mEq6XqdQ" name="return" type="_jznsLQmREd-3u7mEq6XqdQ" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_jznsEgmREd-3u7mEq6XqdQ" name="getChild" visibility="public">
+            <ownedParameter xmi:id="_jznsEwmREd-3u7mEq6XqdQ" name="name" type="_jznsKwmREd-3u7mEq6XqdQ"/>
+            <ownedParameter xmi:id="_jznsFAmREd-3u7mEq6XqdQ" name="return" type="_jznFDAmREd-3u7mEq6XqdQ" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_jznsFQmREd-3u7mEq6XqdQ" name="exists" visibility="public">
+            <ownedParameter xmi:id="_jznsFgmREd-3u7mEq6XqdQ" name="name" type="_jznsKwmREd-3u7mEq6XqdQ"/>
+            <ownedParameter xmi:id="_jznsFwmREd-3u7mEq6XqdQ" name="return" type="_jznsLAmREd-3u7mEq6XqdQ" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_jznsGAmREd-3u7mEq6XqdQ" name="isDirectory" visibility="public">
+            <ownedParameter xmi:id="_jznsGQmREd-3u7mEq6XqdQ" name="return" type="_jznsLAmREd-3u7mEq6XqdQ" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_jznsGgmREd-3u7mEq6XqdQ" name="getParent" visibility="public">
+            <ownedParameter xmi:id="_jznsGwmREd-3u7mEq6XqdQ" name="return" type="_jznFDAmREd-3u7mEq6XqdQ" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_jznsHAmREd-3u7mEq6XqdQ" name="getName" visibility="public">
+            <ownedParameter xmi:id="_jznsHQmREd-3u7mEq6XqdQ" name="return" type="_jznsKwmREd-3u7mEq6XqdQ" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_jznsHgmREd-3u7mEq6XqdQ" name="getPath" visibility="public">
+            <ownedParameter xmi:id="_jznsHwmREd-3u7mEq6XqdQ" name="return" type="_jznsKwmREd-3u7mEq6XqdQ" direction="return"/>
+          </ownedOperation>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_jznsIAmREd-3u7mEq6XqdQ" name="FailureDetector">
+          <ownedOperation xmi:id="_jznsIQmREd-3u7mEq6XqdQ" name="getInstance" visibility="public" isStatic="true">
+            <ownedParameter xmi:id="_jznsIgmREd-3u7mEq6XqdQ" name="return" type="_jznsIAmREd-3u7mEq6XqdQ" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_jznsIwmREd-3u7mEq6XqdQ" name="getMissingFiles" visibility="public">
+            <ownedParameter xmi:id="_jznsJAmREd-3u7mEq6XqdQ" name="return" type="_jznsLgmREd-3u7mEq6XqdQ" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_jznsJQmREd-3u7mEq6XqdQ" name="checkMissingFiles" visibility="public"/>
+          <ownedOperation xmi:id="_jznsJgmREd-3u7mEq6XqdQ" name="start" visibility="public"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_jznsJwmREd-3u7mEq6XqdQ" name="PackageSettingMap">
+          <ownedOperation xmi:id="_jznsKAmREd-3u7mEq6XqdQ" name="getInstance" visibility="public" isStatic="true">
+            <ownedParameter xmi:id="_jznsKQmREd-3u7mEq6XqdQ" name="return" type="_jznsJwmREd-3u7mEq6XqdQ" direction="return"/>
+          </ownedOperation>
+        </packagedElement>
+        <packagedElement xmi:type="uml:DataType" xmi:id="_jznsKgmREd-3u7mEq6XqdQ" name="File"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="_jznsKwmREd-3u7mEq6XqdQ" name="String"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="_jznsLAmREd-3u7mEq6XqdQ" name="Boolean"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="_jznsLQmREd-3u7mEq6XqdQ" name="HashMap"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="_jznsLgmREd-3u7mEq6XqdQ" name="List"/>
+      </packagedElement>
+    </packagedElement>
+  </packagedElement>
+</uml:Model>
