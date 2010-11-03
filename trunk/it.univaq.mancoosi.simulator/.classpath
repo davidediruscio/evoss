@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/ATL-parser.jar"/>
+	<classpathentry kind="lib" path="lib/org.antlr.runtime_3.0.0.v200803061811.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.core.jobs_3.4.1.R34x_v20081128.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.core.resources_3.4.2.R34x_v20090126.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.core.runtime_3.4.0.v20080512.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.core.runtime.compatibility_3.2.0.v20071008.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.emf.common_2.4.0.v200902171115.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.emf.ecore_2.4.2.v200902171115.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.emf.ecore.xmi_2.4.1.v200902171115.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.equinox.common_3.4.0.v20080421-2006.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.gmt.tcs.extractor_1.0.0.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.gmt.tcs.injector_1.0.0.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.m2m.atl_2.0.2.v200812191010.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.m2m.atl.compilers.atl2006_2.0.2.v200812191010.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.m2m.atl.drivers.emf4atl_2.0.2.v200812191010.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.m2m.atl.engine.emfvm_2.0.2.v200812191010.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.m2m.atl.engine.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.m2m.atl.engine.vm_2.0.2.v200812191010.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.m2m.atl.ocl.core_2.0.2.v200812191010.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.m2m.atl.service.core_2.0.2.v200812191010.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.osgi_3.4.3.R34x_v20081215-1030.jar"/>
+	<classpathentry kind="src" path="/it.univaq.mancoosi.errormm"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/it.univaq.mancoosi.packagemm"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/it.univaq.mancoosi.positionmm"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/it.univaq.mancoosi.mancoosimm"/>
+	<classpathentry kind="lib" path="lib/WiresFixed_1.0.1.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

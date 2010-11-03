@@ -1,0 +1,1 @@
+query NumberErrors = MMError!Error.allInstances()->size();

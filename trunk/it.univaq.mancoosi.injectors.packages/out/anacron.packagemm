@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<packagemm:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:packagemm="packagemm">
+  <PostinstScript>
+    <statements xsi:type="packagemm:CasePostinst" name="casePostinst" selector="$1">
+      <default>
+        <action xsi:type="packagemm:Message" name="echo"/>
+        <action xsi:type="packagemm:Return" name="exit"/>
+      </default>
+      <conditions>
+        <value>configure</value>
+      </conditions>
+      <conditions>
+        <action xsi:type="packagemm:Return" name="exit"/>
+        <value>abort_upgrade</value>
+        <value>abort_remove</value>
+        <value>abort_deconfigure</value>
+      </conditions>
+    </statements>
+    <statements xsi:type="packagemm:PostinstInit">
+      <scriptParam name="anacron"/>
+      <initParams value="start"/>
+      <initParams value="89"/>
+      <initParams value="2"/>
+      <initParams value="3"/>
+      <initParams value="4"/>
+      <initParams value="5"/>
+      <initParams value="."/>
+      <initParams value="stop"/>
+      <initParams value="11"/>
+      <initParams value="1"/>
+      <initParams value="."/>
+      <errorHandler xsi:type="packagemm:Return" name="exit" value="one"/>
+    </statements>
+  </PostinstScript>
+  <PrermScript>
+    <statements xsi:type="packagemm:PrermInit">
+      <scriptParam name="anacron"/>
+      <errorHandler xsi:type="packagemm:Return" name="exit" value="one"/>
+    </statements>
+  </PrermScript>
+</packagemm:Package>

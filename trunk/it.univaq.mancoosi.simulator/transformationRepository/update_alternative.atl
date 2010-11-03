@@ -1,0 +1,577 @@
+module update_alternative;
+
+create OUT : OUTConfiguration, OUTERR: MMError  from IN : INConfiguration, INPACK : INPackage, INPOS : INCurrentPosition;
+
+
+helper def : getPosition : Integer = INCurrentPosition!Counter.allInstancesFrom('INPOS')->first().position;
+
+helper def : getScript : String = INCurrentPosition!Counter.allInstancesFrom('INPOS')->first().script;
+
+helper def : getStatementName : String = INCurrentPosition!Counter.allInstancesFrom('INPOS')->first().name;
+
+helper def : getStatement : INPackage!Statement = INPackage!Statement.allInstancesFrom('INPACK')->select(e | (e.refImmediateComposite().oclType().toString() = ('INPackage!'+thisModule.getScript.toString()))
+	and (e.oclType().toString() = ('INPackage!'+thisModule.getStatementName.toString())))->at(thisModule.getPosition);
+
+helper def : existsAlternative(n:String) : Boolean = INConfiguration!Alternative.allInstancesFrom('IN')->collect(e | e.name)->exists(e | e = n);
+
+helper def : getAlternative(n:String) : INConfiguration!Alternative = INConfiguration!Alternative.allInstancesFrom('IN')->select(e | e.name = n)->first();
+
+helper def : getFile(n:String) : INConfiguration!File = INConfiguration!File.allInstancesFrom('IN')->select(e | e.location = n)->first();
+
+helper def : existsFile(n:String) : Boolean = INConfiguration!File.allInstancesFrom('IN')->collect(e | e.location)->exists(e | e = n);
+
+
+rule Configuration {
+    from s : INConfiguration!Configuration
+    to t : OUTConfiguration!Configuration (
+        name <- s.name,
+        creationTime <- s.creationTime,
+        systemType <- s.systemType,
+        installedPackages <- s.installedPackages,
+        fileSystem <- s.fileSystem,
+        environment <- s.environment,
+        notInstalledPackages <- s.notInstalledPackages)
+}
+
+rule InstalledPackage {
+    from s : INConfiguration!InstalledPackage (s.oclIsTypeOf(INConfiguration!InstalledPackage))
+    to t : OUTConfiguration!InstalledPackage (
+        name <- s.name,
+        version <- s.version,
+        installedSize <- s.installedSize,
+        maintainer <- s.maintainer,
+        architecture <- s.architecture,
+        fileSize <- s.fileSize,
+        checkSum <- s.checkSum,
+        description <- s.description,
+        section <- s.section,
+        tag <- s.tag,
+        priority <- s.priority,
+        status <- s.status,
+        uploaders <- s.uploaders,
+        configuration <- s.configuration,
+        packageSettings <- s.packageSettings,
+        sourcePackage <- s.sourcePackage,
+        depends <- s.depends,
+        recommends <- s.recommends,
+        suggests <- s.suggests,
+        enhances <- s.enhances,
+        predepends <- s.predepends,
+        provides <- s.provides,
+        replaces <- s.replaces,
+        files <- s.files,
+        documentationFiles <- s.documentationFiles,
+        conflict <- s.conflict)
+}
+
+rule NotInstalledPackage {
+    from s : INConfiguration!NotInstalledPackage
+    to t : OUTConfiguration!NotInstalledPackage (
+        name <- s.name,
+        version <- s.version,
+        configuration <- s.configuration,
+        packageSettings <- s.packageSettings)
+}
+
+rule SrcPackage {
+    from s : INConfiguration!SrcPackage
+    to t : OUTConfiguration!SrcPackage (
+        name <- s.name,
+        version <- s.version,
+        installedSize <- s.installedSize,
+        maintainer <- s.maintainer,
+        architecture <- s.architecture,
+        fileSize <- s.fileSize,
+        checkSum <- s.checkSum,
+        description <- s.description,
+        section <- s.section,
+        tag <- s.tag,
+        priority <- s.priority,
+        status <- s.status,
+        uploaders <- s.uploaders,
+        configuration <- s.configuration,
+        packageSettings <- s.packageSettings,
+        sourcePackage <- s.sourcePackage,
+        depends <- s.depends,
+        recommends <- s.recommends,
+        suggests <- s.suggests,
+        enhances <- s.enhances,
+        predepends <- s.predepends,
+        provides <- s.provides,
+        replaces <- s.replaces,
+        files <- s.files,
+        documentationFiles <- s.documentationFiles,
+        conflict <- s.conflict,
+        buildDepends <- s.buildDepends,
+        buildConflicts <- s.buildConflicts)
+}
+
+rule BinPackage {
+    from s : INConfiguration!BinPackage
+    to t : OUTConfiguration!BinPackage (
+        name <- s.name,
+        version <- s.version,
+        installedSize <- s.installedSize,
+        maintainer <- s.maintainer,
+        architecture <- s.architecture,
+        fileSize <- s.fileSize,
+        checkSum <- s.checkSum,
+        description <- s.description,
+        section <- s.section,
+        tag <- s.tag,
+        priority <- s.priority,
+        status <- s.status,
+        uploaders <- s.uploaders,
+        configuration <- s.configuration,
+        packageSettings <- s.packageSettings,
+        sourcePackage <- s.sourcePackage,
+        depends <- s.depends,
+        recommends <- s.recommends,
+        suggests <- s.suggests,
+        enhances <- s.enhances,
+        predepends <- s.predepends,
+        provides <- s.provides,
+        replaces <- s.replaces,
+        files <- s.files,
+        documentationFiles <- s.documentationFiles,
+        conflict <- s.conflict,
+        srcRef <- s.srcRef)
+}
+
+rule VirtualPackage {
+    from s : INConfiguration!VirtualPackage
+    to t : OUTConfiguration!VirtualPackage (
+        name <- s.name,
+        version <- s.version,
+        installedSize <- s.installedSize,
+        maintainer <- s.maintainer,
+        architecture <- s.architecture,
+        fileSize <- s.fileSize,
+        checkSum <- s.checkSum,
+        description <- s.description,
+        section <- s.section,
+        tag <- s.tag,
+        priority <- s.priority,
+        status <- s.status,
+        uploaders <- s.uploaders,
+        configuration <- s.configuration,
+        packageSettings <- s.packageSettings,
+        sourcePackage <- s.sourcePackage,
+        depends <- s.depends,
+        recommends <- s.recommends,
+        suggests <- s.suggests,
+        enhances <- s.enhances,
+        predepends <- s.predepends,
+        provides <- s.provides,
+        replaces <- s.replaces,
+        files <- s.files,
+        documentationFiles <- s.documentationFiles,
+        conflict <- s.conflict,
+        impPackage <- s.impPackage)
+}
+
+rule AndDep {
+    from s : INConfiguration!AndDep
+    to t : OUTConfiguration!AndDep (
+        andDep <- s.andDep,
+        orDep <- s.orDep,
+        singleDep <- s.singleDep,
+        pkg <- s.pkg,
+        ops <- s.ops)
+}
+
+rule OrDep {
+    from s : INConfiguration!OrDep
+    to t : OUTConfiguration!OrDep (
+        andDep <- s.andDep,
+        orDep <- s.orDep,
+        singleDep <- s.singleDep,
+        pkg <- s.pkg,
+        ops <- s.ops)
+}
+
+rule SingleDep {
+    from s : INConfiguration!SingleDep
+    to t : OUTConfiguration!SingleDep (
+        version <- s.version,
+        value <- s.value,
+        andDep <- s.andDep,
+        orDep <- s.orDep,
+        singleDep <- s.singleDep,
+        pkg <- s.pkg)
+}
+
+rule Invariant {
+    from s : INConfiguration!Invariant
+    to t : OUTConfiguration!Invariant (
+        name <- s.name,
+        atomEl <- s.atomEl,
+        "and" <- s."and",
+        "or" <- s."or",
+        "not" <- s."not")
+}
+
+rule Atom {
+    from s : INConfiguration!Atom
+    to t : OUTConfiguration!Atom (
+        name <- s.name)
+}
+
+rule AndInv {
+    from s : INConfiguration!AndInv
+    to t : OUTConfiguration!AndInv (
+        left <- s.left,
+        right <- s.right)
+}
+
+rule OrInv {
+    from s : INConfiguration!OrInv
+    to t : OUTConfiguration!OrInv (
+        left <- s.left,
+        right <- s.right)
+}
+
+rule NotInv {
+    from s : INConfiguration!NotInv
+    to t : OUTConfiguration!NotInv (
+        elem <- s.elem)
+}
+--
+rule Environment {
+    from s : INConfiguration!Environment
+	using {
+    	-- Modificare in base al template ora non disponibile
+    	nameAlt : String = thisModule.getStatement.name;
+    	locationAlt : String = thisModule.getStatement.location;
+    }
+    to t : OUTConfiguration!Environment (
+        name <- s.name,
+        runningServices <- s.runningServices,
+		users <- s.users,
+        groups <- s.groups,
+        emacspkg <- s.emacspkg,
+        iconCache <- s.iconCache,
+        desktopDb <- s.desktopDb,
+        mimeTypeHandlerCache <- s.mimeTypeHandlerCache,
+        libraryCache <- s.libraryCache,
+        skeeperCatalog <- s.skeeperCatalog,
+        sgmlCatalog <- s.sgmlCatalog,
+        moduleCache <- s.moduleCache,
+        xfontCaches <- s.xfontCaches,
+        gconf <- s.gconf,
+        menu <- s.menu)
+		
+		do {
+			if (thisModule.existsFile(locationAlt)) {
+				if (thisModule.existsAlternative(nameAlt)) {
+					thisModule.getAlternative(nameAlt).current <- thisModule.getFile(locationAlt);
+					t.alternatives <- INConfiguration!Alternative.allInstancesFrom('IN')->collect(e | thisModule.Alternative(e));
+				} else {
+				thisModule.createErrorModel('updateAlternative', 'Alternative '+ nameAlt + ' not exist.');				}
+			} else {
+				thisModule.createErrorModel('updateAlternative', 'File '+ locationAlt + ' not exist.');
+			}
+		}
+}
+
+rule FileSystem {
+    from s : INConfiguration!FileSystem
+    to t : OUTConfiguration!FileSystem (
+        name <- s.name,
+        root <- s.root,
+        allFiles <- s.allFiles)
+}
+
+rule GConf {
+    from s : INConfiguration!GConf
+    to t : OUTConfiguration!GConf (
+        confFiles <- s.confFiles,
+        schemas <- s.schemas)
+}
+
+rule ApplicationMenuCatalog {
+    from s : INConfiguration!ApplicationMenuCatalog
+    to t : OUTConfiguration!ApplicationMenuCatalog (
+        name <- s.name)
+}
+
+rule Menu {
+    from s : INConfiguration!Menu
+    to t : OUTConfiguration!Menu (
+        entries <- s.entries,
+        catalog <- s.catalog)
+}
+
+rule MenuEntry {
+    from s : INConfiguration!MenuEntry
+    to t : OUTConfiguration!MenuEntry (
+        name <- s.name,
+        executable <- s.executable,
+        parent <- s.parent)
+}
+
+rule Boot {
+    from s : INConfiguration!Boot
+    to t : OUTConfiguration!Boot (
+        services <- s.services)
+}
+
+rule Service {
+    from s : INConfiguration!Service
+    to t : OUTConfiguration!Service (
+        name <- s.name,
+        executable <- s.executable,
+        env <- s.env)
+}
+
+rule File {
+    from s : INConfiguration!File (s.oclIsTypeOf(INConfiguration!File))
+    to t : OUTConfiguration!File (
+        name <- s.name,
+        extension <- s.extension,
+        description <- s.description,
+        size <- s.size,
+        checkSum <- s.checkSum,
+        isDirectory <- s.isDirectory,
+        suid <- s.suid,
+        guid <- s.guid,
+        permission <- s.permission,
+        location <- s.location,
+        isMissing <- s.isMissing,
+        childs <- s.childs,
+        owner <- s.owner,
+        group <- s.group,
+        pkgSettings <- s.pkgSettings)
+}
+
+rule DocumentationFile {
+    from s : INConfiguration!DocumentationFile
+    to t : OUTConfiguration!DocumentationFile (
+        name <- s.name,
+        extension <- s.extension,
+        description <- s.description,
+        size <- s.size,
+        checkSum <- s.checkSum,
+        isDirectory <- s.isDirectory,
+        suid <- s.suid,
+        guid <- s.guid,
+        permission <- s.permission,
+        location <- s.location,
+        isMissing <- s.isMissing,
+        childs <- s.childs,
+        owner <- s.owner,
+        group <- s.group,
+        pkgSettings <- s.pkgSettings)
+}
+
+rule InformationFile {
+    from s : INConfiguration!InformationFile
+    to t : OUTConfiguration!InformationFile (
+        name <- s.name,
+        extension <- s.extension,
+        description <- s.description,
+        size <- s.size,
+        checkSum <- s.checkSum,
+        isDirectory <- s.isDirectory,
+        suid <- s.suid,
+        guid <- s.guid,
+        permission <- s.permission,
+        location <- s.location,
+        isMissing <- s.isMissing,
+        childs <- s.childs,
+        owner <- s.owner,
+        group <- s.group,
+        pkgSettings <- s.pkgSettings)
+}
+
+--
+lazy rule Alternative {
+    from s : INConfiguration!Alternative
+    to t : OUTConfiguration!Alternative (
+        name <- s.name,
+        current <- s.current,
+        location <- s.location)
+}
+
+
+
+rule PackageSetting {
+    from s : INConfiguration!PackageSetting
+    to t : OUTConfiguration!PackageSetting (
+        name <- s.name,
+        services <- s.services,
+        files <- s.files,
+        dependences <- s.dependences)
+}
+
+rule IconCache {
+    from s : INConfiguration!IconCache
+    to t : OUTConfiguration!IconCache (
+        mtime <- s.mtime,
+        icons <- s.icons)
+}
+
+rule DesktopDB {
+    from s : INConfiguration!DesktopDB
+    to t : OUTConfiguration!DesktopDB (
+        applications <- s.applications)
+}
+
+rule MimeTypeHandlerCache {
+    from s : INConfiguration!MimeTypeHandlerCache
+    to t : OUTConfiguration!MimeTypeHandlerCache (
+        handlers <- s.handlers,
+        mimeTypes <- s.mimeTypes)
+}
+
+rule MimeTypeHandler {
+    from s : INConfiguration!MimeTypeHandler
+    to t : OUTConfiguration!MimeTypeHandler (
+        handler <- s.handler,
+        type <- s.type)
+}
+
+rule MimeType {
+    from s : INConfiguration!MimeType
+    to t : OUTConfiguration!MimeType (
+        name <- s.name,
+        extension <- s.extension,
+        mimeTypeHandlers <- s.mimeTypeHandlers)
+}
+
+rule XFontCache {
+    from s : INConfiguration!XFontCache
+    to t : OUTConfiguration!XFontCache (
+        location <- s.location,
+        xfonts <- s.xfonts)
+}
+
+rule XFont {
+    from s : INConfiguration!XFont
+    to t : OUTConfiguration!XFont (
+        name <- s.name,
+        file <- s.file)
+}
+
+rule LibraryCache {
+    from s : INConfiguration!LibraryCache
+    to t : OUTConfiguration!LibraryCache (
+        locations <- s.locations,
+        sharedLibraries <- s.sharedLibraries)
+}
+
+rule SharedLibrary {
+    from s : INConfiguration!SharedLibrary
+    to t : OUTConfiguration!SharedLibrary (
+        name <- s.name,
+        version <- s.version,
+        file <- s.file)
+}
+
+rule ModuleCache {
+    from s : INConfiguration!ModuleCache
+    to t : OUTConfiguration!ModuleCache (
+        version <- s.version,
+        modules <- s.modules)
+}
+
+rule Module {
+    from s : INConfiguration!Module
+    to t : OUTConfiguration!Module (
+        name <- s.name,
+        file <- s.file)
+}
+
+rule SGMLCatalog {
+    from s : INConfiguration!SGMLCatalog
+    to t : OUTConfiguration!SGMLCatalog (
+        name <- s.name,
+        documents <- s.documents)
+}
+
+rule SGMLDocument {
+    from s : INConfiguration!SGMLDocument
+    to t : OUTConfiguration!SGMLDocument (
+        name <- s.name,
+        location <- s.location,
+        document <- s.document)
+}
+
+rule SkeeperCatalog {
+    from s : INConfiguration!SkeeperCatalog
+    to t : OUTConfiguration!SkeeperCatalog (
+        name <- s.name,
+        documents <- s.documents)
+}
+
+rule SkeeperDocument {
+    from s : INConfiguration!SkeeperDocument
+    to t : OUTConfiguration!SkeeperDocument (
+        name <- s.name,
+        location <- s.location,
+        document <- s.document)
+}
+
+rule EmacsPackage {
+    from s : INConfiguration!EmacsPackage
+    to t : OUTConfiguration!EmacsPackage (
+        name <- s.name,
+        files <- s.files)
+}
+
+rule User {
+    from s : INConfiguration!User
+    to t : OUTConfiguration!User (
+        name <- s.name,
+        groups <- s.groups,
+        home <- s.home)
+}
+
+rule Group {
+    from s : INConfiguration!Group
+    to t : OUTConfiguration!Group (
+        name <- s.name,
+        users <- s.users)
+}
+
+rule SingleConflict {
+    from s : INConfiguration!SingleConflict
+    to t : OUTConfiguration!SingleConflict (
+        version <- s.version,
+        value <- s.value,
+        andConflict <- s.andConflict,
+        orConflict <- s.orConflict,
+        singleConflict <- s.singleConflict,
+        pkg <- s.pkg)
+}
+
+rule AndConflict {
+    from s : INConfiguration!AndConflict
+    to t : OUTConfiguration!AndConflict (
+        andConflict <- s.andConflict,
+        orConflict <- s.orConflict,
+        singleConflict <- s.singleConflict,
+        pkg <- s.pkg,
+        ops <- s.ops)
+}
+
+rule OrConflict {
+    from s : INConfiguration!OrConflict
+    to t : OUTConfiguration!OrConflict (
+        andConflict <- s.andConflict,
+        orConflict <- s.orConflict,
+        singleConflict <- s.singleConflict,
+        pkg <- s.pkg,
+        ops <- s.ops)
+}
+
+-- 
+rule createErrorModel(type:String, description:String) {
+     to
+       t : MMError!Error (
+           	type <- type,
+            description <- description)
+	do {
+		t;
+	}	
+}

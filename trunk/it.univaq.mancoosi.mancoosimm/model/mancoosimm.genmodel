@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/it.univaq.mancoosi.mancoosimm/src"
+    modelPluginID="it.univaq.mancoosi.mancoosimm" modelName="Mancoosimm" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="6.0" copyrightFields="false">
+  <foreignModel>../../it.univaq.mancoosi.errormm/model/mancoosimm.ecore</foreignModel>
+  <genPackages prefix="Mancoosi" basePackage="it.univaq.mancoosi" disposableProviderFactory="true"
+      fileExtensions="mancoosimm" ecorePackage="mancoosimm.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="mancoosimm.ecore#//PriorityType">
+      <genEnumLiterals ecoreEnumLiteral="mancoosimm.ecore#//PriorityType/standard"/>
+      <genEnumLiterals ecoreEnumLiteral="mancoosimm.ecore#//PriorityType/required"/>
+      <genEnumLiterals ecoreEnumLiteral="mancoosimm.ecore#//PriorityType/important"/>
+      <genEnumLiterals ecoreEnumLiteral="mancoosimm.ecore#//PriorityType/optional"/>
+      <genEnumLiterals ecoreEnumLiteral="mancoosimm.ecore#//PriorityType/extra"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="mancoosimm.ecore#//StatusType">
+      <genEnumLiterals ecoreEnumLiteral="mancoosimm.ecore#//StatusType/installed"/>
+      <genEnumLiterals ecoreEnumLiteral="mancoosimm.ecore#//StatusType/none"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="mancoosimm.ecore#//VersionType">
+      <genEnumLiterals ecoreEnumLiteral="mancoosimm.ecore#//VersionType/eq"/>
+      <genEnumLiterals ecoreEnumLiteral="mancoosimm.ecore#//VersionType/ge"/>
+      <genEnumLiterals ecoreEnumLiteral="mancoosimm.ecore#//VersionType/le"/>
+      <genEnumLiterals ecoreEnumLiteral="mancoosimm.ecore#//VersionType/lt"/>
+      <genEnumLiterals ecoreEnumLiteral="mancoosimm.ecore#//VersionType/llt"/>
+      <genEnumLiterals ecoreEnumLiteral="mancoosimm.ecore#//VersionType/gt"/>
+      <genEnumLiterals ecoreEnumLiteral="mancoosimm.ecore#//VersionType/ggt"/>
+    </genEnums>
+    <genClasses image="false" ecoreClass="mancoosimm.ecore#//NamedElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//NamedElement/name"/>
+    </genClasses>
+    <genClasses ecoreClass="mancoosimm.ecore#//Configuration">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Configuration/installedPackages"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Configuration/fileSystem"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Configuration/environment"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Configuration/notInstalledPackages"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//Configuration/creationTime"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//Configuration/systemType"/>
+    </genClasses>
+    <genClasses ecoreClass="mancoosimm.ecore#//InstalledPackage">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//InstalledPackage/installedSize"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//InstalledPackage/maintainer"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//InstalledPackage/architecture"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//InstalledPackage/fileSize"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//InstalledPackage/checkSum"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//InstalledPackage/description"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//InstalledPackage/section"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//InstalledPackage/tag"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//InstalledPackage/priority"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//InstalledPackage/status"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//InstalledPackage/uploaders"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//InstalledPackage/sourcePackage"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//InstalledPackage/depends"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//InstalledPackage/recommends"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//InstalledPackage/suggests"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//InstalledPackage/enhances"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//InstalledPackage/predepends"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//InstalledPackage/provides"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//InstalledPackage/replaces"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//InstalledPackage/files"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//InstalledPackage/documentationFiles"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//InstalledPackage/conflict"/>
+    </genClasses>
+    <genClasses ecoreClass="mancoosimm.ecore#//NotInstalledPackage"/>
+    <genClasses ecoreClass="mancoosimm.ecore#//SrcPackage">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//SrcPackage/buildDepends"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//SrcPackage/buildConflicts"/>
+    </genClasses>
+    <genClasses ecoreClass="mancoosimm.ecore#//BinPackage">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//BinPackage/srcRef"/>
+    </genClasses>
+    <genClasses ecoreClass="mancoosimm.ecore#//VirtualPackage">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//VirtualPackage/impPackage"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="mancoosimm.ecore#//Dependence">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Dependence/andDep"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Dependence/orDep"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Dependence/singleDep"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Dependence/pkg"/>
+    </genClasses>
+    <genClasses ecoreClass="mancoosimm.ecore#//AndDep">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//AndDep/ops"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference mancoosimm.ecore#//AndDep/dependence"/>
+    </genClasses>
+    <genClasses ecoreClass="mancoosimm.ecore#//OrDep">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//OrDep/ops"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference mancoosimm.ecore#//OrDep/dependence"/>
+    </genClasses>
+    <genClasses ecoreClass="mancoosimm.ecore#//SingleDep">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference mancoosimm.ecore#//SingleDep/dependence"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//SingleDep/version"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//SingleDep/value"/>
+    </genClasses>
+    <genClasses ecoreClass="mancoosimm.ecore#//Invariant">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Invariant/atomEl"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Invariant/and"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Invariant/or"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Invariant/not"/>
+    </genClasses>
+    <genClasses ecoreClass="mancoosimm.ecore#//Atom"/>
+    <genClasses ecoreClass="mancoosimm.ecore#//AndInv">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//AndInv/left"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//AndInv/right"/>
+    </genClasses>
+    <genClasses ecoreClass="mancoosimm.ecore#//OrInv">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//OrInv/left"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//OrInv/right"/>
+    </genClasses>
+    <genClasses ecoreClass="mancoosimm.ecore#//NotInv">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//NotInv/elem"/>
+    </genClasses>
+    <genClasses ecoreClass="mancoosimm.ecore#//Environment">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Environment/runningServices"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Environment/alternatives"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Environment/users"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Environment/groups"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Environment/emacspkg"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Environment/iconCache"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Environment/desktopDb"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Environment/mimeTypeHandlerCache"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Environment/libraryCache"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Environment/skeeperCatalog"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Environment/sgmlCatalog"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference mancoosimm.ecore#//Environment/configuration"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Environment/moduleCache"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Environment/xfontCaches"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Environment/gconf"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Environment/menu"/>
+    </genClasses>
+    <genClasses ecoreClass="mancoosimm.ecore#//FileSystem">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//FileSystem/root"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference mancoosimm.ecore#//FileSystem/configuration"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//FileSystem/allFiles"/>
+    </genClasses>
+    <genClasses ecoreClass="mancoosimm.ecore#//GConf">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//GConf/confFiles"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//GConf/schemas"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference mancoosimm.ecore#//GConf/env"/>
+    </genClasses>
+    <genClasses ecoreClass="mancoosimm.ecore#//ApplicationMenuCatalog">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference mancoosimm.ecore#//ApplicationMenuCatalog/menu"/>
+    </genClasses>
+    <genClasses ecoreClass="mancoosimm.ecore#//Menu">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Menu/entries"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Menu/catalog"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference mancoosimm.ecore#//Menu/env"/>
+    </genClasses>
+    <genClasses ecoreClass="mancoosimm.ecore#//MenuEntry">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference mancoosimm.ecore#//MenuEntry/menu"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//MenuEntry/executable"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//MenuEntry/parent"/>
+    </genClasses>
+    <genClasses ecoreClass="mancoosimm.ecore#//Boot">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Boot/services"/>
+    </genClasses>
+    <genClasses ecoreClass="mancoosimm.ecore#//Service">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Service/executable"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Service/env"/>
+    </genClasses>
+    <genClasses ecoreClass="mancoosimm.ecore#//File">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//File/extension"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//File/description"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//File/size"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//File/checkSum"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//File/isDirectory"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//File/suid"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//File/guid"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//File/permission"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//File/location"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference mancoosimm.ecore#//File/fs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//File/childs"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference mancoosimm.ecore#//File/parent"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//File/owner"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//File/group"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//File/isMissing"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//File/pkgSettings"/>
+    </genClasses>
+    <genClasses ecoreClass="mancoosimm.ecore#//DocumentationFile">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference mancoosimm.ecore#//DocumentationFile/pkg"/>
+    </genClasses>
+    <genClasses ecoreClass="mancoosimm.ecore#//InformationFile"/>
+    <genClasses ecoreClass="mancoosimm.ecore#//Alternative">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Alternative/current"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Alternative/location"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference mancoosimm.ecore#//Alternative/env"/>
+    </genClasses>
+    <genClasses ecoreClass="mancoosimm.ecore#//PackageSetting">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//PackageSetting/services"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//PackageSetting/files"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference mancoosimm.ecore#//PackageSetting/pkg"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//PackageSetting/dependences"/>
+    </genClasses>
+    <genClasses ecoreClass="mancoosimm.ecore#//IconCache">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//IconCache/mtime"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference mancoosimm.ecore#//IconCache/env"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//IconCache/icons"/>
+    </genClasses>
+    <genClasses ecoreClass="mancoosimm.ecore#//DesktopDB">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference mancoosimm.ecore#//DesktopDB/env"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//DesktopDB/applications"/>
+    </genClasses>
+    <genClasses ecoreClass="mancoosimm.ecore#//MimeTypeHandlerCache">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference mancoosimm.ecore#//MimeTypeHandlerCache/env"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//MimeTypeHandlerCache/handlers"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//MimeTypeHandlerCache/mimeTypes"/>
+    </genClasses>
+    <genClasses ecoreClass="mancoosimm.ecore#//MimeTypeHandler">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//MimeTypeHandler/handler"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//MimeTypeHandler/type"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference mancoosimm.ecore#//MimeTypeHandler/cache"/>
+    </genClasses>
+    <genClasses ecoreClass="mancoosimm.ecore#//MimeType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//MimeType/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//MimeType/extension"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//MimeType/mimeTypeHandlers"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference mancoosimm.ecore#//MimeType/cache"/>
+    </genClasses>
+    <genClasses ecoreClass="mancoosimm.ecore#//XFontCache">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//XFontCache/xfonts"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//XFontCache/location"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference mancoosimm.ecore#//XFontCache/env"/>
+    </genClasses>
+    <genClasses ecoreClass="mancoosimm.ecore#//XFont">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference mancoosimm.ecore#//XFont/xfontCache"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//XFont/file"/>
+    </genClasses>
+    <genClasses ecoreClass="mancoosimm.ecore#//LibraryCache">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//LibraryCache/locations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//LibraryCache/sharedLibraries"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference mancoosimm.ecore#//LibraryCache/env"/>
+    </genClasses>
+    <genClasses ecoreClass="mancoosimm.ecore#//SharedLibrary">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//SharedLibrary/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//SharedLibrary/file"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//SharedLibrary/version"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference mancoosimm.ecore#//SharedLibrary/libraryCache"/>
+    </genClasses>
+    <genClasses ecoreClass="mancoosimm.ecore#//ModuleCache">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//ModuleCache/version"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//ModuleCache/modules"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference mancoosimm.ecore#//ModuleCache/env"/>
+    </genClasses>
+    <genClasses ecoreClass="mancoosimm.ecore#//Module">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Module/file"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference mancoosimm.ecore#//Module/moduleCache"/>
+    </genClasses>
+    <genClasses ecoreClass="mancoosimm.ecore#//SGMLCatalog">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference mancoosimm.ecore#//SGMLCatalog/env"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//SGMLCatalog/documents"/>
+    </genClasses>
+    <genClasses ecoreClass="mancoosimm.ecore#//SGMLDocument">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//SGMLDocument/location"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//SGMLDocument/document"/>
+    </genClasses>
+    <genClasses ecoreClass="mancoosimm.ecore#//SkeeperCatalog">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference mancoosimm.ecore#//SkeeperCatalog/env"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//SkeeperCatalog/documents"/>
+    </genClasses>
+    <genClasses ecoreClass="mancoosimm.ecore#//SkeeperDocument">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//SkeeperDocument/location"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//SkeeperDocument/document"/>
+    </genClasses>
+    <genClasses ecoreClass="mancoosimm.ecore#//EmacsPackage">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//EmacsPackage/files"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference mancoosimm.ecore#//EmacsPackage/env"/>
+    </genClasses>
+    <genClasses ecoreClass="mancoosimm.ecore#//User">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference mancoosimm.ecore#//User/env"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//User/groups"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//User/home"/>
+    </genClasses>
+    <genClasses ecoreClass="mancoosimm.ecore#//Group">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference mancoosimm.ecore#//Group/env"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Group/users"/>
+    </genClasses>
+    <genClasses ecoreClass="mancoosimm.ecore#//SingleConflict">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference mancoosimm.ecore#//SingleConflict/conflict"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//SingleConflict/version"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//SingleConflict/value"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="mancoosimm.ecore#//Conflict">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Conflict/andConflict"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Conflict/orConflict"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Conflict/singleConflict"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Conflict/pkg"/>
+    </genClasses>
+    <genClasses ecoreClass="mancoosimm.ecore#//AndConflict">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//AndConflict/ops"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference mancoosimm.ecore#//AndConflict/conflict"/>
+    </genClasses>
+    <genClasses ecoreClass="mancoosimm.ecore#//OrConflict">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//OrConflict/ops"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference mancoosimm.ecore#//OrConflict/conflict"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="mancoosimm.ecore#//Package">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//Package/version"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Package/configuration"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Package/packageSettings"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

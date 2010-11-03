@@ -1,0 +1,3 @@
+module condition;
+
+create OUT : ATL  from INPACK : INPackage, INPOS : INCurrentPosition;
