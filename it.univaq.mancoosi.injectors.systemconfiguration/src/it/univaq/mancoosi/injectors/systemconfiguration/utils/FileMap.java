@@ -30,7 +30,7 @@ public class FileMap {
 		this.parent = parent;
 		this.isDirectory = isDiretory;
 		this.path = path;
-		this.childs = new HashMap();
+		this.childs = new HashMap<String, FileMap>();
 	}
 	
 	public void addFile(String name, Boolean isDirectory, File modelFileElement){

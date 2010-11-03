@@ -4,10 +4,7 @@ package it.univaq.mancoosi.injectors.systemconfiguration.managers.caixa;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-import com.sun.org.apache.bcel.internal.generic.INSTANCEOF;
-
 import it.univaq.mancoosi.mancoosimm.Alternative;
-import it.univaq.mancoosi.mancoosimm.MancoosiFactory;
 import it.univaq.mancoosi.injectors.systemconfiguration.managers.AlternativesManager;
 
 public class CaixaAlternativesManager extends AlternativesManager{

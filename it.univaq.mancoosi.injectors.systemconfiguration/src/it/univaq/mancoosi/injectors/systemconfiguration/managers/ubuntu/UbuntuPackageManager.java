@@ -256,7 +256,7 @@ public class UbuntuPackageManager extends PackageManager {
 	    	  } else  {
 	    
 	    		  // A list of configuration files is create
-	    		  List<String> conffilesBlock = new ArrayList();
+	    		  List<String> conffilesBlock = new ArrayList<String>();
 	    		  PackageSetting pkgSetting = factory.createPackageSetting();
 	    		  installedPackage.setPackageSettings(pkgSetting);
 	    

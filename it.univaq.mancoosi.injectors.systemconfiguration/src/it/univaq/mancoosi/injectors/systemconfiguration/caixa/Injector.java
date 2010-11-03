@@ -21,7 +21,6 @@ import java.util.GregorianCalendar;
 import it.univaq.mancoosi.mancoosimm.Configuration;
 import it.univaq.mancoosi.mancoosimm.Environment;
 import it.univaq.mancoosi.mancoosimm.FileSystem;
-import it.univaq.mancoosi.mancoosimm.MancoosiFactory;
 import it.univaq.mancoosi.mancoosimm.MimeTypeHandlerCache;
 import it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl;
 
@@ -42,7 +41,6 @@ public class Injector {
 		MancoosiPackageImpl.init();
 					
 		// retrieve the default Mancoosi factory singleton
-		MancoosiFactory factory = MancoosiFactory.eINSTANCE; 
 		Configuration configuration = null;
 	
 		URI fileURI = URI.createFileURI("model/systemModel.mancoosimm");
@@ -59,14 +57,13 @@ public class Injector {
 			CaixaFileSystemManager.getInstance().setFileSystem(configuration.getFileSystem());
 			CaixaEnvironmentManager.getInstance().setEnvironment(configuration.getEnvironment());
 
-			//CaixaPackageManager.getInstance().removePackage("yelp");
 			
 			CaixaPackageManager.getInstance().synchronize();
 			
 			System.out.println("Synchronization completed !");		
 			
 		} else {
-			System.out.println("AGH HERE");
+
 			// The configuration element is initialized 
 			configuration = CaixaConfigurationManager.getInstance().getConfiguration();
 			resource.getContents().add(configuration);
@@ -126,13 +123,6 @@ public class Injector {
 			out.flush();
 		}
 		
-		
-		//FileSystemManager.getInstance().deleteFile("/etc/acpi/always-mute.sh");
-	
-		
-
-	//	if (PackageManager.getInstance().removePackageElement("apturl"))
-	//		System.out.println("PackageDeleted");
 		out.close();
 		
 		FailureDetector.getInstance().start();	

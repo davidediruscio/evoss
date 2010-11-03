@@ -21,7 +21,7 @@ public abstract class GroupManager {
 		
 	protected GroupManager(){
 		this.configuration = ConfigurationManager.getInstance().getConfiguration();
-		this.groupMap = new HashMap();
+		this.groupMap = new HashMap<String, Group>();
 	}
 	
 	public static GroupManager getInstance() {

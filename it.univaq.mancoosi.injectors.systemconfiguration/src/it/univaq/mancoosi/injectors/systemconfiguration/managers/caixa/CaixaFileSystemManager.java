@@ -3,8 +3,6 @@ package it.univaq.mancoosi.injectors.systemconfiguration.managers.caixa;
 import java.io.IOException;
 
 import it.univaq.mancoosi.injectors.systemconfiguration.managers.FileSystemManager;
-import it.univaq.mancoosi.injectors.systemconfiguration.managers.GroupManager;
-import it.univaq.mancoosi.injectors.systemconfiguration.managers.UserManager;
 
 public class CaixaFileSystemManager extends FileSystemManager {
 

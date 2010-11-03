@@ -4,12 +4,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Iterator;
-import java.util.List;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
-import it.univaq.mancoosi.mancoosimm.Configuration;
 import it.univaq.mancoosi.mancoosimm.FileSystem;
 import it.univaq.mancoosi.mancoosimm.File;
 import it.univaq.mancoosi.mancoosimm.MancoosiFactory;
