@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_H3dm0AkbEd-3u7mEq6XqdQ">
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_H3dm0QkbEd-3u7mEq6XqdQ" name="boolean"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_H3dm0gkbEd-3u7mEq6XqdQ" name="byte"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_H3dm0wkbEd-3u7mEq6XqdQ" name="char"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_H3dm1AkbEd-3u7mEq6XqdQ" name="double"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_H3dm1QkbEd-3u7mEq6XqdQ" name="float"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_H3dm1gkbEd-3u7mEq6XqdQ" name="int"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_H3dm1wkbEd-3u7mEq6XqdQ" name="long"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_H3dm2AkbEd-3u7mEq6XqdQ" name="short"/>
+  <packagedElement xmi:type="uml:Package" xmi:id="_H3dm2QkbEd-3u7mEq6XqdQ" name="mancoosi">
+    <packagedElement xmi:type="uml:Package" xmi:id="_H3dm2gkbEd-3u7mEq6XqdQ" name="injectors">
+      <packagedElement xmi:type="uml:Package" xmi:id="_H3dm2wkbEd-3u7mEq6XqdQ" name="managers">
+        <packagedElement xmi:type="uml:Class" xmi:id="_H3dm3AkbEd-3u7mEq6XqdQ" name="GroupManager" isAbstract="true">
+          <ownedOperation xmi:id="_H3dm3QkbEd-3u7mEq6XqdQ" name="getInstance" visibility="public" isStatic="true">
+            <ownedParameter xmi:id="_H3dm3gkbEd-3u7mEq6XqdQ" name="return" type="_H3dm3AkbEd-3u7mEq6XqdQ" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_H3dm3wkbEd-3u7mEq6XqdQ" name="addGroup" visibility="public">
+            <ownedParameter xmi:id="_H3dm4AkbEd-3u7mEq6XqdQ" name="groupName" type="_H3fcAwkbEd-3u7mEq6XqdQ"/>
+            <ownedParameter xmi:id="_H3dm4QkbEd-3u7mEq6XqdQ" name="return" type="_H3fcBAkbEd-3u7mEq6XqdQ" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_H3dm4gkbEd-3u7mEq6XqdQ" name="getGroup" visibility="public">
+            <ownedParameter xmi:id="_H3dm4wkbEd-3u7mEq6XqdQ" name="groupName" type="_H3fcAwkbEd-3u7mEq6XqdQ"/>
+            <ownedParameter xmi:id="_H3dm5AkbEd-3u7mEq6XqdQ" name="return" type="_H3fcBAkbEd-3u7mEq6XqdQ" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_H3eN4AkbEd-3u7mEq6XqdQ" name="getAllGroups" visibility="public">
+            <ownedParameter xmi:id="_H3eN4QkbEd-3u7mEq6XqdQ" name="return" type="_H3fcBAkbEd-3u7mEq6XqdQ" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_H3eN4gkbEd-3u7mEq6XqdQ" name="exists" visibility="public">
+            <ownedParameter xmi:id="_H3eN4wkbEd-3u7mEq6XqdQ" name="groupName" type="_H3fcAwkbEd-3u7mEq6XqdQ"/>
+            <ownedParameter xmi:id="_H3eN5AkbEd-3u7mEq6XqdQ" name="return" type="_H3fcBQkbEd-3u7mEq6XqdQ" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_H3eN5QkbEd-3u7mEq6XqdQ" name="synchronize" visibility="public" isAbstract="true"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_H3eN5gkbEd-3u7mEq6XqdQ" name="FileSystemManager" isAbstract="true">
+          <ownedOperation xmi:id="_H3eN5wkbEd-3u7mEq6XqdQ" name="getInstance" visibility="public" isStatic="true">
+            <ownedParameter xmi:id="_H3eN6AkbEd-3u7mEq6XqdQ" name="return" type="_H3eN5gkbEd-3u7mEq6XqdQ" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_H3eN6QkbEd-3u7mEq6XqdQ" name="getFileSystem" visibility="public">
+            <ownedParameter xmi:id="_H3eN6gkbEd-3u7mEq6XqdQ" name="return" type="_H3fcBgkbEd-3u7mEq6XqdQ" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_H3eN6wkbEd-3u7mEq6XqdQ" name="setFileSystem" visibility="public">
+            <ownedParameter xmi:id="_H3eN7AkbEd-3u7mEq6XqdQ" name="fileSystem" type="_H3fcBgkbEd-3u7mEq6XqdQ"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_H3eN7QkbEd-3u7mEq6XqdQ" name="getFileInformation" visibility="public">
+            <ownedParameter xmi:id="_H3eN7gkbEd-3u7mEq6XqdQ" name="location" type="_H3fcAwkbEd-3u7mEq6XqdQ"/>
+            <ownedParameter xmi:id="_H3eN7wkbEd-3u7mEq6XqdQ" name="return" type="_H3fcAwkbEd-3u7mEq6XqdQ" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_H3eN8AkbEd-3u7mEq6XqdQ" name="exists" visibility="public">
+            <ownedParameter xmi:id="_H3eN8QkbEd-3u7mEq6XqdQ" name="path" type="_H3fcAwkbEd-3u7mEq6XqdQ"/>
+            <ownedParameter xmi:id="_H3eN8gkbEd-3u7mEq6XqdQ" name="return" type="_H3fcBQkbEd-3u7mEq6XqdQ" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_H3eN8wkbEd-3u7mEq6XqdQ" name="createFile" visibility="public">
+            <ownedParameter xmi:id="_H3eN9AkbEd-3u7mEq6XqdQ" name="path" type="_H3fcAwkbEd-3u7mEq6XqdQ"/>
+            <ownedParameter xmi:id="_H3eN9QkbEd-3u7mEq6XqdQ" name="return" type="_H3fcBwkbEd-3u7mEq6XqdQ" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_H3eN9gkbEd-3u7mEq6XqdQ" name="deleteFile" visibility="public">
+            <ownedParameter xmi:id="_H3eN9wkbEd-3u7mEq6XqdQ" name="path" type="_H3fcAwkbEd-3u7mEq6XqdQ"/>
+            <ownedParameter xmi:id="_H3eN-AkbEd-3u7mEq6XqdQ" name="return" type="_H3fcBQkbEd-3u7mEq6XqdQ" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_H3eN-QkbEd-3u7mEq6XqdQ" name="getFile" visibility="public">
+            <ownedParameter xmi:id="_H3eN-gkbEd-3u7mEq6XqdQ" name="path" type="_H3fcAwkbEd-3u7mEq6XqdQ"/>
+            <ownedParameter xmi:id="_H3eN-wkbEd-3u7mEq6XqdQ" name="return" type="_H3fcBwkbEd-3u7mEq6XqdQ" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_H3eN_AkbEd-3u7mEq6XqdQ" name="synchronize" visibility="public" isAbstract="true"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_H3eN_QkbEd-3u7mEq6XqdQ" name="EnvironmentManager" isAbstract="true">
+          <ownedOperation xmi:id="_H3eN_gkbEd-3u7mEq6XqdQ" name="getInstance" visibility="public" isStatic="true">
+            <ownedParameter xmi:id="_H3eN_wkbEd-3u7mEq6XqdQ" name="return" type="_H3eN_QkbEd-3u7mEq6XqdQ" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_H3eOAAkbEd-3u7mEq6XqdQ" name="getEnvironment" visibility="public">
+            <ownedParameter xmi:id="_H3eOAQkbEd-3u7mEq6XqdQ" name="return" type="_H3fcCAkbEd-3u7mEq6XqdQ" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_H3eOAgkbEd-3u7mEq6XqdQ" name="setEnvironment" visibility="public">
+            <ownedParameter xmi:id="_H3eOAwkbEd-3u7mEq6XqdQ" name="environment" type="_H3fcCAkbEd-3u7mEq6XqdQ"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_H3eOBAkbEd-3u7mEq6XqdQ" name="synchronize" visibility="public" isAbstract="true"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_H3eOBQkbEd-3u7mEq6XqdQ" name="AlternativesManager" isAbstract="true">
+          <ownedOperation xmi:id="_H3eOBgkbEd-3u7mEq6XqdQ" name="getInstance" visibility="public" isStatic="true">
+            <ownedParameter xmi:id="_H3eOBwkbEd-3u7mEq6XqdQ" name="return" type="_H3eOBQkbEd-3u7mEq6XqdQ" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_H3eOCAkbEd-3u7mEq6XqdQ" name="getAlternative" visibility="public" isAbstract="true">
+            <ownedParameter xmi:id="_H3eOCQkbEd-3u7mEq6XqdQ" name="alternativeName" type="_H3fcAwkbEd-3u7mEq6XqdQ"/>
+            <ownedParameter xmi:id="_H3eOCgkbEd-3u7mEq6XqdQ" name="return" type="_H3fcCQkbEd-3u7mEq6XqdQ" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_H3eOCwkbEd-3u7mEq6XqdQ" name="exists" visibility="public" isAbstract="true">
+            <ownedParameter xmi:id="_H3eODAkbEd-3u7mEq6XqdQ" name="alternativeName" type="_H3fcAwkbEd-3u7mEq6XqdQ"/>
+            <ownedParameter xmi:id="_H3eODQkbEd-3u7mEq6XqdQ" name="return" type="_H3fcBQkbEd-3u7mEq6XqdQ" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_H3eODgkbEd-3u7mEq6XqdQ" name="createAlternativesFromSystem" visibility="public" isAbstract="true"/>
+          <ownedOperation xmi:id="_H3eODwkbEd-3u7mEq6XqdQ" name="sychronize" visibility="public" isAbstract="true"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_H3eOEAkbEd-3u7mEq6XqdQ" name="UserManager" isAbstract="true">
+          <ownedOperation xmi:id="_H3eOEQkbEd-3u7mEq6XqdQ" name="getInstance" visibility="public" isStatic="true">
+            <ownedParameter xmi:id="_H3eOEgkbEd-3u7mEq6XqdQ" name="return" type="_H3eOEAkbEd-3u7mEq6XqdQ" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_H3eOEwkbEd-3u7mEq6XqdQ" name="addUser" visibility="public">
+            <ownedParameter xmi:id="_H3eOFAkbEd-3u7mEq6XqdQ" name="userName" type="_H3fcAwkbEd-3u7mEq6XqdQ"/>
+            <ownedParameter xmi:id="_H3eOFQkbEd-3u7mEq6XqdQ" name="groupName" type="_H3fcAwkbEd-3u7mEq6XqdQ"/>
+            <ownedParameter xmi:id="_H3eOFgkbEd-3u7mEq6XqdQ" name="return" type="_H3fcCgkbEd-3u7mEq6XqdQ" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_H3eOFwkbEd-3u7mEq6XqdQ" name="getUser" visibility="public">
+            <ownedParameter xmi:id="_H3eOGAkbEd-3u7mEq6XqdQ" name="name" type="_H3fcAwkbEd-3u7mEq6XqdQ"/>
+            <ownedParameter xmi:id="_H3eOGQkbEd-3u7mEq6XqdQ" name="return" type="_H3fcCgkbEd-3u7mEq6XqdQ" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_H3eOGgkbEd-3u7mEq6XqdQ" name="getAllUsers" visibility="public">
+            <ownedParameter xmi:id="_H3eOGwkbEd-3u7mEq6XqdQ" name="return" type="_H3fcCgkbEd-3u7mEq6XqdQ" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_H3eOHAkbEd-3u7mEq6XqdQ" name="createUsersFromSystem" visibility="public"/>
+          <ownedOperation xmi:id="_H3eOHQkbEd-3u7mEq6XqdQ" name="synchronize" visibility="public" isAbstract="true"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_H3eOHgkbEd-3u7mEq6XqdQ" name="ConfigurationManager" isAbstract="true">
+          <ownedOperation xmi:id="_H3eOHwkbEd-3u7mEq6XqdQ" name="getInstance" visibility="public" isStatic="true">
+            <ownedParameter xmi:id="_H3eOIAkbEd-3u7mEq6XqdQ" name="return" type="_H3eOHgkbEd-3u7mEq6XqdQ" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_H3eOIQkbEd-3u7mEq6XqdQ" name="getConfiguration" visibility="public">
+            <ownedParameter xmi:id="_H3eOIgkbEd-3u7mEq6XqdQ" name="return" type="_H3fcCwkbEd-3u7mEq6XqdQ" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_H3eOIwkbEd-3u7mEq6XqdQ" name="setConfiguration" visibility="public">
+            <ownedParameter xmi:id="_H3eOJAkbEd-3u7mEq6XqdQ" name="configuration" type="_H3fcCwkbEd-3u7mEq6XqdQ"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_H3e08AkbEd-3u7mEq6XqdQ" name="synchronize" visibility="public" isAbstract="true"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_H3e08QkbEd-3u7mEq6XqdQ" name="PackageManager" isAbstract="true">
+          <ownedOperation xmi:id="_H3e08gkbEd-3u7mEq6XqdQ" name="getInstance" visibility="public" isStatic="true">
+            <ownedParameter xmi:id="_H3e08wkbEd-3u7mEq6XqdQ" name="return" type="_H3e08QkbEd-3u7mEq6XqdQ" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_H3e09AkbEd-3u7mEq6XqdQ" name="createPackage" visibility="public">
+            <ownedParameter xmi:id="_H3e09QkbEd-3u7mEq6XqdQ" name="packageName" type="_H3fcAwkbEd-3u7mEq6XqdQ"/>
+            <ownedParameter xmi:id="_H3e09gkbEd-3u7mEq6XqdQ" name="return" type="_H3fcDAkbEd-3u7mEq6XqdQ" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_H3e09wkbEd-3u7mEq6XqdQ" name="removePackage" visibility="public">
+            <ownedParameter xmi:id="_H3e0-AkbEd-3u7mEq6XqdQ" name="packageName" type="_H3fcAwkbEd-3u7mEq6XqdQ"/>
+            <ownedParameter xmi:id="_H3e0-QkbEd-3u7mEq6XqdQ" name="return" type="_H3fcBQkbEd-3u7mEq6XqdQ" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_H3e0-gkbEd-3u7mEq6XqdQ" name="existsPackage" visibility="public">
+            <ownedParameter xmi:id="_H3e0-wkbEd-3u7mEq6XqdQ" name="packageName" type="_H3fcAwkbEd-3u7mEq6XqdQ"/>
+            <ownedParameter xmi:id="_H3e0_AkbEd-3u7mEq6XqdQ" name="return" type="_H3fcBQkbEd-3u7mEq6XqdQ" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_H3e0_QkbEd-3u7mEq6XqdQ" name="getConfFiles" visibility="public">
+            <ownedParameter xmi:id="_H3e0_gkbEd-3u7mEq6XqdQ" name="installedPackage" type="_H3fcDAkbEd-3u7mEq6XqdQ"/>
+            <ownedParameter xmi:id="_H3e0_wkbEd-3u7mEq6XqdQ" name="return" type="_H3fcDQkbEd-3u7mEq6XqdQ" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_H3e1AAkbEd-3u7mEq6XqdQ" name="setFeaturesOfInstalledPackages" visibility="public" isAbstract="true"/>
+          <ownedOperation xmi:id="_H3e1AQkbEd-3u7mEq6XqdQ" name="setFeaturesOfInstalledPackagesFoundBySync" visibility="public" isAbstract="true"/>
+          <ownedOperation xmi:id="_H3e1AgkbEd-3u7mEq6XqdQ" name="createPackageElementsFromSystem" visibility="public" isAbstract="true"/>
+          <ownedOperation xmi:id="_H3e1AwkbEd-3u7mEq6XqdQ" name="synchronize" visibility="public" isAbstract="true"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_H3e1BAkbEd-3u7mEq6XqdQ" name="MimeTypeHandlerCacheManager" isAbstract="true">
+          <ownedOperation xmi:id="_H3e1BQkbEd-3u7mEq6XqdQ" name="getInstance" visibility="public" isStatic="true">
+            <ownedParameter xmi:id="_H3e1BgkbEd-3u7mEq6XqdQ" name="return" type="_H3e1BAkbEd-3u7mEq6XqdQ" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_H3e1BwkbEd-3u7mEq6XqdQ" name="getMimeTypeHandlerCache" visibility="public">
+            <ownedParameter xmi:id="_H3e1CAkbEd-3u7mEq6XqdQ" name="return" type="_H3fcDgkbEd-3u7mEq6XqdQ" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_H3e1CQkbEd-3u7mEq6XqdQ" name="createMimeTypeHandlerCacheFromSystem" visibility="public" isAbstract="true"/>
+          <ownedOperation xmi:id="_H3e1CgkbEd-3u7mEq6XqdQ" name="synchronize" visibility="public" isAbstract="true"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_H3e1CwkbEd-3u7mEq6XqdQ" name="PackageSettingDependenciesManager" isAbstract="true">
+          <ownedOperation xmi:id="_H3e1DAkbEd-3u7mEq6XqdQ" name="getInstance" visibility="public" isStatic="true">
+            <ownedParameter xmi:id="_H3e1DQkbEd-3u7mEq6XqdQ" name="return" type="_H3e1CwkbEd-3u7mEq6XqdQ" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_H3e1DgkbEd-3u7mEq6XqdQ" name="getRequiredFiles" visibility="public">
+            <ownedParameter xmi:id="_H3e1DwkbEd-3u7mEq6XqdQ" name="confFile" type="_H3fcBwkbEd-3u7mEq6XqdQ"/>
+            <ownedParameter xmi:id="_H3fcAAkbEd-3u7mEq6XqdQ" name="installedPackagePar" type="_H3fcDAkbEd-3u7mEq6XqdQ"/>
+            <ownedParameter xmi:id="_H3fcAQkbEd-3u7mEq6XqdQ" name="return" type="_H3fcDQkbEd-3u7mEq6XqdQ" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_H3fcAgkbEd-3u7mEq6XqdQ" name="updatePackageSettingDependencies" visibility="public"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:DataType" xmi:id="_H3fcAwkbEd-3u7mEq6XqdQ" name="String"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="_H3fcBAkbEd-3u7mEq6XqdQ" name="Group"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="_H3fcBQkbEd-3u7mEq6XqdQ" name="Boolean"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="_H3fcBgkbEd-3u7mEq6XqdQ" name="FileSystem"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="_H3fcBwkbEd-3u7mEq6XqdQ" name="File"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="_H3fcCAkbEd-3u7mEq6XqdQ" name="Environment"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="_H3fcCQkbEd-3u7mEq6XqdQ" name="Alternative"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="_H3fcCgkbEd-3u7mEq6XqdQ" name="User"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="_H3fcCwkbEd-3u7mEq6XqdQ" name="Configuration"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="_H3fcDAkbEd-3u7mEq6XqdQ" name="InstalledPackage"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="_H3fcDQkbEd-3u7mEq6XqdQ" name="List"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="_H3fcDgkbEd-3u7mEq6XqdQ" name="MimeTypeHandlerCache"/>
+      </packagedElement>
+    </packagedElement>
+  </packagedElement>
+</uml:Model>

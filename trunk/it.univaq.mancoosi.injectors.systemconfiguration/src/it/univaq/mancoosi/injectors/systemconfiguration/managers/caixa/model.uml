@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_9XGTEAmhEd-3u7mEq6XqdQ">
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_9XGTEQmhEd-3u7mEq6XqdQ" name="boolean"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_9XGTEgmhEd-3u7mEq6XqdQ" name="byte"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_9XGTEwmhEd-3u7mEq6XqdQ" name="char"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_9XGTFAmhEd-3u7mEq6XqdQ" name="double"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_9XGTFQmhEd-3u7mEq6XqdQ" name="float"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_9XGTFgmhEd-3u7mEq6XqdQ" name="int"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_9XGTFwmhEd-3u7mEq6XqdQ" name="long"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_9XGTGAmhEd-3u7mEq6XqdQ" name="short"/>
+  <packagedElement xmi:type="uml:Package" xmi:id="_9XGTGQmhEd-3u7mEq6XqdQ" name="mancoosi">
+    <packagedElement xmi:type="uml:Package" xmi:id="_9XGTGgmhEd-3u7mEq6XqdQ" name="injectors">
+      <packagedElement xmi:type="uml:Package" xmi:id="_9XGTGwmhEd-3u7mEq6XqdQ" name="managers">
+        <packagedElement xmi:type="uml:Package" xmi:id="_9XGTHAmhEd-3u7mEq6XqdQ" name="ubuntu">
+          <packagedElement xmi:type="uml:Class" xmi:id="_9XGTHQmhEd-3u7mEq6XqdQ" name="UbuntuUserManager">
+            <generalization xmi:id="_9XGTHgmhEd-3u7mEq6XqdQ" general="_9XG6SgmhEd-3u7mEq6XqdQ"/>
+            <ownedOperation xmi:id="_9XGTHwmhEd-3u7mEq6XqdQ" name="getInstance" visibility="public" isStatic="true">
+              <ownedParameter xmi:id="_9XGTIAmhEd-3u7mEq6XqdQ" name="return" type="_9XG6SgmhEd-3u7mEq6XqdQ" direction="return"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_9XGTIQmhEd-3u7mEq6XqdQ" name="synchronize" visibility="public"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_9XGTIgmhEd-3u7mEq6XqdQ" name="UbuntuPackageManager">
+            <generalization xmi:id="_9XGTIwmhEd-3u7mEq6XqdQ" general="_9XG6SwmhEd-3u7mEq6XqdQ"/>
+            <ownedOperation xmi:id="_9XGTJAmhEd-3u7mEq6XqdQ" name="getInstance" visibility="public" isStatic="true">
+              <ownedParameter xmi:id="_9XGTJQmhEd-3u7mEq6XqdQ" name="return" type="_9XG6SwmhEd-3u7mEq6XqdQ" direction="return"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_9XGTJgmhEd-3u7mEq6XqdQ" name="setFeaturesOfInstalledPackages" visibility="public"/>
+            <ownedOperation xmi:id="_9XGTJwmhEd-3u7mEq6XqdQ" name="setFeaturesOfInstalledPackagesFoundBySync" visibility="public"/>
+            <ownedOperation xmi:id="_9XGTKAmhEd-3u7mEq6XqdQ" name="createPackageElementsFromSystem" visibility="public"/>
+            <ownedOperation xmi:id="_9XGTKQmhEd-3u7mEq6XqdQ" name="synchronize" visibility="public"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_9XG6IAmhEd-3u7mEq6XqdQ" name="UbuntuAlternativesManager">
+            <generalization xmi:id="_9XG6IQmhEd-3u7mEq6XqdQ" general="_9XG6TAmhEd-3u7mEq6XqdQ"/>
+            <ownedOperation xmi:id="_9XG6IgmhEd-3u7mEq6XqdQ" name="getInstance" visibility="public" isStatic="true">
+              <ownedParameter xmi:id="_9XG6IwmhEd-3u7mEq6XqdQ" name="return" type="_9XG6TAmhEd-3u7mEq6XqdQ" direction="return"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_9XG6JAmhEd-3u7mEq6XqdQ" name="getAlternative" visibility="public">
+              <ownedParameter xmi:id="_9XG6JQmhEd-3u7mEq6XqdQ" name="alternativeName" type="_9XG6TQmhEd-3u7mEq6XqdQ"/>
+              <ownedParameter xmi:id="_9XG6JgmhEd-3u7mEq6XqdQ" name="return" type="_9XG6TgmhEd-3u7mEq6XqdQ" direction="return"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_9XG6JwmhEd-3u7mEq6XqdQ" name="exists" visibility="public">
+              <ownedParameter xmi:id="_9XG6KAmhEd-3u7mEq6XqdQ" name="alternativeName" type="_9XG6TQmhEd-3u7mEq6XqdQ"/>
+              <ownedParameter xmi:id="_9XG6KQmhEd-3u7mEq6XqdQ" name="return" type="_9XG6TwmhEd-3u7mEq6XqdQ" direction="return"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_9XG6KgmhEd-3u7mEq6XqdQ" name="sychronize" visibility="public"/>
+            <ownedOperation xmi:id="_9XG6KwmhEd-3u7mEq6XqdQ" name="createAlternativesFromSystem" visibility="public"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_9XG6LAmhEd-3u7mEq6XqdQ" name="UbuntuPackageSettingDependenciesManager">
+            <generalization xmi:id="_9XG6LQmhEd-3u7mEq6XqdQ" general="_9XG6UAmhEd-3u7mEq6XqdQ"/>
+            <ownedOperation xmi:id="_9XG6LgmhEd-3u7mEq6XqdQ" name="getInstance" visibility="public" isStatic="true">
+              <ownedParameter xmi:id="_9XG6LwmhEd-3u7mEq6XqdQ" name="return" type="_9XG6UAmhEd-3u7mEq6XqdQ" direction="return"/>
+            </ownedOperation>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_9XG6MAmhEd-3u7mEq6XqdQ" name="UbuntuFileSystemManager">
+            <generalization xmi:id="_9XG6MQmhEd-3u7mEq6XqdQ" general="_9XG6UQmhEd-3u7mEq6XqdQ"/>
+            <ownedOperation xmi:id="_9XG6MgmhEd-3u7mEq6XqdQ" name="getInstance" visibility="public" isStatic="true">
+              <ownedParameter xmi:id="_9XG6MwmhEd-3u7mEq6XqdQ" name="return" type="_9XG6UQmhEd-3u7mEq6XqdQ" direction="return"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_9XG6NAmhEd-3u7mEq6XqdQ" name="synchronize" visibility="public"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_9XG6NQmhEd-3u7mEq6XqdQ" name="UbuntuEnvironmentManager">
+            <generalization xmi:id="_9XG6NgmhEd-3u7mEq6XqdQ" general="_9XG6UgmhEd-3u7mEq6XqdQ"/>
+            <ownedOperation xmi:id="_9XG6NwmhEd-3u7mEq6XqdQ" name="getInstance" visibility="public" isStatic="true">
+              <ownedParameter xmi:id="_9XG6OAmhEd-3u7mEq6XqdQ" name="return" type="_9XG6UgmhEd-3u7mEq6XqdQ" direction="return"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_9XG6OQmhEd-3u7mEq6XqdQ" name="synchronize" visibility="public"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_9XG6OgmhEd-3u7mEq6XqdQ" name="UbuntuGroupManager">
+            <generalization xmi:id="_9XG6OwmhEd-3u7mEq6XqdQ" general="_9XG6UwmhEd-3u7mEq6XqdQ"/>
+            <ownedOperation xmi:id="_9XG6PAmhEd-3u7mEq6XqdQ" name="getInstance" visibility="public" isStatic="true">
+              <ownedParameter xmi:id="_9XG6PQmhEd-3u7mEq6XqdQ" name="return" type="_9XG6UwmhEd-3u7mEq6XqdQ" direction="return"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_9XG6PgmhEd-3u7mEq6XqdQ" name="synchronize" visibility="public"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_9XG6PwmhEd-3u7mEq6XqdQ" name="UbuntuConfigurationManager">
+            <generalization xmi:id="_9XG6QAmhEd-3u7mEq6XqdQ" general="_9XG6VAmhEd-3u7mEq6XqdQ"/>
+            <ownedOperation xmi:id="_9XG6QQmhEd-3u7mEq6XqdQ" name="getInstance" visibility="public" isStatic="true">
+              <ownedParameter xmi:id="_9XG6QgmhEd-3u7mEq6XqdQ" name="return" type="_9XG6VAmhEd-3u7mEq6XqdQ" direction="return"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_9XG6QwmhEd-3u7mEq6XqdQ" name="synchronize" visibility="public"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_9XG6RAmhEd-3u7mEq6XqdQ" name="UbuntuMimeTypeHandlerCacheManager">
+            <generalization xmi:id="_9XG6RQmhEd-3u7mEq6XqdQ" general="_9XG6VQmhEd-3u7mEq6XqdQ"/>
+            <ownedOperation xmi:id="_9XG6RgmhEd-3u7mEq6XqdQ" name="getInstance" visibility="public" isStatic="true">
+              <ownedParameter xmi:id="_9XG6RwmhEd-3u7mEq6XqdQ" name="return" type="_9XG6VQmhEd-3u7mEq6XqdQ" direction="return"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_9XG6SAmhEd-3u7mEq6XqdQ" name="createMimeTypeHandlerCacheFromSystem" visibility="public"/>
+            <ownedOperation xmi:id="_9XG6SQmhEd-3u7mEq6XqdQ" name="synchronize" visibility="public"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:DataType" xmi:id="_9XG6SgmhEd-3u7mEq6XqdQ" name="UserManager"/>
+          <packagedElement xmi:type="uml:DataType" xmi:id="_9XG6SwmhEd-3u7mEq6XqdQ" name="PackageManager"/>
+          <packagedElement xmi:type="uml:DataType" xmi:id="_9XG6TAmhEd-3u7mEq6XqdQ" name="AlternativesManager"/>
+          <packagedElement xmi:type="uml:DataType" xmi:id="_9XG6TQmhEd-3u7mEq6XqdQ" name="String"/>
+          <packagedElement xmi:type="uml:DataType" xmi:id="_9XG6TgmhEd-3u7mEq6XqdQ" name="Alternative"/>
+          <packagedElement xmi:type="uml:DataType" xmi:id="_9XG6TwmhEd-3u7mEq6XqdQ" name="Boolean"/>
+          <packagedElement xmi:type="uml:DataType" xmi:id="_9XG6UAmhEd-3u7mEq6XqdQ" name="PackageSettingDependenciesManager"/>
+          <packagedElement xmi:type="uml:DataType" xmi:id="_9XG6UQmhEd-3u7mEq6XqdQ" name="FileSystemManager"/>
+          <packagedElement xmi:type="uml:DataType" xmi:id="_9XG6UgmhEd-3u7mEq6XqdQ" name="EnvironmentManager"/>
+          <packagedElement xmi:type="uml:DataType" xmi:id="_9XG6UwmhEd-3u7mEq6XqdQ" name="GroupManager"/>
+          <packagedElement xmi:type="uml:DataType" xmi:id="_9XG6VAmhEd-3u7mEq6XqdQ" name="ConfigurationManager"/>
+          <packagedElement xmi:type="uml:DataType" xmi:id="_9XG6VQmhEd-3u7mEq6XqdQ" name="MimeTypeHandlerCacheManager"/>
+        </packagedElement>
+      </packagedElement>
+    </packagedElement>
+  </packagedElement>
+</uml:Model>
