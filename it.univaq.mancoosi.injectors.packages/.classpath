@@ -24,7 +24,6 @@
 	<classpathentry kind="lib" path="lib/ant/ant-swing.jar"/>
 	<classpathentry kind="lib" path="lib/ant/ant-testutil.jar"/>
 	<classpathentry kind="lib" path="lib/ant/ant.jar"/>
-	<classpathentry kind="lib" path="lib/ant/tools.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/it.univaq.mancoosi.packagemm"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

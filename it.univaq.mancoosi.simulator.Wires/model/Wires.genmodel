@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/it.univaq.mancoosi.simulator.Wires/src"
+    modelPluginID="it.univaq.mancoosi.simulator.Wires" modelName="Wires" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="6.0" copyrightFields="false">
+  <foreignModel>file:/home/max/workspace/WiresFixed/newMetamodelWires/Wires.ecore</foreignModel>
+  <genPackages prefix="Wires" disposableProviderFactory="true" ecorePackage="Wires.ecore#/">
+    <genClasses image="false" ecoreClass="Wires.ecore#//Transformation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Wires.ecore#//Transformation/inParams"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Wires.ecore#//Transformation/outParams"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Wires.ecore#//Transformation/controlNode"/>
+    </genClasses>
+    <genClasses ecoreClass="Wires.ecore#//Query"/>
+    <genClasses ecoreClass="Wires.ecore#//AtomicModelTransformation"/>
+    <genClasses image="false" ecoreClass="Wires.ecore#//TypedElement">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Wires.ecore#//TypedElement/type"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Wires.ecore#//Type">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Wires.ecore#//Type/path"/>
+    </genClasses>
+    <genClasses ecoreClass="Wires.ecore#//ModelType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Wires.ecore#//ModelType/uri"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Wires.ecore#//DataType"/>
+    <genClasses image="false" ecoreClass="Wires.ecore#//ActualParameter"/>
+    <genClasses ecoreClass="Wires.ecore#//DecisionNode">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Wires.ecore#//DecisionNode/trueBranch"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Wires.ecore#//DecisionNode/falseBranch"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Wires.ecore#//DecisionNode/expression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Wires.ecore#//DecisionNode/inParams"/>
+    </genClasses>
+    <genClasses ecoreClass="Wires.ecore#//DataFlow">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Wires.ecore#//DataFlow/target"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Wires.ecore#//DataFlow/src"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Wires.ecore#//TransformationType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Wires.ecore#//TransformationType/outParams"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Wires.ecore#//TransformationType/libraries"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Wires.ecore#//TransformationType/inParams"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Wires.ecore#//FormalParameter">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Wires.ecore#//FormalParameter/typeEl"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Wires.ecore#//FormalParameter/typeName"/>
+    </genClasses>
+    <genClasses ecoreClass="Wires.ecore#//QueryType"/>
+    <genClasses image="false" ecoreClass="Wires.ecore#//ConnectableElement">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Wires.ecore#//ConnectableElement/incoming"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Wires.ecore#//ConnectableElement/outgoing"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Wires.ecore#//ConnectableElement/name"/>
+    </genClasses>
+    <genClasses ecoreClass="Wires.ecore#//Model">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Wires.ecore#//Model/path"/>
+    </genClasses>
+    <genClasses ecoreClass="Wires.ecore#//BasicData">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Wires.ecore#//BasicData/path"/>
+    </genClasses>
+    <genClasses ecoreClass="Wires.ecore#//CompositeTransformationType"/>
+    <genClasses ecoreClass="Wires.ecore#//CompositeTransformation"/>
+    <genClasses ecoreClass="Wires.ecore#//BasicDataType"/>
+    <genClasses ecoreClass="Wires.ecore#//WiresSpecification">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Wires.ecore#//WiresSpecification/els"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Wires.ecore#//WiresElement"/>
+    <genClasses ecoreClass="Wires.ecore#//LibraryRef">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Wires.ecore#//LibraryRef/library"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Wires.ecore#//LibraryRef/name"/>
+    </genClasses>
+    <genClasses ecoreClass="Wires.ecore#//Library">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Wires.ecore#//Library/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Wires.ecore#//Library/path"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Wires.ecore#//Library/libraries"/>
+    </genClasses>
+    <genClasses ecoreClass="Wires.ecore#//InputFormalParameter"/>
+    <genClasses ecoreClass="Wires.ecore#//OutputFormalParameter"/>
+    <genClasses ecoreClass="Wires.ecore#//InputActualParameter"/>
+    <genClasses ecoreClass="Wires.ecore#//OutputActualParameter"/>
+    <genClasses ecoreClass="Wires.ecore#//AtomicModelTransfomationType"/>
+    <genClasses ecoreClass="Wires.ecore#//IdentityTransformation"/>
+    <genClasses ecoreClass="Wires.ecore#//GenericTransformation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Wires.ecore#//GenericTransformation/typeParam"/>
+    </genClasses>
+    <genClasses ecoreClass="Wires.ecore#//TypeParameter"/>
+    <genClasses ecoreClass="Wires.ecore#//GenericQuery">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Wires.ecore#//GenericQuery/typeParam"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
