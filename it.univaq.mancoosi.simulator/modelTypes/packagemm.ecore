@@ -124,7 +124,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Statement" abstract="true" eSuperTypes="#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="script" ordered="false"
-        lowerBound="0" eType="#//Script" eOpposite="#//Script/statements"/>
+        eType="#//Script" eOpposite="#//Script/statements"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isStart" ordered="false"
         unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="previous" ordered="false"
@@ -315,11 +315,11 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AndBooleanExpression" eSuperTypes="#//BooleanExpression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="exps" lowerBound="2" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exps" lowerBound="2" upperBound="2"
         eType="#//BooleanExpression" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OrBooleanExpression" eSuperTypes="#//BooleanExpression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="exps" lowerBound="2" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exps" lowerBound="2" upperBound="2"
         eType="#//BooleanExpression" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StatementBoolean" eSuperTypes="#//BooleanExpression #//Statement"/>
@@ -407,7 +407,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="childs" ordered="false"
         upperBound="-1" eType="#//File" containment="true" eOpposite="#//File/parent"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parent" ordered="false"
-        lowerBound="0" eType="#//File" eOpposite="#//File/childs"/>
+        eType="#//File" eOpposite="#//File/childs"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="owner" ordered="false"
         unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="group" ordered="false"

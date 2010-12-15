@@ -12,7 +12,7 @@
 	<mapping elementModel="PostrmModules" transformationFile="update_modules.atl"/>
 	<!--<mapping elementModel="Return" transformationFile="exit.atl"/>-->
 	<mapping elementModel="PostinstAddAlternative" transformationFile="add_alternative_deb.atl"/>
-	<!--<mapping elementModel="If" transformationFile="condition.atl"/>-->
+	<mapping elementModel="If" transformationFile="conditionHOT.atl"/>
 	
 	<mapping elementModel="UpdatePythonModules" transformationFile="default_copy.atl"/>
 	<mapping elementModel="Message" transformationFile="default_copy.atl"/>

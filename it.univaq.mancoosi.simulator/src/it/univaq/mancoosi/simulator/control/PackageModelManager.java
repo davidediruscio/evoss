@@ -118,14 +118,14 @@ public class PackageModelManager {
 		while (tree.hasNext()) {
 
 			EObject elem = tree.next();
-
+			
 			if (!(elem.eContainingFeature().getName().equals("condition")
 					|| elem.eContainingFeature().getName().equals("exps")
-					|| elem.eClass().getName().equals("InputParameter")
-					|| elem.eClass().getName().equals("AddAlternative"))) {
-			
-			if (mapElementTransformation.existsTransformationRule(elem.eClass().getName())
-					|| elem.eClass().getName().equals("If")) {
+					|| elem.eContainingFeature().getName().equals("master")
+					|| elem.eContainingFeature().getName().equals("file")
+					|| elem.eClass().getName().equals("InputParameter"))) {
+
+			if (mapElementTransformation.existsTransformationRule(elem.eClass().getName())) {
 
 					int position;
 
@@ -496,6 +496,9 @@ public class PackageModelManager {
 	public String setInitParamsPrerm (String[] initParams) throws Exception {
 		
 		// delete old initParams
+		for (int i=0; i < packContent.getPrermScript().getInputParameters().size(); i++) {
+			packContent.getPrermScript().getInputParameters().remove(i);
+		}
 		
 		for (int i=0; i< initParams.length; i++) {
 			InputParameter inputParam = PackagemmFactory.eINSTANCE.createInputParameter();
@@ -518,6 +521,9 @@ public class PackageModelManager {
 	public String setInitParamsPostrm (String[] initParams) throws Exception {
 		
 		// delete old initParams
+		for (int i=0; i < packContent.getPostrmScript().getInputParameters().size(); i++) {
+			packContent.getPostrmScript().getInputParameters().remove(i);
+		}
 		
 		for (int i=0; i< initParams.length; i++) {
 			InputParameter inputParam = PackagemmFactory.eINSTANCE.createInputParameter();
@@ -539,6 +545,9 @@ public class PackageModelManager {
 	public String setInitParamsPreinst (String[] initParams) throws Exception {
 		
 		// delete old initParams
+		for (int i=0; i < packContent.getPreinstScript().getInputParameters().size(); i++) {
+			packContent.getPreinstScript().getInputParameters().remove(i);
+		}
 		
 		for (int i=0; i< initParams.length; i++) {
 			InputParameter inputParam = PackagemmFactory.eINSTANCE.createInputParameter();
@@ -560,6 +569,9 @@ public class PackageModelManager {
 	public String setInitParamsPostinst (String[] initParams) throws Exception {
 		
 		// delete old initParams
+		for (int i=0; i < packContent.getPostinstScript().getInputParameters().size(); i++) {
+			packContent.getPostinstScript().getInputParameters().remove(i);
+		}
 		
 		for (int i=0; i< initParams.length; i++) {
 			InputParameter inputParam = PackagemmFactory.eINSTANCE.createInputParameter();

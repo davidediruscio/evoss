@@ -36,7 +36,7 @@ public interface AndBooleanExpression extends BooleanExpression {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Exps</em>' containment reference list.
 	 * @see it.univaq.mancoosi.packagemm.PackagemmPackage#getAndBooleanExpression_Exps()
-	 * @model containment="true" lower="2"
+	 * @model containment="true" lower="2" upper="2"
 	 * @generated
 	 */
 	EList<BooleanExpression> getExps();

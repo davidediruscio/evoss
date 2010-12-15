@@ -208,7 +208,7 @@ public class SimulatorConfig {
 	/**
 	 * @return the dirTmp
 	 */
-	public String getDirTmp() {
+	public String getTmpDir() {
 		return dirTmp;
 	}
 

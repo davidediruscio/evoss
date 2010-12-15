@@ -2,17 +2,28 @@ module add_alternative_deb;
 
 create OUT : OUTConfiguration, OUTERR: MMError  from IN : INConfiguration, INPACK : INPackage, INPOS : INCurrentPosition;
 
-
 helper def : getPosition : Integer = INCurrentPosition!Counter.allInstancesFrom('INPOS')->first().position;
 
-helper def : getScript : String = INCurrentPosition!Counter.allInstancesFrom('INPOS')->first().script;
+helper def : getScriptName : String = INCurrentPosition!Counter.allInstancesFrom('INPOS')->first().script.toString();
+
+helper def : getScript : INPackage!Script = INPackage!Script.allInstancesFrom('INPACK')->select(e | e.oclType().toString() = ('INPackage!'+thisModule.getScriptName))->first();
 
 helper def : getPackage : String = INPackage!Package.allInstancesFrom('INPACK')->first().name;
 
 helper def : getStatementName : String = INCurrentPosition!Counter.allInstancesFrom('INPOS')->first().name;
 
-helper def : getStatement : INPackage!Statement = INPackage!Statement.allInstancesFrom('INPACK')->select(e | (e.refImmediateComposite().oclType().toString() = ('INPackage!'+thisModule.getScript.toString()))
-	and (e.oclType().toString() = ('INPackage!'+thisModule.getStatementName.toString())))->at(thisModule.getPosition);
+helper def : getStatement : INPackage!Statement = INPackage!Statement.allInstancesFrom('INPACK')->select(e | (e.oclType().toString() = ('INPackage!'+thisModule.getStatementName.toString()))
+	and (e.firstContainerOfType(thisModule.getScript.oclType())))->at(thisModule.getPosition);
+
+helper context INPackage!Statement def: firstContainerOfType(type: OclType) : Boolean = 
+            if self.refImmediateComposite().oclIsTypeOf(type)
+			then true
+			else if (self.refImmediateComposite().oclIsKindOf(INPackage!Script) or self.refImmediateComposite().oclIsUndefined())
+		    then false 
+			else
+				self.refImmediateComposite().firstContainerOfType(type)
+			endif
+		endif;
 
 helper def : existsAlternative(n:String) : Boolean = INConfiguration!Alternative.allInstancesFrom('IN')->collect(e | e.name)->exists(e | e = n);
 
@@ -268,7 +279,7 @@ rule Environment {
         gconf <- s.gconf,
         menu <- s.menu)
 		
-		do {	
+		do {
 			if (thisModule.existsFile(locationAlt)) {
 				if (thisModule.existsAlternative(nameAlt)) {
 					thisModule.getAlternative(nameAlt).current <- thisModule.getFile(locationAlt);
@@ -592,7 +603,7 @@ rule createErrorModel(type:String, description:String) {
        t : MMError!Error (
        		statement <- thisModule.getStatementName.toString(),
        		package <- thisModule.getPackage.toString(),
-       		script <- thisModule.getScript.toString(),
+       		script <- thisModule.getScriptName.toString(),
            	type <- type,
             description <- description)
 	do {

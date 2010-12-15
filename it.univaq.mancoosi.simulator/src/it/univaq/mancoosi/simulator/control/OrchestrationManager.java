@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.StringTokenizer;
+import java.util.UUID;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -27,6 +28,7 @@ import it.univaq.mancoosi.simulator.util.FileManagement;
 import it.univaq.mancoosi.simulator.util.SimulatorConfig;
 import it.univaq.mancoosi.simulator.util.TransformationRuleFilesMapping;
 
+
 import Wires.ActualParameter;
 import Wires.AtomicModelTransfomationType;
 import Wires.AtomicModelTransformation;
@@ -35,6 +37,7 @@ import Wires.ConnectableElement;
 import Wires.DataFlow;
 import Wires.DecisionNode;
 import Wires.FormalParameter;
+import Wires.GenericQuery;
 import Wires.GenericTransformation;
 import Wires.IdentityTransformation;
 import Wires.InputActualParameter;
@@ -50,6 +53,7 @@ import Wires.QueryType;
 import Wires.Transformation;
 import Wires.TransformationType;
 import Wires.Type;
+import Wires.TypeParameter;
 import Wires.WiresElement;
 import Wires.WiresFactory;
 import Wires.WiresSpecification;
@@ -110,7 +114,7 @@ public class OrchestrationManager {
 	}
 
 	/**
-	 * Provides the execution of the model created
+	 * Provides the execution of the model
 	 * 
 	 * @throws SimulatorException
 	 */
@@ -129,8 +133,7 @@ public class OrchestrationManager {
 
 			WiresElement wEl = e.getWiresElement();
 			String paramName = ((ActualParameter) wEl).getName();
-			String transName = ((IdentityTransformation) (((ActualParameter) wEl)
-					.eContainer())).getName();
+			String transName = ((IdentityTransformation) (((ActualParameter) wEl).eContainer())).getName();
 			throw new SimulatorException("Wires Error: "
 					+ "The input parameter '" + paramName
 					+ "' does not have an output parameter with the"
@@ -140,8 +143,7 @@ public class OrchestrationManager {
 		} catch (ATLExtractionFailedException e) {
 
 			WiresElement wEl = e.getWiresElement();
-			String transName = ((GenericTransformation) (((ActualParameter) wEl)
-					.eContainer())).getName();
+			String transName = ((GenericTransformation) (((ActualParameter) wEl).eContainer())).getName();
 
 			throw new SimulatorException("Wires Error: "
 					+ "ATL code extraction failed at generic transformation '"
@@ -151,8 +153,7 @@ public class OrchestrationManager {
 
 			LibraryRef lib = e.getLibraryRef();
 			String libRefName = lib.getName();
-			String containerName = ((TransformationType) (lib.eContainer()))
-					.getName();
+			String containerName = ((TransformationType) (lib.eContainer())).getName();
 			String concept = "";
 			if ((lib instanceof TransformationType))
 				concept = "transformation type";
@@ -169,8 +170,7 @@ public class OrchestrationManager {
 			if ((wEl instanceof FormalParameter)) {
 				String paramName = ((FormalParameter) wEl).getName() + ":"
 						+ ((FormalParameter) wEl).getTypeName();
-				String tType = ((TransformationType) (((FormalParameter) wEl)
-						.eContainer())).getName();
+				String tType = ((TransformationType) (((FormalParameter) wEl).eContainer())).getName();
 				throw new SimulatorException("Wires Error: "
 						+ "Please fill the typeEl attribute in the parameter '"
 						+ paramName + "' of the transformation '" + tType
@@ -206,6 +206,7 @@ public class OrchestrationManager {
 					+ "Transformation failed", e);
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new SimulatorException("Wires execution error", e);
 		}
 		
@@ -227,8 +228,7 @@ public class OrchestrationManager {
 				+ "_" + typeScript + ".wires";
 		ResourceSet resourceSet = new ResourceSetImpl();
 
-		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap()
-				.put("wires", new EcoreResourceFactoryImpl());
+		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("wires", new EcoreResourceFactoryImpl());
 
 		URI fileURI = URI.createFileURI(new File(pathFile).getAbsolutePath());
 		Resource poResource = resourceSet.createResource(fileURI);
@@ -249,41 +249,32 @@ public class OrchestrationManager {
 	private void createModel() throws Exception {
 
 		// Models type
-		ModelType modelSystemType = createModelType("mancoosimm", config
-				.getDirModelTypes()
+		ModelType modelSystemType = createModelType("mancoosimm", config.getDirModelTypes()
 				+ "mancoosimm.ecore");
-		ModelType modelPackageType = createModelType("packagemm", config
-				.getDirModelTypes()
+		ModelType modelPackageType = createModelType("packagemm", config.getDirModelTypes()
 				+ "packagemm.ecore");
-		ModelType modelErrorType = createModelType("MMError", config
-				.getDirModelTypes()
+		ModelType modelErrorType = createModelType("MMError", config.getDirModelTypes()
 				+ "errormm.ecore");
-		ModelType modelAtlType = createModelType("ATL", config
-				.getDirModelTypes()
+		ModelType modelAtlType = createModelType("ATL", config.getDirModelTypes()
 				+ "ATL-0.2.ecore");
-		ModelType modelExecPositionType = createModelType(
-				"positionmm", config.getDirModelTypes()
-						+ "positionmm.ecore");
+		ModelType modelExecPositionType = createModelType("positionmm", config.getDirModelTypes()
+				+ "positionmm.ecore");
 
 		// Basic DataType Integer
-		BasicDataType integerType = WiresFactory.eINSTANCE
-				.createBasicDataType();
+		BasicDataType integerType = WiresFactory.eINSTANCE.createBasicDataType();
 		integerType.setName("Integer");
 		wiresSpecification.getEls().add(integerType);
 		// Basic DataType Boolean
-		BasicDataType booleanType = WiresFactory.eINSTANCE
-		.createBasicDataType();
+		BasicDataType booleanType = WiresFactory.eINSTANCE.createBasicDataType();
 		booleanType.setName("Boolean");
 		wiresSpecification.getEls().add(booleanType);
-		
+
 		// Package model
-		Model packageModel = createModel(packageNameInput, modelPackageType,
-				pathPackageModel);
+		Model packageModel = createModel(packageNameInput, modelPackageType, pathPackageModel);
 
 		// Configuration model - input
 		Model systemModelIn = createModel("systemModelInput", modelSystemType,
-				CurrentSystemModelFile.getInstance().getSystemModelCurrent()
-						.getPath());
+				CurrentSystemModelFile.getInstance().getSystemModelCurrent().getPath());
 
 		// Configuration model - output
 		String inputSystemModel = config.getFileInputSystemModel();
@@ -298,188 +289,386 @@ public class OrchestrationManager {
 		CurrentSystemModelFile.getInstance().setSystemModelCurrent(newTempFile);
 
 		// Error model
-		Model errorModel = createModel("errorModel", modelErrorType, config
-				.getDirOutput()
+		Model errorModel = createModel("errorModel", modelErrorType, config.getDirOutput()
 				+ config.getFileErrorModel());
 
-		// Statements
+		// Statements temp
 		ArrayList<AtomicModelTransformation> transfTemp = new ArrayList<AtomicModelTransformation>();
-		
-		int i = 0;
-		while (i < statementsScript.size()) {
-			
-			if (statementsScript.get(i).getType().equals("If")) {
-				
-				AtomicModelTransformation atomicModelTransfHOT = 
-					createAtomicModelTransf(statementsScript.get(i).getType(), i);
+		// ThenTemp
+		ArrayList<AtomicModelTransformation> thenTemp = new ArrayList<AtomicModelTransformation>();
+		// ElseTemp
+		ArrayList<AtomicModelTransformation> elseTemp = new ArrayList<AtomicModelTransformation>();
+		// Generic query
+		ArrayList<GenericQuery> genQueriesTemp = new ArrayList<GenericQuery>();
 
-				setInputTransfPackageModel (atomicModelTransfHOT, packageModel, i);
-				setInputTransfPositionModel (atomicModelTransfHOT, modelExecPositionType, i);
-				
+		Model systemModelTempPreIf = null;
+
+		AtomicModelTransformation tempTransfIf = null;
+
+		for (int i = 0; i < statementsScript.size(); i++) {
+
+			if (statementsScript.get(i).getType().equals("If")) {
+
+				tempTransfIf = transfTemp.get(transfTemp.size() - 1);
+
+				// --------- Temp Model --> Query
+				File newFile = FileManagement.createTempFile(nameFileModel
+						.substring(0, nameFileModel.lastIndexOf(".")),
+						nameFileModel.substring(
+								nameFileModel.lastIndexOf(".") + 1,
+								nameFileModel.length()));
+				systemModelTempPreIf = createModel("systemModelTemp_" + i,
+						modelSystemType, newFile.getPath());
+
+				createDataFlow(tempTransfIf, systemModelTempPreIf, modelSystemType);
+
+				AtomicModelTransformation atomicModelTransfHOT = createAtomicModelTransf(
+						statementsScript.get(i).getType(), i);
+
+				this.setInputTransfPackageModel(atomicModelTransfHOT, packageModel);
+				this.setInputTransfPositionModel(atomicModelTransfHOT, modelExecPositionType, i);
+
 				// Type Query
-				AtomicModelTransfomationType conditionQueryType = WiresFactory.eINSTANCE.createAtomicModelTransfomationType();
+				QueryType conditionQueryType = WiresFactory.eINSTANCE.createQueryType();
 				wiresSpecification.getEls().add(conditionQueryType);
-				conditionQueryType.setName("Type_"+statementsScript.get(i).getType()+"_"+statementsScript.get(i).getPosition());
+				conditionQueryType.setName("Type_"
+						+ statementsScript.get(i).getType() + "_"
+						+ statementsScript.get(i).getPosition());
 				File transformationTempFile = FileManagement.createTempFile("condition", "atl");
 				conditionQueryType.setPath(transformationTempFile.getPath());
+				// Library
+				Library conditionLib = WiresFactory.eINSTANCE.createLibrary();
+				conditionLib.setName("conditionlib");
+				conditionLib.setPath(config.getDirTransformationRepository()
+						+ "conditionlib.atl");
+				wiresSpecification.getEls().add(conditionLib);
+				// LibraryRef
+				LibraryRef reflib = WiresFactory.eINSTANCE.createLibraryRef();
+				reflib.setName("conditionLibRef");
+				reflib.setLibrary(conditionLib);
+				conditionQueryType.getLibraries().add(reflib);
+				// Parameters
 				InputFormalParameter inputParamQuery = WiresFactory.eINSTANCE.createInputFormalParameter();
 				inputParamQuery.setTypeEl(modelSystemType);
-				inputParamQuery.setName(inputSystemModel);
-				inputParamQuery.setTypeName(inputSystemModel);
+				inputParamQuery.setName("IN");
+				inputParamQuery.setTypeName("INConfiguration");
 				conditionQueryType.getInParams().add(inputParamQuery);
 				OutputFormalParameter outputParamQuery = WiresFactory.eINSTANCE.createOutputFormalParameter();
 				outputParamQuery.setTypeEl(booleanType);
 				outputParamQuery.setName("OUT");
 				outputParamQuery.setTypeName("Boolean");
 				conditionQueryType.getOutParams().add(outputParamQuery);
-				
-				// Query
-				GenericTransformation conditionQuery = WiresFactory.eINSTANCE.createGenericTransformation();
+
+				// GenericQuery
+				GenericQuery conditionQuery = WiresFactory.eINSTANCE.createGenericQuery();
+				conditionQuery.setName("out");
 				wiresSpecification.getEls().add(conditionQuery);
-				//TypeParameter paramTypeParameter = WiresFactory.eINSTANCE.createTypeParameter();
-				//paramTypeParameter.setType(modelAtlType);
+				genQueriesTemp.add(conditionQuery);
+				TypeParameter paramTypeParameter = WiresFactory.eINSTANCE.createTypeParameter();
+				conditionQuery.setTypeParam(paramTypeParameter);
 				conditionQuery.setType(conditionQueryType);
 				InputActualParameter inActualQuery = WiresFactory.eINSTANCE.createInputActualParameter();
 				inActualQuery.setType(inputParamQuery);
-				inActualQuery.setName(inputParamQuery.getName()+":"+inputParamQuery.getTypeName());
+				inActualQuery.setName(inputParamQuery.getName() + ":"
+						+ inputParamQuery.getTypeName());
 				conditionQuery.getInParams().add(inActualQuery);
 				OutputActualParameter outActualQuery = WiresFactory.eINSTANCE.createOutputActualParameter();
 				outActualQuery.setType(outputParamQuery);
-				outActualQuery.setName(outputParamQuery.getName()+":"+outputParamQuery.getTypeName());
+				outActualQuery.setName(outputParamQuery.getName() + ":"
+						+ outputParamQuery.getTypeName());
 				conditionQuery.getOutParams().add(outActualQuery);
-				
+
 				// DataFlow: HOT --> GenericTransformation
-				DataFlow outHOTinTypeParam = WiresFactory.eINSTANCE.createDataFlow();
-				OutputActualParameter outputActual = getParamOut(atomicModelTransfHOT.getOutParams(), modelAtlType);
-				
-				outHOTinTypeParam.setSrc(outputActual);
-				outHOTinTypeParam.setTarget(conditionQuery.getTypeParam());
-				conditionQuery.getTypeParam().getIncoming().add(outHOTinTypeParam);
-				outputActual.getOutgoing().add(outHOTinTypeParam);
-				wiresSpecification.getEls().add(outHOTinTypeParam);
-				
-				//TODO
-				
+				createDataFlow(atomicModelTransfHOT, conditionQuery.getTypeParam(), modelAtlType);
+
+
+				if (i == 0) {
+					// Dataflow input GenericQuery
+					createDataFlow(systemModelIn, conditionQuery, modelSystemType);
+				} else {
+					createDataFlow(systemModelTempPreIf, conditionQuery, modelSystemType);
+					// For transformation with possible error model
+					errorModelManager(tempTransfIf, false, conditionQuery, errorModel, null, integerType, modelSystemType);
+				}
+
 			} else {
 
 				AtomicModelTransformation atomicModelTransf = null;
 
-				atomicModelTransf = createAtomicModelTransf(statementsScript
-						.get(i).getType(), i);
+				atomicModelTransf = createAtomicModelTransf(statementsScript.get(i).getType(), i);
 
 				transfTemp.add(atomicModelTransf);
 
-				DataFlow in = WiresFactory.eINSTANCE.createDataFlow();
-
-				InputActualParameter inActual = getParamIn(atomicModelTransf.getInParams(), systemModelIn.getType());
-				in.setTarget(inActual);
-
-				inActual.getIncoming().add(in);
-
-				if (i == 0) {
-
-					in.setSrc(systemModelIn);
-					systemModelIn.getOutgoing().add(in);
-
-				} else {
-
-					OutputActualParameter outActual = getParamOut((transfTemp
-							.get(i - 1)).getOutParams(), systemModelIn
-							.getType());
-
-					in.setSrc(outActual);
-					outActual.getOutgoing().add(in);
-
-					// init2 - For transformation with possible error model
-					OutputActualParameter outActualError = getParamOut(
-							transfTemp.get(i - 1).getOutParams(), errorModel
-									.getType());
-					if (outActualError != null) {
-
-						// Error modelTemp
-						String nameErrorModel = config.getFileErrorModel();
-						File errorTempFile = FileManagement.createTempFile(
-								nameErrorModel.substring(0, nameErrorModel
-										.lastIndexOf(".")), nameErrorModel
-										.substring(nameErrorModel
-												.lastIndexOf(".") + 1,
-												nameErrorModel.length()));
-						Model errorModelTemp = createModel("errorModelTemp_"
-								+ (i - 1), modelErrorType, errorTempFile
-								.getPath());
-
-						// Dataflow: OUTActual --> TempErrorModel
-						DataFlow outActualModelTemp = WiresFactory.eINSTANCE
-								.createDataFlow();
-						outActualModelTemp.setSrc(outActualError);
-						outActualModelTemp.setTarget(errorModelTemp);
-						wiresSpecification.getEls().add(outActualModelTemp);
-						errorModelTemp.getIncoming().add(outActualModelTemp);
-						outActualError.getOutgoing().add(outActualModelTemp);
-
-						createManagementErrorModel(errorModelTemp,
-								atomicModelTransf, errorModel, null,
-								integerType, i - 1);
-					}
-					// end2
-
-				}
-
-				wiresSpecification.getEls().add(in);
-
-				setInputTransfPackageModel (atomicModelTransf, packageModel, i);
-				setInputTransfPositionModel (atomicModelTransf, modelExecPositionType, i);
-
-				if (i == (statementsScript.size() - 1)) {
-
-					// init2 - For transformation with possible error model
-					OutputActualParameter outActualError = getParamOut(
-							atomicModelTransf.getOutParams(), errorModel
-									.getType());
-					if (outActualError != null) {
-
-						// Error modelTemp
-						String nameErrorModel = config.getFileErrorModel();
-						File errorTempFile = FileManagement.createTempFile(
-								nameErrorModel.substring(0, nameErrorModel
-										.lastIndexOf(".")), nameErrorModel
-										.substring(nameErrorModel
-												.lastIndexOf(".") + 1,
-												nameErrorModel.length()));
-						Model errorModelTemp = createModel("errorModel_" + i,
-								modelErrorType, errorTempFile.getPath());
-
-						// Dataflow: OUTActual --> TempErrorModel
-						DataFlow outActualModelTemp = WiresFactory.eINSTANCE
-								.createDataFlow();
-						outActualModelTemp.setSrc(outActualError);
-						outActualModelTemp.setTarget(errorModelTemp);
-						wiresSpecification.getEls().add(outActualModelTemp);
-						errorModelTemp.getIncoming().add(outActualModelTemp);
-						outActualError.getOutgoing().add(outActualModelTemp);
-
-						createManagementErrorModel(errorModelTemp,
-								atomicModelTransf, errorModel, systemModelOut,
-								integerType, i);
-						// end2
+				if (statementsScript.get(i).getContainingFeature().equals("then")) {
+					
+					thenTemp.add(atomicModelTransf);
+					
+					if (statementsScript.get(i - 1).getType().equals("If")) {
+						// Dataflow TransfPreIf -> then
+						createDataFlow(systemModelTempPreIf, atomicModelTransf, modelSystemType);
 					} else {
-						DataFlow inT = WiresFactory.eINSTANCE.createDataFlow();
-						OutputActualParameter outputActual = getParamOut(
-								atomicModelTransf.getOutParams(),
-								systemModelOut.getType());
-						inT.setSrc(outputActual);
-						inT.setTarget(systemModelOut);
-						systemModelOut.getIncoming().add(inT);
-						outputActual.getOutgoing().add(inT);
-						wiresSpecification.getEls().add(inT);
+						createDataFlow(thenTemp.get(thenTemp.size() - 2), atomicModelTransf, modelSystemType);
+						// For transformation with possible error
+						errorModelManager(thenTemp.get(thenTemp.size() - 2), false, atomicModelTransf, errorModel, null, integerType, modelSystemType);
 					}
-				}
-			i++;
+					
+				} else if (statementsScript.get(i).getContainingFeature().equals("else")) {
+					
+					elseTemp.add(atomicModelTransf);
+					
+					if (statementsScript.get(i - 1).getContainingFeature().equals("then")) {
+						// Dataflow TransfPreIf -> else
+						createDataFlow(systemModelTempPreIf, atomicModelTransf, modelSystemType);
+					} else {
+						createDataFlow(elseTemp.get(elseTemp.size() - 2), atomicModelTransf, modelSystemType);
+						// For transformation with possible error
+						errorModelManager(elseTemp.get(elseTemp.size() - 2), false, atomicModelTransf, errorModel, null, integerType, modelSystemType);
+					}
+				} else if (i > 0 && statementsScript.get(i-1).getContainingFeature().equals("then")) {
+
+						IdentityTransformation identity = createIdentityTransf(modelSystemType);
+						
+						DecisionNode decisNode = createDecisionNode("condition", "condition", identity, thenTemp.get(0));
+						identity.setControlNode(decisNode);
+						thenTemp.get(0).setControlNode(decisNode);
+						
+						createDataFlow(genQueriesTemp.get(genQueriesTemp.size() - 1).getOutParams().get(0), decisNode.getInParams().get(0));
+						
+						//PreIf --> identity
+						createDataFlow(systemModelTempPreIf, identity.getInParams().get(0));
+
+
+						// --------- Temp Model --> Query
+						File newFile = FileManagement.createTempFile(nameFileModel
+								.substring(0, nameFileModel.lastIndexOf(".")),
+								nameFileModel.substring(
+										nameFileModel.lastIndexOf(".") + 1,
+										nameFileModel.length()));
+						Model systemModelTempPostIdentity = createModel("systemModelTemp_" + i,
+								modelSystemType, newFile.getPath());
+
+						// identity --> tempModel
+						createDataFlow(identity.getOutParams().get(0), systemModelTempPostIdentity);
+						
+						// tempModel --> postIf
+						createDataFlow(systemModelTempPostIdentity, atomicModelTransf, modelSystemType);
+						
+						// For transformation with possible error model
+						errorModelManager(thenTemp.get(thenTemp.size() - 1), true, atomicModelTransf, errorModel, null, integerType, modelSystemType);
+
+
+					} else if (i > 0 && statementsScript.get(i-1).getContainingFeature().equals("else")) {
+
+						DecisionNode decisNode = createDecisionNode("condition", "condition", elseTemp.get(0), thenTemp.get(0));
+						elseTemp.get(0).setControlNode(decisNode);
+						thenTemp.get(0).setControlNode(decisNode);
+						
+						createDataFlow(genQueriesTemp.get(genQueriesTemp.size()-1).getOutParams().get(0), decisNode.getInParams().get(0));
+
+						// else --> postIf
+						if (!errorModelManager(elseTemp.get(elseTemp.size() - 1), true, atomicModelTransf, errorModel, null, integerType, modelSystemType)) {
+							createDataFlow(elseTemp.get(elseTemp.size()-1), atomicModelTransf, modelSystemType);
+						}
+						// then --> postIf
+						if (!errorModelManager(thenTemp.get(thenTemp.size() - 1), true, atomicModelTransf, errorModel, null, integerType, modelSystemType)) {
+							createDataFlow(thenTemp.get(thenTemp.size()-1), atomicModelTransf, modelSystemType);
+						}
+						
+					} else {
+
+						if (i == 0) {
+							createDataFlow(systemModelIn, atomicModelTransf, modelSystemType);
+						} else {
+							createDataFlow(transfTemp.get(transfTemp.size() - 2), atomicModelTransf, modelSystemType);
+
+							// For transformation with possible error
+							errorModelManager(transfTemp.get(transfTemp.size() - 2), false, atomicModelTransf, errorModel, null, integerType, modelSystemType);
+
+						}
+						
+						//---
+						//thenTemp.clear();
+						//elseTemp.clear();
+						//genQueriesTemp.clear();
+						//systemModelTempPreIf = null;
+						//tempTransfIf = null;
+						//---
+					}
+
+						
+						setInputTransfPackageModel(atomicModelTransf, packageModel);
+						setInputTransfPositionModel(atomicModelTransf, modelExecPositionType, i);
+
+						if (i == (statementsScript.size() - 1)) {
+
+							// For transformation with possible error
+							Boolean res = errorModelManager(atomicModelTransf, false, atomicModelTransf, errorModel, systemModelOut, integerType, modelSystemType);
+							if (!res)  {
+								createDataFlow(atomicModelTransf, systemModelOut, modelSystemType);
+							}
+						}
 			}
 		}
 	}
 
-	
+	/**
+	 * 
+	 * @param source
+	 * @param target
+	 * @param modelType
+	 * @return
+	 */
+	private void createDataFlow(Transformation source,
+			Transformation target, ModelType modelType) {
+
+		DataFlow p = WiresFactory.eINSTANCE.createDataFlow();
+		wiresSpecification.getEls().add(p);
+		OutputActualParameter out = getParamOut(source.getOutParams(), modelType);
+		p.setSrc(out);
+		out.getOutgoing().add(p);
+		InputActualParameter in = getParamIn(target.getInParams(), modelType);
+		p.setTarget(in);
+		in.getIncoming().add(p);
+	}
+
+	/**
+	 * 
+	 * @param source
+	 * @param target
+	 * @return
+	 */
+	private void createDataFlow(ConnectableElement source,
+			ConnectableElement target) {
+		
+		DataFlow p = WiresFactory.eINSTANCE.createDataFlow();
+		wiresSpecification.getEls().add(p);
+		p.setSrc(source);
+		source.getOutgoing().add(p);
+		
+		p.setTarget(target);
+		target.getIncoming().add(p);
+		
+	}
+
+	/**
+	 * 
+	 * @param source
+	 * @param conditionQuery
+	 * @param typeModel
+	 * @return
+	 */
+	private void createDataFlow(ConnectableElement source,
+			Transformation conditionQuery, ModelType typeModel) {
+
+		DataFlow p = WiresFactory.eINSTANCE.createDataFlow();
+
+		InputActualParameter inActual = getParamIn(conditionQuery.getInParams(), typeModel);
+		p.setTarget(inActual);
+
+		inActual.getIncoming().add(p);
+
+		p.setSrc(source);
+		source.getOutgoing().add(p);
+
+		wiresSpecification.getEls().add(p);
+
+
+	}
+
+	/**
+	 * 
+	 * @param source
+	 * @param target
+	 * @param modelType
+	 * @return
+	 */
+	private void createDataFlow(Transformation source, ConnectableElement target, ModelType modelType) {
+		DataFlow p = WiresFactory.eINSTANCE.createDataFlow();
+		OutputActualParameter out = getParamOut(source.getOutParams(), modelType);
+		p.setSrc(out);
+		out.getOutgoing().add(p);
+
+		p.setTarget(target);
+		target.getIncoming().add(p);
+		wiresSpecification.getEls().add(p);
+	}
+
+	/**
+	 * 
+	 * @param transfWithError
+	 * @param transfPosterror
+	 * @param errorModel
+	 * @param integerType
+	 * @throws SimulatorException 
+	 */
+	private Boolean errorModelManager(Transformation transfWithError, Boolean thenOrElse,
+			Transformation transfPosterror, Model errorModel, Model sysModelOut,
+			BasicDataType integerType, ModelType systemType) throws SimulatorException {
+
+		Boolean result = false;
+		OutputActualParameter outActualError = getParamOut(transfWithError.getOutParams(), errorModel.getType());
+		if (outActualError != null) {
+			result = true;
+			// Error modelTemp
+			String nameErrorModel = config.getFileErrorModel();
+			File errorTempFile = FileManagement.createTempFile(nameErrorModel
+					.substring(0, nameErrorModel.lastIndexOf(".")),
+					nameErrorModel.substring(
+							nameErrorModel.lastIndexOf(".") + 1, nameErrorModel.length()));
+			Model errorModelTemp = createModel("errorModelTemp_"
+					+ this.getRandomNumber(), (ModelType)errorModel.getType(),
+					errorTempFile.getPath());
+
+			// Dataflow: OUTActual --> TempErrorModel
+			createDataFlow(outActualError, errorModelTemp);
+
+			if (!thenOrElse) {
+
+				createManagementErrorModel(errorModelTemp, transfPosterror, errorModel, sysModelOut, integerType);
+			} else {
+
+				// modelTemp1
+				String path = config.getFileInputSystemModel();
+				String nameModel = path.substring(path.lastIndexOf("/") + 1, path.length());
+				File tempFile1 = FileManagement.createTempFile(nameModel.substring(0, nameModel.lastIndexOf(".")),
+						nameModel.substring(nameModel.lastIndexOf(".") + 1, nameModel.length()));
+				Model sysModelTemp1 = createModel("modelTemp1_"
+						+ this.getRandomNumber(), systemType,
+						tempFile1.getPath());
+				
+				File tempFile2 = FileManagement.createTempFile(nameModel
+						.substring(0, nameModel.lastIndexOf(".")),
+						nameModel.substring(nameModel.lastIndexOf(".") + 1, nameModel.length()));
+				Model sysModelTemp2 = createModel("modelTemp2_"
+						+ this.getRandomNumber(), systemType,
+						tempFile2.getPath());
+				
+				IdentityTransformation identity = createIdentityTransf(systemType);
+
+				createManagementErrorModel(errorModelTemp, identity, errorModel, sysModelOut, integerType);
+
+				createDataFlow(transfWithError, sysModelTemp1, systemType);
+
+				createDataFlow(sysModelTemp1, identity.getInParams().get(0));
+
+				createDataFlow(identity.getOutParams().get(0), sysModelTemp2);
+				
+				createDataFlow(sysModelTemp2, transfPosterror, systemType);
+				
+			}
+		}
+			return result;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	private String getRandomNumber() {
+		String random = UUID.randomUUID().toString();
+		return random;
+	}
+
 	/**
 	 * 
 	 * @param atomicModelTransf
@@ -487,19 +676,11 @@ public class OrchestrationManager {
 	 * @param i
 	 * @throws Exception
 	 */
-	private void setInputTransfPackageModel (AtomicModelTransformation atomicModelTransf, Model packageModel, int i) throws Exception {	
+	private void setInputTransfPackageModel (AtomicModelTransformation atomicModelTransf, Model packageModel) throws Exception {	
 
-		InputActualParameter inputActual = getParamIn(atomicModelTransf
-				.getInParams(), packageModel.getType());
+		InputActualParameter inputActual = getParamIn(atomicModelTransf.getInParams(), packageModel.getType());
 		if (inputActual != null) {
-	
-			DataFlow inPackage = WiresFactory.eINSTANCE
-					.createDataFlow();
-			inPackage.setSrc(packageModel);
-			inPackage.setTarget(inputActual);
-			inputActual.getIncoming().add(inPackage);
-			packageModel.getOutgoing().add(inPackage);
-			wiresSpecification.getEls().add(inPackage);
+			createDataFlow(packageModel, inputActual);
 		}
 	}
 	
@@ -521,17 +702,9 @@ public class OrchestrationManager {
 					statementsScript.get(i).getType(), typeScript, statementsScript.get(i).getPosition());
 
 			Model posInModel = createModel("posModelIn_" + i,
-					modelExecPositionType, positionModel
-							.getPathPositionScriptModel());
+					modelExecPositionType, positionModel.getPathPositionScriptModel());
 
-			DataFlow inPosition = WiresFactory.eINSTANCE
-					.createDataFlow();
-
-			inPosition.setSrc(posInModel);
-			inPosition.setTarget(inActualPosition);
-			inActualPosition.getIncoming().add(inPosition);
-			posInModel.getOutgoing().add(inPosition);
-			wiresSpecification.getEls().add(inPosition);
+			createDataFlow(posInModel, inActualPosition);
 		}
 	}
 
@@ -539,15 +712,15 @@ public class OrchestrationManager {
 	/**
 	 * 
 	 * @param errorModelTemp
-	 * @param atomicModelTransformation
+	 * @param transfPostError
 	 * @param errorModel
 	 * @param i
 	 * @throws SimulatorException 
 	 */
 	private void createManagementErrorModel(
 			Model errorModelTemp,
-			AtomicModelTransformation atomicModelTransformation,
-			Model errorModel, Model sysModelOut, BasicDataType integerType, int position) throws SimulatorException {
+			Transformation transfPostError,
+			Model errorModel, Model sysModelOut, BasicDataType integerType) throws SimulatorException {
 
 		QueryType isEmptyErrorModel = getQueryType("isEmptyErrorModel");
 		
@@ -567,26 +740,21 @@ public class OrchestrationManager {
 		}
 		
 		// Query
-		Query isEmptyQuery = createQueryElement(isEmptyErrorModel, "isEmptyErrorModel", position);
+		Query isEmptyQuery = createQueryElement(isEmptyErrorModel, "isEmptyErrorModel");
 		
 		// DataFlow: ErrorTempModel --> Query
-		DataFlow outErrQueryDataflow = WiresFactory.eINSTANCE.createDataFlow();
-		outErrQueryDataflow.setSrc(errorModelTemp);
-		errorModelTemp.getOutgoing().add(outErrQueryDataflow);
-		outErrQueryDataflow.setTarget(isEmptyQuery.getInParams().get(0));
-		isEmptyQuery.getInParams().get(0).getIncoming().add(outErrQueryDataflow);
-		wiresSpecification.getEls().add(outErrQueryDataflow);
+		createDataFlow(errorModelTemp, isEmptyQuery.getInParams().get(0));
 		
 		// IdentityTransformation - ErrorModel
-		IdentityTransformation identityErrorModel = createIdentityTransf(position, (ModelType)errorModel.getType());
+		IdentityTransformation identityErrorModel = createIdentityTransf((ModelType)errorModel.getType());
 		
 		// DecisionNode
 		DecisionNode node;
 		
 		if (sysModelOut == null) {
 			
-			node = createDecisionNode("x>0", atomicModelTransformation, identityErrorModel);
-			atomicModelTransformation.setControlNode(node);
+			node = createDecisionNode("x", "x>0", transfPostError, identityErrorModel);
+			transfPostError.setControlNode(node);
 			
 		} else {
 			
@@ -602,61 +770,28 @@ public class OrchestrationManager {
 					newTempFile.getPath());
 			
 			// Dataflow: OutActualSystamModel --> tempSysModel
-			DataFlow inT = WiresFactory.eINSTANCE.createDataFlow();
-			OutputActualParameter outputActual = getParamOut(
-					atomicModelTransformation.getOutParams(), sysModelOut.getType());
-			inT.setSrc(outputActual);
-			inT.setTarget(systemModelTemp);
-			systemModelTemp.getIncoming().add(inT);
-			outputActual.getOutgoing().add(inT);
-			wiresSpecification.getEls().add(inT);
-			
+			createDataFlow(transfPostError, systemModelTemp, (ModelType)sysModelOut.getType());
 			// IdentityTransformation - 
-			IdentityTransformation identitySysModel = createIdentityTransf(position+1, (ModelType)systemModelTemp.getType());
-			node = createDecisionNode("x>0", identitySysModel, identityErrorModel);
+			IdentityTransformation identitySysModel = createIdentityTransf((ModelType)systemModelTemp.getType());
+			node = createDecisionNode("x","x>0", identitySysModel, identityErrorModel);
 			
 			// DataFlow: TempSysModel --> Identity
-			DataFlow outTempIdentityDataflow = WiresFactory.eINSTANCE.createDataFlow();
-			outTempIdentityDataflow.setSrc(systemModelTemp);
-			systemModelTemp.getOutgoing().add(outTempIdentityDataflow);
-			outTempIdentityDataflow.setTarget(identitySysModel.getInParams().get(0));
-			identitySysModel.getInParams().get(0).getIncoming().add(outTempIdentityDataflow);
-			wiresSpecification.getEls().add(outTempIdentityDataflow);
+			createDataFlow(systemModelTemp, identitySysModel.getInParams().get(0));
 			
 			// DataFlow: Identity --> SysModel
-			DataFlow identityModelDataflow = WiresFactory.eINSTANCE.createDataFlow();
-			identityModelDataflow.setSrc(identitySysModel.getOutParams().get(0));
-			identitySysModel.getOutParams().get(0).getOutgoing().add(identityModelDataflow);
-			identityModelDataflow.setTarget(sysModelOut);
-			sysModelOut.getIncoming().add(identityModelDataflow);
-			wiresSpecification.getEls().add(identityModelDataflow);
+			createDataFlow(identitySysModel.getOutParams().get(0), sysModelOut);
 		}
 		
 		identityErrorModel.setControlNode(node);
 		
 		// DataFlow: Query --> DecisionNode
-		DataFlow queryNodeDataflow = WiresFactory.eINSTANCE.createDataFlow();
-		queryNodeDataflow.setSrc(isEmptyQuery.getOutParams().get(0));
-		isEmptyQuery.getOutParams().get(0).getOutgoing().add(queryNodeDataflow);
-		queryNodeDataflow.setTarget(node.getInParams().get(0));
-		node.getInParams().get(0).getIncoming().add(queryNodeDataflow);
-		wiresSpecification.getEls().add(queryNodeDataflow);
+		createDataFlow(isEmptyQuery.getOutParams().get(0), node.getInParams().get(0));
 		
 		// DataFlow: TempErrorModel --> Identity
-		DataFlow outActualIdentityDataflow = WiresFactory.eINSTANCE.createDataFlow();
-		outActualIdentityDataflow.setSrc(errorModelTemp);
-		errorModelTemp.getOutgoing().add(outActualIdentityDataflow);
-		outActualIdentityDataflow.setTarget(identityErrorModel.getInParams().get(0));
-		identityErrorModel.getInParams().get(0).getIncoming().add(outActualIdentityDataflow);
-		wiresSpecification.getEls().add(outActualIdentityDataflow);
+		createDataFlow(errorModelTemp, identityErrorModel.getInParams().get(0));
 		
 		// DataFlow: Identity --> errorModel
-		DataFlow identityModelDataflow = WiresFactory.eINSTANCE.createDataFlow();
-		identityModelDataflow.setSrc(identityErrorModel.getOutParams().get(0));
-		identityErrorModel.getOutParams().get(0).getOutgoing().add(identityModelDataflow);
-		identityModelDataflow.setTarget(errorModel);
-		errorModel.getIncoming().add(identityModelDataflow);
-		wiresSpecification.getEls().add(identityModelDataflow);
+		createDataFlow(identityErrorModel.getOutParams().get(0), errorModel);
 	}
 	
 	/**
@@ -665,10 +800,10 @@ public class OrchestrationManager {
 	 * @param node
 	 * @return
 	 */
-	private IdentityTransformation createIdentityTransf(int position, ModelType modelType) {
+	private IdentityTransformation createIdentityTransf(ModelType modelType) {
 		IdentityTransformation identity = WiresFactory.eINSTANCE
 				.createIdentityTransformation();
-		identity.setName("identity_" + position);
+		identity.setName("identity_" + this.getRandomNumber());
 		
 		InputActualParameter inputId = WiresFactory.eINSTANCE
 				.createInputActualParameter();
@@ -728,12 +863,12 @@ public class OrchestrationManager {
 	 * @param trueTransf
 	 * @return
 	 */
-	private DecisionNode createDecisionNode(String paramString,
+	private DecisionNode createDecisionNode(String inputString, String paramString,
 			Transformation falseTransf, Transformation trueTransf) {
 
 		DecisionNode node = WiresFactory.eINSTANCE.createDecisionNode();
 		InputActualParameter inputActual = WiresFactory.eINSTANCE.createInputActualParameter();
-		inputActual.setName("x");
+		inputActual.setName(inputString);
 
 		node.setExpression(paramString);
 		node.getFalseBranch().add(falseTransf);
@@ -753,18 +888,16 @@ public class OrchestrationManager {
 	 * @param position
 	 * @return
 	 */
-	private Query createQueryElement(QueryType queryType,
-									String name, int position) {
+	private Query createQueryElement(QueryType queryType, String name) {
 		
 		Query query = WiresFactory.eINSTANCE.createQuery();
 		
 		query.setType(queryType);
-		query.setName(name+"_"+position);
+		query.setName(name+"_"+this.getRandomNumber());
 
 		for (int i = 0; i < queryType.getInParams().size(); i++) {
 			InputFormalParameter inFormal = queryType.getInParams().get(i);
-			InputActualParameter inActual = WiresFactory.eINSTANCE
-					.createInputActualParameter();
+			InputActualParameter inActual = WiresFactory.eINSTANCE.createInputActualParameter();
 			inActual.setType(inFormal);
 			inActual.setName(inFormal.getName() + ":" + inFormal.getTypeName());
 			query.getInParams().add(inActual);
@@ -772,11 +905,9 @@ public class OrchestrationManager {
 
 		for (int i = 0; i < queryType.getOutParams().size(); i++) {
 			OutputFormalParameter outFormal = queryType.getOutParams().get(i);
-			OutputActualParameter outActual = WiresFactory.eINSTANCE
-					.createOutputActualParameter();
+			OutputActualParameter outActual = WiresFactory.eINSTANCE.createOutputActualParameter();
 			outActual.setType(outFormal);
-			outActual.setName(outFormal.getName() + ":"
-					+ outFormal.getTypeName());
+			outActual.setName(outFormal.getName() + ":"	+ outFormal.getTypeName());
 			query.getOutParams().add(outActual);
 		}
 		
@@ -797,7 +928,7 @@ public class OrchestrationManager {
 		Boolean found = false;
 		WiresElement element = null;
 		QueryType type = null;
-
+		
 		while ((elemIterator.hasNext()) && (!found)) {
 			element = elemIterator.next();
 			if (element instanceof QueryType) {
@@ -807,6 +938,9 @@ public class OrchestrationManager {
 					found = true;
 			}
 		}
+		
+		if (!found) type = null;
+
 		return type;
 	}
 	
@@ -847,8 +981,7 @@ public class OrchestrationManager {
 					word = nextNoDelimToken(tokens);
 					while ((!word.equals(";")) && (tokens.hasMoreTokens())) {
 
-						LibraryRef lib = WiresFactory.eINSTANCE
-								.createLibraryRef();
+						LibraryRef lib = WiresFactory.eINSTANCE.createLibraryRef();
 						lib.setName(word);
 						lib.setLibrary(getLibrary(word));
 						queryType.getLibraries().add(lib);
@@ -882,10 +1015,8 @@ public class OrchestrationManager {
 	private AtomicModelTransformation createAtomicModelTransf(
 			String elementModel, int position) throws SimulatorException {
 
-		AtomicModelTransformation atomModelTransf = WiresFactory.eINSTANCE
-				.createAtomicModelTransformation();
-		Iterator<WiresElement> elemIterator = wiresSpecification.getEls()
-				.iterator();
+		AtomicModelTransformation atomModelTransf = WiresFactory.eINSTANCE.createAtomicModelTransformation();
+		Iterator<WiresElement> elemIterator = wiresSpecification.getEls().iterator();
 		WiresElement element = null;
 		AtomicModelTransfomationType type = null;
 		Boolean found = false;
@@ -911,8 +1042,7 @@ public class OrchestrationManager {
 
 		for (int i = 0; i < type.getInParams().size(); i++) {
 			InputFormalParameter inFormal = type.getInParams().get(i);
-			InputActualParameter inActual = WiresFactory.eINSTANCE
-					.createInputActualParameter();
+			InputActualParameter inActual = WiresFactory.eINSTANCE.createInputActualParameter();
 			inActual.setType(inFormal);
 			inActual.setName(inFormal.getName() + ":" + inFormal.getTypeName());
 			atomModelTransf.getInParams().add(inActual);
@@ -920,11 +1050,9 @@ public class OrchestrationManager {
 
 		for (int i = 0; i < type.getOutParams().size(); i++) {
 			OutputFormalParameter outFormal = type.getOutParams().get(i);
-			OutputActualParameter outActual = WiresFactory.eINSTANCE
-					.createOutputActualParameter();
+			OutputActualParameter outActual = WiresFactory.eINSTANCE.createOutputActualParameter();
 			outActual.setType(outFormal);
-			outActual.setName(outFormal.getName() + ":"
-					+ outFormal.getTypeName());
+			outActual.setName(outFormal.getName() + ":"	+ outFormal.getTypeName());
 			atomModelTransf.getOutParams().add(outActual);
 		}
 
@@ -940,17 +1068,18 @@ public class OrchestrationManager {
 	 * @param type
 	 * @return
 	 */
-	private InputActualParameter getParamIn(EList<InputActualParameter> list,
-			Type type) {
+	private InputActualParameter getParamIn(EList<InputActualParameter> list, Type type) {
 		Boolean found = false;
 		InputActualParameter param = null;
 		for (int i = 0; i < list.size() && !found; i++) {
 			if ((((InputFormalParameter) ((list.get(i)).getType()))
 					.getTypeEl().getName()).equals(type.getName())) {
 				found = true;
+				
 				param = list.get(i);
 			}
 		}
+		
 		return param;
 	}
 
@@ -961,8 +1090,7 @@ public class OrchestrationManager {
 	 * @param type
 	 * @return
 	 */
-	private OutputActualParameter getParamOut(
-			EList<OutputActualParameter> list, Type type) {
+	private OutputActualParameter getParamOut(EList<OutputActualParameter> list, Type type) {
 		Boolean found = false;
 		OutputActualParameter param = null;
 		for (int i = 0; i < list.size() && !found; i++) {
@@ -972,6 +1100,7 @@ public class OrchestrationManager {
 				param = list.get(i);
 			}
 		}
+		
 		return param;
 	}
 
@@ -982,20 +1111,17 @@ public class OrchestrationManager {
 	 * @return
 	 * @throws SimulatorException
 	 */
-	private AtomicModelTransfomationType createAtomicModelTransfType(
-			String elementModel) throws SimulatorException {
+	private AtomicModelTransfomationType createAtomicModelTransfType(String elementModel) throws SimulatorException {
 
 		AtomicModelTransfomationType atomModelTransfType = WiresFactory.eINSTANCE
 				.createAtomicModelTransfomationType();
-		String pathTransfRule = mappingRule
-				.getPathFileTransformation(elementModel);
+		String pathTransfRule = mappingRule.getPathFileTransformation(elementModel);
 
 		atomModelTransfType.setName(elementModel);
 		atomModelTransfType.setPath(pathTransfRule);
 
 		try {
-			BufferedReader br = new BufferedReader(new FileReader(
-					pathTransfRule));
+			BufferedReader br = new BufferedReader(new FileReader(pathTransfRule));
 			String file = " ";
 			String line = "";
 			String word = "";
@@ -1010,13 +1136,11 @@ public class OrchestrationManager {
 				if ((word.equals("create")) && (tokens.hasMoreTokens())) {
 					word = nextNoDelimToken(tokens);
 					while ((!word.equals("from")) && (tokens.hasMoreTokens())) {
-						OutputFormalParameter outParam = WiresFactory.eINSTANCE
-								.createOutputFormalParameter();
+						OutputFormalParameter outParam = WiresFactory.eINSTANCE.createOutputFormalParameter();
 						outParam.setName(word);
 						outParam.setTypeName(nextNoDelimToken(tokens));
 						atomModelTransfType.getOutParams().add(outParam);
-						outParam.setTypeEl(getModelTypeByName(outParam
-								.getTypeName()));
+						outParam.setTypeEl(getModelTypeByName(outParam.getTypeName()));
 
 						word = nextNoDelimToken(tokens);
 					}
@@ -1024,13 +1148,11 @@ public class OrchestrationManager {
 				if ((word.equals("from")) && (tokens.hasMoreTokens())) {
 					word = nextNoDelimToken(tokens);
 					while ((!word.equals(";")) && (tokens.hasMoreTokens())) {
-						InputFormalParameter inParam = WiresFactory.eINSTANCE
-								.createInputFormalParameter();
+						InputFormalParameter inParam = WiresFactory.eINSTANCE.createInputFormalParameter();
 						inParam.setName(word);
 						inParam.setTypeName(nextNoDelimToken(tokens));
 						atomModelTransfType.getInParams().add(inParam);
-						inParam.setTypeEl(getModelTypeByName(inParam
-								.getTypeName()));
+						inParam.setTypeEl(getModelTypeByName(inParam.getTypeName()));
 
 						word = nextNoDelimToken(tokens);
 					}
@@ -1039,8 +1161,7 @@ public class OrchestrationManager {
 					word = nextNoDelimToken(tokens);
 					while ((!word.equals(";")) && (tokens.hasMoreTokens())) {
 
-						LibraryRef lib = WiresFactory.eINSTANCE
-								.createLibraryRef();
+						LibraryRef lib = WiresFactory.eINSTANCE.createLibraryRef();
 						lib.setName(word);
 						lib.setLibrary(getLibrary(word));
 						atomModelTransfType.getLibraries().add(lib);
@@ -1050,8 +1171,7 @@ public class OrchestrationManager {
 					end = true;
 				}
 
-				if ((word.equals("helper")) || (word.equals("rule"))
-						|| (word.equals("lazy")))
+				if ((word.equals("helper")) || (word.equals("rule")) || (word.equals("lazy")))
 					end = true;
 				if (!tokens.hasMoreTokens())
 					break;
@@ -1060,11 +1180,9 @@ public class OrchestrationManager {
 			wiresSpecification.getEls().add(atomModelTransfType);
 
 		} catch (FileNotFoundException e) {
-			throw new SimulatorException("Wires Error: "
-					+ "File not found", e);
+			throw new SimulatorException("Wires Error: " + "File not found", e);
 		} catch (IOException e) {
-			throw new SimulatorException("Wires Error: "
-					+ "IO error", e);
+			throw new SimulatorException("Wires Error: " + "IO error", e);
 		}
 		return atomModelTransfType;
 	}
@@ -1079,8 +1197,7 @@ public class OrchestrationManager {
 		if (tokens.hasMoreTokens())
 			result = tokens.nextToken();
 		while ((tokens.hasMoreTokens())
-				&& ((result.equals(" ")) || (result.equals(",")) || (result
-						.equals(":")))) {
+				&& ((result.equals(" ")) || (result.equals(",")) || (result.equals(":")))) {
 			result = tokens.nextToken();
 		}
 		return result;
@@ -1109,8 +1226,7 @@ public class OrchestrationManager {
 		if (!found) {
 			element = WiresFactory.eINSTANCE.createLibrary();
 			element.setName(word);
-			element.setPath(config.getDirTransformationRepository() + word
-					+ ".atl");
+			element.setPath(config.getDirTransformationRepository() + word + ".atl");
 			wiresSpecification.getEls().add(element);
 		}
 		return element;
@@ -1124,20 +1240,17 @@ public class OrchestrationManager {
 	 */
 	private ModelType getModelTypeByName(String typeName) {
 
-		Iterator<WiresElement> elemIterator = wiresSpecification.getEls()
-				.iterator();
+		Iterator<WiresElement> elemIterator = wiresSpecification.getEls().iterator();
 		ModelType element = null;
 		WiresElement wiresEl = null;
 		Boolean found = false;
 
 
-		if (typeName.equals("INConfiguration")
-			|| typeName.equals("OUTConfiguration")) {
+		if (typeName.equals("INConfiguration") || typeName.equals("OUTConfiguration")) {
 			typeName = "mancoosimm";
 		}
 		
-		if (typeName.equals("INCurrentPosition")
-				|| typeName.equals("OUTCurrentPosition")) {
+		if (typeName.equals("INCurrentPosition") || typeName.equals("OUTCurrentPosition")) {
 				typeName = "positionmm";
 			}
 		
@@ -1153,6 +1266,8 @@ public class OrchestrationManager {
 					found = true;
 			}
 		}
+		
+		if (!found) element = null;
 		
 		return element;
 	}
