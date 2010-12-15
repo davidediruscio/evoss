@@ -8,7 +8,7 @@ rule Configuration {
     to t : OUTConfiguration!Configuration (
         name <- s.name,
         creationTime <- s.creationTime,
-        systemType <- s.systemType+'1',
+        systemType <- s.systemType,
         installedPackages <- s.installedPackages,
         fileSystem <- s.fileSystem,
         environment <- s.environment,

@@ -1,0 +1,5 @@
+library conditionlib;
+
+helper context String def : existsFile() : Boolean = INConfiguration!File.allInstances()->collect(e | e.location)->exists(e | e = self);
+
+helper context String def : isDirectory() : Boolean = INConfiguration!File.allInstances()->exists(e | e.location = self and e.isDirectory = true);

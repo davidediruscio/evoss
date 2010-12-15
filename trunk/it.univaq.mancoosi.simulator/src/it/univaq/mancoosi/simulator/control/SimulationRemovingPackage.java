@@ -78,7 +78,7 @@ class SimulationRemovingPackage extends SimulationPackageManager {
 
 		} else {
 			logger.info("-Simulator- Package: " + packageNameInput
-					+ "- have not Postrm script.");
+					+ "- has not Postrm script.");
 		}
 	}
 
@@ -98,7 +98,7 @@ class SimulationRemovingPackage extends SimulationPackageManager {
 
 		} else {
 			logger.info("-Simulator- Package: " + packageNameInput
-					+ "- have not Prerm script.");
+					+ "- has not Prerm script.");
 		}
 	}
 

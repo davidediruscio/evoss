@@ -1,0 +1,109 @@
+module conditionHOT;
+
+create OUT : ATL from INPACK : INPackage, INPOS : INCurrentPosition;
+
+
+helper def : getPosition : Integer = INCurrentPosition!Counter.allInstancesFrom('INPOS')->first().position;
+
+helper def : getScript : String = INCurrentPosition!Counter.allInstancesFrom('INPOS')->first().script;
+
+helper def : getStatementName : String = INCurrentPosition!Counter.allInstancesFrom('INPOS')->first().name;
+
+helper def : getStatement : INPackage!Statement = INPackage!Statement.allInstancesFrom('INPACK')->select(e | (e.refImmediateComposite().oclType().toString() = ('INPackage!'+thisModule.getScript.toString()))
+	and (e.oclType().toString() = ('INPackage!'+thisModule.getStatementName.toString())))->at(thisModule.getPosition);
+
+helper def : getRootBooleanExpression : INPackage!BooleanExpression = INPackage!BooleanExpression.allInstancesFrom('INPACK')->select(e | e.isTreeNodeRoot())->first();
+
+helper def : isInCurrentCondition(n:INPackage!BooleanExpression) : Boolean = thisModule.getRootBooleanExpression.getAllExpressions()->exists(e | e = n);
+
+-- This helper returns true if the current tree element is the tree root
+helper context INPackage!BooleanExpression def : isTreeNodeRoot() : Boolean =
+	self.refImmediateComposite() = thisModule.getStatement;
+
+helper context INPackage!BooleanExpression def : getAllExpressions() : OrderedSet(INPackage!BooleanExpression) =
+	self.exps->iterate( child ; elements : OrderedSet(INPackage!BooleanExpression) = 
+		OrderedSet{self} | 
+		if (child.oclIsTypeOf(INPackage!AndBooleanExpression) or child.oclIsTypeOf(INPackage!OrBooleanExpression)) then
+			elements.union(child.getAllExpressions()).append(child)  -- NODE : recursive call
+		else
+			elements.append(child) -- LEAF
+		endif
+		)
+	;
+
+--  Retrieve the tree elements starting from a given node 
+helper context INPackage!BooleanExpression def : getChildren () : OrderedSet(INPackage!BooleanExpression) =
+	self.exps->iterate( child ; elements : OrderedSet(INPackage!BooleanExpression) = OrderedSet{} | elements.append(child)
+		)
+	;
+
+
+-- Creates an ATL transformation module from a KM3 metamodel.
+rule Query {
+	from
+		s : INPackage!Package
+	to
+		l1 : ATL!LibraryRef (
+		  	name <- 'conditionlib'
+		),
+		b1 : ATL!BooleanExp (
+			booleanSymbol <- true
+		),
+		b2 : ATL!BooleanExp (
+			booleanSymbol <- false
+		),
+		ss : ATL!IfExp (
+			thenExpression <- b1,
+			condition <- thisModule.getRootBooleanExpression,
+			elseExpression <- b2
+		),
+		t : ATL!Query (
+			name <- 'Condition',
+			libraries <- Sequence {l1},
+			body <- ss)
+}
+
+
+rule OrBooleanExpression {
+	from 
+		s : INPackage!OrBooleanExpression (thisModule.isInCurrentCondition(s))
+	to 
+		t : ATL!OperatorCallExp (
+			operationName <- 'or',
+			source <- s.getChildren()->first(),
+			arguments <- s.getChildren()->last()
+			)
+}
+
+rule AndBooleanExpression {
+	from 
+		s : INPackage!AndBooleanExpression (thisModule.isInCurrentCondition(s))
+	to 
+		t : ATL!OperatorCallExp (
+			operationName <- 'and',
+			source <- s.getChildren()->first(),
+			arguments <- s.getChildren()->last()
+			)
+}
+
+rule IsDirectoryBoolean {
+	from s : INPackage!IsDirectoryBoolean (thisModule.isInCurrentCondition(s))
+	to
+		t : ATL!OperationCallExp (
+			operationName <- 'isDirectory',
+			source <- x
+			),
+		x : ATL!StringExp (
+			stringSymbol <- s.file.location)
+}
+
+rule FileExistsBoolean {
+	from s : INPackage!FileExistsBoolean (thisModule.isInCurrentCondition(s))
+	to
+		t : ATL!OperationCallExp (
+			operationName <- 'existsFile',
+			source <- x
+			),
+		x : ATL!StringExp (
+			stringSymbol <- s.file.location)
+}

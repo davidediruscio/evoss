@@ -8,7 +8,7 @@ import it.univaq.mancoosi.simulator.exceptions.SimulatorException;
 
 /**
  * Abstract class to handle different file
- * formats of sequence packets
+ * formats of sequence package
  * @author max
  */
 public abstract class PackageSequence {
@@ -25,7 +25,7 @@ public abstract class PackageSequence {
 
 			// To change if file format changes
 			if ((config.getFilePackageSequence()).endsWith(".xml")) {
-				INSTANCE = new PackageSequenceFileXML();
+				INSTANCE = new PackageSequenceXML();
 			} else {
 					throw new PackageSequenceFileException("Format PackageSequence '" +config.getFilePackageSequence() + "' not supported");
 			}

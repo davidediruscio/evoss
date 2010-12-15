@@ -77,7 +77,7 @@ class SimulationInstallingPackage extends SimulationPackageManager {
 
 		} else {
 			logger.info("-Simulator- Package: " + packageNameInput
-					+ "- have not Postinst script.");
+					+ "- has no Postinst script.");
 		}
 	}
 
@@ -95,7 +95,7 @@ class SimulationInstallingPackage extends SimulationPackageManager {
 
 		} else {
 			logger.info("-Simulator- Package: " + packageNameInput
-					+ "- have not Preinst script.");
+					+ "- has no Preinst script.");
 		}
 	}
 

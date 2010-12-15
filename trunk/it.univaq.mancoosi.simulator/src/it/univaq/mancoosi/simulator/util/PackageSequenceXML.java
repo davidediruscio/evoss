@@ -24,7 +24,7 @@ import it.univaq.mancoosi.simulator.exceptions.SimulatorException;
  * Manages the list of packages from an XML file
  * @author max
  */
-class PackageSequenceFileXML extends PackageSequence {
+class PackageSequenceXML extends PackageSequence {
 
 	private ArrayList<ActionPkg> sequencepkg = null;
 
@@ -32,7 +32,7 @@ class PackageSequenceFileXML extends PackageSequence {
 	 * Constructor
 	 * @throws SimulatorException
 	 */
-	PackageSequenceFileXML() throws SimulatorException {
+	PackageSequenceXML() throws SimulatorException {
 		sequencepkg = new ArrayList<ActionPkg>();
 		parseFile();
 	}

@@ -94,7 +94,7 @@ public class FileManagement {
 		File temp;
 		try {
 			temp = File.createTempFile(pattern, "." + suffix, new File(
-					SimulatorConfig.getInstance().getDirTmp()));
+					SimulatorConfig.getInstance().getTmpDir()));
 		} catch (IOException e) {
 			throw new SimulatorException("Error creating temporary file", e);
 		}
