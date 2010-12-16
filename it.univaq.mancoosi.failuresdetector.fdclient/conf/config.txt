@@ -1,0 +1,22 @@
+#FDClient configuration file (# at line beginning for comment)
+#
+#List of client configuration parameters:
+#fdServerUri (default value is localhost)
+#ecoreModelDir (default value is model)
+#ecoreModelFileName (default value is systemModel.ecore)
+#jarsDir (default value is jars)
+#jarsListFile (default value is jarsList.txt)
+#tmpDir (default value is tmp)
+#oclQueriesDir (default value is oclqueries)
+#oclQueriesFileName (default value is queries.ocl)
+#
+#The pattern for defining a parameter is
+#<<parameter>>=<<value>>
+fdServerUri=localhost
+ecoreModelDir=model
+ecoreModelFileName=systemModel.ecore
+jarsDir=jars
+jarsListFile=jarsListFile.txt
+tmpDir=tmp
+oclQueriesDir=oclqueries
+oclQueriesFileName=queries.ocl
