@@ -1,0 +1,2 @@
+                            <p><a href="mailto:apocanow@hotmail.it">Contact Us</a> | <a href="logout.php">Logout</a><br />
+                                Copyright &copy; 2010 --- All Rights Reserved.</p>

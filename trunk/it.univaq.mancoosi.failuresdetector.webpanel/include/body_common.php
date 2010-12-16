@@ -1,0 +1,1 @@
+<body class="sfondo" onload="fixedBackground('immagini/sfondo.jpg');">

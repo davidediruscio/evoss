@@ -1,0 +1,7 @@
+server = localhost
+dbname = failuresdetector
+username = root
+password = 
+
+# Il pannello legge solo le prime 4 righe di questo file. Se si vogliono inserire ulteriori parametri, sarà necessario editare il codice PHP
+# contenuto in php_common.php (attualmente il valore $rows, riga 29)
