@@ -1,0 +1,305 @@
+-- phpMyAdmin SQL Dump
+-- version 3.2.1
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generato il: 14 dic, 2010 at 05:15 PM
+-- Versione MySQL: 5.1.37
+-- Versione PHP: 5.2.10
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+--
+-- Database: `failuresdetector`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `ass_oclqueries2failures`
+--
+
+CREATE TABLE IF NOT EXISTS `ass_oclqueries2failures` (
+  `ID` int(6) NOT NULL AUTO_INCREMENT,
+  `idfirst` int(6) NOT NULL,
+  `idsecond` int(6) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+
+--
+-- Dump dei dati per la tabella `ass_oclqueries2failures`
+--
+
+INSERT INTO `ass_oclqueries2failures` (`ID`, `idfirst`, `idsecond`) VALUES
+(1, 12, 3),
+(2, 12, 4),
+(3, 13, 5),
+(4, 13, 6),
+(5, 14, 7),
+(6, 14, 8),
+(7, 15, 9),
+(8, 15, 10),
+(9, 16, 11);
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `ass_oclqueries2jars`
+--
+
+CREATE TABLE IF NOT EXISTS `ass_oclqueries2jars` (
+  `ID` int(6) NOT NULL AUTO_INCREMENT,
+  `idfirst` int(6) NOT NULL,
+  `idsecond` int(6) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Dump dei dati per la tabella `ass_oclqueries2jars`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `ass_oclqueries2keywords`
+--
+
+CREATE TABLE IF NOT EXISTS `ass_oclqueries2keywords` (
+  `ID` int(6) NOT NULL AUTO_INCREMENT,
+  `idfirst` int(6) NOT NULL,
+  `idsecond` int(6) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=78 ;
+
+--
+-- Dump dei dati per la tabella `ass_oclqueries2keywords`
+--
+
+INSERT INTO `ass_oclqueries2keywords` (`ID`, `idfirst`, `idsecond`) VALUES
+(70, 51, 9),
+(69, 51, 8),
+(68, 51, 7),
+(67, 50, 8),
+(66, 50, 7),
+(72, 52, 15),
+(71, 52, 7),
+(74, 53, 16),
+(73, 53, 7),
+(76, 54, 18),
+(75, 54, 17),
+(77, 54, 19);
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `ass_solutions2failures`
+--
+
+CREATE TABLE IF NOT EXISTS `ass_solutions2failures` (
+  `ID` int(6) NOT NULL AUTO_INCREMENT,
+  `idfirst` int(6) NOT NULL,
+  `idsecond` int(6) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
+
+--
+-- Dump dei dati per la tabella `ass_solutions2failures`
+--
+
+INSERT INTO `ass_solutions2failures` (`ID`, `idfirst`, `idsecond`) VALUES
+(10, 6, 3),
+(11, 6, 4),
+(12, 7, 5),
+(13, 7, 6),
+(14, 8, 7),
+(15, 8, 8),
+(16, 9, 9),
+(17, 9, 10),
+(18, 6, 11),
+(19, 6, 12),
+(20, 10, 9),
+(21, 10, 10),
+(24, 6, 12);
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `conf_findfield`
+--
+
+CREATE TABLE IF NOT EXISTS `conf_findfield` (
+  `ID` int(2) NOT NULL AUTO_INCREMENT,
+  `mytable` varchar(40) NOT NULL,
+  `myfield` varchar(40) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+
+--
+-- Dump dei dati per la tabella `conf_findfield`
+--
+
+INSERT INTO `conf_findfield` (`ID`, `mytable`, `myfield`) VALUES
+(1, 'failures', 'idtext'),
+(2, 'findfield', 'mytable'),
+(3, 'oclqueries', 'name'),
+(4, 'solutions', 'text'),
+(5, 'users', 'nickname'),
+(8, 'keywords', 'keyword'),
+(9, 'jars', 'file');
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `failures`
+--
+
+CREATE TABLE IF NOT EXISTS `failures` (
+  `ID` int(7) NOT NULL AUTO_INCREMENT,
+  `idtext` varchar(40) NOT NULL,
+  `description` text NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `IDtext` (`idtext`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+
+--
+-- Dump dei dati per la tabella `failures`
+--
+
+INSERT INTO `failures` (`ID`, `idtext`, `description`) VALUES
+(3, 'First failure for query 12', 'First failure for query 12 (get InstalledPackage named ''apt'')'),
+(4, 'Second failure for query 12', 'Second failure for query 12 (get InstalledPackage named ''apt'')'),
+(5, 'First failure for query 13', 'First failure for query 13 (get InstalledPackage named ''apt'' with installedSize = 5200)'),
+(6, 'Second failure for query 13', 'Second failure for query 13 (get InstalledPackage named ''apt'' with installedSize = 5200)'),
+(7, 'First failure for query 14', 'First failure for query 14 (Exists at least an InstalledPackage with installedSize < 85)'),
+(8, 'Second failure for query 14', 'Second failure for query 14 (Exists at least an InstalledPackage with installedSize < 85)'),
+(9, 'First failure for query 15', 'First failure for query 15 (Exists an IstalledPackage named ''a'')'),
+(10, 'Second failure for query 15', 'Second failure for query 15 (Exists an IstalledPackage named ''a'')'),
+(11, 'First failure for query 16', 'First failure for query 15 (get IstalledPackage named ''apt'' alternative version)'),
+(12, 'Second failure for query 16', 'Second failure for query 15 (get IstalledPackage named ''apt'' alternative version)');
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `jars`
+--
+
+CREATE TABLE IF NOT EXISTS `jars` (
+  `ID` int(5) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `description` text NOT NULL,
+  `file` tinytext NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
+
+--
+-- Dump dei dati per la tabella `jars`
+--
+
+INSERT INTO `jars` (`ID`, `name`, `description`, `file`) VALUES
+(15, 'Try', 'JAR Try', 'anothertry.jar'),
+(14, 'Prova JAR', 'JAR di prova per il testing del Pannello Failures', 'provajar.jar'),
+(16, 'Hello World', 'Jar di prova che stampa "HELLO WORLD!"', 'helloworld.jar'),
+(17, 'Arcelli Tesi', 'jar tesi', 'ArcelliTesi.jar'),
+(18, 'Example of OCL queries execution from jar file', 'Example of OCL queries execution from jar file.', 'queriesExecExample.jar');
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `keywords`
+--
+
+CREATE TABLE IF NOT EXISTS `keywords` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `keyword` varchar(255) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
+
+--
+-- Dump dei dati per la tabella `keywords`
+--
+
+INSERT INTO `keywords` (`ID`, `keyword`) VALUES
+(8, 'SelectNameEqapt'),
+(7, 'InstalledPackageallInstances'),
+(9, 'InstalledSizeEq5200'),
+(13, 'InstalledSizeEq1000'),
+(14, 'SelectNameEqapzt'),
+(15, 'ExistsInstalledSizeLt85'),
+(16, 'ExistsNameEqa'),
+(17, 'ConfigurationallInstances'),
+(18, 'CollectInstalledPackages'),
+(19, 'ExistsNameEqapt');
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `oclqueries`
+--
+
+CREATE TABLE IF NOT EXISTS `oclqueries` (
+  `ID` int(6) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `query` text NOT NULL,
+  `author` varchar(16) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=56 ;
+
+--
+-- Dump dei dati per la tabella `oclqueries`
+--
+
+INSERT INTO `oclqueries` (`ID`, `name`, `query`, `author`) VALUES
+(50, 'APT', 'mancoosi::InstalledPackage.allInstances()->select(c | c.name = ''apt'')', 'davide'),
+(51, 'apt with installedsize = 5200', 'mancoosi::InstalledPackage.allInstances()->select(c | c.name = ''apt'')->asSequence()->first().installedSize = 5200', 'Apocalisse'),
+(52, 'InstalledSize < 85', 'mancoosi::InstalledPackage.allInstances()->exists(c | c.installedSize < 85)', 'davide'),
+(53, 'Packet A', 'mancoosi::InstalledPackage.allInstances()->exists(c | c.name = ''a'')', 'Apocalisse'),
+(54, 'APT Version 2', 'mancoosi::Configuration.allInstances()->asSequence()->first()->collect(c | c.installedPackages)->exists(p | p.name = ''apt'')', 'davide');
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `solutions`
+--
+
+CREATE TABLE IF NOT EXISTS `solutions` (
+  `ID` int(8) NOT NULL AUTO_INCREMENT,
+  `text` text NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+
+--
+-- Dump dei dati per la tabella `solutions`
+--
+
+INSERT INTO `solutions` (`ID`, `text`) VALUES
+(6, 'Install the ''apt'' package.'),
+(7, 'Install the ''apt'' package having installedSize = 5200.'),
+(8, 'Install a package having installedSize < 85.'),
+(9, 'Install the ''a'' package.'),
+(10, 'Install a package including the ''a'' package.');
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `users`
+--
+
+CREATE TABLE IF NOT EXISTS `users` (
+  `ID` int(4) NOT NULL AUTO_INCREMENT,
+  `nickname` varchar(16) NOT NULL,
+  `password` varchar(16) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `nickname` (`nickname`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+
+--
+-- Dump dei dati per la tabella `users`
+--
+
+INSERT INTO `users` (`ID`, `nickname`, `password`, `email`) VALUES
+(1, 'apocalisse', 'prova', 'apocanow@hotmail.it'),
+(4, 'davide', 'prova', 'davewilson@hotmail.it'),
+(5, 'root', 'root', '');

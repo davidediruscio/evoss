@@ -1,0 +1,105 @@
+a{
+text-decoration: none;
+color: white;
+}
+
+form{
+margin-bottom: 0px;
+}
+
+.box{
+background-image:url('../immagini/box.gif');
+position: absolute;
+width: 338px;
+height: 220px;
+top: 30%;
+left: 40%;
+}
+
+.dato{
+float: left;
+position: absolute;
+top: 144px;
+left: 35px;
+width: 275px;
+height: 17px;
+background-color: white;
+font-family: Verdana;
+font-weight: normal;
+font-size: 12px;
+margin: 0px;
+border: 0px;
+}
+
+.descrizione{
+float: left;
+position: absolute;
+top: 110px;
+left: 97px;
+font-weight: normal;
+font-family: Verdana;
+font-size: 13px;
+color: black;
+text-align: center;
+}
+
+.errorlogin{
+float: left;
+position: absolute;
+top: 70%;
+left: 40%;
+width: 338px;
+height: 30px;
+font-weight: normal;
+font-family: Verdana;
+font-size: 13px;
+color: white;
+text-align: center;
+}
+
+.sfondo{
+background-repeat:no-repeat;
+background-attachment:fixed;
+margin: 0px;
+padding: 0px;
+}
+
+.sottotitolo{
+float: left;
+position: absolute;
+top: 80px;
+left: 148px;
+letter-spacing: 1px;
+font-weight: bold;
+font-family: Verdana;
+font-size: 13px;
+color: black;
+text-align: center;
+}
+
+.sottotitolo2{
+float: left;
+position: absolute;
+top: 80px;
+left: 135px;
+letter-spacing: 1px;
+font-weight: bold;
+font-family: Verdana;
+font-size: 13px;
+color: black;
+text-align: center;
+}
+
+.titletext{
+float: left;
+position: absolute;
+top: 23px;
+left: 120px;
+font-weight: bold;
+font-family: Verdana;
+font-size: 20px;
+color: black;
+text-align: center;
+}
+
+
