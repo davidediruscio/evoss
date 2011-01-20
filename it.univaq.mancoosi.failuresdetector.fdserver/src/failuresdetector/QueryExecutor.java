@@ -3,7 +3,7 @@ package failuresdetector;
 import java.io.File;
 import java.io.OutputStream;
 import java.io.PrintStream;
-import mancoosi.MancoosiPackage;
+import it.univaq.mancoosi.mancoosimm.*;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EClassifier;
