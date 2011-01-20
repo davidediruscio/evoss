@@ -32,7 +32,8 @@ public class JarClassLoader extends URLClassLoader
     }
     
     //This method invokes the class name with args
-    public void invokeClass(String name, String[] args) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, NoClassDefFoundError {
+    @SuppressWarnings("unchecked")
+	public void invokeClass(String name, String[] args) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, NoClassDefFoundError {
     	try {
     		Class c = loadClass(name);
     		Method m = c.getMethod("main", new Class[] { args.getClass() });
