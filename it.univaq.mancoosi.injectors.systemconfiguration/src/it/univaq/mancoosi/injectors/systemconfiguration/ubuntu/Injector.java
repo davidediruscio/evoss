@@ -9,7 +9,6 @@ import it.univaq.mancoosi.injectors.systemconfiguration.managers.ubuntu.UbuntuMi
 import it.univaq.mancoosi.injectors.systemconfiguration.managers.ubuntu.UbuntuPackageManager;
 import it.univaq.mancoosi.injectors.systemconfiguration.managers.ubuntu.UbuntuPackageSettingDependenciesManager;
 import it.univaq.mancoosi.injectors.systemconfiguration.managers.ubuntu.UbuntuUserManager;
-import it.univaq.mancoosi.injectors.systemconfiguration.utils.FailureDetector;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -117,7 +116,7 @@ public class Injector {
 		
 		out.close();
 		
-		FailureDetector.getInstance().start();	
+ 
 
 		resource.save(Collections.EMPTY_MAP);
 		
