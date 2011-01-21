@@ -17,7 +17,7 @@ public class JarExecutor {
 		String name = null;
 		try {
 			if(jarFile.exists()) {
-				url = new URL[]{new URL("jar:file:/" + jarFile.getAbsolutePath() + "!/")};
+				url = new URL[]{new URL("jar:file:" + jarFile.getAbsolutePath() + "!/")};
 				JarClassLoader cl = new JarClassLoader(url[0]);
 				name = cl.getMainClassName();
 				if (name != null) {

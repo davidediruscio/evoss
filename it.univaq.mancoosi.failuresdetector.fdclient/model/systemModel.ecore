@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<mancoosi:Configuration xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mancoosi="mancoosi" creationTime="Thu Jan 28 09:23:09 CET 2010" systemType="Ubuntu">
+<mancoosi:Configuration xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mancoosi="mancoosimm" creationTime="Thu Jan 28 09:23:09 CET 2010" systemType="Ubuntu">
   <installedPackages name="acl" version="2.2.45-1" installedSize="260" maintainer="Ubuntu Core Developers &lt;ubuntu-devel-discuss@lists.ubuntu.com>" architecture="i386" description="Access control list utilities" section="utils" priority="optional">
     <depends xsi:type="mancoosi:AndDep">
       <ops xsi:type="mancoosi:SingleDep" pkg="//@installedPackages.325" version="ge" value="2.2.11-1"/>

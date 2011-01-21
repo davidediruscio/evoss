@@ -701,6 +701,7 @@ public class FDClient {
 	}
 	
 	public static void main(String[] args) {
+		String pathSep = File.separator;
 		FDClient fd = FDClient.getInstance();
 		try {
 			System.out.println("Loading configuration...");
@@ -730,10 +731,10 @@ public class FDClient {
 							
 							//local queries execution
 							System.out.println("\nOCL QUERIES LOCAL EXECUTION PROCESS");
-							String[] localQueriesLS = fd.getQueriesFromFile(fd.getOclQueriesDir() + "/" + fd.getOclQueriesFileName());
+							String[] localQueriesLS = fd.getQueriesFromFile(fd.getOclQueriesDir() + pathSep + fd.getOclQueriesFileName());
 							if(localQueriesLS != null) {
 								System.out.println(localQueriesLS.length + " queries will be executed.");
-								Object[] results = QueryExecutor.executeQueries(fd.getEcoreModelDir() + "/" + fd.getEcoreModelFileName(), localQueriesLS);
+								Object[] results = QueryExecutor.executeQueries(fd.getEcoreModelDir() + pathSep + fd.getEcoreModelFileName(), localQueriesLS);
 								System.out.println("\nFAILURES DETECTION");
 								for(int i = 0; i < results.length; i++) {
 									if(detectFailure(results[i].toString())) {
@@ -755,11 +756,11 @@ public class FDClient {
 					
 					//local jars execution
 					System.out.println("\nJAR FILES EXECUTION PROCESS");
-					String[] jarsToExecLS = fd.getJarsList(fd.getJarsDir() + "/" + fd.getJarsListFileName());
+					String[] jarsToExecLS = fd.getJarsList(fd.getJarsDir() + pathSep + fd.getJarsListFileName());
 					for(int i = 0; i < jarsToExecLS.length; i++) {
-						jarsToExecLS[i] = fd.getJarsDir() + "/" + jarsToExecLS[i];
+						jarsToExecLS[i] = fd.getJarsDir() + pathSep + jarsToExecLS[i];
 					}
-					JarExecutor.executeJars(jarsToExecLS, fd.getEcoreModelDir() + "/" + fd.getEcoreModelFileName());
+					JarExecutor.executeJars(jarsToExecLS, fd.getEcoreModelDir() + pathSep + fd.getEcoreModelFileName());
 					break;
 				case FDClientOptionsManager.REMOTE_SCENARIO:
 					System.out.println("\nREMOTE SCENARIO");
@@ -802,10 +803,10 @@ public class FDClient {
 					System.out.println("\nOFFLINE SCENARIO");
 					//local queries execution
 					System.out.println("\nLOCAL OCL QUERIES EXECUTION PROCESS");
-					String[] localQueriesOS = fd.getQueriesFromFile(fd.getOclQueriesDir() + "/" + fd.getOclQueriesFileName());
+					String[] localQueriesOS = fd.getQueriesFromFile(fd.getOclQueriesDir() + pathSep + fd.getOclQueriesFileName());
 					if(localQueriesOS != null) {
 						System.out.println(localQueriesOS.length + " queries will be executed.");
-						Object[] results = QueryExecutor.executeQueries(fd.getEcoreModelDir() + "/" + fd.getEcoreModelFileName(), localQueriesOS);
+						Object[] results = QueryExecutor.executeQueries(fd.getEcoreModelDir() + pathSep + fd.getEcoreModelFileName(), localQueriesOS);
 						System.out.println("\nFAILURES DETECTION");
 						for(int i = 0; i < results.length; i++) {
 							if(detectFailure(results[i].toString())) {
@@ -819,11 +820,11 @@ public class FDClient {
 					
 					//local jars execution
 					System.out.println("\nJAR FILES EXECUTION PROCESS");
-					String[] jarsToExecOS = fd.getJarsList(fd.getJarsDir() + "/" + fd.getJarsListFileName());
+					String[] jarsToExecOS = fd.getJarsList(fd.getJarsDir() + pathSep + fd.getJarsListFileName());
 					for(int i = 0; i < jarsToExecOS.length; i++) {
-						jarsToExecOS[i] = fd.getJarsDir() + "/" + jarsToExecOS[i];
+						jarsToExecOS[i] = fd.getJarsDir() + pathSep + jarsToExecOS[i];
 					}
-					JarExecutor.executeJars(jarsToExecOS, fd.getEcoreModelDir() + "/" + fd.getEcoreModelFileName());
+					JarExecutor.executeJars(jarsToExecOS, fd.getEcoreModelDir() + pathSep + fd.getEcoreModelFileName());
 					break;
 				case FDClientOptionsManager.UPDATEONLY_SCENARIO:
 					System.out.println("\nUPDATEONLY SCENARIO");
@@ -849,7 +850,7 @@ public class FDClient {
 					String[] localQueriesLQES = fd.getQueriesFromCmdLine(args);
 					if(localQueriesLQES != null) {
 						System.out.println(localQueriesLQES.length + " queries will be executed.");
-						QueryExecutor.executeQueries(fd.getEcoreModelDir() + "/" + fd.getEcoreModelFileName(), localQueriesLQES);
+						QueryExecutor.executeQueries(fd.getEcoreModelDir() + pathSep + fd.getEcoreModelFileName(), localQueriesLQES);
 					} else
 						System.out.println("No queries to execute.");
 					break;
@@ -882,9 +883,9 @@ public class FDClient {
 					//local jars execution
 					String[] jarsToExecLJES = (fd.getJarsFromCmdLine(args));
 					for(int i = 0; i < jarsToExecLJES.length; i++) {
-						jarsToExecLJES[i] = fd.getJarsDir() + "/" + jarsToExecLJES[i];
+						jarsToExecLJES[i] = fd.getJarsDir() + pathSep + jarsToExecLJES[i];
 					}
-					JarExecutor.executeJars(jarsToExecLJES,fd.getEcoreModelDir() + "/" + fd.getEcoreModelFileName());
+					JarExecutor.executeJars(jarsToExecLJES,fd.getEcoreModelDir() + pathSep + fd.getEcoreModelFileName());
 					break;
 				case FDClientOptionsManager.DEFAULT_SCENARIO:
 					System.out.println("\nDEFAULT SCENARIO (LOCAL SCENARIO)");
@@ -901,10 +902,10 @@ public class FDClient {
 							
 							//local queries execution
 							System.out.println("\nOCL QUERIES LOCAL EXECUTION PROCESS");
-							String[] localQueriesLS = fd.getQueriesFromFile(fd.getOclQueriesDir() + "/" + fd.getOclQueriesFileName());
+							String[] localQueriesLS = fd.getQueriesFromFile(fd.getOclQueriesDir() + pathSep + fd.getOclQueriesFileName());
 							if(localQueriesLS != null) {
 								System.out.println(localQueriesLS.length + " queries will be executed.");
-								Object[] results = QueryExecutor.executeQueries(fd.getEcoreModelDir() + "/" + fd.getEcoreModelFileName(), localQueriesLS);
+								Object[] results = QueryExecutor.executeQueries(fd.getEcoreModelDir() + pathSep + fd.getEcoreModelFileName(), localQueriesLS);
 								System.out.println("\nFAILURES DETECTION");
 								for(int i = 0; i < results.length; i++) {
 									if(detectFailure(results[i].toString())) {
@@ -925,12 +926,13 @@ public class FDClient {
 					}
 					//local jars execution
 					System.out.println("\nJAR FILES EXECUTION PROCESS");
-					String[] jarsToExecDS = fd.getJarsList(fd.getJarsDir() + "/" + fd.getJarsListFileName());
+					String[] jarsToExecDS = fd.getJarsList(fd.getJarsDir() + pathSep + fd.getJarsListFileName());
+	System.out.println(jarsToExecDS); 
 					System.out.println(jarsToExecDS.length + " .jar files will be executed.");
 					for(int i = 0; i < jarsToExecDS.length; i++) {
-						jarsToExecDS[i] = fd.getJarsDir() + "/" + jarsToExecDS[i];
+						jarsToExecDS[i] = fd.getJarsDir() + pathSep + jarsToExecDS[i];
 					}
-					JarExecutor.executeJars(jarsToExecDS, fd.getEcoreModelDir() + "/" + fd.getEcoreModelFileName());
+					JarExecutor.executeJars(jarsToExecDS, fd.getEcoreModelDir() + pathSep + fd.getEcoreModelFileName());
 					break;
 			}
 		} catch(LoadConfigurationException e) {
