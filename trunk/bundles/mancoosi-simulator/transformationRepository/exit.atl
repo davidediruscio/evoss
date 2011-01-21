@@ -1,0 +1,13 @@
+module exit;
+
+create OUT : OUTConfiguration, OUTERR: MMError from IN : INConfiguration, INPOS : INCurrentPosition;
+
+
+-- 
+rule createErrorModel {
+    from s : INConfiguration!Configuration 
+	to
+       t : MMError!Error (
+           	type <- 'exit',
+            description <- 'Script called with unknown argument')
+}
