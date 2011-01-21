@@ -9,7 +9,6 @@ import it.univaq.mancoosi.injectors.systemconfiguration.managers.caixa.CaixaMime
 import it.univaq.mancoosi.injectors.systemconfiguration.managers.caixa.CaixaPackageManager;
 import it.univaq.mancoosi.injectors.systemconfiguration.managers.caixa.CaixaPackageSettingDependenciesManager;
 import it.univaq.mancoosi.injectors.systemconfiguration.managers.caixa.CaixaUserManager;
-import it.univaq.mancoosi.injectors.systemconfiguration.utils.FailureDetector;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -124,8 +123,6 @@ public class Injector {
 		}
 		
 		out.close();
-		
-		FailureDetector.getInstance().start();	
 
 		resource.save(Collections.EMPTY_MAP);
 		
