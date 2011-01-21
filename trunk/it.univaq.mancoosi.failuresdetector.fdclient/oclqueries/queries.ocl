@@ -1,5 +1,5 @@
-mancoosi::InstalledPackage.allInstances()->select(c | c.name = 'apt')
-mancoosi::InstalledPackage.allInstances()->select(c | c.name = 'apt')->asSequence()->first().installedSize = 5200
-mancoosi::InstalledPackage.allInstances()->exists(c | c.installedSize < 85)
-mancoosi::InstalledPackage.allInstances()->exists(c | c.name = 'a')
-mancoosi::Configuration.allInstances()->asSequence()->first()->collect(c | c.installedPackages)->exists(p | p.name = 'apt')
+mancoosimm::InstalledPackage.allInstances()->select(c | c.name = 'apt')
+mancoosimm::InstalledPackage.allInstances()->select(c | c.name = 'apt')->asSequence()->first().installedSize = 5200
+mancoosimm::InstalledPackage.allInstances()->exists(c | c.installedSize < 85)
+mancoosimm::InstalledPackage.allInstances()->exists(c | c.name = 'a')
+mancoosimm::Configuration.allInstances()->asSequence()->first()->collect(c | c.installedPackages)->exists(p | p.name = 'apt')
