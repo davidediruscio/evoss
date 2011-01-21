@@ -1,5 +1,3 @@
-anothertry.jar
-provajar.jar
 helloworld.jar
-ArcelliTesi.jar
-queriesExecExample.jar
+missingFiles.jar
+queryExecFromJar.jar
