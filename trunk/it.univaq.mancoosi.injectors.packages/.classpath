@@ -2,28 +2,20 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="lib/ant/ant-antlr.jar"/>
-	<classpathentry kind="lib" path="lib/ant/ant-apache-bcel.jar"/>
-	<classpathentry kind="lib" path="lib/ant/ant-apache-bsf.jar"/>
-	<classpathentry kind="lib" path="lib/ant/ant-apache-log4j.jar"/>
-	<classpathentry kind="lib" path="lib/ant/ant-apache-oro.jar"/>
-	<classpathentry kind="lib" path="lib/ant/ant-apache-regexp.jar"/>
-	<classpathentry kind="lib" path="lib/ant/ant-apache-resolver.jar"/>
-	<classpathentry kind="lib" path="lib/ant/ant-apache-xalan2.jar"/>
-	<classpathentry kind="lib" path="lib/ant/ant-commons-logging.jar"/>
-	<classpathentry kind="lib" path="lib/ant/ant-commons-net.jar"/>
-	<classpathentry kind="lib" path="lib/ant/ant-jai.jar"/>
-	<classpathentry kind="lib" path="lib/ant/ant-javamail.jar"/>
-	<classpathentry kind="lib" path="lib/ant/ant-jdepend.jar"/>
-	<classpathentry kind="lib" path="lib/ant/ant-jmf.jar"/>
-	<classpathentry kind="lib" path="lib/ant/ant-jsch.jar"/>
-	<classpathentry kind="lib" path="lib/ant/ant-junit.jar"/>
-	<classpathentry kind="lib" path="lib/ant/ant-launcher.jar"/>
-	<classpathentry kind="lib" path="lib/ant/ant-netrexx.jar"/>
-	<classpathentry kind="lib" path="lib/ant/ant-nodeps.jar"/>
-	<classpathentry kind="lib" path="lib/ant/ant-swing.jar"/>
-	<classpathentry kind="lib" path="lib/ant/ant-testutil.jar"/>
-	<classpathentry kind="lib" path="lib/ant/ant.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/it.univaq.mancoosi.packagemm"/>
+	<classpathentry kind="lib" path="files/bin"/>
+	<classpathentry kind="lib" path="lib/antlr-3.2.jar"/>
+	<classpathentry kind="lib" path="lib/gts.modernization.grammar2Model.antTasks.jar"/>
+	<classpathentry kind="lib" path="lib/gts.modernization.grammar2Model.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.emf.cdo_2.0.0.v200906160459.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.emf.cdo.common_2.0.0.v200906160459.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.emf.common_2.5.0.v200906151043.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.emf.ecore_2.5.0.v200906151043.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.emf.ecore.xmi_2.5.0.v200906151043.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.equinox.common_3.5.0.v20090520-1800.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.gmt.modisco.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.net4j_2.0.0.v200906160348.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.net4j.tcp_2.0.0.v200906160348.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.net4j.util_2.0.0.v200906160348.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
