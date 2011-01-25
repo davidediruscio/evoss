@@ -1,0 +1,935 @@
+rule 'mapPackage'
+   from CST c
+   to packagemm::Package
+   queries
+     stPostI : //#file{filename.endsWith(".postinst")}//#statement;
+     stPostR : //#file{filename.endsWith(".postrm")}//#statement;
+     stPreI  : //#file{filename.endsWith(".preinst")}//#statement;
+     stPreR  : //#file{filename.endsWith(".prerm")}//#statement;
+   mappings
+     name = ext ExtractFilename(f);
+	 
+	 if (stPostI.hasResults) then
+     	PostinstScript = new packagemm::PostinstScript;
+     	PostinstScript.statements = stPostI;
+     end_if
+
+	 if (stPostR.hasResults) then
+     	PostrmScript = new packagemm::PostrmScript;
+     	PostrmScript.statements = stPostR;
+     end_if
+
+	 if (stPreI.hasResults) then
+     	PreinstScript = new packagemm::PreinstScript;
+     	PreinstScript.statements = stPreI;
+     end_if
+
+	 if (stPreR.hasResults) then
+     	PrermScript = new packagemm::PrermScript;
+     	PrermScript.statements = stPreR;
+     end_if    
+     
+end_rule
+
+--------------------------------------
+-- Rules for Templates
+--------------------------------------
+rule 'mapTemplateA1'
+	from statement//templateA1 tp
+	to packagemm::PostinstDesktop
+	queries
+	mappings
+end_rule
+
+rule 'mapTemplateA2'
+	from statement//templateA2 tp
+	to packagemm::PostrmDesktop
+	queries
+	mappings
+end_rule
+
+rule 'mapTemplateA3'
+	from statement//templateA3 tp
+	to packagemm::PostinstDocBase
+	queries
+		dI : //tp//templateA3/#doc_id;
+	mappings
+		document = new packagemm::File;
+		document.name = extract dI;
+end_rule
+
+rule 'mapTemplateA4'
+	from statement//templateA4 tp
+	to packagemm::PrermDocBase
+	queries
+		dI : //tp//templateA4/#doc_id;
+	mappings
+		document = new packagemm::File;
+		document.name = extract dI;
+end_rule
+
+rule 'mapTemplateA5'
+	from statement//templateA5 tp
+	to packagemm::PostinstEmacsen
+	queries
+		pK : //tp//templateA5/#pack;
+	mappings
+		package = new packagemm::File;
+		package.name = extract pK;
+end_rule
+
+rule 'mapTemplateA6'
+	from statement//templateA6 tp
+	to packagemm::PrermEmacsen
+	queries
+		pK : //tp//templateA6/#pack;
+	mappings
+		package = new packagemm::Package;
+		package.name = extract pK;
+end_rule
+
+rule 'mapTemplateA7'
+	from statement//templateA7 tp
+	to packagemm::PostinstGconfDefaults
+	queries
+	mappings
+end_rule
+
+rule 'mapTemplateA8'
+	from statement//templateA8 tp
+	to packagemm::PostrmGconfDefaults
+	queries
+	mappings
+end_rule
+
+rule 'mapTemplateA9'
+	from statement//templateA9 tp
+	to packagemm::PostinstGconf
+	queries
+		sk : //tp//templateA9/#schemas;
+	mappings
+		schemas = sk;
+end_rule
+
+rule 'mapTemplateA10'
+	from statement//templateA10 tp
+	to packagemm::PrermGconf
+	queries
+		sk : //tp//templateA10/#schemas;
+	mappings
+		schemas = sk;
+end_rule
+
+rule 'mapTemplateA11'
+	from statement//templateA11 tp
+	to packagemm::PostrmGconf
+	queries
+		sk : //tp//templateA11/#schemas;
+	mappings
+		schemas = sk;
+end_rule
+
+rule 'mapTemplateA12'
+	from //file{filename.endsWith(".postinst")}//#statement//templateA12_13 tp
+	to packagemm::PostinstIcons
+	queries
+    	diR : //tp//templateA12_13/#dirlist;
+   mappings
+       directories = diR;
+end_rule
+
+rule 'mapTemplateA13'
+	from //file{filename.endsWith(".postrm")}//#statement//templateA12_13 tp
+	to packagemm::PostrmIcons
+	queries
+		diR : //tp//templateA12_13/#dirlist;
+   mappings
+       dirs = diR;
+end_rule
+
+rule 'mapTemplateA14'
+	from statement//templateA14 tp
+	to packagemm::PostinstInfo
+	queries
+		fL : //tp//templateA14/#file[0];
+	mappings
+		file = new packagemm::File;
+		file.name = extract fL;
+end_rule
+
+rule 'mapTemplateA15'
+	from statement//templateA15 tp
+	to packagemm::PrermInfo
+	queries
+		fL : //tp//templateA15/#file;
+	mappings
+		file = new packagemm::File;
+		file.name = extract fL;
+end_rule
+
+rule 'mapTemplateA16'
+	from statement//templateA16 tp
+	to packagemm::PostinstInitNostart
+    queries
+       nS : //tp//templateA16/#script;
+       iP : //tp//templateA16/#initparms;
+       eH : //tp//templateA16/#error_handler;
+    mappings
+       scriptParam = new packagemm::Script;
+       scriptParam.name = extract nS;
+       initParams = iP;
+       errorHandler = eH;
+end_rule
+
+rule 'mapTemplateA17'
+	from statement//templateA17 tp
+	to packagemm::PostinstInitRestart
+    queries
+       nS : //tp//templateA17/#script[0];
+       iP : //tp//templateA17/#initparms;
+       eH : //tp//templateA17/#error_handler;
+    mappings
+       scriptParam = new packagemm::Script;
+       scriptParam.name = extract nS;
+       initParams = iP;
+       errorHandler = eH;
+end_rule
+
+rule 'mapTemplateA18'
+	from statement//templateA18 tp
+	to packagemm::PrermInitNorestart
+    queries
+       nS : //tp//templateA18/#script[0];
+       eH : //tp//templateA18/#error_handler;
+    mappings
+       scriptParam = new packagemm::Script;
+       scriptParam.name = extract nS;
+       errorHandler = eH;
+end_rule
+
+rule 'mapTemplateA19'
+	from statement//templateA19 tp
+	to packagemm::PostinstInit
+    queries
+       nS : //tp//templateA19/#script[0];
+       iP : //tp//templateA19/#initparms;
+       eH : //tp//templateA19/#error_handler;
+    mappings
+       scriptParam = new packagemm::Script;
+       scriptParam.name = extract nS;
+       initParams = iP;
+       errorHandler = eH;
+end_rule
+
+rule 'mapTemplateA20'
+	from statement//templateA20 tp
+	to packagemm::PrermInit
+    queries
+       nS : //tp//templateA20/#script[0];
+       eH : //tp//templateA20/#error_handler;
+    mappings
+       scriptParam = new packagemm::Script;
+       scriptParam.name = extract nS;
+       errorHandler = eH;
+end_rule
+
+rule 'mapTemplateA21'
+	from statement//templateA21 tp
+	to packagemm::PostrmInit
+    queries
+       nS : //tp//templateA21/#script;
+       eH : //tp//templateA21/#error_handler;
+    mappings
+       scriptParam = new packagemm::Script;
+       scriptParam.name = extract nS;
+       errorHandler = eH;
+end_rule
+
+rule 'mapTemplateA22'
+	from statement//templateA22 tp
+	to packagemm::PostrmGconfDefaults
+	queries
+	mappings
+end_rule
+
+rule 'mapTemplateA23'
+	from statement//templateA23 tp
+	to packagemm::PostrmMakeshlibs
+	queries
+	mappings
+end_rule
+
+rule 'mapTemplateA24'
+	from statement//templateA24 tp
+	to packagemm::PostinstMenuMethod
+	queries
+		pK : //tp//templateA24/#pack;
+	mappings
+		package = new packagemm::Package;
+		package.name = extract pK;
+end_rule
+
+rule 'mapTemplateA25'
+	from statement//templateA25 tp
+	to packagemm::PostrmMenuMethod
+	queries
+		pK : //tp//templateA25/#pack;
+	mappings
+		package = new packagemm::Package;
+		package.name = extract pK;
+end_rule
+
+rule 'mapTemplateA26'
+	from statement//templateA26 tp
+	to packagemm::PostinstMenu
+	queries
+	mappings
+end_rule
+
+rule 'mapTemplateA27'
+	from statement//templateA27 tp
+	to packagemm::PostrmMenu
+	queries
+	mappings
+end_rule
+
+rule 'mapTemplateA28'
+	from statement//templateA28 tp
+	to packagemm::PostinstModules
+	queries
+		kV : //tp//templateA28/#kvers[0];
+	mappings
+		kvers = new packagemm::StringParam;
+		kvers.value = extract kV;
+end_rule
+
+rule 'mapTemplateA29'
+	from statement//templateA29 tp
+	to packagemm::PostrmModules
+	queries
+		kV : //tp//templateA29/#kvers;
+	mappings
+		kvers = new packagemm::IntParam;
+		kvers.value = extract kV;
+end_rule
+
+rule 'mapTemplateA30'
+	from statement//templateA30 tp
+	to packagemm::PostinstPython
+	queries
+		pV : //tp//templateA30/#pyver;
+		diR : //tp//templateA30/#dirlist;
+	mappings
+		dirlist = diR;
+		pyver = new packagemm::IntParam;
+		pyver.value = extract pV;
+end_rule
+
+rule 'mapTemplateA31'
+	from statement//templateA31 tp
+	to packagemm::PrermPython
+	queries
+		pK : //tp//templateA31/#pack;
+	mappings
+		package = new packagemm::Package;
+		package.name = extract pK;
+end_rule
+
+rule 'mapTemplateA32'
+	from statement//templateA32 tp
+	to packagemm::PostinstScrollkeeper
+	queries
+	mappings
+end_rule
+
+rule 'mapTemplateA33'
+	from statement//templateA33 tp
+	to packagemm::PostrmScrollkeeper
+	queries
+	mappings
+end_rule
+
+rule 'mapTemplateA34'
+	from statement//templateA34 tp
+	to packagemm::PostinstSgmlcatalog
+	queries
+		cC : //tp//templateA34/#centralcat[0];
+		oC : //tp//templateA34/#ordcats;
+	mappings
+		centralcat = new packagemm::File;
+		centralcat.name = extract cC;
+		ordcats = new packagemm::File;
+		ordcats.name = extract oC;
+end_rule
+
+rule 'mapTemplateA35'
+	from statement//templateA35 tp
+	to packagemm::PrermSgmlcatalog
+	queries
+		cC : //tp//templateA35/#centralcat;
+	mappings
+		centralcat = new packagemm::File;
+		centralcat.name = extract cC;
+end_rule
+
+rule 'mapTemplateA36'
+	from statement//templateA36 tp
+	to packagemm::PostrmSgmlcatalog
+	queries
+		cC : //tp//templateA36/#centralcat[0];
+	mappings
+		centralcat = new packagemm::File;
+		centralcat.name = extract cC;
+end_rule
+
+rule 'mapTemplateA37'
+	from statement//templateA37 tp
+	to packagemm::PostinstSharedmimeinfo
+	queries
+	mappings
+end_rule
+
+rule 'mapTemplateA38'
+	from statement//templateA38 tp
+	to packagemm::PostrmSharedmimeinfo
+	queries
+	mappings
+end_rule
+
+rule 'mapTemplateA39'
+	from statement//templateA39 tp
+	to packagemm::PostinstMime
+	queries
+	mappings
+end_rule
+
+rule 'mapTemplateA40'
+	from statement//templateA40 tp
+	to packagemm::PostrmMime
+	queries
+	mappings
+end_rule
+
+rule 'mapTemplateA41'
+	from statement//templateA41 tp
+	to packagemm::PostinstSuid
+	queries
+		pK : //tp//templateA41/#pack;
+		fL : //tp//templateA41/#file[0];
+		oW : //tp//templateA41/#owner[0];
+		gR : //tp//templateA41/#group[0];
+		pR : //tp//templateA41/#perms[0];
+	mappings
+		package = new packagemm::Package;
+		package.name = extract pK;
+		file = new packagemm::File;
+		file.name = extract fL;
+		owner = new packagemm::StringParam;
+		owner.value = extract oW;
+		group = new packagemm::StringParam;
+		group.value = extract gR;
+		perms = new packagemm::StringParam;
+		perms.value = extract pR;
+end_rule
+
+rule 'mapTemplateA42'
+	from statement//templateA42 tp
+	to packagemm::PostrmSuid
+	queries
+		pK : //tp//templateA42/#pack;
+		fL : //tp//templateA42/#file;
+	mappings
+		package = new packagemm::Package;
+		package.name = extract pK;
+		file = new packagemm::File;
+		file.name = extract fL;
+end_rule
+
+rule 'mapTemplateA43'
+	from statement//templateA43 tp
+	to packagemm::PreinstUdev
+	queries
+		oD : //tp//templateA43/#old[0];
+		rL : //tp//templateA43/#rule_placeholder[0];
+		pK : //tp//templateA43/#pack;
+	mappings
+		old = new packagemm::File;
+		old.name = extract oD;
+		_rule = new packagemm::File;
+		_rule.name = extract rL;
+		package = new packagemm::Package;
+		package.name = extract pK;
+end_rule
+
+rule 'mapTemplateA44'
+	from statement//templateA44 tp
+	to packagemm::PostinstUdev
+	queries
+		oD : //tp//templateA44/#old[0];
+		rL : //tp//templateA44/#rule_placeholder;
+	mappings
+		old = new packagemm::File;
+		old.name = extract oD;
+		_rule = new packagemm::File;
+		_rule.name = extract rL;
+end_rule
+
+rule 'mapTemplateA45'
+	from statement//templateA45 tp
+	to packagemm::PostinstUsrlocal
+	queries
+		diR : //tp//templateA45/#dirlist;
+	mappings
+		dirlist = diR;
+end_rule
+
+rule 'mapTemplateA46'
+	from statement//templateA46 tp
+	to packagemm::PrermUsrlocal
+	queries
+		diR : //tp//templateA46/#dirlist;
+	mappings
+		dirlist = diR;
+end_rule
+
+
+rule 'mapTemplateA47'
+	from statement//templateA47 tp
+	to packagemm::PostinstWmNoman
+	queries
+		wM : //tp//templateA47/#wm;
+		pR : //tp//templateA47/#priority;
+	mappings
+		wm = new packagemm::StringParam;
+		wm.value = extract wM;
+		priority = new packagemm::StringParam;
+		priority.value = extract pR;
+end_rule
+
+rule 'mapTemplateA48'
+	from statement//templateA48 tp
+	to packagemm::PostinstWm
+	queries
+		wM : //tp//templateA48/#wm;
+		pR : //tp//templateA48/#priority;
+		wMM : //tp//templateA48/#wmman;
+	mappings
+		wm = new packagemm::StringParam;
+		wm.value = extract wM;
+		priority = new packagemm::StringParam;
+		priority.value = extract pR;
+		wmman = new packagemm::StringParam;
+		wmman.value = extract wMM;
+end_rule
+
+rule 'mapTemplateA49'
+	from statement//templateA49 tp
+	to packagemm::PrermWm
+	queries
+		wM : //tp//templateA49/#wm;
+	mappings
+		wm = new packagemm::StringParam;
+		wm.value = extract wM;
+end_rule
+
+rule 'mapTemplateA50'
+	from statement//templateA50 tp
+	to packagemm::PostinstXfonts
+	queries
+		cM : //tp//templateA50/cmds/#statement;
+	mappings
+		cmds = cM;
+end_rule
+
+rule 'mapTemplateA51'
+	from statement//templateA51 tp
+	to packagemm::PostrmXfonts
+	queries
+		cM : //tp//templateA51/cmds/#statement;
+	mappings
+		cmds = cM;
+end_rule
+
+rule 'mapTemplateA52'
+	from statement//templateA52 tp
+	to packagemm::PostrmDebconf
+	queries
+	mappings
+end_rule
+
+
+rule 'mapInitParams'
+	from initparms st
+	to packagemm::Param
+    queries
+    mappings
+       value = extract st;
+end_rule
+ 
+rule 'mapSchemas'
+ 	from schemas st
+ 	to packagemm::File
+ 	queries
+ 	mappings
+ 		name = extract st;
+end_rule
+
+rule 'mapDirList'
+ 	from dirlist st
+ 	to packagemm::File
+ 	queries
+ 	mappings
+ 		name = extract st;
+end_rule
+
+rule 'mapErrorHandler'
+	from error_handler/simple_command/command_name//id{ID.eq("exit")} st
+	to packagemm::Return
+	queries
+		vAl	: /error_handler/simple_command/params/#param{NUMBER.eq("0")};
+	mappings
+		name = "exit";
+		 if (vAl.hasResults) then
+		 	value = "zero";
+		 else
+		    value = "one";
+		 end_if
+end_rule
+
+--------------------------------------
+-- Rules for ControlStatements
+--------------------------------------
+
+rule 'mapIfStatement'
+	from statement//if_statement st
+	to packagemm::If
+	queries
+		cond   : /st//if_statement/#condition;
+		thenst : /st//if_statement/#statement;
+		elsest : /st//if_statement/else_branch/#statement;
+	mappings
+		name = "if";
+		condition = new packagemm::BooleanExpression;
+		condition.value = extract cond;
+		_then = thenst;
+		if (elsest.hasResults) then
+			_else = elsest;
+		end_if
+end_rule
+
+rule 'mapIteratorStatement'
+	from statement//for_statement st
+	to packagemm::EnumerationIterator
+	queries
+		sTat : /st//for_statement/#statement;
+	mappings
+		name = "for";
+		statements = sTat;
+end_rule
+
+rule 'mapCasePrermStatement'
+	from //file{filename.endsWith(".prerm")}//#statement//case_statement st
+	to packagemm::CasePrerm
+	queries
+		sElec : /st//case_statement/#word;
+		cOnd : /st//case_statement/#body_case/case_condition/word/id{!TOKEN.eq("*")};
+		dEf	: /st//case_statement/#body_case/case_condition/word/id{TOKEN.eq("*")};
+		aCt	: /dEf/#statement;
+	mappings
+		name = "casePrerm";
+		selector = extract sElec;
+		if (cOnd.hasResults) then
+			conditions = cOnd;
+		end_if
+		if (dEf.hasResults) then
+			_default = new packagemm::DefaultCaseCondition;
+			_default.action = aCt;
+		end_if
+end_rule
+
+rule 'mapCasePostinstStatement'
+	from //file{filename.endsWith(".postinst")}//#statement//case_statement st
+	to packagemm::CasePostinst
+	queries
+		sElec : /st//case_statement/#word;
+		cOnd : /st//case_statement/#body_case/case_condition/word/id{!TOKEN.eq("*")};
+		dEf	: /st//case_statement/#body_case/case_condition/word/id{TOKEN.eq("*")};
+		aCt	: /dEf/#statement;
+	mappings
+		name = "casePostinst";
+		selector = extract sElec;
+		if (cOnd.hasResults) then
+			conditions = cOnd;
+		end_if
+		if (dEf.hasResults) then
+			_default = new packagemm::DefaultCaseCondition;
+			_default.action = aCt;
+		end_if
+end_rule
+
+rule 'mapCasePreinstStatement'
+	from //file{filename.endsWith(".preinst")}//#statement//case_statement st
+	to packagemm::CasePreinst
+	queries
+		sElec : /st//case_statement/#word;
+		cOnd : /st//case_statement/#body_case/case_condition/word/id{!TOKEN.eq("*")};
+		dEf	: /st//case_statement/#body_case/case_condition/word/id{TOKEN.eq("*")};
+		aCt	: /dEf/#statement;
+	mappings
+		name = "casePreinst";
+		selector = extract sElec;
+		if (cOnd.hasResults) then
+			conditions = cOnd;
+		end_if
+		if (dEf.hasResults) then
+			_default = new packagemm::DefaultCaseCondition;
+			_default.action = aCt;
+		end_if
+end_rule
+
+rule 'mapCasePostrmStatement'
+	from //file{filename.endsWith(".postrm")}//#statement//case_statement st
+	to packagemm::CasePostrm
+	queries
+		sElec : /st//case_statement/#word;
+		cOnd : /st//case_statement/#body_case/case_condition/word/id{!TOKEN.eq("*")};
+		dEf	: /st//case_statement/#body_case/case_condition/word/id{TOKEN.eq("*")};
+		aCt	: /dEf/#statement;
+	mappings
+		name = "casePostrm";
+		selector = extract sElec;
+		if (cOnd.hasResults) then
+			conditions = cOnd;
+		end_if
+		if (dEf.hasResults) then
+			_default = new packagemm::DefaultCaseCondition;
+			_default.action = aCt;
+		end_if
+end_rule
+
+rule 'mapCaseConditionPostrm'
+	from //file{filename.endsWith(".postrm")}//statement//case_statement/#body_case st
+	to packagemm::CasePostrmCondition
+	queries
+		vAl1	: /st/case_condition/#word/id{ID.eq("abort-upgrade")};
+		vAl2	: /st/case_condition/#word/id{ID.eq("abort-install")};
+		vAlOther	: /st/case_condition/#word/id{ID.eq("failed") || TOKEN.eq("purge")
+													|| TOKEN.eq("upgrade") || TOKEN.eq("remove")
+													|| ID.eq("disappear")};
+		aCt	: /st/#statement;	
+	mappings
+		if (vAl1.hasResults) then
+			value = "abort_upgrade";
+		end_if
+		if (vAl2.hasResults) then
+			value = "abort_install";
+		end_if
+		if (vAlOther.hasResults) then
+			value = extractID vAlOther;
+		end_if	
+		action = aCt;
+end_rule
+
+rule 'mapCaseConditionPostinst'
+	from //file{filename.endsWith(".postinst")}//statement//case_statement/#body_case st
+	to packagemm::CasePostinstCondition
+	queries
+		vAl1	: /st/case_condition/#word/id{ID.eq("abort-upgrade")};
+		vAl2	: /st/case_condition/#word/id{ID.eq("abort-remove")};
+		vAl3	: /st/case_condition/#word/id{ID.eq("abort-deconfigure")};
+		vAlOther	: /st/case_condition/#word/id{TOKEN.eq("configure")};
+		aCt	: /st/#statement;	
+	mappings
+		if (vAl1.hasResults) then
+			value = "abort_upgrade";
+		end_if
+		if (vAl2.hasResults) then
+			value = "abort_remove";
+		end_if
+		if (vAl3.hasResults) then
+			value = "abort_deconfigure";
+		end_if
+		if (vAlOther.hasResults) then
+			value = extractID vAlOther;
+		end_if	
+		action = aCt;
+end_rule
+
+rule 'mapCaseConditionPrerm'
+	from //file{filename.endsWith(".prerm")}//statement//case_statement/#body_case st
+	to packagemm::CasePrermCondition
+	queries
+		vAl	: /st/case_condition/#word/id{ID.eq("failed-upgrade")};
+		vAlOther	: /st/case_condition/#word/id{TOKEN.eq("remove")
+												|| TOKEN.eq("upgrade") || ID.eq("deconfigure")};
+		aCt	: /st/#statement;	
+	mappings
+		if (vAl.hasResults) then
+			value = "failed_upgrade";
+		end_if
+		if (vAlOther.hasResults) then
+			value = extractID vAlOther;
+		end_if
+		action = aCt;
+end_rule
+
+rule 'mapCaseConditionPreinst'
+	from //file{filename.endsWith(".preinst")}//statement//case_statement/#body_case st
+	to packagemm::CasePreinstCondition
+	queries
+		vAl	: /st/case_condition/#word/id{ID.eq("abort-upgrade")};
+		vAlOther	: /st/case_condition/#word/id{TOKEN.eq("upgrade") || TOKEN.eq("install")};
+		aCt	: /st/#statement;	
+	mappings
+		if (vAl.hasResults) then
+			value = "abort_upgrade";
+		end_if
+		if (vAlOther.hasResults) then
+			value = extractID vAlOther;
+		end_if
+		action = aCt;
+end_rule
+--------------------------------------
+-- Rules for Commands
+--------------------------------------
+
+rule 'mapStatementExit'
+	from statement//simple_command/command_name//id{ID.eq("exit")} st
+	to packagemm::Return
+	queries
+		vAl	: /st//simple_command/params/#param{NUMBER.eq("0")};
+	mappings
+		 if (vAl.hasResults) then
+		 	value = "zero";
+		 else
+		    value = "one";
+		 end_if
+		name = "exit";
+end_rule
+
+rule 'mapStatementTouch'
+	from statement//simple_command/command_name//id{ID.eq("touch")} st
+	to packagemm::AdditionFileSystemStatement
+	queries
+	mappings
+		name = "touch";
+end_rule
+
+rule 'mapStatementMkdir'
+	from statement//simple_command/command_name//id{TOKEN.eq("mkdir")} st
+	to packagemm::AdditionFileSystemStatement
+	queries
+	mappings
+		name = "mkdir";
+end_rule
+
+rule 'mapStatementLn'
+	from statement//simple_command/command_name//id{ID.eq("ln")} st
+	to packagemm::AdditionFileSystemStatement
+	queries
+	mappings
+		name = "ln";
+end_rule
+
+rule 'mapStatementRm'
+	from statement//simple_command/command_name//id{TOKEN.eq("rm")} st
+	to packagemm::DeletionFileSystemStatement
+	queries
+	mappings
+		name = "rm";
+end_rule
+
+rule 'mapStatementRmdir'
+	from statement//simple_command/command_name//id{TOKEN.eq("rmdir")} st
+	to packagemm::DeletionFileSystemStatement
+	queries
+	mappings
+		name = "rmdir";
+end_rule
+
+rule 'mapStatementCp'
+	from statement//simple_command/command_name//id{ID.eq("cp")} st
+	to packagemm::UpdateFileSystemStatement
+	queries
+	mappings
+	    --name = "cp";
+end_rule
+
+rule 'mapStatementInstallmenu'
+	from statement//simple_command/command_name//id{ID.eq("install-menu")} st
+	to packagemm::AdditionEnvironmentStatement
+	queries
+	mappings
+		name = "install-menu";
+end_rule
+
+rule 'mapStatementUpdateMenus'
+	from statement//simple_command/command_name//id{TOKEN.eq("update-menus")} st
+	to packagemm::UpdateEnvironmentStatement
+	queries
+	mappings
+		name = "update-menus";
+end_rule
+
+rule 'mapStatementRmmod'
+	from statement//simple_command/command_name//id{ID.eq("rmmod")} st
+	to packagemm::DeletionEnvironmentStatement
+	queries
+	mappings
+		name = "rmmod";
+end_rule
+
+rule 'mapStatementLdconfig'
+	from statement//simple_command/command_name//id{TOKEN.eq("ldconfig")} st
+	to packagemm::UpdateEnvironmentStatement
+	queries
+	mappings
+		name = "ldconfig";
+end_rule
+
+rule 'mapStatementA2enmod'
+	from statement//simple_command/command_name//id{ID.eq("a2enmod")} st
+	to packagemm::AdditionPackageSettingStatement
+	queries
+	mappings
+		name = "a2enmod";
+end_rule
+
+rule 'mapStatementA2dismod'
+	from statement//simple_command/command_name//id{ID.eq("a2dismod")} st
+	to packagemm::DeletionPackageSettingStatement
+	queries
+	mappings
+		name = "a2dismod";
+end_rule
+
+--------------------------------------
+-- Rules for NeutralStatements
+--------------------------------------
+
+rule 'mapAssignmentStatement'
+	from statement/command_statement/list_of_commands/pipeline/simple_command/assignment_statement st
+	to packagemm::Assignment
+	queries
+		aS : /st/command_statement/list_of_commands/pipeline/simple_command/assignment_statement/#word;
+		vAl: /st/command_statement/list_of_commands/pipeline/simple_command/assignment_statement/#params;
+	mappings
+		assigned = extract aS;
+		expression = extract vAl;
+end_rule
+
+rule 'mapStatementEcho'
+	from statement//simple_command/command_name//id{TOKEN.eq("echo")} st
+	to packagemm::Message
+	queries
+	mappings
+		name = "echo";
+end_rule
+
+rule 'mapStatementMore'
+	from statement//simple_command/command_name//id{ID.eq("more")} st
+	to packagemm::Message
+	queries
+	mappings
+		name = "more";
+end_rule
