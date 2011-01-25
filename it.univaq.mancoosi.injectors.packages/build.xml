@@ -68,7 +68,7 @@
      	<pathelement location="${binDir}/."/>
    	</path> 
 	
-	<target name="build" depends="checkExtensions, yesExtension, noExtension, checkEGrammarExists, phaseOne, phaseTwo">
+	<target name="build" depends="checkExtensions, yesExtension, noExtension, checkEGrammarExists, phaseOne">
 		<tstamp/>
 	</target>	
 	
@@ -127,7 +127,6 @@
 		<mkdir dir="${binDir}"/>
 		<javac srcdir="${genDir}"
 			destdir="${binDir}"
-		    debug="on"
 		    source="1.6">
 			<classpath>
 				<path refid="path.taskdef" />
@@ -135,7 +134,7 @@
 		</javac>
 	</target>
 
-	
+
 	<target name="phaseTwo"
 		description="This second phase executes the interpreter of Gra2MoL">
 				
@@ -147,7 +146,6 @@
 					pathSourceView="${transformationLocation}" 
 					pathMetamodel="${metamodelLocation}"
 					targetMetamodel="${metamodelMainPackage}"
-					className="${grammarName}Test"
 					result="${resultLocation}"
 					grammar="${grammarName}" 
 					mainRule="${grammarMainRule}" 

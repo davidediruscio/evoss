@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
-<packagemm:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:packagemm="packagemm">
-  <PostrmScript>
-    <statements xsi:type="packagemm:PostrmIcons">
-      <dirs name="/usr/share/icons/hicolor"/>
-    </statements>
-  </PostrmScript>
-</packagemm:Package>
