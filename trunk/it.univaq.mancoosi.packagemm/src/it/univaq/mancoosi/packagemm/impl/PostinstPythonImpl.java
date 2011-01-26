@@ -23,6 +23,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 /**
@@ -51,7 +53,7 @@ public class PostinstPythonImpl extends UpdateEnvironmentStatementImpl implement
 	protected IntParam pyver;
 
 	/**
-	 * The cached value of the '{@link #getDirlist() <em>Dirlist</em>}' reference list.
+	 * The cached value of the '{@link #getDirlist() <em>Dirlist</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getDirlist()
@@ -129,7 +131,7 @@ public class PostinstPythonImpl extends UpdateEnvironmentStatementImpl implement
 	 */
 	public EList<File> getDirlist() {
 		if (dirlist == null) {
-			dirlist = new EObjectResolvingEList<File>(File.class, this, PackagemmPackage.POSTINST_PYTHON__DIRLIST);
+			dirlist = new EObjectContainmentEList<File>(File.class, this, PackagemmPackage.POSTINST_PYTHON__DIRLIST);
 		}
 		return dirlist;
 	}
@@ -144,6 +146,8 @@ public class PostinstPythonImpl extends UpdateEnvironmentStatementImpl implement
 		switch (featureID) {
 			case PackagemmPackage.POSTINST_PYTHON__PYVER:
 				return basicSetPyver(null, msgs);
+			case PackagemmPackage.POSTINST_PYTHON__DIRLIST:
+				return ((InternalEList<?>)getDirlist()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}

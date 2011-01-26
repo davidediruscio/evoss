@@ -6,6 +6,8 @@
  */
 package it.univaq.mancoosi.packagemm;
 
+import org.eclipse.emf.common.util.EList;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -16,6 +18,7 @@ package it.univaq.mancoosi.packagemm;
  * The following features are supported:
  * <ul>
  *   <li>{@link it.univaq.mancoosi.packagemm.EnumerationIterator#getEnumeration <em>Enumeration</em>}</li>
+ *   <li>{@link it.univaq.mancoosi.packagemm.EnumerationIterator#getStatements <em>Statements</em>}</li>
  * </ul>
  * </p>
  *
@@ -49,5 +52,21 @@ public interface EnumerationIterator extends Iterator {
 	 * @generated
 	 */
 	void setEnumeration(Enumeration value);
+
+	/**
+	 * Returns the value of the '<em><b>Statements</b></em>' containment reference list.
+	 * The list contents are of type {@link it.univaq.mancoosi.packagemm.Statement}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Statements</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Statements</em>' containment reference list.
+	 * @see it.univaq.mancoosi.packagemm.PackagemmPackage#getEnumerationIterator_Statements()
+	 * @model containment="true" ordered="false"
+	 * @generated
+	 */
+	EList<Statement> getStatements();
 
 } // EnumerationIterator

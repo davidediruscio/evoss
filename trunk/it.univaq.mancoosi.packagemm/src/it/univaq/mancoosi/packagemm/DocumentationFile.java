@@ -25,7 +25,7 @@ package it.univaq.mancoosi.packagemm;
  */
 public interface DocumentationFile extends File {
 	/**
-	 * Returns the value of the '<em><b>Pkg</b></em>' container reference.
+	 * Returns the value of the '<em><b>Pkg</b></em>' reference.
 	 * It is bidirectional and its opposite is '{@link it.univaq.mancoosi.packagemm.Package#getDocumentationFiles <em>Documentation Files</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -33,20 +33,20 @@ public interface DocumentationFile extends File {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Pkg</em>' container reference.
+	 * @return the value of the '<em>Pkg</em>' reference.
 	 * @see #setPkg(it.univaq.mancoosi.packagemm.Package)
 	 * @see it.univaq.mancoosi.packagemm.PackagemmPackage#getDocumentationFile_Pkg()
 	 * @see it.univaq.mancoosi.packagemm.Package#getDocumentationFiles
-	 * @model opposite="documentationFiles" required="true" transient="false" ordered="false"
+	 * @model opposite="documentationFiles" required="true" ordered="false"
 	 * @generated
 	 */
 	it.univaq.mancoosi.packagemm.Package getPkg();
 
 	/**
-	 * Sets the value of the '{@link it.univaq.mancoosi.packagemm.DocumentationFile#getPkg <em>Pkg</em>}' container reference.
+	 * Sets the value of the '{@link it.univaq.mancoosi.packagemm.DocumentationFile#getPkg <em>Pkg</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Pkg</em>' container reference.
+	 * @param value the new value of the '<em>Pkg</em>' reference.
 	 * @see #getPkg()
 	 * @generated
 	 */

@@ -4,9 +4,10 @@ import gts.modernization.interpreter.Gra2MoLDebugger;
 import gts.modernization.launcher.Gra2MoLInterpreterLauncher;
 
 import java.io.File;
-//import java.io.IOException;
-//import java.io.OutputStream;
-//import java.io.PrintStream;
+
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.List;
 
 public class Gra2MoLDinamicInterpreter {
@@ -38,13 +39,13 @@ public class Gra2MoLDinamicInterpreter {
 		
 		Gra2MoLDebugger.setQuiet(true);
 
-	//	PrintStream printStreamOriginal=System.out;
+		PrintStream printStreamOriginal=System.out;
  
-		/*System.setOut(new PrintStream(new OutputStream() {
+		System.setOut(new PrintStream(new OutputStream() {
 			@Override
 			public void write(int arg0) throws IOException {
 			}
-		}));*/
+		}));
 
 		Gra2MoLInterpreterLauncher launcher = new Gra2MoLInterpreterLauncher(
 				this.pathSourceView, this.pathMetamodel, this.targetMetamodel,
@@ -52,7 +53,7 @@ public class Gra2MoLDinamicInterpreter {
 		launcher.setCaseSensitive(this.caseSensitive);
 		launcher.launch();
 		
-		// System.setOut(printStreamOriginal);
+		 System.setOut(printStreamOriginal);
 		 
 		(new File(launcher.CST_SAVE_PATH)).deleteOnExit();
 		(new File(launcher.ABSTRACT_SYNTAX_SAVE_PATH)).deleteOnExit();

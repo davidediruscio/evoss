@@ -34,6 +34,16 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  */
 public class DocumentationFileImpl extends FileImpl implements DocumentationFile {
 	/**
+	 * The cached value of the '{@link #getPkg() <em>Pkg</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPkg()
+	 * @generated
+	 * @ordered
+	 */
+	protected it.univaq.mancoosi.packagemm.Package pkg;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -58,8 +68,24 @@ public class DocumentationFileImpl extends FileImpl implements DocumentationFile
 	 * @generated
 	 */
 	public it.univaq.mancoosi.packagemm.Package getPkg() {
-		if (eContainerFeatureID() != PackagemmPackage.DOCUMENTATION_FILE__PKG) return null;
-		return (it.univaq.mancoosi.packagemm.Package)eContainer();
+		if (pkg != null && pkg.eIsProxy()) {
+			InternalEObject oldPkg = (InternalEObject)pkg;
+			pkg = (it.univaq.mancoosi.packagemm.Package)eResolveProxy(oldPkg);
+			if (pkg != oldPkg) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, PackagemmPackage.DOCUMENTATION_FILE__PKG, oldPkg, pkg));
+			}
+		}
+		return pkg;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public it.univaq.mancoosi.packagemm.Package basicGetPkg() {
+		return pkg;
 	}
 
 	/**
@@ -68,7 +94,12 @@ public class DocumentationFileImpl extends FileImpl implements DocumentationFile
 	 * @generated
 	 */
 	public NotificationChain basicSetPkg(it.univaq.mancoosi.packagemm.Package newPkg, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newPkg, PackagemmPackage.DOCUMENTATION_FILE__PKG, msgs);
+		it.univaq.mancoosi.packagemm.Package oldPkg = pkg;
+		pkg = newPkg;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, PackagemmPackage.DOCUMENTATION_FILE__PKG, oldPkg, newPkg);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
 		return msgs;
 	}
 
@@ -78,12 +109,10 @@ public class DocumentationFileImpl extends FileImpl implements DocumentationFile
 	 * @generated
 	 */
 	public void setPkg(it.univaq.mancoosi.packagemm.Package newPkg) {
-		if (newPkg != eInternalContainer() || (eContainerFeatureID() != PackagemmPackage.DOCUMENTATION_FILE__PKG && newPkg != null)) {
-			if (EcoreUtil.isAncestor(this, newPkg))
-				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+		if (newPkg != pkg) {
 			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
+			if (pkg != null)
+				msgs = ((InternalEObject)pkg).eInverseRemove(this, PackagemmPackage.PACKAGE__DOCUMENTATION_FILES, it.univaq.mancoosi.packagemm.Package.class, msgs);
 			if (newPkg != null)
 				msgs = ((InternalEObject)newPkg).eInverseAdd(this, PackagemmPackage.PACKAGE__DOCUMENTATION_FILES, it.univaq.mancoosi.packagemm.Package.class, msgs);
 			msgs = basicSetPkg(newPkg, msgs);
@@ -102,8 +131,8 @@ public class DocumentationFileImpl extends FileImpl implements DocumentationFile
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case PackagemmPackage.DOCUMENTATION_FILE__PKG:
-				if (eInternalContainer() != null)
-					msgs = eBasicRemoveFromContainer(msgs);
+				if (pkg != null)
+					msgs = ((InternalEObject)pkg).eInverseRemove(this, PackagemmPackage.PACKAGE__DOCUMENTATION_FILES, it.univaq.mancoosi.packagemm.Package.class, msgs);
 				return basicSetPkg((it.univaq.mancoosi.packagemm.Package)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -129,24 +158,11 @@ public class DocumentationFileImpl extends FileImpl implements DocumentationFile
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID()) {
-			case PackagemmPackage.DOCUMENTATION_FILE__PKG:
-				return eInternalContainer().eInverseRemove(this, PackagemmPackage.PACKAGE__DOCUMENTATION_FILES, it.univaq.mancoosi.packagemm.Package.class, msgs);
-		}
-		return super.eBasicRemoveFromContainerFeature(msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case PackagemmPackage.DOCUMENTATION_FILE__PKG:
-				return getPkg();
+				if (resolve) return getPkg();
+				return basicGetPkg();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -190,7 +206,7 @@ public class DocumentationFileImpl extends FileImpl implements DocumentationFile
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case PackagemmPackage.DOCUMENTATION_FILE__PKG:
-				return getPkg() != null;
+				return pkg != null;
 		}
 		return super.eIsSet(featureID);
 	}

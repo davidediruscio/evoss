@@ -3,7 +3,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/it.univaq.mancoosi.packagemm"/>
-	<classpathentry kind="lib" path="files/bin"/>
 	<classpathentry kind="lib" path="lib/antlr-3.2.jar"/>
 	<classpathentry kind="lib" path="lib/gts.modernization.grammar2Model.antTasks.jar"/>
 	<classpathentry kind="lib" path="lib/gts.modernization.grammar2Model.jar"/>
@@ -17,5 +16,6 @@
 	<classpathentry kind="lib" path="lib/org.eclipse.net4j_2.0.0.v200906160348.jar"/>
 	<classpathentry kind="lib" path="lib/org.eclipse.net4j.tcp_2.0.0.v200906160348.jar"/>
 	<classpathentry kind="lib" path="lib/org.eclipse.net4j.util_2.0.0.v200906160348.jar"/>
+	<classpathentry kind="lib" path="files/bin"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

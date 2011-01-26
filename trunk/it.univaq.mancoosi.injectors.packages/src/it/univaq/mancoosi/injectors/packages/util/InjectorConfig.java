@@ -23,6 +23,7 @@ public abstract class InjectorConfig {
 	protected String resultLocation;
 	private String metamodelMainPackage;
 	protected String tempLocation;
+	private Boolean skipFilesWithError;
 
 
 	/**
@@ -54,6 +55,12 @@ public abstract class InjectorConfig {
 		transformationLocation = props.getProperty("transformationLocation");
 		metamodelLocation = props.getProperty("metamodelLocation");
 		metamodelMainPackage = props.getProperty("metamodelMainPackage");
+		
+		if (props.getProperty("skipFilesWithError").equals("true")) {
+			this.skipFilesWithError = true;
+		} else {
+			this.skipFilesWithError = false;
+		}
 	}
 
 
@@ -112,5 +119,13 @@ public abstract class InjectorConfig {
 
 	public String getMetamodelMainPackage() {
 		return metamodelMainPackage;
+	}
+
+	public void setSkipFilesWithError(Boolean skipFilesWithError) {
+		this.skipFilesWithError = skipFilesWithError;
+	}
+
+	public Boolean getSkipFilesWithError() {
+		return skipFilesWithError;
 	}
 }

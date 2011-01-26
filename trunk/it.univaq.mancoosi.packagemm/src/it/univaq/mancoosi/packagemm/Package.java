@@ -516,7 +516,7 @@ public interface Package extends NamedElement {
 	EList<File> getFiles();
 
 	/**
-	 * Returns the value of the '<em><b>Documentation Files</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Documentation Files</b></em>' reference list.
 	 * The list contents are of type {@link it.univaq.mancoosi.packagemm.DocumentationFile}.
 	 * It is bidirectional and its opposite is '{@link it.univaq.mancoosi.packagemm.DocumentationFile#getPkg <em>Pkg</em>}'.
 	 * <!-- begin-user-doc -->
@@ -525,10 +525,10 @@ public interface Package extends NamedElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Documentation Files</em>' containment reference list.
+	 * @return the value of the '<em>Documentation Files</em>' reference list.
 	 * @see it.univaq.mancoosi.packagemm.PackagemmPackage#getPackage_DocumentationFiles()
 	 * @see it.univaq.mancoosi.packagemm.DocumentationFile#getPkg
-	 * @model opposite="pkg" containment="true" ordered="false"
+	 * @model opposite="pkg" ordered="false"
 	 * @generated
 	 */
 	EList<DocumentationFile> getDocumentationFiles();

@@ -600,33 +600,6 @@ end_rule
 -- Rules for ControlStatements
 --------------------------------------
 
-rule 'mapIfStatement'
-	from statement//if_statement st
-	to packagemm::If
-	queries
-		cond   : /st//if_statement/#condition;
-		thenst : /st//if_statement/#statement;
-		elsest : /st//if_statement/else_branch/#statement;
-	mappings
-		name = "if";
-		condition = new packagemm::BooleanExpression;
-		condition.value = extract cond;
-		_then = thenst;
-		if (elsest.hasResults) then
-			_else = elsest;
-		end_if
-end_rule
-
-rule 'mapIteratorStatement'
-	from statement//for_statement st
-	to packagemm::EnumerationIterator
-	queries
-		sTat : /st//for_statement/#statement;
-	mappings
-		name = "for";
-		statements = sTat;
-end_rule
-
 rule 'mapCasePrermStatement'
 	from //file{filename.endsWith(".prerm")}//#statement//case_statement st
 	to packagemm::CasePrerm
@@ -713,6 +686,7 @@ rule 'mapCaseConditionPostrm'
 	queries
 		vAl1	: /st/case_condition/#word/id{ID.eq("abort-upgrade")};
 		vAl2	: /st/case_condition/#word/id{ID.eq("abort-install")};
+		vAl3	: /st/case_condition/#word/id{ID.eq("failed-upgrade")};
 		vAlOther	: /st/case_condition/#word/id{ID.eq("failed") || TOKEN.eq("purge")
 													|| TOKEN.eq("upgrade") || TOKEN.eq("remove")
 													|| ID.eq("disappear")};
@@ -723,6 +697,9 @@ rule 'mapCaseConditionPostrm'
 		end_if
 		if (vAl2.hasResults) then
 			value = "abort_install";
+		end_if
+		if (vAl3.hasResults) then
+			value = "failed_upgrade";
 		end_if
 		if (vAlOther.hasResults) then
 			value = extractID vAlOther;
@@ -789,6 +766,35 @@ rule 'mapCaseConditionPreinst'
 		end_if
 		action = aCt;
 end_rule
+
+
+rule 'mapIfStatement'
+	from statement//if_statement st
+	to packagemm::If
+	queries
+		cond   : /st//if_statement/#condition;
+		thenst : /st//if_statement/#statement;
+		elsest : /st//if_statement/else_branch/#statement;
+	mappings
+		name = "if";
+		condition = new packagemm::BooleanExpression;
+		condition.value = extract cond;
+		_then = thenst;
+		if (elsest.hasResults) then
+			_else = elsest;
+		end_if
+end_rule
+
+rule 'mapIteratorStatement'
+	from statement//for_statement st
+	to packagemm::EnumerationIterator
+	queries
+		sTat : /st//for_statement/#statement;
+	mappings
+		name = "for";
+		statements = sTat;
+end_rule
+
 --------------------------------------
 -- Rules for Commands
 --------------------------------------

@@ -10,12 +10,18 @@ import it.univaq.mancoosi.packagemm.Enumeration;
 import it.univaq.mancoosi.packagemm.EnumerationIterator;
 import it.univaq.mancoosi.packagemm.PackagemmPackage;
 
+import it.univaq.mancoosi.packagemm.Statement;
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,6 +31,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link it.univaq.mancoosi.packagemm.impl.EnumerationIteratorImpl#getEnumeration <em>Enumeration</em>}</li>
+ *   <li>{@link it.univaq.mancoosi.packagemm.impl.EnumerationIteratorImpl#getStatements <em>Statements</em>}</li>
  * </ul>
  * </p>
  *
@@ -40,6 +47,16 @@ public class EnumerationIteratorImpl extends IteratorImpl implements Enumeration
 	 * @ordered
 	 */
 	protected Enumeration enumeration;
+
+	/**
+	 * The cached value of the '{@link #getStatements() <em>Statements</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStatements()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Statement> statements;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -103,12 +120,40 @@ public class EnumerationIteratorImpl extends IteratorImpl implements Enumeration
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Statement> getStatements() {
+		if (statements == null) {
+			statements = new EObjectContainmentEList<Statement>(Statement.class, this, PackagemmPackage.ENUMERATION_ITERATOR__STATEMENTS);
+		}
+		return statements;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case PackagemmPackage.ENUMERATION_ITERATOR__STATEMENTS:
+				return ((InternalEList<?>)getStatements()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case PackagemmPackage.ENUMERATION_ITERATOR__ENUMERATION:
 				if (resolve) return getEnumeration();
 				return basicGetEnumeration();
+			case PackagemmPackage.ENUMERATION_ITERATOR__STATEMENTS:
+				return getStatements();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -118,11 +163,16 @@ public class EnumerationIteratorImpl extends IteratorImpl implements Enumeration
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case PackagemmPackage.ENUMERATION_ITERATOR__ENUMERATION:
 				setEnumeration((Enumeration)newValue);
+				return;
+			case PackagemmPackage.ENUMERATION_ITERATOR__STATEMENTS:
+				getStatements().clear();
+				getStatements().addAll((Collection<? extends Statement>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -139,6 +189,9 @@ public class EnumerationIteratorImpl extends IteratorImpl implements Enumeration
 			case PackagemmPackage.ENUMERATION_ITERATOR__ENUMERATION:
 				setEnumeration((Enumeration)null);
 				return;
+			case PackagemmPackage.ENUMERATION_ITERATOR__STATEMENTS:
+				getStatements().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -153,6 +206,8 @@ public class EnumerationIteratorImpl extends IteratorImpl implements Enumeration
 		switch (featureID) {
 			case PackagemmPackage.ENUMERATION_ITERATOR__ENUMERATION:
 				return enumeration != null;
+			case PackagemmPackage.ENUMERATION_ITERATOR__STATEMENTS:
+				return statements != null && !statements.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
