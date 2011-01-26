@@ -270,7 +270,7 @@ public interface PackagemmPackage extends EPackage {
 	int PACKAGE__FILES = NAMED_ELEMENT_FEATURE_COUNT + 17;
 
 	/**
-	 * The feature id for the '<em><b>Documentation Files</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Documentation Files</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -3672,13 +3672,22 @@ public interface PackagemmPackage extends EPackage {
 	int ENUMERATION_ITERATOR__ENUMERATION = ITERATOR_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Statements</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATION_ITERATOR__STATEMENTS = ITERATOR_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Enumeration Iterator</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ENUMERATION_ITERATOR_FEATURE_COUNT = ITERATOR_FEATURE_COUNT + 1;
+	int ENUMERATION_ITERATOR_FEATURE_COUNT = ITERATOR_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link it.univaq.mancoosi.packagemm.impl.StringIteratorImpl <em>String Iterator</em>}' class.
@@ -5177,7 +5186,7 @@ public interface PackagemmPackage extends EPackage {
 	int DOCUMENTATION_FILE__IS_MISSING = FILE__IS_MISSING;
 
 	/**
-	 * The feature id for the '<em><b>Pkg</b></em>' container reference.
+	 * The feature id for the '<em><b>Pkg</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -6670,7 +6679,7 @@ public interface PackagemmPackage extends EPackage {
 	int POSTINST_PYTHON__PYVER = UPDATE_ENVIRONMENT_STATEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Dirlist</b></em>' reference list.
+	 * The feature id for the '<em><b>Dirlist</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -7207,7 +7216,7 @@ public interface PackagemmPackage extends EPackage {
 	int POSTINST_USRLOCAL__FILES = UPDATE_FILE_SYSTEM_STATEMENT__FILES;
 
 	/**
-	 * The feature id for the '<em><b>Dirlist</b></em>' reference list.
+	 * The feature id for the '<em><b>Dirlist</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -9748,7 +9757,7 @@ public interface PackagemmPackage extends EPackage {
 	int PRERM_USRLOCAL__FILES = DELETION_FILE_SYSTEM_STATEMENT__FILES;
 
 	/**
-	 * The feature id for the '<em><b>Dirlist</b></em>' reference list.
+	 * The feature id for the '<em><b>Dirlist</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -10835,10 +10844,10 @@ public interface PackagemmPackage extends EPackage {
 	EReference getPackage_Files();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link it.univaq.mancoosi.packagemm.Package#getDocumentationFiles <em>Documentation Files</em>}'.
+	 * Returns the meta object for the reference list '{@link it.univaq.mancoosi.packagemm.Package#getDocumentationFiles <em>Documentation Files</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Documentation Files</em>'.
+	 * @return the meta object for the reference list '<em>Documentation Files</em>'.
 	 * @see it.univaq.mancoosi.packagemm.Package#getDocumentationFiles()
 	 * @see #getPackage()
 	 * @generated
@@ -12477,6 +12486,17 @@ public interface PackagemmPackage extends EPackage {
 	EReference getEnumerationIterator_Enumeration();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link it.univaq.mancoosi.packagemm.EnumerationIterator#getStatements <em>Statements</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Statements</em>'.
+	 * @see it.univaq.mancoosi.packagemm.EnumerationIterator#getStatements()
+	 * @see #getEnumerationIterator()
+	 * @generated
+	 */
+	EReference getEnumerationIterator_Statements();
+
+	/**
 	 * Returns the meta object for class '{@link it.univaq.mancoosi.packagemm.StringIterator <em>String Iterator</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -12897,10 +12917,10 @@ public interface PackagemmPackage extends EPackage {
 	EClass getDocumentationFile();
 
 	/**
-	 * Returns the meta object for the container reference '{@link it.univaq.mancoosi.packagemm.DocumentationFile#getPkg <em>Pkg</em>}'.
+	 * Returns the meta object for the reference '{@link it.univaq.mancoosi.packagemm.DocumentationFile#getPkg <em>Pkg</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Pkg</em>'.
+	 * @return the meta object for the reference '<em>Pkg</em>'.
 	 * @see it.univaq.mancoosi.packagemm.DocumentationFile#getPkg()
 	 * @see #getDocumentationFile()
 	 * @generated
@@ -13265,10 +13285,10 @@ public interface PackagemmPackage extends EPackage {
 	EReference getPostinstPython_Pyver();
 
 	/**
-	 * Returns the meta object for the reference list '{@link it.univaq.mancoosi.packagemm.PostinstPython#getDirlist <em>Dirlist</em>}'.
+	 * Returns the meta object for the containment reference list '{@link it.univaq.mancoosi.packagemm.PostinstPython#getDirlist <em>Dirlist</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Dirlist</em>'.
+	 * @return the meta object for the containment reference list '<em>Dirlist</em>'.
 	 * @see it.univaq.mancoosi.packagemm.PostinstPython#getDirlist()
 	 * @see #getPostinstPython()
 	 * @generated
@@ -13435,10 +13455,10 @@ public interface PackagemmPackage extends EPackage {
 	EClass getPostinstUsrlocal();
 
 	/**
-	 * Returns the meta object for the reference list '{@link it.univaq.mancoosi.packagemm.PostinstUsrlocal#getDirlist <em>Dirlist</em>}'.
+	 * Returns the meta object for the containment reference list '{@link it.univaq.mancoosi.packagemm.PostinstUsrlocal#getDirlist <em>Dirlist</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Dirlist</em>'.
+	 * @return the meta object for the containment reference list '<em>Dirlist</em>'.
 	 * @see it.univaq.mancoosi.packagemm.PostinstUsrlocal#getDirlist()
 	 * @see #getPostinstUsrlocal()
 	 * @generated
@@ -14109,10 +14129,10 @@ public interface PackagemmPackage extends EPackage {
 	EClass getPrermUsrlocal();
 
 	/**
-	 * Returns the meta object for the reference list '{@link it.univaq.mancoosi.packagemm.PrermUsrlocal#getDirlist <em>Dirlist</em>}'.
+	 * Returns the meta object for the containment reference list '{@link it.univaq.mancoosi.packagemm.PrermUsrlocal#getDirlist <em>Dirlist</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Dirlist</em>'.
+	 * @return the meta object for the containment reference list '<em>Dirlist</em>'.
 	 * @see it.univaq.mancoosi.packagemm.PrermUsrlocal#getDirlist()
 	 * @see #getPrermUsrlocal()
 	 * @generated

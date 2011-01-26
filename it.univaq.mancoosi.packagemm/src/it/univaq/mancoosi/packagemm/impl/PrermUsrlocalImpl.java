@@ -12,10 +12,14 @@ import it.univaq.mancoosi.packagemm.PrermUsrlocal;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 /**
@@ -33,7 +37,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  */
 public class PrermUsrlocalImpl extends DeletionFileSystemStatementImpl implements PrermUsrlocal {
 	/**
-	 * The cached value of the '{@link #getDirlist() <em>Dirlist</em>}' reference list.
+	 * The cached value of the '{@link #getDirlist() <em>Dirlist</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getDirlist()
@@ -68,9 +72,23 @@ public class PrermUsrlocalImpl extends DeletionFileSystemStatementImpl implement
 	 */
 	public EList<File> getDirlist() {
 		if (dirlist == null) {
-			dirlist = new EObjectResolvingEList<File>(File.class, this, PackagemmPackage.PRERM_USRLOCAL__DIRLIST);
+			dirlist = new EObjectContainmentEList<File>(File.class, this, PackagemmPackage.PRERM_USRLOCAL__DIRLIST);
 		}
 		return dirlist;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case PackagemmPackage.PRERM_USRLOCAL__DIRLIST:
+				return ((InternalEList<?>)getDirlist()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**

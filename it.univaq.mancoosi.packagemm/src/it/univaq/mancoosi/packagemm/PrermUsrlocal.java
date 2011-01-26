@@ -26,7 +26,7 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface PrermUsrlocal extends DeletionFileSystemStatement {
 	/**
-	 * Returns the value of the '<em><b>Dirlist</b></em>' reference list.
+	 * Returns the value of the '<em><b>Dirlist</b></em>' containment reference list.
 	 * The list contents are of type {@link it.univaq.mancoosi.packagemm.File}.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -34,9 +34,9 @@ public interface PrermUsrlocal extends DeletionFileSystemStatement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Dirlist</em>' reference list.
+	 * @return the value of the '<em>Dirlist</em>' containment reference list.
 	 * @see it.univaq.mancoosi.packagemm.PackagemmPackage#getPrermUsrlocal_Dirlist()
-	 * @model required="true" ordered="false"
+	 * @model containment="true" required="true" ordered="false"
 	 * @generated
 	 */
 	EList<File> getDirlist();

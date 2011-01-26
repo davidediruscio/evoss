@@ -2992,6 +2992,15 @@ public class PackagemmPackageImpl extends EPackageImpl implements PackagemmPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getEnumerationIterator_Statements() {
+        return (EReference)getEnumerationIterator().getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getStringIterator() {
 		if (stringIteratorEClass == null) {
 			stringIteratorEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(PackagemmPackage.eNS_URI).getEClassifiers().get(65);

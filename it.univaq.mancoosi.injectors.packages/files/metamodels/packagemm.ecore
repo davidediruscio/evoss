@@ -45,7 +45,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="files" ordered="false"
         upperBound="-1" eType="#//File" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="documentationFiles" ordered="false"
-        upperBound="-1" eType="#//DocumentationFile" containment="true" eOpposite="#//DocumentationFile/pkg"/>
+        upperBound="-1" eType="#//DocumentationFile" eOpposite="#//DocumentationFile/pkg"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="PreinstScript" ordered="false"
         eType="#//PreinstScript" containment="true" eOpposite="#//PreinstScript/pkg"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="PostinstScript" ordered="false"
@@ -124,7 +124,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Statement" abstract="true" eSuperTypes="#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="script" ordered="false"
-        lowerBound="0" eType="#//Script" eOpposite="#//Script/statements"/>
+        eType="#//Script" eOpposite="#//Script/statements"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isStart" ordered="false"
         unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="previous" ordered="false"
@@ -315,11 +315,11 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AndBooleanExpression" eSuperTypes="#//BooleanExpression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="exps" lowerBound="2" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exps" lowerBound="2" upperBound="2"
         eType="#//BooleanExpression" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OrBooleanExpression" eSuperTypes="#//BooleanExpression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="exps" lowerBound="2" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exps" lowerBound="2" upperBound="2"
         eType="#//BooleanExpression" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StatementBoolean" eSuperTypes="#//BooleanExpression #//Statement"/>
@@ -346,6 +346,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="EnumerationIterator" eSuperTypes="#//Iterator">
     <eStructuralFeatures xsi:type="ecore:EReference" name="enumeration" ordered="false"
         lowerBound="1" eType="#//Enumeration"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="statements" ordered="false"
+        upperBound="-1" eType="#//Statement" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StringIterator" eSuperTypes="#//Iterator"/>
   <eClassifiers xsi:type="ecore:EClass" name="Enumeration">
@@ -407,7 +409,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="childs" ordered="false"
         upperBound="-1" eType="#//File" containment="true" eOpposite="#//File/parent"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parent" ordered="false"
-        lowerBound="0" eType="#//File" eOpposite="#//File/childs"/>
+        eType="#//File" eOpposite="#//File/childs"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="owner" ordered="false"
         unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="group" ordered="false"
@@ -480,7 +482,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="pyver" ordered="false"
         lowerBound="1" eType="#//IntParam" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dirlist" ordered="false"
-        lowerBound="1" upperBound="-1" eType="#//File"/>
+        lowerBound="1" upperBound="-1" eType="#//File" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PostinstScrollkeeper" eSuperTypes="#//UpdateEnvironmentStatement"/>
   <eClassifiers xsi:type="ecore:EClass" name="PostinstSgmlcatalog" eSuperTypes="#//UpdateEnvironmentStatement">
@@ -510,7 +512,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PostinstUsrlocal" eSuperTypes="#//UpdateFileSystemStatement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="dirlist" ordered="false"
-        lowerBound="1" upperBound="-1" eType="#//File"/>
+        lowerBound="1" upperBound="-1" eType="#//File" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PostinstWm" eSuperTypes="#//UpdateEnvironmentStatement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="wm" ordered="false" lowerBound="1"
@@ -630,7 +632,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PrermUsrlocal" eSuperTypes="#//DeletionFileSystemStatement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="dirlist" ordered="false"
-        lowerBound="1" upperBound="-1" eType="#//File"/>
+        lowerBound="1" upperBound="-1" eType="#//File" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PrermWm" eSuperTypes="#//DeletionPackageSettingStatement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="wm" ordered="false" lowerBound="1"
@@ -695,6 +697,7 @@
     <eLiterals name="abort_install" value="5" literal="abort_install"/>
     <eLiterals name="abort_upgrade" value="6" literal="abort_upgrade"/>
     <eLiterals name="disappear" value="7" literal="disappear"/>
+    <eLiterals name="failed_upgrade" value="8" literal="failed_upgrade"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="CasePreinstConditionValue">
     <eLiterals name="install" value="1" literal="install"/>

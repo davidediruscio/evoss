@@ -32,6 +32,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -426,7 +427,7 @@ public class PackageImpl extends NamedElementImpl implements it.univaq.mancoosi.
 	protected EList<File> files;
 
 	/**
-	 * The cached value of the '{@link #getDocumentationFiles() <em>Documentation Files</em>}' containment reference list.
+	 * The cached value of the '{@link #getDocumentationFiles() <em>Documentation Files</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getDocumentationFiles()
@@ -910,7 +911,7 @@ public class PackageImpl extends NamedElementImpl implements it.univaq.mancoosi.
 	 */
 	public EList<DocumentationFile> getDocumentationFiles() {
 		if (documentationFiles == null) {
-			documentationFiles = new EObjectContainmentWithInverseEList<DocumentationFile>(DocumentationFile.class, this, PackagemmPackage.PACKAGE__DOCUMENTATION_FILES, PackagemmPackage.DOCUMENTATION_FILE__PKG);
+			documentationFiles = new EObjectWithInverseResolvingEList<DocumentationFile>(DocumentationFile.class, this, PackagemmPackage.PACKAGE__DOCUMENTATION_FILES, PackagemmPackage.DOCUMENTATION_FILE__PKG);
 		}
 		return documentationFiles;
 	}

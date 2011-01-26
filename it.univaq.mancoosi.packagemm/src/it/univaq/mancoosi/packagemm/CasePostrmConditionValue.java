@@ -90,7 +90,15 @@ public enum CasePostrmConditionValue implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	DISAPPEAR(7, "disappear", "disappear");
+	DISAPPEAR(7, "disappear", "disappear"), /**
+	 * The '<em><b>Failed upgrade</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #FAILED_UPGRADE_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	FAILED_UPGRADE(8, "failed_upgrade", "failed_upgrade");
 
 	/**
 	 * The '<em><b>Purge</b></em>' literal value.
@@ -198,6 +206,21 @@ public enum CasePostrmConditionValue implements Enumerator {
 	public static final int DISAPPEAR_VALUE = 7;
 
 	/**
+	 * The '<em><b>Failed upgrade</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Failed upgrade</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #FAILED_UPGRADE
+	 * @model name="failed_upgrade"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int FAILED_UPGRADE_VALUE = 8;
+
+	/**
 	 * An array of all the '<em><b>Case Postrm Condition Value</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -212,6 +235,7 @@ public enum CasePostrmConditionValue implements Enumerator {
 			ABORT_INSTALL,
 			ABORT_UPGRADE,
 			DISAPPEAR,
+			FAILED_UPGRADE,
 		};
 
 	/**
@@ -269,6 +293,7 @@ public enum CasePostrmConditionValue implements Enumerator {
 			case ABORT_INSTALL_VALUE: return ABORT_INSTALL;
 			case ABORT_UPGRADE_VALUE: return ABORT_UPGRADE;
 			case DISAPPEAR_VALUE: return DISAPPEAR;
+			case FAILED_UPGRADE_VALUE: return FAILED_UPGRADE;
 		}
 		return null;
 	}
