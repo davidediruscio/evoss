@@ -45,6 +45,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -66,6 +67,8 @@ public class FDServerThread extends Thread {
 	private String jarsListFileName;
 	private String tmpDir;
 	private String oclQueriesFileName;
+	
+	public static String pathSep = File.separator;
 	   
 	private FDServerOptionsManager optionsManager = new FDServerOptionsManager();
 	
@@ -405,40 +408,47 @@ public class FDServerThread extends Thread {
     //This method sends the queries file to the client
     private void updateClientQueries(Socket connectionSocket) throws NoConnectionToDBException {
     	try {
-    		updateQueriesFile(new File(getTmpDir() + "/" + getOclQueriesFileName()));
-    		Socket appConnectionSocket = new Socket(connectionSocket.getInetAddress(), FDServerConfigurationManager.FILE_PORT);
+    		File tmp = new File(getTmpDir() + pathSep + getOclQueriesFileName());
+    		updateQueriesFile(tmp);
+    		
+    	//	Socket appConnectionSocket = new Socket(connectionSocket.getInetAddress(), FDServerConfigurationManager.FILE_PORT); 
+    		
     		System.out.println("Updating client's OCL queries...");
-    		new FileSenderManager(appConnectionSocket, getTmpDir(), getOclQueriesFileName()).run();
-    		appConnectionSocket.close();
+    		new FileSenderManager(connectionSocket, getTmpDir(), getOclQueriesFileName()).run();
+    		//appConnectionSocket.close();
     		System.out.println("OCL queries file sent to client.");
+    		//tmp.deleteOnExit();
+    	
+    	} catch (SocketException e) {
+    		e.printStackTrace();
+    		System.out.println("Socket creation error !");
     	} catch (IOException e) {
+    		e.printStackTrace();
 			// TODO Auto-generated catch block
 			System.out.println("Could not update client's OCL queries.");
 		}
     }
     
     //This method executes OCL queries provided by the client from server-side.
-    private void executeQueries(Socket connSocket) throws IOException {    	
-    	ServerSocket ss = new ServerSocket(FDServerConfigurationManager.CONTROL_PORT);
-    	Socket connectionSocket = ss.accept();
+    private void executeQueries(Socket connectionSocket, Socket protocolSocket) throws IOException {    	
     	
-    	DataOutputStream outToClient = new DataOutputStream(connectionSocket.getOutputStream());
-    	BufferedReader inFromClient = new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
+    	DataOutputStream outToClient = new DataOutputStream(protocolSocket.getOutputStream());
+    	BufferedReader inFromClient = new BufferedReader(new InputStreamReader(protocolSocket.getInputStream()));
     	if(inFromClient.readLine().equals("EXEC_QUERIES")) {
     		outToClient.writeBytes("EXEC_QUERIES_ACK\n");
     		if(inFromClient.readLine().equals("MANCOOSI_MODEL")) {
-    			System.out.println("Receiving mancoosi model from the client " + connSocket.getInetAddress().toString().substring(1) + "...");
+    			System.out.println("Receiving mancoosi model from the client " + connectionSocket.getInetAddress().toString().substring(1) + "...");
     			outToClient.writeBytes("SEND_ECORE_FILENAME\n");
     			String ecoreFileName = inFromClient.readLine(); 
     			if(ecoreFileName.endsWith(".ecore")) {
     				outToClient.writeBytes("SEND_ECORE_FILENAME_ACK\n");
-    				ServerSocket appSs = new ServerSocket(FDServerConfigurationManager.FILE_PORT);
-        	    	Socket appConnectionSocket = appSs.accept();
-        	    	String clientAddress = appConnectionSocket.getInetAddress().toString().substring(1);
+    				//ServerSocket appSs = new ServerSocket(FDServerConfigurationManager.FILE_PORT);
+        	    	//Socket appConnectionSocket = appSs.accept();
+        	    	String clientAddress = connectionSocket.getInetAddress().toString().substring(1);
         	    	String fileName = clientAddress + "_" + ecoreFileName;
-    				new FileReceiverManager(appConnectionSocket, getTmpDir(), fileName).run();
-    				appConnectionSocket.close();
-    				appSs.close();
+    				new FileReceiverManager(connectionSocket, getTmpDir(), fileName).run();
+    				//appConnectionSocket.close();
+    				//appSs.close();
     				outToClient.writeBytes("MANCOOSI_MODEL_ACK\n");
     				try {
     					boolean execFinished = false;
@@ -449,7 +459,7 @@ public class FDServerThread extends Thread {
     							System.out.println("\nClient requested the execution of the following OCL query: " + strLine);
     							outToClient.writeBytes("EXECUTING_QUERY\n");
     							if(inFromClient.readLine().equals("WAITING_RESULT")) {
-    								Object actualQueryResult = QueryExecutor.executeQuery(getTmpDir() + "/" + fileName, strLine);
+    								Object actualQueryResult = QueryExecutor.executeQuery(getTmpDir() + pathSep + fileName, strLine);
     								outToClient.writeBytes(actualQueryResult.toString() + "\n");
     								System.out.println("OCL query result sent to client " + connectionSocket.getInetAddress().toString().substring(1) + ".");
         						
@@ -504,7 +514,7 @@ public class FDServerThread extends Thread {
     					inFromClient.close();
     					outToClient.close();
     					System.out.println("Remote OCL queries execution process complete!");
-    					deleteFile(getTmpDir() + "/" + fileName);
+    					deleteFile(getTmpDir() + pathSep + fileName);
     				} catch (NoConnectionToDBException e) {
     					//TODO Auto-generated catch block
     					System.out.println(e.getMessage());
@@ -520,17 +530,17 @@ public class FDServerThread extends Thread {
     	} else {
 			System.out.println("Could not execute queries for the client" + connectionSocket.getInetAddress().toString().substring(1) + " .");
 		}
-		if(!connectionSocket.isClosed())
-			connectionSocket.close();
-		if(!ss.isClosed())
-			ss.close();
+		//if(!connectionSocket.isClosed())
+		//	connectionSocket.close();
+		//if(!ss.isClosed())
+		//	ss.close();
     }
     
     
     //This method executes OCL queries in the database from server-side.
     private void executeQueriesInDb(Socket connSocket) throws IOException {    	
-    	ServerSocket ss = new ServerSocket(FDServerConfigurationManager.CONTROL_PORT);
-    	Socket connectionSocket = ss.accept();
+    	//ServerSocket ss = new ServerSocket(FDServerConfigurationManager.CONTROL_PORT);
+    	Socket connectionSocket = connSocket;
     	
     	DataOutputStream outToClient = new DataOutputStream(connectionSocket.getOutputStream());
     	BufferedReader inFromClient = new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
@@ -542,13 +552,13 @@ public class FDServerThread extends Thread {
     			String ecoreFileName = inFromClient.readLine(); 
     			if(ecoreFileName.endsWith(".ecore")) {
     				outToClient.writeBytes("SEND_ECORE_FILENAME_ACK\n");
-    				ServerSocket appSs = new ServerSocket(FDServerConfigurationManager.FILE_PORT);
-        	    	Socket appConnectionSocket = appSs.accept();
-        	    	String clientAddress = appConnectionSocket.getInetAddress().toString().substring(1);
+    				//ServerSocket appSs = new ServerSocket(FDServerConfigurationManager.FILE_PORT);
+        	    	//Socket appConnectionSocket = appSs.accept();
+        	    	String clientAddress = connectionSocket.getInetAddress().toString().substring(1);
         	    	String fileName = clientAddress + "_" + ecoreFileName;
-    				new FileReceiverManager(appConnectionSocket, getTmpDir(), fileName).run();
-    				appConnectionSocket.close();
-    				appSs.close();
+    				new FileReceiverManager(connectionSocket, getTmpDir(), fileName).run();
+    				//appConnectionSocket.close();
+    				//appSs.close();
     				outToClient.writeBytes("MANCOOSI_MODEL_ACK\n");
     				
     				try {
@@ -559,7 +569,7 @@ public class FDServerThread extends Thread {
 							if(inFromClient.readLine().equals("EXECUTING_QUERY_ACK")) {
 								outToClient.writeBytes(queriesToExecute[i] + "\n");
 								if(inFromClient.readLine().equals("WAITING_RESULT")) {
-	    							Object actualQueryResult = QueryExecutor.executeQuery(getTmpDir() + "/" + fileName, queriesToExecute[i]);
+	    							Object actualQueryResult = QueryExecutor.executeQuery(getTmpDir() + pathSep + fileName, queriesToExecute[i]);
 	    							outToClient.writeBytes(actualQueryResult.toString() + "\n");
 	        						System.out.println("OCL query result sent to client " + connectionSocket.getInetAddress().toString().substring(1) + ".");
 	        						
@@ -619,7 +629,7 @@ public class FDServerThread extends Thread {
 						System.out.println(e.getMessage());
 						System.out.println("Error in remote OCL queries execution process!");
 					}
-    				deleteFile(getTmpDir() + "/" + fileName);
+    				deleteFile(getTmpDir() + pathSep + fileName);
     			} else {
     				outToClient.writeBytes("INVALID_FILENAME\n");
     				System.out.println("Invalid ecore filename!");
@@ -630,10 +640,10 @@ public class FDServerThread extends Thread {
     	} else {
 			System.out.println("Could not execute queries for the client" + connectionSocket.getInetAddress().toString().substring(1) + " .");
 		}
-		if(!connectionSocket.isClosed())
-			connectionSocket.close();
-		if(!ss.isClosed())
-			ss.close();
+		//if(!connectionSocket.isClosed())
+		//	connectionSocket.close();
+		//if(!ss.isClosed())
+		//	ss.close();
     }
     
     //This method detects if the executed OCL query result given in input produced a failure.
@@ -646,6 +656,7 @@ public class FDServerThread extends Thread {
     //This method updates the server jars list file, retrieving the jars from the database.
     private void updateJarsListFile(File jarsListFile) throws NoConnectionToDBException, IOException {
     	String[] dbJars = getJarsFromDb();
+    	
     	for(int i = 0; i < dbJars.length; i++) {
     		if(i == 0)
     			writeToFile(jarsListFile, dbJars[i]);
@@ -657,13 +668,17 @@ public class FDServerThread extends Thread {
     //This method sends the server jars list file to the client, that will eventually request missing jars .
     private void updateClientJars(Socket connectionSocket) throws NoConnectionToDBException {
     	try {
-    		updateJarsListFile(new File(getJarsDir() + "/" + getJarsListFileName()));
-    		Socket appConnectionSocket = new Socket(connectionSocket.getInetAddress(), FDServerConfigurationManager.FILE_PORT);
+    		File tmp = new File(getJarsDir() + pathSep + getJarsListFileName());
+    		updateJarsListFile(tmp);    
     		System.out.println("Updating client's jar files...");
-    		new FileSenderManager(appConnectionSocket, getJarsDir(), getJarsListFileName()).run();
-    		appConnectionSocket.close();
+    		new FileSenderManager(connectionSocket, getJarsDir(), getJarsListFileName()).run();
     		System.out.println("Jar files list sent to client.");
+  
+    	} catch (SocketException e) {
+    		e.printStackTrace();
+    		System.out.println("Socket creation error !");
     	} catch (IOException e) {
+    		e.printStackTrace();
 			// TODO Auto-generated catch block
 			System.out.println("Could not update client's jar files list.");
 		}
@@ -716,12 +731,10 @@ public class FDServerThread extends Thread {
     }
     
 	//This method sends jar files over the socket given in input.
-    private void sendJars(Socket connSocket) throws IOException {    	
-    	ServerSocket ss = new ServerSocket(FDServerConfigurationManager.CONTROL_PORT);
-    	Socket connectionSocket = ss.accept();
+    private void sendJars(Socket connectionSocket, Socket protocolSocket) throws IOException {    	
     	
-    	DataOutputStream outToClient = new DataOutputStream(connectionSocket.getOutputStream());
-    	BufferedReader inFromClient = new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
+    	DataOutputStream outToClient = new DataOutputStream(protocolSocket.getOutputStream());
+    	BufferedReader inFromClient = new BufferedReader(new InputStreamReader(protocolSocket.getInputStream()));
     	String firstInput = inFromClient.readLine();
     	if(firstInput.equals("GET_JARS")) {
     		outToClient.writeBytes("GET_JARS_ACK\n");
@@ -731,11 +744,9 @@ public class FDServerThread extends Thread {
     			strLine = inFromClient.readLine();
     			if(strLine.endsWith(".jar")) {
     				System.out.println("Client requested " + strLine + " ...");
-    				if(new File(getJarsDir() + "/" + strLine).exists()) {
+    				if(new File(getJarsDir() + pathSep + strLine).exists()) {
     					outToClient.writeBytes("SENDING_JAR\n");
-    					Socket appConnectionSocket = new Socket(connSocket.getInetAddress(), FDServerConfigurationManager.FILE_PORT);
-    					new FileSenderManager(appConnectionSocket, getJarsDir(), strLine).run();
-    					appConnectionSocket.close();
+    					new FileSenderManager(connectionSocket, getJarsDir(), strLine).run();
     					System.out.println(strLine + " sent to client.");
     					if(inFromClient.readLine().equals(strLine + "_ACK"))
     						System.out.println(strLine + " received by client.");
@@ -757,28 +768,24 @@ public class FDServerThread extends Thread {
     		System.out.println("Update jars process complete!");
     	} else {
     		if(firstInput.equals("NO_JARS")) {
-    			System.out.println("No jars to send to the client " + connSocket.getInetAddress().toString().substring(1) + " . Its jars list is already updated.");
+    			System.out.println("No jars to send to the client " + connectionSocket.getInetAddress().toString().substring(1) + " . Its jars list is already updated.");
     		}
     		else {
-    			System.out.println("Could not send jars to the client" + connSocket.getInetAddress().toString().substring(1) + " .");
+    			System.out.println("Could not send jars to the client" + connectionSocket.getInetAddress().toString().substring(1) + " .");
     		}
 		}
-    	if(!connectionSocket.isClosed())
-			connectionSocket.close();
-		if(!ss.isClosed())
-			ss.close();
     }
     
     //This method implements the client jars update process, which consists of the client jars list update, 
     //followed by the transfer of missing jar files.
-    private void updateClientJarsProcess(Socket connectionSocket) throws NoConnectionToDBException, IOException {
+    private void updateClientJarsProcess(Socket connectionSocket, Socket protocolSocket) throws NoConnectionToDBException, IOException {
     	updateClientJars(connectionSocket);
-    	DataOutputStream outToClient = new DataOutputStream(connectionSocket.getOutputStream());
-    	BufferedReader inFromClient = new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
+    	DataOutputStream outToClient = new DataOutputStream(protocolSocket.getOutputStream());
+    	BufferedReader inFromClient = new BufferedReader(new InputStreamReader(protocolSocket.getInputStream()));
     	String firstInput = inFromClient.readLine();
     	if(firstInput.equals("GET_JARS")) {
     		outToClient.writeBytes("GET_JARS_ACK\n");
-    		sendJars(connectionSocket);
+    		sendJars(connectionSocket,protocolSocket);
     	} else {
     		if(firstInput.equals("NO_JARS")) {
     			System.out.println("No jars to send to the client " + connectionSocket.getInetAddress().toString().substring(1) + " . Its jars list is already updated.");
@@ -787,7 +794,6 @@ public class FDServerThread extends Thread {
     			System.out.println("Could not send jars to the client" + connectionSocket.getInetAddress().toString().substring(1) + " .");
     		}
     	}    	
-    	//connectionSocket.close();
     }
     
 	//This method writes the String str on to the File file    
@@ -878,41 +884,51 @@ public class FDServerThread extends Thread {
 	}    
     
     //This method determines which scenario will be executed.
-    private int getScenarioFromClient(Socket connectionSocket) throws IOException, InvalidFDServerOptionException {
-    	DataOutputStream outToClient = new DataOutputStream(connectionSocket.getOutputStream());
-    	BufferedReader inFromClient = new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
+    private int getScenarioFromClient(Socket protocolSocket) throws IOException, InvalidFDServerOptionException {
+    	DataOutputStream outToClient = new DataOutputStream(protocolSocket.getOutputStream());
+    	BufferedReader inFromClient = new BufferedReader(new InputStreamReader(protocolSocket.getInputStream()));
     	String option = inFromClient.readLine();
     	outToClient.writeBytes("GET_SCENARIO_ACK\n");
     	return FDServerOptionsManager.getScenario(option);
     }
     
     //This method implements the interaction with a single client
-    public void start(Socket connectionSocket) {
+    public void start(Socket connectionSocket, Socket protocolSocket) {
         try {
 			try {
-				int scenario = getScenarioFromClient(connectionSocket);
+				int scenario = getScenarioFromClient(protocolSocket);
 				switch(scenario) {
-					case FDServerOptionsManager.REMOTE_SCENARIO:
+				
+				
+					case FDServerOptionsManager.REMOTE_AND_LOCAL_SCENARIO:
 						System.out.println("\nREMOTE SCENARIO (Client: " + connectionSocket.getInetAddress().toString().substring(1) + ")");
 						updateClientQueries(connectionSocket);
-						updateClientJarsProcess(connectionSocket);
+						updateClientJarsProcess(connectionSocket,protocolSocket);
+						//remote queries execution
+						executeQueriesInDb(connectionSocket);
+						break;
+					
+					case FDServerOptionsManager.REMOTE_SCENARIO:
+						System.out.println("\nREMOTE SCENARIO (Client: " + connectionSocket.getInetAddress().toString().substring(1) + ")");
+						//updateClientQueries(connectionSocket);
+						//updateClientJarsProcess(connectionSocket,protocolSocket);
 						//remote queries execution
 						executeQueriesInDb(connectionSocket);
 						break;
 					case FDServerOptionsManager.UPDATEONLY_SCENARIO:
 						System.out.println("\nUPDATEONLY SCENARIO (Client: " + connectionSocket.getInetAddress().toString().substring(1) + ")");
 						updateClientQueries(connectionSocket);
-						updateClientJarsProcess(connectionSocket);
+						updateClientJarsProcess(connectionSocket,protocolSocket);
 						break;
 					case FDServerOptionsManager.REMOTE_QUERIES_EXECUTION_SCENARIO:
 						System.out.println("\nREMOTE QUERIES EXECUTION SCENARIO (Client: " + connectionSocket.getInetAddress().toString().substring(1) + ")");
 						//remote queries execution
-						executeQueries(connectionSocket);
+						executeQueries(connectionSocket,protocolSocket);
 						break;
 					case FDServerOptionsManager.DEFAULT_SCENARIO:
 						System.out.println("\nDEFAULT SCENARIO (UPDATEONLY SCENARIO) (Client: " + connectionSocket.getInetAddress().toString().substring(1) + ")");
 						updateClientQueries(connectionSocket);
-						updateClientJarsProcess(connectionSocket);
+						updateClientJarsProcess(connectionSocket,protocolSocket);
 						break;
 				}					
 			} catch (NoConnectionToDBException e) {

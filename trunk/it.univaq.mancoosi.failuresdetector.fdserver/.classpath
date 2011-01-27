@@ -5,7 +5,6 @@
 	<classpathentry kind="lib" path="/it.univaq.mancoosi.failuresdetector.libs/AppFramework-1.03.jar"/>
 	<classpathentry kind="lib" path="/it.univaq.mancoosi.failuresdetector.libs/javax.transaction_1.1.1.v201006150915.jar"/>
 	<classpathentry kind="lib" path="/it.univaq.mancoosi.failuresdetector.libs/mysql-connector-java-3.1.14-bin.jar"/>
-	<classpathentry kind="lib" path="/it.univaq.mancoosi.failuresdetector.libs/net.sourceforge.lpg.lpgjavaruntime.source_1.1.0.v200803061910.jar"/>
 	<classpathentry kind="lib" path="/it.univaq.mancoosi.failuresdetector.libs/org.eclipse.core.contenttype_3.4.1.R35x_v20090826-0451.jar"/>
 	<classpathentry kind="lib" path="/it.univaq.mancoosi.failuresdetector.libs/org.eclipse.core.jobs_3.4.100.v20090429-1800.jar"/>
 	<classpathentry kind="lib" path="/it.univaq.mancoosi.failuresdetector.libs/org.eclipse.core.runtime_3.5.0.v20090525.jar"/>
@@ -24,5 +23,7 @@
 	<classpathentry kind="lib" path="/it.univaq.mancoosi.failuresdetector.libs/org.eclipse.osgi_3.5.2.R35x_v20100126.jar"/>
 	<classpathentry kind="lib" path="/it.univaq.mancoosi.failuresdetector.libs/org.eclipse.persistence.jpa.equinox.weaving_2.1.1.v20100817-r8050.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/it.univaq.mancoosi.mancoosimm"/>
+	<classpathentry kind="lib" path="/it.univaq.mancoosi.failuresdetector.libs/net.sourceforge.lpg.lpgjavaruntime_1.1.0.v200803061910.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/it.univaq.mancoosi.failuresdetector.protocol"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
