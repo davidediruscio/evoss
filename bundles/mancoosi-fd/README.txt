@@ -1,31 +1,15 @@
 CLIENT AND SERVER OPTIONS:
 Allowed options for the fdclient are:
--l (local OCL queries and jars execution with previous lists update),
--r (remote OCL queries and jars execution with previous lists update),
--offline (local OCL queries and jars execution without previous lists update),
--updateonly (lists update only),
--qsexecutel (local OCL queries execution) <<oclfilepath (.ocl) or OCL queries separated by space>>,
--qsexecuter (remote OCL queries execution) <<oclfilepath (.ocl) or OCL queries separated by space>>,
--jsexecute (jars execution) <<jarslistfilepath (.txt) or jar files paths separated by space>>,
-no options (default scenario, equivalent to -l option).
+-l (local OCL queries and jars execution with previous lists update),	OK
+-rl (remote OCL queries and local jars execution with previous lists update), OK
+-r (remote OCL queries)	OK
+-offline (local OCL queries and jars execution without previous lists update), OK
+-updateonly (lists update only), OK
+-qsexecutel (local OCL queries execution) <<oclfilepath (.ocl) or OCL queries separated by space>>, OK
+-qsexecuter (remote OCL queries execution) <<oclfilepath (.ocl) or OCL queries separated by space>>, OK
+-jsexecute (jars execution) <<jarslistfilepath (.txt) or jar files paths separated by space>>, OK
+no options (default scenario, equivalent to -l option). OK
 
-Each option is related to an execution scenario and this relation is managed by a specific class (FDClientOptionsManager) using Map:
-
-	...
-	private static Map<String, Integer> optionsMap = new HashMap<String, Integer>();
-	
-	public FDClientOptionsManager() {
-		optionsMap.put("-l", LOCAL_SCENARIO);
-		optionsMap.put("-r", REMOTE_SCENARIO);
-		optionsMap.put("-offline", OFFLINE_SCENARIO);
-		optionsMap.put("-updateonly", UPDATEONLY_SCENARIO);
-		optionsMap.put("-qsexecuter", REMOTE_QUERIES_EXECUTION_SCENARIO);
-		optionsMap.put("-qsexecutel", LOCAL_QUERIES_EXECUTION_SCENARIO);
-		optionsMap.put("-jsexecute", LOCAL_JARS_EXECUTION_SCENARIO);
-		optionsMap.put("", DEFAULT_SCENARIO);
-		optionsMap.put(null, DEFAULT_SCENARIO);
-	}
-	...
 
 Allowed options for the fdserver are:
 -r (remote OCL queries and jars execution with previous lists update),
@@ -33,19 +17,7 @@ Allowed options for the fdserver are:
 -qsexecuter (remote OCL queries execution) <<oclfilepath or OCL queries separated by space>>,
 no options (default scenario, equivalent to -updateonly option).
 	
-Each option is related to an execution scenario and this relation is managed by a specific class (FDServerOptionsManager) using Map:
 
-	...
-	private static Map<String, Integer> optionsMap = new HashMap<String, Integer>();
-	
-	public FDServerOptionsManager() {
-		optionsMap.put("-r", REMOTE_SCENARIO);
-		optionsMap.put("-updateonly", UPDATEONLY_SCENARIO);
-		optionsMap.put("-qsexecuter", REMOTE_QUERIES_EXECUTION_SCENARIO);
-		optionsMap.put("", DEFAULT_SCENARIO);
-		optionsMap.put(null, DEFAULT_SCENARIO);
-	}
-	...
 	
 CLIENT/SERVER INTERACTIONS DYNAMIC:
 Supposing the server is running (listening on port 6793) and the client is launched:
