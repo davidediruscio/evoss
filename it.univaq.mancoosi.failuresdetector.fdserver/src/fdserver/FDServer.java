@@ -16,10 +16,12 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.ConnectException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
 import failuresdetector.exceptions.LoadConfigurationException;
+
 
 /**
  *
@@ -37,6 +39,8 @@ public class FDServer {
 	private String jarsListFileName;
 	private String tmpDir;
 	private String oclQueriesFileName;
+	
+	public static String pathSep = File.separator;
 	
 	public static FDServer getServerInstance() {
         return FDServer.serverInstance;
@@ -111,7 +115,7 @@ public class FDServer {
 	}
 	
 	//This method starts a new FDServerThread
-	private static void startNewThread(final Socket connectionSocket,
+	private static void startNewThread(final Socket connectionSocket, final Socket protocolSocket,
 										String dbDriverName, String dbUri, String dbUser, String dbPassword, 
 										String jarsDir, String jarsListFileName,
 										String tmpDir, String oclQueriesFileName) throws IOException {
@@ -121,10 +125,11 @@ public class FDServer {
 		t1 = new Thread(new Runnable() {
 
 			public void run() {
-				serverThread.start(connectionSocket);
+				serverThread.start(connectionSocket,protocolSocket);
 			}
 		});
 		t1.start();
+		
 	}
 	
 	//This method returns the jar files list as a String array.
@@ -142,16 +147,16 @@ public class FDServer {
   	  			}
   	  			in.close();
   	  		} else {
-  	  			System.out.println("The jars file list " + getJarsDir() + "/" + getJarsListFileName() + " doesn't exists.");
+  	  			System.out.println("The jars file list " + getJarsDir() + pathSep + getJarsListFileName() + " doesn't exists.");
   	  		}
 		} catch(NullPointerException e) {
-  	  		System.out.println("The jars file list " + getJarsDir() + "/" + getJarsListFileName() + " doesn't exists.");
+  	  		System.out.println("The jars file list " + getJarsDir() + pathSep + getJarsListFileName() + " doesn't exists.");
   	  	} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
-  	  		System.out.println("The jars file list " + getJarsDir() + "/" + getJarsListFileName() + " doesn't exists.");
+  	  		System.out.println("The jars file list " + getJarsDir() + pathSep + getJarsListFileName() + " doesn't exists.");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			System.out.println("Can't read from file " + getJarsDir() + "/" + getJarsListFileName() + ". Please, check file permission.");
+			System.out.println("Can't read from file " + getJarsDir() + pathSep + getJarsListFileName() + ". Please, check file permission.");
 		}
 		return jarsList;
 	}
@@ -184,7 +189,7 @@ public class FDServer {
     //There is a jars inconsistency if some jar file in the jar files list is not present on the filesystem and 
     //if some jar file on the filesystem is not present in the jar files list.
     public boolean checkJarsConsistency() {
-		File jarFilesList = new File(getJarsDir() + "/" + getJarsListFileName());
+		File jarFilesList = new File(getJarsDir() + pathSep + getJarsListFileName());
 		try {
 			//deletes from the jar files list all that jars that are not present on the filesystem
 			if(jarFilesList.exists()) {
@@ -196,7 +201,7 @@ public class FDServer {
 				//Read File Line By Line
 				while((strLine = br.readLine()) != null) {
 					if(strLine.endsWith(".jar")) {
-						File correspJar = new File(getJarsDir() + "/" + strLine);
+						File correspJar = new File(getJarsDir() + pathSep + strLine);
 						if(!correspJar.exists()) {
 							obsoleteJars = addToArray(obsoleteJars, strLine);
 						}
@@ -221,10 +226,10 @@ public class FDServer {
 						return name.endsWith(".jar"); 
 					}
 				});
-				String[] jarsToDelete = compareJarsLists(getJarsList(getJarsDir() + "/" + getJarsListFileName()), jars);
+				String[] jarsToDelete = compareJarsLists(getJarsList(getJarsDir() + pathSep + getJarsListFileName()), jars);
 				if(jarsToDelete != null && jarsToDelete.length > 0) {
 					for(int i = 0; i < jarsToDelete.length; i++) {
-						deleteFile(getJarsDir() + "/" + jarsToDelete[i]);
+						deleteFile(getJarsDir() + pathSep + jarsToDelete[i]);
 					}
 				}
 			}
@@ -300,19 +305,38 @@ public class FDServer {
 	
 	public static void main(String[] args) {
 		try {
-			System.out.println("Loading OCL Server configuration...");
+			System.out.println("Loading Failures Detector Server configuration...");
     		loadConfiguration();
-    		System.out.println("OCL Server configuration loaded!");
+    		System.out.println("Failures Detector Server configuration loaded!");
     		if(getServerInstance().checkJarsConsistency()) {
 				System.out.println("Jars Consistency checked.");
 				ServerSocket serverFather = new ServerSocket(FDServerConfigurationManager.DEFAULT_PORT);
-	            Socket connectionSocket = null;
-    		
-	            while(true) {
+				
+				Socket connectionSocket = null;
+				
+			
+
+				while(true) {
 	            	System.out.println("\nListening for connection request on port " + FDServerConfigurationManager.DEFAULT_PORT + "...");
 	                connectionSocket = serverFather.accept();
 	                System.out.println("Connection estabilished with client " + connectionSocket.getInetAddress().toString().substring(1) + ".");
-	                startNewThread(connectionSocket, 
+	            	
+	                System.out.println("Requesting socket protocol on the remote port " + FDServerConfigurationManager.CONTROL_PORT );
+	                Socket protocolSocket = null;
+	                boolean protocolSocketConnected = false;
+	                
+	                while ( ! protocolSocketConnected ) {
+	                	try {
+	                		protocolSocket = new Socket(connectionSocket.getInetAddress(), FDServerConfigurationManager.CONTROL_PORT);
+	                		protocolSocketConnected = true;
+						} catch (ConnectException e) {
+							// TODO: handle exception
+						}	             
+	                }
+	               
+	    	    	    			
+	               startNewThread(connectionSocket, 
+	            		   			protocolSocket,
 	                				getServerInstance().getDbDriverName(),
 	                				getServerInstance().getDbUri(),
 	                				getServerInstance().getDbUser(),
@@ -321,6 +345,8 @@ public class FDServer {
 	                				getServerInstance().getJarsListFileName(),
 	                				getServerInstance().getTmpDir(),
 	                				getServerInstance().getOclQueriesFileName());
+	                
+	    
 	            }				
 			} else {
 				System.out.println("Error occurred when checking jars consistency. The server cannot be started." +

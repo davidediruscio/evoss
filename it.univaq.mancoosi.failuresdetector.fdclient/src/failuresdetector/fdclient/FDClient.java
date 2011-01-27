@@ -23,6 +23,7 @@ import failuresdetector.exceptions.InvalidFDClientOptionException;
 import failuresdetector.exceptions.LoadConfigurationException;
 
 
+
 public class FDClient {
 	private static final FDClient INSTANCE = new FDClient();
 	
@@ -37,8 +38,12 @@ public class FDClient {
 	private String oclQueriesDir;
 	private String oclQueriesFileName;
 	
+	public static String pathSep = File.separator;
+	
 	Socket socket = null;
-	   
+	
+	private static Socket protocolSocket = null;
+	
     // Private constructor prevents instantiation from other classes
 	private FDClient() {
 		 
@@ -169,37 +174,38 @@ public class FDClient {
 	
 	//This method updates client's known queries, receiving the server's queries file
 	private void updateQueries(Socket connectionSocket) throws IOException {
-		ServerSocket appSs = new ServerSocket(FDClientConfigurationManager.FILE_PORT);
-		Socket appConnectionSocket = appSs.accept();
+//		ServerSocket appSs = new ServerSocket(FDClientConfigurationManager.FILE_PORT);
+//		Socket appConnectionSocket = appSs.accept();
 		System.out.println("Updating OCL queries...");
-		new FileReceiverManager(appConnectionSocket, getOclQueriesDir(), getOclQueriesFileName()).run();
-		appConnectionSocket.close();
-		appSs.close();
+		new FileReceiverManager(connectionSocket, getOclQueriesDir(), getOclQueriesFileName()).run();
+//		appConnectionSocket.close();
+//		appSs.close();
 		System.out.println("OCL queries updated!");
 	}
 	
 	//This method updates client's jar files list, receiving the server's jars list file 
 	//and differencing the two lists for retrieving missing jar files
-	private void updateJars(Socket connectionSocket) throws IOException {
-		ServerSocket appSs = new ServerSocket(FDClientConfigurationManager.FILE_PORT);
-		Socket appConnectionSocket = appSs.accept();
+	private void updateJars(Socket connectionSocket, Socket protocolSocket) throws IOException {
+//		ServerSocket appSs = new ServerSocket(FDClientConfigurationManager.FILE_PORT);
+//		Socket appConnectionSocket = appSs.accept();
 		System.out.println("Updating jar files...");
 		System.out.println("Retrieving server jar files list...");
-		new FileReceiverManager(appConnectionSocket, getTmpDir(), getJarsListFileName()).run();
-		appConnectionSocket.close();
-		appSs.close();
+System.out.println("AGGIORNO I JAR IN " + getTmpDir() + pathSep + getJarsListFileName());		
+		new FileReceiverManager(connectionSocket, getTmpDir(), getJarsListFileName()).run();
+//		appConnectionSocket.close();
+//		appSs.close();
 		System.out.println("Server jar files list retrieved!");
 		System.out.println("Checking missing jars...");
-		String[] serverJarsList = getJarsList(getTmpDir() + "/" + getJarsListFileName());
-		String[] clientJarsList = getJarsList(getJarsDir() + "/" + getJarsListFileName());
+		String[] serverJarsList = getJarsList(getTmpDir() + pathSep + getJarsListFileName());
+		String[] clientJarsList = getJarsList(getJarsDir() + pathSep + getJarsListFileName());
 		if(serverJarsList != null && clientJarsList != null) {
 			//deletes jars on the client filesystem that aren't present on server's one
 			String[] difference = compareJarsLists(serverJarsList, clientJarsList);
 			if(difference != null && difference.length > 0) {
 				System.out.println(difference.length + " obsolete jar(s) to delete:");
 				for(int i = 0; i < difference.length; i++) {
-					if(new File(getJarsDir() + "/" + difference[i]).exists()) {
-						deleteFile(getJarsDir() + "/" + difference[i]);
+					if(new File(getJarsDir() + pathSep + difference[i]).exists()) {
+						deleteFile(getJarsDir() + pathSep + difference[i]);
 						System.out.println("Obsolete jar " + difference[i] + " deleted.");
 					}
 					System.out.println("All obsolete jars deleted.");
@@ -209,13 +215,13 @@ public class FDClient {
 			}
 			//checks if there are some jars to download and if there are, it downloads them
 			difference = compareJarsLists(clientJarsList, serverJarsList);
-			DataOutputStream outToServer = new DataOutputStream(connectionSocket.getOutputStream());
-			BufferedReader inFromServer = new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
+			DataOutputStream outToServer = new DataOutputStream(protocolSocket.getOutputStream());
+			BufferedReader inFromServer = new BufferedReader(new InputStreamReader(protocolSocket.getInputStream()));
 			if(difference != null && difference.length > 0) {
 				System.out.println(difference.length + " jar(s) to download:");
 				outToServer.writeBytes("GET_JARS\n");
 				if(inFromServer.readLine().equals("GET_JARS_ACK")) {
-					downloadJars(connectionSocket, difference);
+					downloadJars(connectionSocket, protocolSocket, difference);
 				} else {
 					System.out.println("Error occurred when trying to download missing jars.");
 				}
@@ -226,7 +232,7 @@ public class FDClient {
 		} else {
 			System.out.println("Error occurred when trying to update jars list.");
 		}
-		deleteFile(getTmpDir() + "/" + getJarsListFileName());
+		deleteFile(getTmpDir() + pathSep + getJarsListFileName());
 		System.out.println("Jar files updating process complete!");
 	}
 
@@ -286,7 +292,7 @@ public class FDClient {
 	//This method deletes from the local jars list all the jars that are not present on the client filesystem and 
 	//also deletes from the client's filesystem all the jars that are not present in the local jars list
 	public boolean checkJarsConsistency() {
-		File jarFilesList = new File(getJarsDir() + "/" + getJarsListFileName());
+		File jarFilesList = new File(getJarsDir() + pathSep + getJarsListFileName());
 		try {
 			//deletes from the local jars list all the jars that are not present on the client filesystem
 			if(jarFilesList.exists()) {
@@ -298,7 +304,7 @@ public class FDClient {
 				//Read File Line By Line
 				while((strLine = br.readLine()) != null) {
 					if(strLine.endsWith(".jar")) {
-						File correspJar = new File(getJarsDir() + "/" + strLine);
+						File correspJar = new File(getJarsDir() + pathSep + strLine);
 						if(!correspJar.exists()) {
 							obsoleteJars = addToArray(obsoleteJars, strLine);
 						}
@@ -322,10 +328,10 @@ public class FDClient {
 						return name.endsWith(".jar"); 
 					}
 				});
-				String[] jarsToDelete = compareJarsLists(getJarsList(getJarsDir() + "/" + getJarsListFileName()), jars);
+				String[] jarsToDelete = compareJarsLists(getJarsList(getJarsDir() + pathSep + getJarsListFileName()), jars);
 				if(jarsToDelete != null && jarsToDelete.length > 0) {
 					for(int i = 0; i < jarsToDelete.length; i++) {
-						deleteFile(getJarsDir() + "/" + jarsToDelete[i]);
+						deleteFile(getJarsDir() + pathSep + jarsToDelete[i]);
 					}
 				}
 			}
@@ -341,25 +347,23 @@ public class FDClient {
 	
 	//This method is used for downloading missing jar files. 
 	//More in general, it tries to download all the files listed in the jarsToDownload input parameter 
-	private void downloadJars(Socket connSocket, String[] jarsToDownload) throws IOException {
+	private void downloadJars(Socket connectionSocket, Socket protocolSocket, String[] jarsToDownload) throws IOException {
+		
 		System.out.println("Downloading missing jars...");
-		Socket connectionSocket = new Socket(getOclServerUri(), FDClientConfigurationManager.CONTROL_PORT);
 		System.out.println("Connection over port " +  FDClientConfigurationManager.CONTROL_PORT + " estabilished...");
-		DataOutputStream outToServer = new DataOutputStream(connectionSocket.getOutputStream());
-		BufferedReader inFromServer = new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
+		DataOutputStream outToServer = new DataOutputStream(protocolSocket.getOutputStream());
+		BufferedReader inFromServer = new BufferedReader(new InputStreamReader(protocolSocket.getInputStream()));
 		if(jarsToDownload != null && jarsToDownload.length > 0) {
 			outToServer.writeBytes("GET_JARS\n");
 			if(inFromServer.readLine().equals("GET_JARS_ACK")) {
-				ServerSocket appSs = new ServerSocket(FDClientConfigurationManager.FILE_PORT);
+				//ServerSocket appSs = new ServerSocket(FDClientConfigurationManager.FILE_PORT);
 				for(int i = 0; i < jarsToDownload.length; i++) {
 					System.out.println("Downloading " + jarsToDownload[i] + "...");
-					outToServer.writeBytes(jarsToDownload[i] + "\n");
+					outToServer.writeBytes(jarsToDownload[i] + "\n");	
 					if(inFromServer.readLine().equals("SENDING_JAR")) {
-	        	    	Socket appConnectionSocket = appSs.accept();
-						new FileReceiverManager(appConnectionSocket, getJarsDir(), jarsToDownload[i]).run();
-						appConnectionSocket.close();
+						new FileReceiverManager(connectionSocket, getJarsDir(), jarsToDownload[i]).run();
 						outToServer.writeBytes(jarsToDownload[i] + "_ACK\n");
-						appendToFile(new File(getJarsDir() + "/" + getJarsListFileName()), jarsToDownload[i]);
+						appendToFile(new File(getJarsDir() + pathSep + getJarsListFileName()), jarsToDownload[i]);
 						System.out.println("" + jarsToDownload[i] + " downloaded.");
 					} else {
 						System.out.println("Error downloading requested jar " + jarsToDownload[i]);
@@ -367,7 +371,7 @@ public class FDClient {
 				}
 				outToServer.writeBytes("GET_JARS_END\n");
 				if(inFromServer.readLine().equals("GET_JARS_END_ACK")) {
-					appSs.close();
+					//appSs.close();
 					outToServer.close();
 					inFromServer.close();
 				}
@@ -383,22 +387,23 @@ public class FDClient {
 	
 	//This method implements a remote OCL queries execution procedure in which the client itself  
 	//asks to the server the execution of some specific OCL queries
-	private void remoteQueriesExecution(Socket connSocket, String[] queriesToExecute) throws IOException {
+	private void remoteQueriesExecution(Socket connectionSocket, Socket protocolSocket, String[] queriesToExecute) throws IOException {
+		
 		System.out.println("Estabilishing connection over port " + FDClientConfigurationManager.CONTROL_PORT + " for executing queries...");
-		Socket connectionSocket = new Socket(getOclServerUri(), FDClientConfigurationManager.CONTROL_PORT);
+	
 		System.out.println("Connection over port " + FDClientConfigurationManager.CONTROL_PORT + " estabilished...");
-		DataOutputStream outToServer = new DataOutputStream(connectionSocket.getOutputStream());
-		BufferedReader inFromServer = new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
+		DataOutputStream outToServer = new DataOutputStream(protocolSocket.getOutputStream());
+		BufferedReader inFromServer = new BufferedReader(new InputStreamReader(protocolSocket.getInputStream()));
 		outToServer.writeBytes("EXEC_QUERIES\n");
 		if(inFromServer.readLine().equals("EXEC_QUERIES_ACK")) {
 			outToServer.writeBytes("MANCOOSI_MODEL\n");
 			if(inFromServer.readLine().equals("SEND_ECORE_FILENAME")) {
 				outToServer.writeBytes(getEcoreModelFileName() + "\n");
 				if(inFromServer.readLine().equals("SEND_ECORE_FILENAME_ACK")) {
-					Socket appConnectionSocket = new Socket(getOclServerUri(), FDClientConfigurationManager.FILE_PORT);
+					//Socket appConnectionSocket = new Socket(getOclServerUri(), FDClientConfigurationManager.FILE_PORT);
 					System.out.println("Estabilishing connection over port " + FDClientConfigurationManager.FILE_PORT + " for sending mancoosi ecore model...");
-					new FileSenderManager(appConnectionSocket, getEcoreModelDir(), getEcoreModelFileName()).run();
-					appConnectionSocket.close();
+					new FileSenderManager(connectionSocket, getEcoreModelDir(), getEcoreModelFileName()).run();
+					//appConnectionSocket.close();
 					if(inFromServer.readLine().equals("MANCOOSI_MODEL_ACK")) {
 						
 						for(int i = 0; i < queriesToExecute.length; i++) {
@@ -462,7 +467,7 @@ public class FDClient {
 	//asks to the server the execution of all the OCL queries in the database
 	private void remoteQueriesInDbExecution(Socket connSocket) throws IOException {
 		System.out.println("Estabilishing connection over port " + FDClientConfigurationManager.CONTROL_PORT + " for executing queries...");
-		Socket connectionSocket = new Socket(getOclServerUri(), FDClientConfigurationManager.CONTROL_PORT);
+		Socket connectionSocket = connSocket; //new Socket(getOclServerUri(), FDClientConfigurationManager.CONTROL_PORT);
 		System.out.println("Connection over port " + FDClientConfigurationManager.CONTROL_PORT + " estabilished...");
 		DataOutputStream outToServer = new DataOutputStream(connectionSocket.getOutputStream());
 		BufferedReader inFromServer = new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
@@ -472,10 +477,10 @@ public class FDClient {
 			if(inFromServer.readLine().equals("SEND_ECORE_FILENAME")) {
 				outToServer.writeBytes(getEcoreModelFileName() + "\n");
 				if(inFromServer.readLine().equals("SEND_ECORE_FILENAME_ACK")) {
-					Socket appConnectionSocket = new Socket(getOclServerUri(), FDClientConfigurationManager.FILE_PORT);
+					//Socket appConnectionSocket = new Socket(getOclServerUri(), FDClientConfigurationManager.FILE_PORT);
 					System.out.println("Estabilishing connection over port " + FDClientConfigurationManager.FILE_PORT + " for sending mancoosi ecore model...");
-					new FileSenderManager(appConnectionSocket, getEcoreModelDir(), getEcoreModelFileName()).run();///////////////
-					appConnectionSocket.close();
+					new FileSenderManager(connectionSocket, getEcoreModelDir(), getEcoreModelFileName()).run();///////////////
+					//appConnectionSocket.close();
 					if(inFromServer.readLine().equals("MANCOOSI_MODEL_ACK")) {
 						boolean execFinished = false;
 	    				String strLine = null;
@@ -641,7 +646,7 @@ public class FDClient {
 			if(scenario == FDClientOptionsManager.LOCAL_QUERIES_EXECUTION_SCENARIO ||
 				scenario == FDClientOptionsManager.REMOTE_QUERIES_EXECUTION_SCENARIO) {
 				if(args[1].endsWith(".ocl")) {
-					queries = getQueriesFromFile(getOclQueriesDir() + "/" + args[1]);
+					queries = getQueriesFromFile(getOclQueriesDir() + pathSep + args[1]);
 				} else {
 					for(int i = 1; i < args.length; i++) {
 						queries = addToArray(queries, args[i]);
@@ -662,7 +667,7 @@ public class FDClient {
 			int scenario = FDClientOptionsManager.getScenario(args);
 			if(scenario == FDClientOptionsManager.LOCAL_JARS_EXECUTION_SCENARIO) {
 				if(args[1].endsWith(".txt")) {
-					jars = getJarsList(getJarsDir() + "/" + args[1]);
+					jars = getJarsList(getJarsDir() + pathSep + args[1]);
 				} else {
 					for(int i = 1; i < args.length; i++) {
 						jars = addToArray(jars, args[i]);
@@ -676,9 +681,9 @@ public class FDClient {
 	}
 	
 	//This method is used for synchronizing the client with the server, communicating to this last the scenario to execute
-	private boolean sendScenarioToServer(Socket connectionSocket, int scenario) throws IOException {
-		DataOutputStream outToServer = new DataOutputStream(connectionSocket.getOutputStream());
-		BufferedReader inFromServer = new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
+	private boolean sendScenarioToServer(Socket protocolSocket, int scenario) throws IOException {
+		DataOutputStream outToServer = new DataOutputStream(protocolSocket.getOutputStream());
+		BufferedReader inFromServer = new BufferedReader(new InputStreamReader(protocolSocket.getInputStream()));
 		outToServer.writeBytes(String.valueOf(scenario) + "\n");
 		if(inFromServer.readLine().equals("GET_SCENARIO_ACK")) {
 			return true;
@@ -701,7 +706,7 @@ public class FDClient {
 	}
 	
 	public static void main(String[] args) {
-		String pathSep = File.separator;
+		
 		FDClient fd = FDClient.getInstance();
 		try {
 			System.out.println("Loading configuration...");
@@ -713,46 +718,54 @@ public class FDClient {
 				System.out.println("Error occurred when checking consistency.");
 			}
 			
-			int scenario = FDClientOptionsManager.getScenario(args);
+			
+			int scenario = FDClientOptionsManager.getScenario(args);			
 			
 			switch(scenario) {
-				case FDClientOptionsManager.LOCAL_SCENARIO:
+			
+				case FDClientOptionsManager.LOCAL_SCENARIO: 
+				case FDClientOptionsManager.DEFAULT_SCENARIO:
 					System.out.println("\nLOCAL SCENARIO");
 					if(!fd.isConnectedToServer()) {
 						if(fd.connectToServer()) {
-							if(fd.sendScenarioToServer(fd.getSocket(), FDClientOptionsManager.UPDATEONLY_SCENARIO)) {
-								System.out.println("\nUPDATE PROCESS");
-								fd.updateQueries(fd.getSocket());
-								fd.updateJars(fd.getSocket());
-							} else {
-								System.out.println("Error occurred when trying to communicate with server. Queries and jars will not be updated and the execution " +
-										"will follow with not updated local copies of queries and jars list file.");
-							}
+							System.out.println("Accepting connection for protocol on the port " + FDClientConfigurationManager.CONTROL_PORT);
+							ServerSocket clientFather = new ServerSocket(FDClientConfigurationManager.CONTROL_PORT);
 							
-							//local queries execution
-							System.out.println("\nOCL QUERIES LOCAL EXECUTION PROCESS");
-							String[] localQueriesLS = fd.getQueriesFromFile(fd.getOclQueriesDir() + pathSep + fd.getOclQueriesFileName());
-							if(localQueriesLS != null) {
-								System.out.println(localQueriesLS.length + " queries will be executed.");
-								Object[] results = QueryExecutor.executeQueries(fd.getEcoreModelDir() + pathSep + fd.getEcoreModelFileName(), localQueriesLS);
-								System.out.println("\nFAILURES DETECTION");
-								for(int i = 0; i < results.length; i++) {
-									if(detectFailure(results[i].toString())) {
-										System.out.println("Failure detected for the query " + localQueriesLS[i] + "!");
-									} else {
-										System.out.println("No failures detected for the query " + localQueriesLS[i] + ".");
-									}
-								}
-								
-							} else
-								System.out.println("No queries to execute.");
+							protocolSocket = clientFather.accept();
+							
+							if(fd.sendScenarioToServer(protocolSocket, FDClientOptionsManager.UPDATEONLY_SCENARIO)) {
+								fd.updateQueries(fd.getSocket());
+								fd.updateJars(fd.getSocket(),protocolSocket);
+							} else {
+								System.out.println("Error occurred when trying to communicate with server. Queries and jars will not be updated.");
+							}
+						} else {
+							System.out.println("Could not estabilish a connection with the OCL server. Please, check configuration file and correct mistakes.");
 						}
-					} else {
-						System.out.println("Could not estabilish a connection with the OCL server. Please, check configuration file and correct mistakes.");
 					}
 					if(fd.getSocket() != null) {
 						fd.disconnectFromServer(fd.getSocket());
 					}
+							
+					//local queries execution
+					System.out.println("\nOCL QUERIES LOCAL EXECUTION PROCESS");
+					String[] localQueriesLS = fd.getQueriesFromFile(fd.getOclQueriesDir() + pathSep + fd.getOclQueriesFileName());
+					if(localQueriesLS != null) {
+						System.out.println(localQueriesLS.length + " queries will be executed.");
+						Object[] results = QueryExecutor.executeQueries(fd.getEcoreModelDir() + pathSep + fd.getEcoreModelFileName(), localQueriesLS);
+						System.out.println("\nFAILURES DETECTION");
+						for(int i = 0; i < results.length; i++) {
+							if(detectFailure(results[i].toString())) {
+								System.out.println("Failure detected for the query " + localQueriesLS[i] + "!");
+							} else {
+								System.out.println("No failures detected for the query " + localQueriesLS[i] + ".");
+							}
+						}
+						
+					} else {
+						System.out.println("No queries to execute.");
+					}
+
 					
 					//local jars execution
 					System.out.println("\nJAR FILES EXECUTION PROCESS");
@@ -760,20 +773,69 @@ public class FDClient {
 					for(int i = 0; i < jarsToExecLS.length; i++) {
 						jarsToExecLS[i] = fd.getJarsDir() + pathSep + jarsToExecLS[i];
 					}
-					JarExecutor.executeJars(jarsToExecLS, fd.getEcoreModelDir() + pathSep + fd.getEcoreModelFileName());
+					JarExecutor.executeJars(jarsToExecLS, fd.getEcoreModelDir() + pathSep + fd.getEcoreModelFileName());					
 					break;
+					
 				case FDClientOptionsManager.REMOTE_SCENARIO:
 					System.out.println("\nREMOTE SCENARIO");
 					//if(fd.connectToServer()) {
 					if(!fd.isConnectedToServer()) {
 						if(fd.connectToServer()) {
-							if(fd.sendScenarioToServer(fd.getSocket(), scenario)) {						
-								fd.updateQueries(fd.getSocket());
-								fd.updateJars(fd.getSocket());
+							
+							System.out.println("Accepting connection for protocol on the port " + FDClientConfigurationManager.CONTROL_PORT);
+							ServerSocket clientFather = new ServerSocket(FDClientConfigurationManager.CONTROL_PORT);							
+							protocolSocket = clientFather.accept();
+
+							if(fd.sendScenarioToServer(protocolSocket, scenario)) {	
+//								fd.updateQueries(fd.getSocket());
+//								fd.updateJars(fd.getSocket(),protocolSocket);
 								//remote queries execution
 								System.out.println("\nREMOTE OCL QUERIES EXECUTION PROCESS");
-								if(new File(fd.getOclQueriesDir() + "/" + fd.getOclQueriesFileName()).exists() &&
-										fd.getQueriesFromFile(fd.getOclQueriesDir() + "/" + fd.getOclQueriesFileName()) != null) {
+								if(new File(fd.getOclQueriesDir() + pathSep + fd.getOclQueriesFileName()).exists() &&
+										fd.getQueriesFromFile(fd.getOclQueriesDir() + pathSep + fd.getOclQueriesFileName()) != null) {
+									fd.remoteQueriesInDbExecution(fd.getSocket());
+								} else {
+									System.out.println("No OCL queries stored on the file system.");
+								}
+							} else {
+								System.out.println("Error occurred when trying to communicate with server. Queries and jars will not be updated." +
+										"So, local copies of queries and jars list file will not be updated and the remote queries execution is not possible for communication problems, " +
+										"but the local jar files execution will proceed with not updated jars list file.");
+							}
+						} else {
+							System.out.println("Could not estabilish a connection with the OCL server. Please, check configuration file and correct mistakes.");
+						}
+					}
+					if(fd.getSocket() != null) {
+						fd.disconnectFromServer(fd.getSocket());
+					}
+					
+					//local jars execution
+	//				System.out.println("\nJAR FILES EXECUTION PROCESS");
+	//				String[] jarsToExecRS = fd.getJarsList(fd.getJarsDir() + pathSep + fd.getJarsListFileName());
+	//				for(int i = 0; i < jarsToExecRS.length; i++) {
+	//					jarsToExecRS[i] = fd.getJarsDir() + pathSep + jarsToExecRS[i];
+	//				}
+	//				JarExecutor.executeJars(jarsToExecRS, fd.getEcoreModelDir() + pathSep + fd.getEcoreModelFileName());
+					break;
+					
+				case FDClientOptionsManager.REMOTE_AND_LOCAL_SCENARIO:
+					System.out.println("\nREMOTE AND LOCAL SCENARIO");
+					//if(fd.connectToServer()) {
+					if(!fd.isConnectedToServer()) {
+						if(fd.connectToServer()) {
+							
+							System.out.println("Accepting connection for protocol on the port " + FDClientConfigurationManager.CONTROL_PORT);
+							ServerSocket clientFather = new ServerSocket(FDClientConfigurationManager.CONTROL_PORT);							
+							protocolSocket = clientFather.accept();
+
+							if(fd.sendScenarioToServer(protocolSocket, scenario)) {	
+								fd.updateQueries(fd.getSocket());
+								fd.updateJars(fd.getSocket(),protocolSocket);
+								//remote queries execution
+								System.out.println("\nREMOTE OCL QUERIES EXECUTION PROCESS");
+								if(new File(fd.getOclQueriesDir() + pathSep + fd.getOclQueriesFileName()).exists() &&
+										fd.getQueriesFromFile(fd.getOclQueriesDir() + pathSep + fd.getOclQueriesFileName()) != null) {
 									fd.remoteQueriesInDbExecution(fd.getSocket());
 								} else {
 									System.out.println("No OCL queries stored on the file system.");
@@ -793,12 +855,13 @@ public class FDClient {
 					
 					//local jars execution
 					System.out.println("\nJAR FILES EXECUTION PROCESS");
-					String[] jarsToExecRS = fd.getJarsList(fd.getJarsDir() + "/" + fd.getJarsListFileName());
+					String[] jarsToExecRS = fd.getJarsList(fd.getJarsDir() + pathSep + fd.getJarsListFileName());
 					for(int i = 0; i < jarsToExecRS.length; i++) {
-						jarsToExecRS[i] = fd.getJarsDir() + "/" + jarsToExecRS[i];
+						jarsToExecRS[i] = fd.getJarsDir() + pathSep + jarsToExecRS[i];
 					}
-					JarExecutor.executeJars(jarsToExecRS, fd.getEcoreModelDir() + "/" + fd.getEcoreModelFileName());
+					JarExecutor.executeJars(jarsToExecRS, fd.getEcoreModelDir() + pathSep + fd.getEcoreModelFileName());
 					break;
+				
 				case FDClientOptionsManager.OFFLINE_SCENARIO:
 					System.out.println("\nOFFLINE SCENARIO");
 					//local queries execution
@@ -826,13 +889,19 @@ public class FDClient {
 					}
 					JarExecutor.executeJars(jarsToExecOS, fd.getEcoreModelDir() + pathSep + fd.getEcoreModelFileName());
 					break;
+					
 				case FDClientOptionsManager.UPDATEONLY_SCENARIO:
 					System.out.println("\nUPDATEONLY SCENARIO");
 					if(!fd.isConnectedToServer()) {
 						if(fd.connectToServer()) {
-							if(fd.sendScenarioToServer(fd.getSocket(), scenario)) {
+							System.out.println("Accepting connection for protocol on the port " + FDClientConfigurationManager.CONTROL_PORT);
+							ServerSocket clientFather = new ServerSocket(FDClientConfigurationManager.CONTROL_PORT);
+							
+							protocolSocket = clientFather.accept();
+							
+							if(fd.sendScenarioToServer(protocolSocket, scenario)) {
 								fd.updateQueries(fd.getSocket());
-								fd.updateJars(fd.getSocket());
+								fd.updateJars(fd.getSocket(),protocolSocket);
 							} else {
 								System.out.println("Error occurred when trying to communicate with server. Queries and jars will not be updated.");
 							}
@@ -844,6 +913,7 @@ public class FDClient {
 						fd.disconnectFromServer(fd.getSocket());
 					}
 					break;
+					
 				case FDClientOptionsManager.LOCAL_QUERIES_EXECUTION_SCENARIO:
 					System.out.println("\nLOCAL OCL QUERIES EXECUTION SCENARIO");
 					//local queries execution
@@ -854,15 +924,22 @@ public class FDClient {
 					} else
 						System.out.println("No queries to execute.");
 					break;
+					
 				case FDClientOptionsManager.REMOTE_QUERIES_EXECUTION_SCENARIO:
 					System.out.println("\nREMOTE OCL QUERIES EXECUTION SCENARIO");
 					String[] localQueriesRQES = fd.getQueriesFromCmdLine(args);
 					if(!fd.isConnectedToServer()) {
 						if(fd.connectToServer()) {
-							if(fd.sendScenarioToServer(fd.getSocket(), scenario)) {
+					
+							System.out.println("Accepting connection for protocol on the port " + FDClientConfigurationManager.CONTROL_PORT);
+							ServerSocket clientFather = new ServerSocket(FDClientConfigurationManager.CONTROL_PORT);
+							
+							protocolSocket = clientFather.accept();
+							
+							if(fd.sendScenarioToServer(protocolSocket, scenario)) {
 								//remote queries execution
 								if(localQueriesRQES != null) {
-									fd.remoteQueriesExecution(fd.getSocket(), localQueriesRQES);
+									fd.remoteQueriesExecution(fd.getSocket(), protocolSocket, localQueriesRQES);
 								} else {
 									System.out.println("No OCL queries stored on the file system.");
 								}
@@ -878,6 +955,7 @@ public class FDClient {
 						fd.disconnectFromServer(fd.getSocket());
 					}
 					break;
+					
 				case FDClientOptionsManager.LOCAL_JARS_EXECUTION_SCENARIO:
 					System.out.println("\nLOCAL JARS EXECUTION SCENARIO");
 					//local jars execution
@@ -887,14 +965,21 @@ public class FDClient {
 					}
 					JarExecutor.executeJars(jarsToExecLJES,fd.getEcoreModelDir() + pathSep + fd.getEcoreModelFileName());
 					break;
+					
+/*					
 				case FDClientOptionsManager.DEFAULT_SCENARIO:
 					System.out.println("\nDEFAULT SCENARIO (LOCAL SCENARIO)");
 					if(!fd.isConnectedToServer()) {
 						if(fd.connectToServer()) {
-							if(fd.sendScenarioToServer(fd.getSocket(), FDClientOptionsManager.UPDATEONLY_SCENARIO)) {
+
+							System.out.println("Accepting connection for protocol on the port " + FDClientConfigurationManager.CONTROL_PORT);
+							ServerSocket clientFather = new ServerSocket(FDClientConfigurationManager.CONTROL_PORT);							
+							protocolSocket = clientFather.accept();
+							
+							if(fd.sendScenarioToServer(protocolSocket, FDClientOptionsManager.UPDATEONLY_SCENARIO)) {
 								System.out.println("\nUPDATE PROCESS");
 								fd.updateQueries(fd.getSocket());
-								fd.updateJars(fd.getSocket());
+								fd.updateJars(fd.getSocket(),protocolSocket);
 							} else {
 								System.out.println("Error occurred when trying to communicate with server. Queries and jars will not be updated and the execution " +
 										"will follow with not updated local copies of queries and jars list file.");
@@ -902,7 +987,7 @@ public class FDClient {
 							
 							//local queries execution
 							System.out.println("\nOCL QUERIES LOCAL EXECUTION PROCESS");
-							String[] localQueriesLS = fd.getQueriesFromFile(fd.getOclQueriesDir() + pathSep + fd.getOclQueriesFileName());
+							localQueriesLS = fd.getQueriesFromFile(fd.getOclQueriesDir() + pathSep + fd.getOclQueriesFileName());
 							if(localQueriesLS != null) {
 								System.out.println(localQueriesLS.length + " queries will be executed.");
 								Object[] results = QueryExecutor.executeQueries(fd.getEcoreModelDir() + pathSep + fd.getEcoreModelFileName(), localQueriesLS);
@@ -934,6 +1019,7 @@ public class FDClient {
 					}
 					JarExecutor.executeJars(jarsToExecDS, fd.getEcoreModelDir() + pathSep + fd.getEcoreModelFileName());
 					break;
+*/
 			}
 		} catch(LoadConfigurationException e) {
 			System.out.println(e.getMessage());

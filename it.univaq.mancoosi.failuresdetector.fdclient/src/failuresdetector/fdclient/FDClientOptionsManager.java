@@ -19,12 +19,14 @@ public class FDClientOptionsManager {
 	public static final int REMOTE_QUERY_EXECUTION_SCENARIO = 8;
 	public static final int LOCAL_JAR_EXECUTION_SCENARIO = 9;
 	public static final int DEFAULT_SCENARIO = 10;
+	public static final int REMOTE_AND_LOCAL_SCENARIO = 11;
 	
 	private static Map<String, Integer> optionsMap = new HashMap<String, Integer>();
 	
 	public FDClientOptionsManager() {
 		optionsMap.put("-l", LOCAL_SCENARIO);
 		optionsMap.put("-r", REMOTE_SCENARIO);
+		optionsMap.put("-rl", REMOTE_AND_LOCAL_SCENARIO);
 		optionsMap.put("-offline", OFFLINE_SCENARIO);
 		optionsMap.put("-updateonly", UPDATEONLY_SCENARIO);
 		optionsMap.put("-qsexecuter", REMOTE_QUERIES_EXECUTION_SCENARIO);

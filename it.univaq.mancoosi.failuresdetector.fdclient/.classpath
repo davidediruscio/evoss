@@ -25,5 +25,6 @@
 	<classpathentry kind="lib" path="/it.univaq.mancoosi.failuresdetector.libs/org.eclipse.persistence.jpa.equinox.weaving_2.1.1.v20100817-r8050.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/it.univaq.mancoosi.mancoosimm"/>
 	<classpathentry kind="lib" path="/it.univaq.mancoosi.failuresdetector.libs/net.sourceforge.lpg.lpgjavaruntime_1.1.0.v200803061910.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/it.univaq.mancoosi.failuresdetector.protocol"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

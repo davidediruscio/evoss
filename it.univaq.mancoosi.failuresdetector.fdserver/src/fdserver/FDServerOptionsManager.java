@@ -13,6 +13,7 @@ public class FDServerOptionsManager {
 	public static final int REMOTE_QUERIES_EXECUTION_SCENARIO = 4;
 	public static final int REMOTE_QUERY_EXECUTION_SCENARIO = 8;
 	public static final int DEFAULT_SCENARIO = 10;
+	public static final int REMOTE_AND_LOCAL_SCENARIO = 11;
 	
 	private static Map<String, Integer> optionsMap = new HashMap<String, Integer>();
 	
