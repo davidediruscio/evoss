@@ -1,6 +1,5 @@
 package it.univaq.mancoosi.injectors.packages.managers.debian;
 
-import it.univaq.mancoosi.injectors.packages.util.CheckErrorParsing;
 import it.univaq.mancoosi.injectors.packages.util.FileManagement;
 import it.univaq.mancoosi.injectors.packages.util.debian.DebianInjectorConfig;
 import it.univaq.mancoosi.injectors.packages.exceptions.InjectorException;
@@ -362,36 +361,6 @@ public class DebianPackageManager extends PackageManager {
 		saveModel(result, pkg);
 
 		FileManagement.deleteDir(new File(pathTemp));
-	}
-
-
-	private Package createModelScript(String result, Package pkg,
-			List<String> listScript) throws Exception {
-
-		List<String> listOut = new ArrayList<String>();
-
-		if (listScript.size() > 0) {
-
-			if (config.getSkipFilesWithError()) {
-				for (int i=0; i < listScript.size(); i++) {
-					Integer numberError = CheckErrorParsing.check(listScript.get(i));
-					if (numberError>0 || numberError==-1) {
-						System.err.println("The script '"+listScript.get(i) + "' is not parsed correctly ("+numberError+" error/s)...");
-					} else {
-						listOut.add(listScript.get(i));
-					}
-				}
-
-				if (listOut.size() > 0) { 
-					createMaintainerScriptModel(result, listOut);
-					pkg = loadModelPackage(result);
-				}
-			} else {
-				createMaintainerScriptModel(result, listScript);
-				pkg = loadModelPackage(result);	
-			}
-		}
-		return pkg;
 	}
 
 

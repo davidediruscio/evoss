@@ -11,8 +11,10 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 
 import it.univaq.mancoosi.injectors.packages.exceptions.InjectorException;
+import it.univaq.mancoosi.injectors.packages.util.CheckErrorParsing;
 import it.univaq.mancoosi.injectors.packages.util.Gra2MoLDinamicInterpreter;
 import it.univaq.mancoosi.injectors.packages.util.InjectorConfig;
+import it.univaq.mancoosi.injectors.packages.util.InjectorStatistics;
 import it.univaq.mancoosi.packagemm.Conflict;
 import it.univaq.mancoosi.packagemm.Dependence;
 import it.univaq.mancoosi.packagemm.PackagemmFactory;
@@ -29,6 +31,8 @@ import it.univaq.mancoosi.packagemm.Package;
 	protected PackagemmFactory factory;
 	
 	protected InjectorConfig config;
+	
+	protected InjectorStatistics stats;
 
 	public static PackageManager getInstance() throws InjectorException  {
 		   return INSTANCE;
@@ -46,6 +50,8 @@ import it.univaq.mancoosi.packagemm.Package;
 		versionTypeMap.put("<<", "llt");
 		
 		factory = PackagemmFactory.eINSTANCE;
+		
+		stats = InjectorStatistics.getInstance();
 		
 	}
 
@@ -94,8 +100,52 @@ import it.univaq.mancoosi.packagemm.Package;
 			throw new InjectorException("Error saving the package model", e);
 		}
 	}
+	
+	protected Package createModelScript(String result, Package pkg,
+			List<String> listScript) throws Exception {
 
-	protected void createMaintainerScriptModel (String result, List<String> sourceFilesFilter) {
+		List<String> listOut = new ArrayList<String>();
+
+		if (listScript.size() > 0) {
+
+			for (int i = 0; i < listScript.size(); i++) {
+
+				Integer numberError = CheckErrorParsing.check(listScript.get(i));
+
+				if (numberError > 0 || numberError ==-1) {
+					System.err.println("    The script '" + listScript.get(i) + "' is not parsed correctly (" + numberError
+										+ " error/s)...");
+				} else {
+					listOut.add(listScript.get(i));
+				}
+			}
+
+			if (listOut.size() == listScript.size()) {
+				
+				createMaintainerScriptModel(result, listScript);
+				pkg = loadModelPackage(result);
+				stats.incrementCorrectPackageWithScript();
+				
+			} else {
+				
+				stats.incrementErrorPackageWithScript();
+				
+				if (config.getSkipFilesWithError()) {
+					createMaintainerScriptModel(result, listOut);
+					pkg = loadModelPackage(result);
+				} else {
+					createMaintainerScriptModel(result, listScript);
+					pkg = loadModelPackage(result);
+				}
+			}
+
+		} else {
+			stats.incrementCorrectPackageNoScript();
+		}
+		return pkg;
+	}
+
+	private void createMaintainerScriptModel (String result, List<String> sourceFilesFilter) {
 		
 		String pathSourceView = config.getTransformationLocation();
 		String pathMetamodel = config.getMetamodelLocation();
