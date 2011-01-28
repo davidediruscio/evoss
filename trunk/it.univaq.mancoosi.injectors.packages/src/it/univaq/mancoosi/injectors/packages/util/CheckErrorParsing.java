@@ -32,6 +32,7 @@ public class CheckErrorParsing {
 		}));
 		
 		Integer numberError = -1;
+		
 		try {
 			
 			Class lexerClass = Class.forName(InjectorConfig.getInstance().getGrammarName()+"Lexer");
@@ -43,7 +44,7 @@ public class CheckErrorParsing {
 
 			CommonTokenStream tokens = new CommonTokenStream((TokenSource) o);
 
-			Class parserClass = Class.forName("GrammarShellForMancoosiParser");
+			Class parserClass = Class.forName(InjectorConfig.getInstance().getGrammarName()+"Parser");
 			Constructor conParser = parserClass.getConstructor(TokenStream.class);
 			Object oParser = conParser.newInstance(tokens);
 
@@ -78,7 +79,9 @@ public class CheckErrorParsing {
 			e.printStackTrace();
 			throw new InjectorException("InstantiationException");
 		}
+		
 		System.setErr(printStreamOriginal);
+		
 		return numberError;
 
 	}
