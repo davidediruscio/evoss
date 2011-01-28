@@ -25,7 +25,7 @@ public abstract class PackageSequence {
 
 			// To change if file format changes
 			if ((config.getFilePackageSequence()).endsWith(".xml")) {
-				INSTANCE = new PackageSequenceXML();
+				INSTANCE = new XmlPackageSequence();
 			} else {
 					throw new PackageSequenceFileException("Format PackageSequence '" +config.getFilePackageSequence() + "' not supported");
 			}
@@ -40,8 +40,26 @@ public abstract class PackageSequence {
 	 * @param index Position in the sequence
 	 * @return Package name
 	 */
-	abstract public String getPackageNameInput(int index);
+	abstract public String getPackageName(int index);
+	
+	/**
+	 * Returns the package version in the required position
+	 * 
+	 * @param index Position in the sequence
+	 * @return Package version
+	 */
+	abstract public String getPackageVersion(int index);
 
+	
+	/**
+	 * Returns the package architecture in the required position
+	 * 
+	 * @param index Position in the sequence
+	 * @return Package architecture
+	 */
+	abstract public String getPackageArchitecture(int index);
+
+	
 	/**
 	 * Returns the action to perform on 
 	 * the package in the required position

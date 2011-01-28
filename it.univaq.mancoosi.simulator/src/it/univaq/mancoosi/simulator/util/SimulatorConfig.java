@@ -13,7 +13,6 @@ import it.univaq.mancoosi.simulator.exceptions.SimulatorException;
 /**
  * Manages the recovery of the
  * configuration of the simulator
- * @author max
  */
 public class SimulatorConfig {
 
@@ -30,7 +29,6 @@ public class SimulatorConfig {
 	private String fileInputSystemModel;
 	private String fileExtensionPackageModel;
 	private String fileErrorModel;
-	private boolean enabledLogging;
 	private boolean saveFileLog;
 	private boolean saveOrchestrationModel;
 	private boolean saveTempFiles;
@@ -62,19 +60,14 @@ public class SimulatorConfig {
 			throw new SimulatorException("IO Error in properties file", e);
 		}
 
-		if (!(props.getProperty("enable_logging")).equals("no")) {
-			enabledLogging = true;
-		} else {
-			enabledLogging = false;
-		}
 
-		if (!(props.getProperty("save_file_log")).equals("no")) {
+		if (!(props.getProperty("save_file_logger")).equals("no")) {
 			saveFileLog = true;
 		} else {
 			saveFileLog = false;
 		}
 		
-		if ((props.getProperty("console_log_active")).equals("yes")) {
+		if ((props.getProperty("console_logger")).equals("yes")) {
 			consoleLog = true;
 		} else {
 			consoleLog = false;
@@ -182,13 +175,6 @@ public class SimulatorConfig {
 	 */
 	public String getFilePackageSequence() {
 		return filePackageSequence;
-	}
-
-	/**
-	 * @return the enabledLogging
-	 */
-	public Boolean isEnabledLogging() {
-		return enabledLogging;
 	}
 
 	/**

@@ -15,7 +15,7 @@ import java.nio.channels.FileChannel;
 
 /**
  * The class handles file copying,
- * the creation of temporary files...
+ * the creation of temporary files.
  * 
  * @author max
  */

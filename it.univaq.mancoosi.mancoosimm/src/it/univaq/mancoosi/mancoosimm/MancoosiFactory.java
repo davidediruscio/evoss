@@ -53,6 +53,42 @@ public interface MancoosiFactory extends EFactory {
 	NotInstalledPackage createNotInstalledPackage();
 
 	/**
+	 * Returns a new object of class '<em>Config Files Package</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Config Files Package</em>'.
+	 * @generated
+	 */
+	ConfigFilesPackage createConfigFilesPackage();
+
+	/**
+	 * Returns a new object of class '<em>Unpacked Package</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Unpacked Package</em>'.
+	 * @generated
+	 */
+	UnpackedPackage createUnpackedPackage();
+
+	/**
+	 * Returns a new object of class '<em>Half Configured Package</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Half Configured Package</em>'.
+	 * @generated
+	 */
+	HalfConfiguredPackage createHalfConfiguredPackage();
+
+	/**
+	 * Returns a new object of class '<em>Half Installed Package</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Half Installed Package</em>'.
+	 * @generated
+	 */
+	HalfInstalledPackage createHalfInstalledPackage();
+
+	/**
 	 * Returns a new object of class '<em>Src Package</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

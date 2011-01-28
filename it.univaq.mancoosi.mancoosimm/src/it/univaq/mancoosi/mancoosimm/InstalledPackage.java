@@ -18,14 +18,12 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  *   <li>{@link it.univaq.mancoosi.mancoosimm.InstalledPackage#getInstalledSize <em>Installed Size</em>}</li>
  *   <li>{@link it.univaq.mancoosi.mancoosimm.InstalledPackage#getMaintainer <em>Maintainer</em>}</li>
- *   <li>{@link it.univaq.mancoosi.mancoosimm.InstalledPackage#getArchitecture <em>Architecture</em>}</li>
  *   <li>{@link it.univaq.mancoosi.mancoosimm.InstalledPackage#getFileSize <em>File Size</em>}</li>
  *   <li>{@link it.univaq.mancoosi.mancoosimm.InstalledPackage#getCheckSum <em>Check Sum</em>}</li>
  *   <li>{@link it.univaq.mancoosi.mancoosimm.InstalledPackage#getDescription <em>Description</em>}</li>
  *   <li>{@link it.univaq.mancoosi.mancoosimm.InstalledPackage#getSection <em>Section</em>}</li>
  *   <li>{@link it.univaq.mancoosi.mancoosimm.InstalledPackage#getTag <em>Tag</em>}</li>
  *   <li>{@link it.univaq.mancoosi.mancoosimm.InstalledPackage#getPriority <em>Priority</em>}</li>
- *   <li>{@link it.univaq.mancoosi.mancoosimm.InstalledPackage#getStatus <em>Status</em>}</li>
  *   <li>{@link it.univaq.mancoosi.mancoosimm.InstalledPackage#getUploaders <em>Uploaders</em>}</li>
  *   <li>{@link it.univaq.mancoosi.mancoosimm.InstalledPackage#getSourcePackage <em>Source Package</em>}</li>
  *   <li>{@link it.univaq.mancoosi.mancoosimm.InstalledPackage#getDepends <em>Depends</em>}</li>
@@ -97,32 +95,6 @@ public interface InstalledPackage extends it.univaq.mancoosi.mancoosimm.Package 
 	 * @generated
 	 */
 	void setMaintainer(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Architecture</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Architecture</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Architecture</em>' attribute.
-	 * @see #setArchitecture(String)
-	 * @see it.univaq.mancoosi.mancoosimm.MancoosiPackage#getInstalledPackage_Architecture()
-	 * @model unique="false" required="true" ordered="false"
-	 * @generated
-	 */
-	String getArchitecture();
-
-	/**
-	 * Sets the value of the '{@link it.univaq.mancoosi.mancoosimm.InstalledPackage#getArchitecture <em>Architecture</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Architecture</em>' attribute.
-	 * @see #getArchitecture()
-	 * @generated
-	 */
-	void setArchitecture(String value);
 
 	/**
 	 * Returns the value of the '<em><b>File Size</b></em>' attribute.
@@ -282,35 +254,6 @@ public interface InstalledPackage extends it.univaq.mancoosi.mancoosimm.Package 
 	 * @generated
 	 */
 	void setPriority(PriorityType value);
-
-	/**
-	 * Returns the value of the '<em><b>Status</b></em>' attribute.
-	 * The literals are from the enumeration {@link it.univaq.mancoosi.mancoosimm.StatusType}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Status</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Status</em>' attribute.
-	 * @see it.univaq.mancoosi.mancoosimm.StatusType
-	 * @see #setStatus(StatusType)
-	 * @see it.univaq.mancoosi.mancoosimm.MancoosiPackage#getInstalledPackage_Status()
-	 * @model unique="false" required="true" ordered="false"
-	 * @generated
-	 */
-	StatusType getStatus();
-
-	/**
-	 * Sets the value of the '{@link it.univaq.mancoosi.mancoosimm.InstalledPackage#getStatus <em>Status</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Status</em>' attribute.
-	 * @see it.univaq.mancoosi.mancoosimm.StatusType
-	 * @see #getStatus()
-	 * @generated
-	 */
-	void setStatus(StatusType value);
 
 	/**
 	 * Returns the value of the '<em><b>Uploaders</b></em>' attribute.

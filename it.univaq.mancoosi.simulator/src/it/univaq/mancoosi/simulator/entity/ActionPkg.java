@@ -1,25 +1,38 @@
-/**
- * 
- */
+
 package it.univaq.mancoosi.simulator.entity;
 
-/**
- * 
- * @author max
- */
+
 public class ActionPkg {
 
-	private String packageNameInput;
+	private String packageName;
+	private String packageVersion;
+	private String packageArchitecture;
 	private String action;
 
+	
+
+	/**
+	 * Constructor
+	 *
+	 */
+	public ActionPkg() {}
+	
+	
 	/**
 	 * Constructor
 	 * 
 	 * @param name
 	 * @param action
+	 * @param packageVersion 
+	 * @param packageRelease 
+	 * @param packageArchitecture 
 	 */
-	public ActionPkg(String name, String action) {
-		packageNameInput = name;
+	public ActionPkg(String packageName, String packageVersion,
+			String packageArchitecture,
+			String action) {
+		this.packageName = packageName;
+		this.packageVersion = packageVersion;
+		this.packageArchitecture = packageArchitecture;
 		this.action = action;
 	}
 
@@ -38,19 +51,28 @@ public class ActionPkg {
 		return action;
 	}
 
-	/**
-	 * @param namePackage
-	 *            the namePackage to set
-	 */
-	public void setNamePackageInput(String packageNameInput) {
-		this.packageNameInput = packageNameInput;
+	public void setPackageName(String packageName) {
+		this.packageName = packageName;
 	}
 
-	/**
-	 * @return the namePackage
-	 */
-	public String getPackageNameInput() {
-		return packageNameInput;
+	public String getPackageName() {
+		return packageName;
+	}
+
+	public void setPackageVersion(String packageVersion) {
+		this.packageVersion = packageVersion;
+	}
+
+	public String getPackageVersion() {
+		return packageVersion;
+	}
+
+	public void setPackageArchitecture(String packageArchitecture) {
+		this.packageArchitecture = packageArchitecture;
+	}
+
+	public String getPackageArchitecture() {
+		return packageArchitecture;
 	}
 
 }

@@ -14,9 +14,7 @@ import java.util.logging.SimpleFormatter;
 import it.univaq.mancoosi.simulator.exceptions.SimulatorException;
 
 /**
- * Manages the logger and
- * its configuration as the formatting ...
- * @author max
+ * Manages the logger and its configuration.
  */
 public class SimulatorLogger {
 
@@ -48,7 +46,7 @@ public class SimulatorLogger {
 			config = SimulatorConfig.getInstance();
 			logger = Logger.getLogger("it.univaq.mancoosi.simulator");
 
-			if (config.isEnabledLogging()) {
+			if (config.isConsoleLog() || config.isSaveFileLog()) {
 				
 				if (config.isConsoleLog()) {
 					logger.setUseParentHandlers(true);

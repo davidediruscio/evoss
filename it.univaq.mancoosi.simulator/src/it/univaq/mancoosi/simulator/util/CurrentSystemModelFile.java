@@ -15,7 +15,7 @@ import java.io.File;
 public class CurrentSystemModelFile {
 
 	private static CurrentSystemModelFile instance = null;
-	File systemModelCurrentFile;
+	private File systemModelCurrentFile;
 
 	/**
 	 * Singleton

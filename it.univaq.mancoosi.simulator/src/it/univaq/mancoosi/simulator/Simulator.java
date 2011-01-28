@@ -5,7 +5,7 @@ package it.univaq.mancoosi.simulator;
 
 
 
-import it.univaq.mancoosi.simulator.control.SimulatorManager;
+import it.univaq.mancoosi.simulator.controller.SimulatorController;
 import it.univaq.mancoosi.simulator.util.SimulatorLogger;
 
 
@@ -21,7 +21,7 @@ public class Simulator {
 		try {
 			System.out.println("Simulation started.");
 
-			SimulatorManager.getInstance().start();
+			SimulatorController.getInstance().start();
 
 			System.out.println("Simulation succeeded.");
 
