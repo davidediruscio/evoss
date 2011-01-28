@@ -1,14 +1,14 @@
 CLIENT AND SERVER OPTIONS:
 Allowed options for the fdclient are:
--l (local OCL queries and jars execution with previous lists update),	OK
--rl (remote OCL queries and local jars execution with previous lists update), OK
--r (remote OCL queries)	OK
--offline (local OCL queries and jars execution without previous lists update), OK
--updateonly (lists update only), OK
--qsexecutel (local OCL queries execution) <<oclfilepath (.ocl) or OCL queries separated by space>>, OK
--qsexecuter (remote OCL queries execution) <<oclfilepath (.ocl) or OCL queries separated by space>>, OK
--jsexecute (jars execution) <<jarslistfilepath (.txt) or jar files paths separated by space>>, OK
-no options (default scenario, equivalent to -l option). OK
+-l (local OCL queries and jars execution with previous lists update),	
+-rl (remote OCL queries and local jars execution with previous lists update), 
+-r (remote OCL queries)	
+-offline (local OCL queries and jars execution without previous lists update), 
+-updateonly (lists update only), 
+-qsexecutel (local OCL queries execution) <<oclfilepath (.ocl) or OCL queries separated by space>>, 
+-qsexecuter (remote OCL queries execution) <<oclfilepath (.ocl) or OCL queries separated by space>>, 
+-jsexecute (jars execution) <<jarslistfilepath (.txt) or jar files paths separated by space>>, 
+no options (default scenario, equivalent to -l option). 
 
 
 Allowed options for the fdserver are:
