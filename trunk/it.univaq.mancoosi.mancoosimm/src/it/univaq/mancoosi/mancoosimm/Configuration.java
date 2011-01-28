@@ -16,12 +16,16 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link it.univaq.mancoosi.mancoosimm.Configuration#getInstalledPackages <em>Installed Packages</em>}</li>
- *   <li>{@link it.univaq.mancoosi.mancoosimm.Configuration#getFileSystem <em>File System</em>}</li>
- *   <li>{@link it.univaq.mancoosi.mancoosimm.Configuration#getEnvironment <em>Environment</em>}</li>
- *   <li>{@link it.univaq.mancoosi.mancoosimm.Configuration#getNotInstalledPackages <em>Not Installed Packages</em>}</li>
  *   <li>{@link it.univaq.mancoosi.mancoosimm.Configuration#getCreationTime <em>Creation Time</em>}</li>
  *   <li>{@link it.univaq.mancoosi.mancoosimm.Configuration#getSystemType <em>System Type</em>}</li>
+ *   <li>{@link it.univaq.mancoosi.mancoosimm.Configuration#getFileSystem <em>File System</em>}</li>
+ *   <li>{@link it.univaq.mancoosi.mancoosimm.Configuration#getEnvironment <em>Environment</em>}</li>
+ *   <li>{@link it.univaq.mancoosi.mancoosimm.Configuration#getInstalledPackages <em>Installed Packages</em>}</li>
+ *   <li>{@link it.univaq.mancoosi.mancoosimm.Configuration#getNotInstalledPackages <em>Not Installed Packages</em>}</li>
+ *   <li>{@link it.univaq.mancoosi.mancoosimm.Configuration#getConfigFilesPackages <em>Config Files Packages</em>}</li>
+ *   <li>{@link it.univaq.mancoosi.mancoosimm.Configuration#getUnpackedPackages <em>Unpacked Packages</em>}</li>
+ *   <li>{@link it.univaq.mancoosi.mancoosimm.Configuration#getHalfConfiguredPackages <em>Half Configured Packages</em>}</li>
+ *   <li>{@link it.univaq.mancoosi.mancoosimm.Configuration#getHalfInstalledPackages <em>Half Installed Packages</em>}</li>
  * </ul>
  * </p>
  *
@@ -31,20 +35,56 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface Configuration extends NamedElement {
 	/**
-	 * Returns the value of the '<em><b>Installed Packages</b></em>' containment reference list.
-	 * The list contents are of type {@link it.univaq.mancoosi.mancoosimm.InstalledPackage}.
+	 * Returns the value of the '<em><b>Creation Time</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Installed Packages</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Creation Time</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Installed Packages</em>' containment reference list.
-	 * @see it.univaq.mancoosi.mancoosimm.MancoosiPackage#getConfiguration_InstalledPackages()
-	 * @model containment="true" ordered="false"
+	 * @return the value of the '<em>Creation Time</em>' attribute.
+	 * @see #setCreationTime(String)
+	 * @see it.univaq.mancoosi.mancoosimm.MancoosiPackage#getConfiguration_CreationTime()
+	 * @model
 	 * @generated
 	 */
-	EList<InstalledPackage> getInstalledPackages();
+	String getCreationTime();
+
+	/**
+	 * Sets the value of the '{@link it.univaq.mancoosi.mancoosimm.Configuration#getCreationTime <em>Creation Time</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Creation Time</em>' attribute.
+	 * @see #getCreationTime()
+	 * @generated
+	 */
+	void setCreationTime(String value);
+
+	/**
+	 * Returns the value of the '<em><b>System Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>System Type</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>System Type</em>' attribute.
+	 * @see #setSystemType(String)
+	 * @see it.univaq.mancoosi.mancoosimm.MancoosiPackage#getConfiguration_SystemType()
+	 * @model
+	 * @generated
+	 */
+	String getSystemType();
+
+	/**
+	 * Sets the value of the '{@link it.univaq.mancoosi.mancoosimm.Configuration#getSystemType <em>System Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>System Type</em>' attribute.
+	 * @see #getSystemType()
+	 * @generated
+	 */
+	void setSystemType(String value);
 
 	/**
 	 * Returns the value of the '<em><b>File System</b></em>' containment reference.
@@ -103,6 +143,22 @@ public interface Configuration extends NamedElement {
 	void setEnvironment(Environment value);
 
 	/**
+	 * Returns the value of the '<em><b>Installed Packages</b></em>' containment reference list.
+	 * The list contents are of type {@link it.univaq.mancoosi.mancoosimm.InstalledPackage}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Installed Packages</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Installed Packages</em>' containment reference list.
+	 * @see it.univaq.mancoosi.mancoosimm.MancoosiPackage#getConfiguration_InstalledPackages()
+	 * @model containment="true" ordered="false"
+	 * @generated
+	 */
+	EList<InstalledPackage> getInstalledPackages();
+
+	/**
 	 * Returns the value of the '<em><b>Not Installed Packages</b></em>' containment reference list.
 	 * The list contents are of type {@link it.univaq.mancoosi.mancoosimm.NotInstalledPackage}.
 	 * <!-- begin-user-doc -->
@@ -119,55 +175,67 @@ public interface Configuration extends NamedElement {
 	EList<NotInstalledPackage> getNotInstalledPackages();
 
 	/**
-	 * Returns the value of the '<em><b>Creation Time</b></em>' attribute.
+	 * Returns the value of the '<em><b>Config Files Packages</b></em>' containment reference list.
+	 * The list contents are of type {@link it.univaq.mancoosi.mancoosimm.ConfigFilesPackage}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Creation Time</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Config Files Packages</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Creation Time</em>' attribute.
-	 * @see #setCreationTime(String)
-	 * @see it.univaq.mancoosi.mancoosimm.MancoosiPackage#getConfiguration_CreationTime()
-	 * @model
+	 * @return the value of the '<em>Config Files Packages</em>' containment reference list.
+	 * @see it.univaq.mancoosi.mancoosimm.MancoosiPackage#getConfiguration_ConfigFilesPackages()
+	 * @model containment="true" ordered="false"
 	 * @generated
 	 */
-	String getCreationTime();
+	EList<ConfigFilesPackage> getConfigFilesPackages();
 
 	/**
-	 * Sets the value of the '{@link it.univaq.mancoosi.mancoosimm.Configuration#getCreationTime <em>Creation Time</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Creation Time</em>' attribute.
-	 * @see #getCreationTime()
-	 * @generated
-	 */
-	void setCreationTime(String value);
-
-	/**
-	 * Returns the value of the '<em><b>System Type</b></em>' attribute.
+	 * Returns the value of the '<em><b>Unpacked Packages</b></em>' containment reference list.
+	 * The list contents are of type {@link it.univaq.mancoosi.mancoosimm.UnpackedPackage}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>System Type</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Unpacked Packages</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>System Type</em>' attribute.
-	 * @see #setSystemType(String)
-	 * @see it.univaq.mancoosi.mancoosimm.MancoosiPackage#getConfiguration_SystemType()
-	 * @model
+	 * @return the value of the '<em>Unpacked Packages</em>' containment reference list.
+	 * @see it.univaq.mancoosi.mancoosimm.MancoosiPackage#getConfiguration_UnpackedPackages()
+	 * @model containment="true" ordered="false"
 	 * @generated
 	 */
-	String getSystemType();
+	EList<UnpackedPackage> getUnpackedPackages();
 
 	/**
-	 * Sets the value of the '{@link it.univaq.mancoosi.mancoosimm.Configuration#getSystemType <em>System Type</em>}' attribute.
+	 * Returns the value of the '<em><b>Half Configured Packages</b></em>' containment reference list.
+	 * The list contents are of type {@link it.univaq.mancoosi.mancoosimm.HalfConfiguredPackage}.
 	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Half Configured Packages</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>System Type</em>' attribute.
-	 * @see #getSystemType()
+	 * @return the value of the '<em>Half Configured Packages</em>' containment reference list.
+	 * @see it.univaq.mancoosi.mancoosimm.MancoosiPackage#getConfiguration_HalfConfiguredPackages()
+	 * @model containment="true" ordered="false"
 	 * @generated
 	 */
-	void setSystemType(String value);
+	EList<HalfConfiguredPackage> getHalfConfiguredPackages();
+
+	/**
+	 * Returns the value of the '<em><b>Half Installed Packages</b></em>' containment reference list.
+	 * The list contents are of type {@link it.univaq.mancoosi.mancoosimm.HalfInstalledPackage}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Half Installed Packages</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Half Installed Packages</em>' containment reference list.
+	 * @see it.univaq.mancoosi.mancoosimm.MancoosiPackage#getConfiguration_HalfInstalledPackages()
+	 * @model containment="true" ordered="false"
+	 * @generated
+	 */
+	EList<HalfInstalledPackage> getHalfInstalledPackages();
 
 } // Configuration

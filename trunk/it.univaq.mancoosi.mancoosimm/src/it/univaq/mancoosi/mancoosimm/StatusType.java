@@ -33,14 +33,54 @@ public enum StatusType implements Enumerator {
 	INSTALLED(1, "installed", "installed"),
 
 	/**
-	 * The '<em><b>None</b></em>' literal object.
+	 * The '<em><b>Not installed</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #NONE_VALUE
+	 * @see #NOT_INSTALLED_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	NONE(2, "none", "none");
+	NOT_INSTALLED(2, "not_installed", "not_installed"),
+
+	/**
+	 * The '<em><b>Half configured</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #HALF_CONFIGURED_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	HALF_CONFIGURED(3, "half_configured", "half_configured"),
+
+	/**
+	 * The '<em><b>Half installed</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #HALF_INSTALLED_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	HALF_INSTALLED(4, "half_installed", "half_installed"),
+
+	/**
+	 * The '<em><b>Config files</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #CONFIG_FILES_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	CONFIG_FILES(5, "config_files", "config_files"),
+
+	/**
+	 * The '<em><b>Unpacked</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #UNPACKED_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	UNPACKED(6, "unpacked", "unpacked");
 
 	/**
 	 * The '<em><b>Installed</b></em>' literal value.
@@ -58,19 +98,79 @@ public enum StatusType implements Enumerator {
 	public static final int INSTALLED_VALUE = 1;
 
 	/**
-	 * The '<em><b>None</b></em>' literal value.
+	 * The '<em><b>Not installed</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>None</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>Not installed</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #NONE
-	 * @model name="none"
+	 * @see #NOT_INSTALLED
+	 * @model name="not_installed"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int NONE_VALUE = 2;
+	public static final int NOT_INSTALLED_VALUE = 2;
+
+	/**
+	 * The '<em><b>Half configured</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Half configured</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #HALF_CONFIGURED
+	 * @model name="half_configured"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int HALF_CONFIGURED_VALUE = 3;
+
+	/**
+	 * The '<em><b>Half installed</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Half installed</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #HALF_INSTALLED
+	 * @model name="half_installed"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int HALF_INSTALLED_VALUE = 4;
+
+	/**
+	 * The '<em><b>Config files</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Config files</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #CONFIG_FILES
+	 * @model name="config_files"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CONFIG_FILES_VALUE = 5;
+
+	/**
+	 * The '<em><b>Unpacked</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Unpacked</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #UNPACKED
+	 * @model name="unpacked"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int UNPACKED_VALUE = 6;
 
 	/**
 	 * An array of all the '<em><b>Status Type</b></em>' enumerators.
@@ -81,7 +181,11 @@ public enum StatusType implements Enumerator {
 	private static final StatusType[] VALUES_ARRAY =
 		new StatusType[] {
 			INSTALLED,
-			NONE,
+			NOT_INSTALLED,
+			HALF_CONFIGURED,
+			HALF_INSTALLED,
+			CONFIG_FILES,
+			UNPACKED,
 		};
 
 	/**
@@ -133,7 +237,11 @@ public enum StatusType implements Enumerator {
 	public static StatusType get(int value) {
 		switch (value) {
 			case INSTALLED_VALUE: return INSTALLED;
-			case NONE_VALUE: return NONE;
+			case NOT_INSTALLED_VALUE: return NOT_INSTALLED;
+			case HALF_CONFIGURED_VALUE: return HALF_CONFIGURED;
+			case HALF_INSTALLED_VALUE: return HALF_INSTALLED;
+			case CONFIG_FILES_VALUE: return CONFIG_FILES;
+			case UNPACKED_VALUE: return UNPACKED;
 		}
 		return null;
 	}

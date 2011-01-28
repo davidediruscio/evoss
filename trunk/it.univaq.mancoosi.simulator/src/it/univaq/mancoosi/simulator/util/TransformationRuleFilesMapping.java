@@ -20,8 +20,7 @@ import org.xml.sax.SAXException;
 
 /**
  * Manages the mapping between the elements 
- * of a model and related files ATL
- * @author max
+ * of a model and related ATL files
  */
 public class TransformationRuleFilesMapping {
 
@@ -75,16 +74,14 @@ public class TransformationRuleFilesMapping {
 				Node fstNode = nodeLst.item(s);
 
 				if (fstNode.getNodeType() == Node.ELEMENT_NODE) {
-					map.put(fstNode.getAttributes()
-							.getNamedItem("elementModel").getNodeValue(),
-							fstNode.getAttributes().getNamedItem(
-									"transformationFile").getNodeValue());
+					map.put(fstNode.getAttributes().getNamedItem("elementModel").getNodeValue(),
+							fstNode.getAttributes().getNamedItem("transformationFile").getNodeValue());
 				}
 
 			}
 
 		} catch (SAXException e) {
-			throw new SimulatorException("Error in the parser SAX", e);
+			throw new SimulatorException("Error in the SAX parser", e);
 		} catch (IOException e) {
 			throw new SimulatorException("IO Error in XML parser", e);
 		} catch (ParserConfigurationException e) {

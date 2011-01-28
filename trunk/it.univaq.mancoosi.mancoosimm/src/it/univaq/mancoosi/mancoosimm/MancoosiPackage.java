@@ -108,49 +108,13 @@ public interface MancoosiPackage extends EPackage {
 	int CONFIGURATION__NAME = NAMED_ELEMENT__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Installed Packages</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONFIGURATION__INSTALLED_PACKAGES = NAMED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>File System</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONFIGURATION__FILE_SYSTEM = NAMED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Environment</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONFIGURATION__ENVIRONMENT = NAMED_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Not Installed Packages</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONFIGURATION__NOT_INSTALLED_PACKAGES = NAMED_ELEMENT_FEATURE_COUNT + 3;
-
-	/**
 	 * The feature id for the '<em><b>Creation Time</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONFIGURATION__CREATION_TIME = NAMED_ELEMENT_FEATURE_COUNT + 4;
+	int CONFIGURATION__CREATION_TIME = NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>System Type</b></em>' attribute.
@@ -159,7 +123,79 @@ public interface MancoosiPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONFIGURATION__SYSTEM_TYPE = NAMED_ELEMENT_FEATURE_COUNT + 5;
+	int CONFIGURATION__SYSTEM_TYPE = NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>File System</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONFIGURATION__FILE_SYSTEM = NAMED_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Environment</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONFIGURATION__ENVIRONMENT = NAMED_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Installed Packages</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONFIGURATION__INSTALLED_PACKAGES = NAMED_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Not Installed Packages</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONFIGURATION__NOT_INSTALLED_PACKAGES = NAMED_ELEMENT_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Config Files Packages</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONFIGURATION__CONFIG_FILES_PACKAGES = NAMED_ELEMENT_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>Unpacked Packages</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONFIGURATION__UNPACKED_PACKAGES = NAMED_ELEMENT_FEATURE_COUNT + 7;
+
+	/**
+	 * The feature id for the '<em><b>Half Configured Packages</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONFIGURATION__HALF_CONFIGURED_PACKAGES = NAMED_ELEMENT_FEATURE_COUNT + 8;
+
+	/**
+	 * The feature id for the '<em><b>Half Installed Packages</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONFIGURATION__HALF_INSTALLED_PACKAGES = NAMED_ELEMENT_FEATURE_COUNT + 9;
 
 	/**
 	 * The number of structural features of the '<em>Configuration</em>' class.
@@ -168,7 +204,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONFIGURATION_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 6;
+	int CONFIGURATION_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 10;
 
 	/**
 	 * The meta object id for the '{@link it.univaq.mancoosi.mancoosimm.impl.PackageImpl <em>Package</em>}' class.
@@ -178,7 +214,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getPackage()
 	 * @generated
 	 */
-	int PACKAGE = 51;
+	int PACKAGE = 2;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -217,13 +253,22 @@ public interface MancoosiPackage extends EPackage {
 	int PACKAGE__PACKAGE_SETTINGS = NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Architecture</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PACKAGE__ARCHITECTURE = NAMED_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Package</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PACKAGE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int PACKAGE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link it.univaq.mancoosi.mancoosimm.impl.InstalledPackageImpl <em>Installed Package</em>}' class.
@@ -233,7 +278,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getInstalledPackage()
 	 * @generated
 	 */
-	int INSTALLED_PACKAGE = 2;
+	int INSTALLED_PACKAGE = 3;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -272,6 +317,15 @@ public interface MancoosiPackage extends EPackage {
 	int INSTALLED_PACKAGE__PACKAGE_SETTINGS = PACKAGE__PACKAGE_SETTINGS;
 
 	/**
+	 * The feature id for the '<em><b>Architecture</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INSTALLED_PACKAGE__ARCHITECTURE = PACKAGE__ARCHITECTURE;
+
+	/**
 	 * The feature id for the '<em><b>Installed Size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -290,22 +344,13 @@ public interface MancoosiPackage extends EPackage {
 	int INSTALLED_PACKAGE__MAINTAINER = PACKAGE_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Architecture</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INSTALLED_PACKAGE__ARCHITECTURE = PACKAGE_FEATURE_COUNT + 2;
-
-	/**
 	 * The feature id for the '<em><b>File Size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INSTALLED_PACKAGE__FILE_SIZE = PACKAGE_FEATURE_COUNT + 3;
+	int INSTALLED_PACKAGE__FILE_SIZE = PACKAGE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Check Sum</b></em>' attribute.
@@ -314,7 +359,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INSTALLED_PACKAGE__CHECK_SUM = PACKAGE_FEATURE_COUNT + 4;
+	int INSTALLED_PACKAGE__CHECK_SUM = PACKAGE_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -323,7 +368,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INSTALLED_PACKAGE__DESCRIPTION = PACKAGE_FEATURE_COUNT + 5;
+	int INSTALLED_PACKAGE__DESCRIPTION = PACKAGE_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Section</b></em>' attribute.
@@ -332,7 +377,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INSTALLED_PACKAGE__SECTION = PACKAGE_FEATURE_COUNT + 6;
+	int INSTALLED_PACKAGE__SECTION = PACKAGE_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' attribute.
@@ -341,7 +386,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INSTALLED_PACKAGE__TAG = PACKAGE_FEATURE_COUNT + 7;
+	int INSTALLED_PACKAGE__TAG = PACKAGE_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Priority</b></em>' attribute.
@@ -350,16 +395,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INSTALLED_PACKAGE__PRIORITY = PACKAGE_FEATURE_COUNT + 8;
-
-	/**
-	 * The feature id for the '<em><b>Status</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INSTALLED_PACKAGE__STATUS = PACKAGE_FEATURE_COUNT + 9;
+	int INSTALLED_PACKAGE__PRIORITY = PACKAGE_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Uploaders</b></em>' attribute.
@@ -368,7 +404,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INSTALLED_PACKAGE__UPLOADERS = PACKAGE_FEATURE_COUNT + 10;
+	int INSTALLED_PACKAGE__UPLOADERS = PACKAGE_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Source Package</b></em>' reference.
@@ -377,7 +413,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INSTALLED_PACKAGE__SOURCE_PACKAGE = PACKAGE_FEATURE_COUNT + 11;
+	int INSTALLED_PACKAGE__SOURCE_PACKAGE = PACKAGE_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Depends</b></em>' containment reference.
@@ -386,7 +422,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INSTALLED_PACKAGE__DEPENDS = PACKAGE_FEATURE_COUNT + 12;
+	int INSTALLED_PACKAGE__DEPENDS = PACKAGE_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Recommends</b></em>' reference list.
@@ -395,7 +431,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INSTALLED_PACKAGE__RECOMMENDS = PACKAGE_FEATURE_COUNT + 13;
+	int INSTALLED_PACKAGE__RECOMMENDS = PACKAGE_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Suggests</b></em>' reference list.
@@ -404,7 +440,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INSTALLED_PACKAGE__SUGGESTS = PACKAGE_FEATURE_COUNT + 14;
+	int INSTALLED_PACKAGE__SUGGESTS = PACKAGE_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Enhances</b></em>' reference list.
@@ -413,7 +449,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INSTALLED_PACKAGE__ENHANCES = PACKAGE_FEATURE_COUNT + 15;
+	int INSTALLED_PACKAGE__ENHANCES = PACKAGE_FEATURE_COUNT + 13;
 
 	/**
 	 * The feature id for the '<em><b>Predepends</b></em>' reference list.
@@ -422,7 +458,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INSTALLED_PACKAGE__PREDEPENDS = PACKAGE_FEATURE_COUNT + 16;
+	int INSTALLED_PACKAGE__PREDEPENDS = PACKAGE_FEATURE_COUNT + 14;
 
 	/**
 	 * The feature id for the '<em><b>Provides</b></em>' reference.
@@ -431,7 +467,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INSTALLED_PACKAGE__PROVIDES = PACKAGE_FEATURE_COUNT + 17;
+	int INSTALLED_PACKAGE__PROVIDES = PACKAGE_FEATURE_COUNT + 15;
 
 	/**
 	 * The feature id for the '<em><b>Replaces</b></em>' reference list.
@@ -440,7 +476,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INSTALLED_PACKAGE__REPLACES = PACKAGE_FEATURE_COUNT + 18;
+	int INSTALLED_PACKAGE__REPLACES = PACKAGE_FEATURE_COUNT + 16;
 
 	/**
 	 * The feature id for the '<em><b>Files</b></em>' reference list.
@@ -449,7 +485,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INSTALLED_PACKAGE__FILES = PACKAGE_FEATURE_COUNT + 19;
+	int INSTALLED_PACKAGE__FILES = PACKAGE_FEATURE_COUNT + 17;
 
 	/**
 	 * The feature id for the '<em><b>Documentation Files</b></em>' containment reference list.
@@ -458,7 +494,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INSTALLED_PACKAGE__DOCUMENTATION_FILES = PACKAGE_FEATURE_COUNT + 20;
+	int INSTALLED_PACKAGE__DOCUMENTATION_FILES = PACKAGE_FEATURE_COUNT + 18;
 
 	/**
 	 * The feature id for the '<em><b>Conflict</b></em>' containment reference.
@@ -467,7 +503,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INSTALLED_PACKAGE__CONFLICT = PACKAGE_FEATURE_COUNT + 21;
+	int INSTALLED_PACKAGE__CONFLICT = PACKAGE_FEATURE_COUNT + 19;
 
 	/**
 	 * The number of structural features of the '<em>Installed Package</em>' class.
@@ -476,7 +512,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INSTALLED_PACKAGE_FEATURE_COUNT = PACKAGE_FEATURE_COUNT + 22;
+	int INSTALLED_PACKAGE_FEATURE_COUNT = PACKAGE_FEATURE_COUNT + 20;
 
 	/**
 	 * The meta object id for the '{@link it.univaq.mancoosi.mancoosimm.impl.NotInstalledPackageImpl <em>Not Installed Package</em>}' class.
@@ -486,7 +522,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getNotInstalledPackage()
 	 * @generated
 	 */
-	int NOT_INSTALLED_PACKAGE = 3;
+	int NOT_INSTALLED_PACKAGE = 4;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -525,6 +561,15 @@ public interface MancoosiPackage extends EPackage {
 	int NOT_INSTALLED_PACKAGE__PACKAGE_SETTINGS = PACKAGE__PACKAGE_SETTINGS;
 
 	/**
+	 * The feature id for the '<em><b>Architecture</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NOT_INSTALLED_PACKAGE__ARCHITECTURE = PACKAGE__ARCHITECTURE;
+
+	/**
 	 * The number of structural features of the '<em>Not Installed Package</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -534,6 +579,532 @@ public interface MancoosiPackage extends EPackage {
 	int NOT_INSTALLED_PACKAGE_FEATURE_COUNT = PACKAGE_FEATURE_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link it.univaq.mancoosi.mancoosimm.impl.ConfigFilesPackageImpl <em>Config Files Package</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see it.univaq.mancoosi.mancoosimm.impl.ConfigFilesPackageImpl
+	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getConfigFilesPackage()
+	 * @generated
+	 */
+	int CONFIG_FILES_PACKAGE = 5;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONFIG_FILES_PACKAGE__NAME = PACKAGE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Version</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONFIG_FILES_PACKAGE__VERSION = PACKAGE__VERSION;
+
+	/**
+	 * The feature id for the '<em><b>Configuration</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONFIG_FILES_PACKAGE__CONFIGURATION = PACKAGE__CONFIGURATION;
+
+	/**
+	 * The feature id for the '<em><b>Package Settings</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONFIG_FILES_PACKAGE__PACKAGE_SETTINGS = PACKAGE__PACKAGE_SETTINGS;
+
+	/**
+	 * The feature id for the '<em><b>Architecture</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONFIG_FILES_PACKAGE__ARCHITECTURE = PACKAGE__ARCHITECTURE;
+
+	/**
+	 * The feature id for the '<em><b>Maintainer</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONFIG_FILES_PACKAGE__MAINTAINER = PACKAGE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Check Sum</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONFIG_FILES_PACKAGE__CHECK_SUM = PACKAGE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONFIG_FILES_PACKAGE__DESCRIPTION = PACKAGE_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Section</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONFIG_FILES_PACKAGE__SECTION = PACKAGE_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONFIG_FILES_PACKAGE__TAG = PACKAGE_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Priority</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONFIG_FILES_PACKAGE__PRIORITY = PACKAGE_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Uploaders</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONFIG_FILES_PACKAGE__UPLOADERS = PACKAGE_FEATURE_COUNT + 6;
+
+	/**
+	 * The number of structural features of the '<em>Config Files Package</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONFIG_FILES_PACKAGE_FEATURE_COUNT = PACKAGE_FEATURE_COUNT + 7;
+
+	/**
+	 * The meta object id for the '{@link it.univaq.mancoosi.mancoosimm.impl.UnpackedPackageImpl <em>Unpacked Package</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see it.univaq.mancoosi.mancoosimm.impl.UnpackedPackageImpl
+	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getUnpackedPackage()
+	 * @generated
+	 */
+	int UNPACKED_PACKAGE = 6;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNPACKED_PACKAGE__NAME = PACKAGE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Version</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNPACKED_PACKAGE__VERSION = PACKAGE__VERSION;
+
+	/**
+	 * The feature id for the '<em><b>Configuration</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNPACKED_PACKAGE__CONFIGURATION = PACKAGE__CONFIGURATION;
+
+	/**
+	 * The feature id for the '<em><b>Package Settings</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNPACKED_PACKAGE__PACKAGE_SETTINGS = PACKAGE__PACKAGE_SETTINGS;
+
+	/**
+	 * The feature id for the '<em><b>Architecture</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNPACKED_PACKAGE__ARCHITECTURE = PACKAGE__ARCHITECTURE;
+
+	/**
+	 * The feature id for the '<em><b>Maintainer</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNPACKED_PACKAGE__MAINTAINER = PACKAGE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Check Sum</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNPACKED_PACKAGE__CHECK_SUM = PACKAGE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNPACKED_PACKAGE__DESCRIPTION = PACKAGE_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Section</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNPACKED_PACKAGE__SECTION = PACKAGE_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNPACKED_PACKAGE__TAG = PACKAGE_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Priority</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNPACKED_PACKAGE__PRIORITY = PACKAGE_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Uploaders</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNPACKED_PACKAGE__UPLOADERS = PACKAGE_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>Files</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNPACKED_PACKAGE__FILES = PACKAGE_FEATURE_COUNT + 7;
+
+	/**
+	 * The number of structural features of the '<em>Unpacked Package</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNPACKED_PACKAGE_FEATURE_COUNT = PACKAGE_FEATURE_COUNT + 8;
+
+	/**
+	 * The meta object id for the '{@link it.univaq.mancoosi.mancoosimm.impl.HalfConfiguredPackageImpl <em>Half Configured Package</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see it.univaq.mancoosi.mancoosimm.impl.HalfConfiguredPackageImpl
+	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getHalfConfiguredPackage()
+	 * @generated
+	 */
+	int HALF_CONFIGURED_PACKAGE = 7;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HALF_CONFIGURED_PACKAGE__NAME = UNPACKED_PACKAGE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Version</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HALF_CONFIGURED_PACKAGE__VERSION = UNPACKED_PACKAGE__VERSION;
+
+	/**
+	 * The feature id for the '<em><b>Configuration</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HALF_CONFIGURED_PACKAGE__CONFIGURATION = UNPACKED_PACKAGE__CONFIGURATION;
+
+	/**
+	 * The feature id for the '<em><b>Package Settings</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HALF_CONFIGURED_PACKAGE__PACKAGE_SETTINGS = UNPACKED_PACKAGE__PACKAGE_SETTINGS;
+
+	/**
+	 * The feature id for the '<em><b>Architecture</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HALF_CONFIGURED_PACKAGE__ARCHITECTURE = UNPACKED_PACKAGE__ARCHITECTURE;
+
+	/**
+	 * The feature id for the '<em><b>Maintainer</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HALF_CONFIGURED_PACKAGE__MAINTAINER = UNPACKED_PACKAGE__MAINTAINER;
+
+	/**
+	 * The feature id for the '<em><b>Check Sum</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HALF_CONFIGURED_PACKAGE__CHECK_SUM = UNPACKED_PACKAGE__CHECK_SUM;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HALF_CONFIGURED_PACKAGE__DESCRIPTION = UNPACKED_PACKAGE__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Section</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HALF_CONFIGURED_PACKAGE__SECTION = UNPACKED_PACKAGE__SECTION;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HALF_CONFIGURED_PACKAGE__TAG = UNPACKED_PACKAGE__TAG;
+
+	/**
+	 * The feature id for the '<em><b>Priority</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HALF_CONFIGURED_PACKAGE__PRIORITY = UNPACKED_PACKAGE__PRIORITY;
+
+	/**
+	 * The feature id for the '<em><b>Uploaders</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HALF_CONFIGURED_PACKAGE__UPLOADERS = UNPACKED_PACKAGE__UPLOADERS;
+
+	/**
+	 * The feature id for the '<em><b>Files</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HALF_CONFIGURED_PACKAGE__FILES = UNPACKED_PACKAGE__FILES;
+
+	/**
+	 * The number of structural features of the '<em>Half Configured Package</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HALF_CONFIGURED_PACKAGE_FEATURE_COUNT = UNPACKED_PACKAGE_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link it.univaq.mancoosi.mancoosimm.impl.HalfInstalledPackageImpl <em>Half Installed Package</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see it.univaq.mancoosi.mancoosimm.impl.HalfInstalledPackageImpl
+	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getHalfInstalledPackage()
+	 * @generated
+	 */
+	int HALF_INSTALLED_PACKAGE = 8;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HALF_INSTALLED_PACKAGE__NAME = PACKAGE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Version</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HALF_INSTALLED_PACKAGE__VERSION = PACKAGE__VERSION;
+
+	/**
+	 * The feature id for the '<em><b>Configuration</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HALF_INSTALLED_PACKAGE__CONFIGURATION = PACKAGE__CONFIGURATION;
+
+	/**
+	 * The feature id for the '<em><b>Package Settings</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HALF_INSTALLED_PACKAGE__PACKAGE_SETTINGS = PACKAGE__PACKAGE_SETTINGS;
+
+	/**
+	 * The feature id for the '<em><b>Architecture</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HALF_INSTALLED_PACKAGE__ARCHITECTURE = PACKAGE__ARCHITECTURE;
+
+	/**
+	 * The feature id for the '<em><b>Maintainer</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HALF_INSTALLED_PACKAGE__MAINTAINER = PACKAGE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Check Sum</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HALF_INSTALLED_PACKAGE__CHECK_SUM = PACKAGE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HALF_INSTALLED_PACKAGE__DESCRIPTION = PACKAGE_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Section</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HALF_INSTALLED_PACKAGE__SECTION = PACKAGE_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HALF_INSTALLED_PACKAGE__TAG = PACKAGE_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Priority</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HALF_INSTALLED_PACKAGE__PRIORITY = PACKAGE_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Uploaders</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HALF_INSTALLED_PACKAGE__UPLOADERS = PACKAGE_FEATURE_COUNT + 6;
+
+	/**
+	 * The number of structural features of the '<em>Half Installed Package</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HALF_INSTALLED_PACKAGE_FEATURE_COUNT = PACKAGE_FEATURE_COUNT + 7;
+
+	/**
 	 * The meta object id for the '{@link it.univaq.mancoosi.mancoosimm.impl.SrcPackageImpl <em>Src Package</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -541,7 +1112,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getSrcPackage()
 	 * @generated
 	 */
-	int SRC_PACKAGE = 4;
+	int SRC_PACKAGE = 9;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -580,6 +1151,15 @@ public interface MancoosiPackage extends EPackage {
 	int SRC_PACKAGE__PACKAGE_SETTINGS = INSTALLED_PACKAGE__PACKAGE_SETTINGS;
 
 	/**
+	 * The feature id for the '<em><b>Architecture</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SRC_PACKAGE__ARCHITECTURE = INSTALLED_PACKAGE__ARCHITECTURE;
+
+	/**
 	 * The feature id for the '<em><b>Installed Size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -596,15 +1176,6 @@ public interface MancoosiPackage extends EPackage {
 	 * @ordered
 	 */
 	int SRC_PACKAGE__MAINTAINER = INSTALLED_PACKAGE__MAINTAINER;
-
-	/**
-	 * The feature id for the '<em><b>Architecture</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SRC_PACKAGE__ARCHITECTURE = INSTALLED_PACKAGE__ARCHITECTURE;
 
 	/**
 	 * The feature id for the '<em><b>File Size</b></em>' attribute.
@@ -659,15 +1230,6 @@ public interface MancoosiPackage extends EPackage {
 	 * @ordered
 	 */
 	int SRC_PACKAGE__PRIORITY = INSTALLED_PACKAGE__PRIORITY;
-
-	/**
-	 * The feature id for the '<em><b>Status</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SRC_PACKAGE__STATUS = INSTALLED_PACKAGE__STATUS;
 
 	/**
 	 * The feature id for the '<em><b>Uploaders</b></em>' attribute.
@@ -812,7 +1374,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getBinPackage()
 	 * @generated
 	 */
-	int BIN_PACKAGE = 5;
+	int BIN_PACKAGE = 10;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -851,6 +1413,15 @@ public interface MancoosiPackage extends EPackage {
 	int BIN_PACKAGE__PACKAGE_SETTINGS = INSTALLED_PACKAGE__PACKAGE_SETTINGS;
 
 	/**
+	 * The feature id for the '<em><b>Architecture</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BIN_PACKAGE__ARCHITECTURE = INSTALLED_PACKAGE__ARCHITECTURE;
+
+	/**
 	 * The feature id for the '<em><b>Installed Size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -867,15 +1438,6 @@ public interface MancoosiPackage extends EPackage {
 	 * @ordered
 	 */
 	int BIN_PACKAGE__MAINTAINER = INSTALLED_PACKAGE__MAINTAINER;
-
-	/**
-	 * The feature id for the '<em><b>Architecture</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BIN_PACKAGE__ARCHITECTURE = INSTALLED_PACKAGE__ARCHITECTURE;
 
 	/**
 	 * The feature id for the '<em><b>File Size</b></em>' attribute.
@@ -930,15 +1492,6 @@ public interface MancoosiPackage extends EPackage {
 	 * @ordered
 	 */
 	int BIN_PACKAGE__PRIORITY = INSTALLED_PACKAGE__PRIORITY;
-
-	/**
-	 * The feature id for the '<em><b>Status</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BIN_PACKAGE__STATUS = INSTALLED_PACKAGE__STATUS;
 
 	/**
 	 * The feature id for the '<em><b>Uploaders</b></em>' attribute.
@@ -1074,7 +1627,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getVirtualPackage()
 	 * @generated
 	 */
-	int VIRTUAL_PACKAGE = 6;
+	int VIRTUAL_PACKAGE = 11;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1113,6 +1666,15 @@ public interface MancoosiPackage extends EPackage {
 	int VIRTUAL_PACKAGE__PACKAGE_SETTINGS = INSTALLED_PACKAGE__PACKAGE_SETTINGS;
 
 	/**
+	 * The feature id for the '<em><b>Architecture</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_PACKAGE__ARCHITECTURE = INSTALLED_PACKAGE__ARCHITECTURE;
+
+	/**
 	 * The feature id for the '<em><b>Installed Size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1129,15 +1691,6 @@ public interface MancoosiPackage extends EPackage {
 	 * @ordered
 	 */
 	int VIRTUAL_PACKAGE__MAINTAINER = INSTALLED_PACKAGE__MAINTAINER;
-
-	/**
-	 * The feature id for the '<em><b>Architecture</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VIRTUAL_PACKAGE__ARCHITECTURE = INSTALLED_PACKAGE__ARCHITECTURE;
 
 	/**
 	 * The feature id for the '<em><b>File Size</b></em>' attribute.
@@ -1192,15 +1745,6 @@ public interface MancoosiPackage extends EPackage {
 	 * @ordered
 	 */
 	int VIRTUAL_PACKAGE__PRIORITY = INSTALLED_PACKAGE__PRIORITY;
-
-	/**
-	 * The feature id for the '<em><b>Status</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VIRTUAL_PACKAGE__STATUS = INSTALLED_PACKAGE__STATUS;
 
 	/**
 	 * The feature id for the '<em><b>Uploaders</b></em>' attribute.
@@ -1336,7 +1880,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getDependence()
 	 * @generated
 	 */
-	int DEPENDENCE = 7;
+	int DEPENDENCE = 12;
 
 	/**
 	 * The feature id for the '<em><b>And Dep</b></em>' containment reference.
@@ -1391,7 +1935,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getAndDep()
 	 * @generated
 	 */
-	int AND_DEP = 8;
+	int AND_DEP = 13;
 
 	/**
 	 * The feature id for the '<em><b>And Dep</b></em>' containment reference.
@@ -1464,7 +2008,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getOrDep()
 	 * @generated
 	 */
-	int OR_DEP = 9;
+	int OR_DEP = 14;
 
 	/**
 	 * The feature id for the '<em><b>And Dep</b></em>' containment reference.
@@ -1537,7 +2081,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getSingleDep()
 	 * @generated
 	 */
-	int SINGLE_DEP = 10;
+	int SINGLE_DEP = 15;
 
 	/**
 	 * The feature id for the '<em><b>And Dep</b></em>' containment reference.
@@ -1619,7 +2163,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getInvariant()
 	 * @generated
 	 */
-	int INVARIANT = 11;
+	int INVARIANT = 16;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1683,7 +2227,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getAtom()
 	 * @generated
 	 */
-	int ATOM = 12;
+	int ATOM = 17;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1711,7 +2255,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getAndInv()
 	 * @generated
 	 */
-	int AND_INV = 13;
+	int AND_INV = 18;
 
 	/**
 	 * The feature id for the '<em><b>Left</b></em>' reference.
@@ -1748,7 +2292,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getOrInv()
 	 * @generated
 	 */
-	int OR_INV = 14;
+	int OR_INV = 19;
 
 	/**
 	 * The feature id for the '<em><b>Left</b></em>' reference.
@@ -1785,7 +2329,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getNotInv()
 	 * @generated
 	 */
-	int NOT_INV = 15;
+	int NOT_INV = 20;
 
 	/**
 	 * The feature id for the '<em><b>Elem</b></em>' reference.
@@ -1813,7 +2357,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getEnvironment()
 	 * @generated
 	 */
-	int ENVIRONMENT = 16;
+	int ENVIRONMENT = 21;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1985,7 +2529,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getFileSystem()
 	 * @generated
 	 */
-	int FILE_SYSTEM = 17;
+	int FILE_SYSTEM = 22;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2040,7 +2584,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getGConf()
 	 * @generated
 	 */
-	int GCONF = 18;
+	int GCONF = 23;
 
 	/**
 	 * The feature id for the '<em><b>Conf Files</b></em>' reference list.
@@ -2086,7 +2630,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getApplicationMenuCatalog()
 	 * @generated
 	 */
-	int APPLICATION_MENU_CATALOG = 19;
+	int APPLICATION_MENU_CATALOG = 24;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2123,7 +2667,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getMenu()
 	 * @generated
 	 */
-	int MENU = 20;
+	int MENU = 25;
 
 	/**
 	 * The feature id for the '<em><b>Entries</b></em>' containment reference list.
@@ -2169,7 +2713,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getMenuEntry()
 	 * @generated
 	 */
-	int MENU_ENTRY = 21;
+	int MENU_ENTRY = 26;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2224,7 +2768,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getBoot()
 	 * @generated
 	 */
-	int BOOT = 22;
+	int BOOT = 27;
 
 	/**
 	 * The feature id for the '<em><b>Services</b></em>' reference list.
@@ -2252,7 +2796,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getService()
 	 * @generated
 	 */
-	int SERVICE = 23;
+	int SERVICE = 28;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2298,7 +2842,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getFile()
 	 * @generated
 	 */
-	int FILE = 24;
+	int FILE = 29;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2470,7 +3014,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getDocumentationFile()
 	 * @generated
 	 */
-	int DOCUMENTATION_FILE = 25;
+	int DOCUMENTATION_FILE = 30;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2651,7 +3195,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getInformationFile()
 	 * @generated
 	 */
-	int INFORMATION_FILE = 26;
+	int INFORMATION_FILE = 31;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2823,7 +3367,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getAlternative()
 	 * @generated
 	 */
-	int ALTERNATIVE = 27;
+	int ALTERNATIVE = 32;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2878,7 +3422,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getPackageSetting()
 	 * @generated
 	 */
-	int PACKAGE_SETTING = 28;
+	int PACKAGE_SETTING = 33;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2942,7 +3486,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getIconCache()
 	 * @generated
 	 */
-	int ICON_CACHE = 29;
+	int ICON_CACHE = 34;
 
 	/**
 	 * The feature id for the '<em><b>Mtime</b></em>' attribute.
@@ -2988,7 +3532,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getDesktopDB()
 	 * @generated
 	 */
-	int DESKTOP_DB = 30;
+	int DESKTOP_DB = 35;
 
 	/**
 	 * The feature id for the '<em><b>Env</b></em>' container reference.
@@ -3025,7 +3569,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getMimeTypeHandlerCache()
 	 * @generated
 	 */
-	int MIME_TYPE_HANDLER_CACHE = 31;
+	int MIME_TYPE_HANDLER_CACHE = 36;
 
 	/**
 	 * The feature id for the '<em><b>Env</b></em>' container reference.
@@ -3071,7 +3615,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getMimeTypeHandler()
 	 * @generated
 	 */
-	int MIME_TYPE_HANDLER = 32;
+	int MIME_TYPE_HANDLER = 37;
 
 	/**
 	 * The feature id for the '<em><b>Handler</b></em>' reference.
@@ -3117,7 +3661,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getMimeType()
 	 * @generated
 	 */
-	int MIME_TYPE = 33;
+	int MIME_TYPE = 38;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3172,7 +3716,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getXFontCache()
 	 * @generated
 	 */
-	int XFONT_CACHE = 34;
+	int XFONT_CACHE = 39;
 
 	/**
 	 * The feature id for the '<em><b>Xfonts</b></em>' containment reference list.
@@ -3218,7 +3762,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getXFont()
 	 * @generated
 	 */
-	int XFONT = 35;
+	int XFONT = 40;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3264,7 +3808,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getLibraryCache()
 	 * @generated
 	 */
-	int LIBRARY_CACHE = 36;
+	int LIBRARY_CACHE = 41;
 
 	/**
 	 * The feature id for the '<em><b>Locations</b></em>' reference list.
@@ -3310,7 +3854,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getSharedLibrary()
 	 * @generated
 	 */
-	int SHARED_LIBRARY = 37;
+	int SHARED_LIBRARY = 42;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3365,7 +3909,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getModuleCache()
 	 * @generated
 	 */
-	int MODULE_CACHE = 38;
+	int MODULE_CACHE = 43;
 
 	/**
 	 * The feature id for the '<em><b>Version</b></em>' attribute.
@@ -3411,7 +3955,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getModule()
 	 * @generated
 	 */
-	int MODULE = 39;
+	int MODULE = 44;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3457,7 +4001,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getSGMLCatalog()
 	 * @generated
 	 */
-	int SGML_CATALOG = 40;
+	int SGML_CATALOG = 45;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3503,7 +4047,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getSGMLDocument()
 	 * @generated
 	 */
-	int SGML_DOCUMENT = 41;
+	int SGML_DOCUMENT = 46;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3549,7 +4093,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getSkeeperCatalog()
 	 * @generated
 	 */
-	int SKEEPER_CATALOG = 42;
+	int SKEEPER_CATALOG = 47;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3595,7 +4139,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getSkeeperDocument()
 	 * @generated
 	 */
-	int SKEEPER_DOCUMENT = 43;
+	int SKEEPER_DOCUMENT = 48;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3641,7 +4185,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getEmacsPackage()
 	 * @generated
 	 */
-	int EMACS_PACKAGE = 44;
+	int EMACS_PACKAGE = 49;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3687,7 +4231,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getUser()
 	 * @generated
 	 */
-	int USER = 45;
+	int USER = 50;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3742,7 +4286,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getGroup()
 	 * @generated
 	 */
-	int GROUP = 46;
+	int GROUP = 51;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3788,7 +4332,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getConflict()
 	 * @generated
 	 */
-	int CONFLICT = 48;
+	int CONFLICT = 53;
 
 	/**
 	 * The feature id for the '<em><b>And Conflict</b></em>' containment reference.
@@ -3843,7 +4387,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getSingleConflict()
 	 * @generated
 	 */
-	int SINGLE_CONFLICT = 47;
+	int SINGLE_CONFLICT = 52;
 
 	/**
 	 * The feature id for the '<em><b>And Conflict</b></em>' containment reference.
@@ -3925,7 +4469,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getAndConflict()
 	 * @generated
 	 */
-	int AND_CONFLICT = 49;
+	int AND_CONFLICT = 54;
 
 	/**
 	 * The feature id for the '<em><b>And Conflict</b></em>' containment reference.
@@ -3998,7 +4542,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getOrConflict()
 	 * @generated
 	 */
-	int OR_CONFLICT = 50;
+	int OR_CONFLICT = 55;
 
 	/**
 	 * The feature id for the '<em><b>And Conflict</b></em>' containment reference.
@@ -4071,7 +4615,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getPriorityType()
 	 * @generated
 	 */
-	int PRIORITY_TYPE = 52;
+	int PRIORITY_TYPE = 56;
 
 	/**
 	 * The meta object id for the '{@link it.univaq.mancoosi.mancoosimm.StatusType <em>Status Type</em>}' enum.
@@ -4081,7 +4625,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getStatusType()
 	 * @generated
 	 */
-	int STATUS_TYPE = 53;
+	int STATUS_TYPE = 57;
 
 	/**
 	 * The meta object id for the '{@link it.univaq.mancoosi.mancoosimm.VersionType <em>Version Type</em>}' enum.
@@ -4091,7 +4635,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getVersionType()
 	 * @generated
 	 */
-	int VERSION_TYPE = 54;
+	int VERSION_TYPE = 58;
 
 
 	/**
@@ -4126,15 +4670,26 @@ public interface MancoosiPackage extends EPackage {
 	EClass getConfiguration();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link it.univaq.mancoosi.mancoosimm.Configuration#getInstalledPackages <em>Installed Packages</em>}'.
+	 * Returns the meta object for the attribute '{@link it.univaq.mancoosi.mancoosimm.Configuration#getCreationTime <em>Creation Time</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Installed Packages</em>'.
-	 * @see it.univaq.mancoosi.mancoosimm.Configuration#getInstalledPackages()
+	 * @return the meta object for the attribute '<em>Creation Time</em>'.
+	 * @see it.univaq.mancoosi.mancoosimm.Configuration#getCreationTime()
 	 * @see #getConfiguration()
 	 * @generated
 	 */
-	EReference getConfiguration_InstalledPackages();
+	EAttribute getConfiguration_CreationTime();
+
+	/**
+	 * Returns the meta object for the attribute '{@link it.univaq.mancoosi.mancoosimm.Configuration#getSystemType <em>System Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>System Type</em>'.
+	 * @see it.univaq.mancoosi.mancoosimm.Configuration#getSystemType()
+	 * @see #getConfiguration()
+	 * @generated
+	 */
+	EAttribute getConfiguration_SystemType();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link it.univaq.mancoosi.mancoosimm.Configuration#getFileSystem <em>File System</em>}'.
@@ -4159,6 +4714,17 @@ public interface MancoosiPackage extends EPackage {
 	EReference getConfiguration_Environment();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link it.univaq.mancoosi.mancoosimm.Configuration#getInstalledPackages <em>Installed Packages</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Installed Packages</em>'.
+	 * @see it.univaq.mancoosi.mancoosimm.Configuration#getInstalledPackages()
+	 * @see #getConfiguration()
+	 * @generated
+	 */
+	EReference getConfiguration_InstalledPackages();
+
+	/**
 	 * Returns the meta object for the containment reference list '{@link it.univaq.mancoosi.mancoosimm.Configuration#getNotInstalledPackages <em>Not Installed Packages</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4170,26 +4736,102 @@ public interface MancoosiPackage extends EPackage {
 	EReference getConfiguration_NotInstalledPackages();
 
 	/**
-	 * Returns the meta object for the attribute '{@link it.univaq.mancoosi.mancoosimm.Configuration#getCreationTime <em>Creation Time</em>}'.
+	 * Returns the meta object for the containment reference list '{@link it.univaq.mancoosi.mancoosimm.Configuration#getConfigFilesPackages <em>Config Files Packages</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Creation Time</em>'.
-	 * @see it.univaq.mancoosi.mancoosimm.Configuration#getCreationTime()
+	 * @return the meta object for the containment reference list '<em>Config Files Packages</em>'.
+	 * @see it.univaq.mancoosi.mancoosimm.Configuration#getConfigFilesPackages()
 	 * @see #getConfiguration()
 	 * @generated
 	 */
-	EAttribute getConfiguration_CreationTime();
+	EReference getConfiguration_ConfigFilesPackages();
 
 	/**
-	 * Returns the meta object for the attribute '{@link it.univaq.mancoosi.mancoosimm.Configuration#getSystemType <em>System Type</em>}'.
+	 * Returns the meta object for the containment reference list '{@link it.univaq.mancoosi.mancoosimm.Configuration#getUnpackedPackages <em>Unpacked Packages</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>System Type</em>'.
-	 * @see it.univaq.mancoosi.mancoosimm.Configuration#getSystemType()
+	 * @return the meta object for the containment reference list '<em>Unpacked Packages</em>'.
+	 * @see it.univaq.mancoosi.mancoosimm.Configuration#getUnpackedPackages()
 	 * @see #getConfiguration()
 	 * @generated
 	 */
-	EAttribute getConfiguration_SystemType();
+	EReference getConfiguration_UnpackedPackages();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link it.univaq.mancoosi.mancoosimm.Configuration#getHalfConfiguredPackages <em>Half Configured Packages</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Half Configured Packages</em>'.
+	 * @see it.univaq.mancoosi.mancoosimm.Configuration#getHalfConfiguredPackages()
+	 * @see #getConfiguration()
+	 * @generated
+	 */
+	EReference getConfiguration_HalfConfiguredPackages();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link it.univaq.mancoosi.mancoosimm.Configuration#getHalfInstalledPackages <em>Half Installed Packages</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Half Installed Packages</em>'.
+	 * @see it.univaq.mancoosi.mancoosimm.Configuration#getHalfInstalledPackages()
+	 * @see #getConfiguration()
+	 * @generated
+	 */
+	EReference getConfiguration_HalfInstalledPackages();
+
+	/**
+	 * Returns the meta object for class '{@link it.univaq.mancoosi.mancoosimm.Package <em>Package</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Package</em>'.
+	 * @see it.univaq.mancoosi.mancoosimm.Package
+	 * @generated
+	 */
+	EClass getPackage();
+
+	/**
+	 * Returns the meta object for the attribute '{@link it.univaq.mancoosi.mancoosimm.Package#getVersion <em>Version</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Version</em>'.
+	 * @see it.univaq.mancoosi.mancoosimm.Package#getVersion()
+	 * @see #getPackage()
+	 * @generated
+	 */
+	EAttribute getPackage_Version();
+
+	/**
+	 * Returns the meta object for the reference '{@link it.univaq.mancoosi.mancoosimm.Package#getConfiguration <em>Configuration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Configuration</em>'.
+	 * @see it.univaq.mancoosi.mancoosimm.Package#getConfiguration()
+	 * @see #getPackage()
+	 * @generated
+	 */
+	EReference getPackage_Configuration();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link it.univaq.mancoosi.mancoosimm.Package#getPackageSettings <em>Package Settings</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Package Settings</em>'.
+	 * @see it.univaq.mancoosi.mancoosimm.Package#getPackageSettings()
+	 * @see #getPackage()
+	 * @generated
+	 */
+	EReference getPackage_PackageSettings();
+
+	/**
+	 * Returns the meta object for the attribute '{@link it.univaq.mancoosi.mancoosimm.Package#getArchitecture <em>Architecture</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Architecture</em>'.
+	 * @see it.univaq.mancoosi.mancoosimm.Package#getArchitecture()
+	 * @see #getPackage()
+	 * @generated
+	 */
+	EAttribute getPackage_Architecture();
 
 	/**
 	 * Returns the meta object for class '{@link it.univaq.mancoosi.mancoosimm.InstalledPackage <em>Installed Package</em>}'.
@@ -4222,17 +4864,6 @@ public interface MancoosiPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getInstalledPackage_Maintainer();
-
-	/**
-	 * Returns the meta object for the attribute '{@link it.univaq.mancoosi.mancoosimm.InstalledPackage#getArchitecture <em>Architecture</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Architecture</em>'.
-	 * @see it.univaq.mancoosi.mancoosimm.InstalledPackage#getArchitecture()
-	 * @see #getInstalledPackage()
-	 * @generated
-	 */
-	EAttribute getInstalledPackage_Architecture();
 
 	/**
 	 * Returns the meta object for the attribute '{@link it.univaq.mancoosi.mancoosimm.InstalledPackage#getFileSize <em>File Size</em>}'.
@@ -4299,17 +4930,6 @@ public interface MancoosiPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getInstalledPackage_Priority();
-
-	/**
-	 * Returns the meta object for the attribute '{@link it.univaq.mancoosi.mancoosimm.InstalledPackage#getStatus <em>Status</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Status</em>'.
-	 * @see it.univaq.mancoosi.mancoosimm.InstalledPackage#getStatus()
-	 * @see #getInstalledPackage()
-	 * @generated
-	 */
-	EAttribute getInstalledPackage_Status();
 
 	/**
 	 * Returns the meta object for the attribute '{@link it.univaq.mancoosi.mancoosimm.InstalledPackage#getUploaders <em>Uploaders</em>}'.
@@ -4452,6 +5072,288 @@ public interface MancoosiPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getNotInstalledPackage();
+
+	/**
+	 * Returns the meta object for class '{@link it.univaq.mancoosi.mancoosimm.ConfigFilesPackage <em>Config Files Package</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Config Files Package</em>'.
+	 * @see it.univaq.mancoosi.mancoosimm.ConfigFilesPackage
+	 * @generated
+	 */
+	EClass getConfigFilesPackage();
+
+	/**
+	 * Returns the meta object for the attribute '{@link it.univaq.mancoosi.mancoosimm.ConfigFilesPackage#getMaintainer <em>Maintainer</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Maintainer</em>'.
+	 * @see it.univaq.mancoosi.mancoosimm.ConfigFilesPackage#getMaintainer()
+	 * @see #getConfigFilesPackage()
+	 * @generated
+	 */
+	EAttribute getConfigFilesPackage_Maintainer();
+
+	/**
+	 * Returns the meta object for the attribute '{@link it.univaq.mancoosi.mancoosimm.ConfigFilesPackage#getCheckSum <em>Check Sum</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Check Sum</em>'.
+	 * @see it.univaq.mancoosi.mancoosimm.ConfigFilesPackage#getCheckSum()
+	 * @see #getConfigFilesPackage()
+	 * @generated
+	 */
+	EAttribute getConfigFilesPackage_CheckSum();
+
+	/**
+	 * Returns the meta object for the attribute '{@link it.univaq.mancoosi.mancoosimm.ConfigFilesPackage#getDescription <em>Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Description</em>'.
+	 * @see it.univaq.mancoosi.mancoosimm.ConfigFilesPackage#getDescription()
+	 * @see #getConfigFilesPackage()
+	 * @generated
+	 */
+	EAttribute getConfigFilesPackage_Description();
+
+	/**
+	 * Returns the meta object for the attribute '{@link it.univaq.mancoosi.mancoosimm.ConfigFilesPackage#getSection <em>Section</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Section</em>'.
+	 * @see it.univaq.mancoosi.mancoosimm.ConfigFilesPackage#getSection()
+	 * @see #getConfigFilesPackage()
+	 * @generated
+	 */
+	EAttribute getConfigFilesPackage_Section();
+
+	/**
+	 * Returns the meta object for the attribute '{@link it.univaq.mancoosi.mancoosimm.ConfigFilesPackage#getTag <em>Tag</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Tag</em>'.
+	 * @see it.univaq.mancoosi.mancoosimm.ConfigFilesPackage#getTag()
+	 * @see #getConfigFilesPackage()
+	 * @generated
+	 */
+	EAttribute getConfigFilesPackage_Tag();
+
+	/**
+	 * Returns the meta object for the attribute '{@link it.univaq.mancoosi.mancoosimm.ConfigFilesPackage#getPriority <em>Priority</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Priority</em>'.
+	 * @see it.univaq.mancoosi.mancoosimm.ConfigFilesPackage#getPriority()
+	 * @see #getConfigFilesPackage()
+	 * @generated
+	 */
+	EAttribute getConfigFilesPackage_Priority();
+
+	/**
+	 * Returns the meta object for the attribute '{@link it.univaq.mancoosi.mancoosimm.ConfigFilesPackage#getUploaders <em>Uploaders</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Uploaders</em>'.
+	 * @see it.univaq.mancoosi.mancoosimm.ConfigFilesPackage#getUploaders()
+	 * @see #getConfigFilesPackage()
+	 * @generated
+	 */
+	EAttribute getConfigFilesPackage_Uploaders();
+
+	/**
+	 * Returns the meta object for class '{@link it.univaq.mancoosi.mancoosimm.UnpackedPackage <em>Unpacked Package</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Unpacked Package</em>'.
+	 * @see it.univaq.mancoosi.mancoosimm.UnpackedPackage
+	 * @generated
+	 */
+	EClass getUnpackedPackage();
+
+	/**
+	 * Returns the meta object for the attribute '{@link it.univaq.mancoosi.mancoosimm.UnpackedPackage#getMaintainer <em>Maintainer</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Maintainer</em>'.
+	 * @see it.univaq.mancoosi.mancoosimm.UnpackedPackage#getMaintainer()
+	 * @see #getUnpackedPackage()
+	 * @generated
+	 */
+	EAttribute getUnpackedPackage_Maintainer();
+
+	/**
+	 * Returns the meta object for the attribute '{@link it.univaq.mancoosi.mancoosimm.UnpackedPackage#getCheckSum <em>Check Sum</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Check Sum</em>'.
+	 * @see it.univaq.mancoosi.mancoosimm.UnpackedPackage#getCheckSum()
+	 * @see #getUnpackedPackage()
+	 * @generated
+	 */
+	EAttribute getUnpackedPackage_CheckSum();
+
+	/**
+	 * Returns the meta object for the attribute '{@link it.univaq.mancoosi.mancoosimm.UnpackedPackage#getDescription <em>Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Description</em>'.
+	 * @see it.univaq.mancoosi.mancoosimm.UnpackedPackage#getDescription()
+	 * @see #getUnpackedPackage()
+	 * @generated
+	 */
+	EAttribute getUnpackedPackage_Description();
+
+	/**
+	 * Returns the meta object for the attribute '{@link it.univaq.mancoosi.mancoosimm.UnpackedPackage#getSection <em>Section</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Section</em>'.
+	 * @see it.univaq.mancoosi.mancoosimm.UnpackedPackage#getSection()
+	 * @see #getUnpackedPackage()
+	 * @generated
+	 */
+	EAttribute getUnpackedPackage_Section();
+
+	/**
+	 * Returns the meta object for the attribute '{@link it.univaq.mancoosi.mancoosimm.UnpackedPackage#getTag <em>Tag</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Tag</em>'.
+	 * @see it.univaq.mancoosi.mancoosimm.UnpackedPackage#getTag()
+	 * @see #getUnpackedPackage()
+	 * @generated
+	 */
+	EAttribute getUnpackedPackage_Tag();
+
+	/**
+	 * Returns the meta object for the attribute '{@link it.univaq.mancoosi.mancoosimm.UnpackedPackage#getPriority <em>Priority</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Priority</em>'.
+	 * @see it.univaq.mancoosi.mancoosimm.UnpackedPackage#getPriority()
+	 * @see #getUnpackedPackage()
+	 * @generated
+	 */
+	EAttribute getUnpackedPackage_Priority();
+
+	/**
+	 * Returns the meta object for the attribute '{@link it.univaq.mancoosi.mancoosimm.UnpackedPackage#getUploaders <em>Uploaders</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Uploaders</em>'.
+	 * @see it.univaq.mancoosi.mancoosimm.UnpackedPackage#getUploaders()
+	 * @see #getUnpackedPackage()
+	 * @generated
+	 */
+	EAttribute getUnpackedPackage_Uploaders();
+
+	/**
+	 * Returns the meta object for the reference list '{@link it.univaq.mancoosi.mancoosimm.UnpackedPackage#getFiles <em>Files</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Files</em>'.
+	 * @see it.univaq.mancoosi.mancoosimm.UnpackedPackage#getFiles()
+	 * @see #getUnpackedPackage()
+	 * @generated
+	 */
+	EReference getUnpackedPackage_Files();
+
+	/**
+	 * Returns the meta object for class '{@link it.univaq.mancoosi.mancoosimm.HalfConfiguredPackage <em>Half Configured Package</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Half Configured Package</em>'.
+	 * @see it.univaq.mancoosi.mancoosimm.HalfConfiguredPackage
+	 * @generated
+	 */
+	EClass getHalfConfiguredPackage();
+
+	/**
+	 * Returns the meta object for class '{@link it.univaq.mancoosi.mancoosimm.HalfInstalledPackage <em>Half Installed Package</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Half Installed Package</em>'.
+	 * @see it.univaq.mancoosi.mancoosimm.HalfInstalledPackage
+	 * @generated
+	 */
+	EClass getHalfInstalledPackage();
+
+	/**
+	 * Returns the meta object for the attribute '{@link it.univaq.mancoosi.mancoosimm.HalfInstalledPackage#getMaintainer <em>Maintainer</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Maintainer</em>'.
+	 * @see it.univaq.mancoosi.mancoosimm.HalfInstalledPackage#getMaintainer()
+	 * @see #getHalfInstalledPackage()
+	 * @generated
+	 */
+	EAttribute getHalfInstalledPackage_Maintainer();
+
+	/**
+	 * Returns the meta object for the attribute '{@link it.univaq.mancoosi.mancoosimm.HalfInstalledPackage#getCheckSum <em>Check Sum</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Check Sum</em>'.
+	 * @see it.univaq.mancoosi.mancoosimm.HalfInstalledPackage#getCheckSum()
+	 * @see #getHalfInstalledPackage()
+	 * @generated
+	 */
+	EAttribute getHalfInstalledPackage_CheckSum();
+
+	/**
+	 * Returns the meta object for the attribute '{@link it.univaq.mancoosi.mancoosimm.HalfInstalledPackage#getDescription <em>Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Description</em>'.
+	 * @see it.univaq.mancoosi.mancoosimm.HalfInstalledPackage#getDescription()
+	 * @see #getHalfInstalledPackage()
+	 * @generated
+	 */
+	EAttribute getHalfInstalledPackage_Description();
+
+	/**
+	 * Returns the meta object for the attribute '{@link it.univaq.mancoosi.mancoosimm.HalfInstalledPackage#getSection <em>Section</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Section</em>'.
+	 * @see it.univaq.mancoosi.mancoosimm.HalfInstalledPackage#getSection()
+	 * @see #getHalfInstalledPackage()
+	 * @generated
+	 */
+	EAttribute getHalfInstalledPackage_Section();
+
+	/**
+	 * Returns the meta object for the attribute '{@link it.univaq.mancoosi.mancoosimm.HalfInstalledPackage#getTag <em>Tag</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Tag</em>'.
+	 * @see it.univaq.mancoosi.mancoosimm.HalfInstalledPackage#getTag()
+	 * @see #getHalfInstalledPackage()
+	 * @generated
+	 */
+	EAttribute getHalfInstalledPackage_Tag();
+
+	/**
+	 * Returns the meta object for the attribute '{@link it.univaq.mancoosi.mancoosimm.HalfInstalledPackage#getPriority <em>Priority</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Priority</em>'.
+	 * @see it.univaq.mancoosi.mancoosimm.HalfInstalledPackage#getPriority()
+	 * @see #getHalfInstalledPackage()
+	 * @generated
+	 */
+	EAttribute getHalfInstalledPackage_Priority();
+
+	/**
+	 * Returns the meta object for the attribute '{@link it.univaq.mancoosi.mancoosimm.HalfInstalledPackage#getUploaders <em>Uploaders</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Uploaders</em>'.
+	 * @see it.univaq.mancoosi.mancoosimm.HalfInstalledPackage#getUploaders()
+	 * @see #getHalfInstalledPackage()
+	 * @generated
+	 */
+	EAttribute getHalfInstalledPackage_Uploaders();
 
 	/**
 	 * Returns the meta object for class '{@link it.univaq.mancoosi.mancoosimm.SrcPackage <em>Src Package</em>}'.
@@ -6442,49 +7344,6 @@ public interface MancoosiPackage extends EPackage {
 	EReference getOrConflict_Conflict();
 
 	/**
-	 * Returns the meta object for class '{@link it.univaq.mancoosi.mancoosimm.Package <em>Package</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Package</em>'.
-	 * @see it.univaq.mancoosi.mancoosimm.Package
-	 * @generated
-	 */
-	EClass getPackage();
-
-	/**
-	 * Returns the meta object for the attribute '{@link it.univaq.mancoosi.mancoosimm.Package#getVersion <em>Version</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Version</em>'.
-	 * @see it.univaq.mancoosi.mancoosimm.Package#getVersion()
-	 * @see #getPackage()
-	 * @generated
-	 */
-	EAttribute getPackage_Version();
-
-	/**
-	 * Returns the meta object for the reference '{@link it.univaq.mancoosi.mancoosimm.Package#getConfiguration <em>Configuration</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Configuration</em>'.
-	 * @see it.univaq.mancoosi.mancoosimm.Package#getConfiguration()
-	 * @see #getPackage()
-	 * @generated
-	 */
-	EReference getPackage_Configuration();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link it.univaq.mancoosi.mancoosimm.Package#getPackageSettings <em>Package Settings</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Package Settings</em>'.
-	 * @see it.univaq.mancoosi.mancoosimm.Package#getPackageSettings()
-	 * @see #getPackage()
-	 * @generated
-	 */
-	EReference getPackage_PackageSettings();
-
-	/**
 	 * Returns the meta object for enum '{@link it.univaq.mancoosi.mancoosimm.PriorityType <em>Priority Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6565,12 +7424,20 @@ public interface MancoosiPackage extends EPackage {
 		EClass CONFIGURATION = eINSTANCE.getConfiguration();
 
 		/**
-		 * The meta object literal for the '<em><b>Installed Packages</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Creation Time</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CONFIGURATION__INSTALLED_PACKAGES = eINSTANCE.getConfiguration_InstalledPackages();
+		EAttribute CONFIGURATION__CREATION_TIME = eINSTANCE.getConfiguration_CreationTime();
+
+		/**
+		 * The meta object literal for the '<em><b>System Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONFIGURATION__SYSTEM_TYPE = eINSTANCE.getConfiguration_SystemType();
 
 		/**
 		 * The meta object literal for the '<em><b>File System</b></em>' containment reference feature.
@@ -6589,6 +7456,14 @@ public interface MancoosiPackage extends EPackage {
 		EReference CONFIGURATION__ENVIRONMENT = eINSTANCE.getConfiguration_Environment();
 
 		/**
+		 * The meta object literal for the '<em><b>Installed Packages</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONFIGURATION__INSTALLED_PACKAGES = eINSTANCE.getConfiguration_InstalledPackages();
+
+		/**
 		 * The meta object literal for the '<em><b>Not Installed Packages</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -6597,20 +7472,78 @@ public interface MancoosiPackage extends EPackage {
 		EReference CONFIGURATION__NOT_INSTALLED_PACKAGES = eINSTANCE.getConfiguration_NotInstalledPackages();
 
 		/**
-		 * The meta object literal for the '<em><b>Creation Time</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Config Files Packages</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute CONFIGURATION__CREATION_TIME = eINSTANCE.getConfiguration_CreationTime();
+		EReference CONFIGURATION__CONFIG_FILES_PACKAGES = eINSTANCE.getConfiguration_ConfigFilesPackages();
 
 		/**
-		 * The meta object literal for the '<em><b>System Type</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Unpacked Packages</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute CONFIGURATION__SYSTEM_TYPE = eINSTANCE.getConfiguration_SystemType();
+		EReference CONFIGURATION__UNPACKED_PACKAGES = eINSTANCE.getConfiguration_UnpackedPackages();
+
+		/**
+		 * The meta object literal for the '<em><b>Half Configured Packages</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONFIGURATION__HALF_CONFIGURED_PACKAGES = eINSTANCE.getConfiguration_HalfConfiguredPackages();
+
+		/**
+		 * The meta object literal for the '<em><b>Half Installed Packages</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONFIGURATION__HALF_INSTALLED_PACKAGES = eINSTANCE.getConfiguration_HalfInstalledPackages();
+
+		/**
+		 * The meta object literal for the '{@link it.univaq.mancoosi.mancoosimm.impl.PackageImpl <em>Package</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see it.univaq.mancoosi.mancoosimm.impl.PackageImpl
+		 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getPackage()
+		 * @generated
+		 */
+		EClass PACKAGE = eINSTANCE.getPackage();
+
+		/**
+		 * The meta object literal for the '<em><b>Version</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PACKAGE__VERSION = eINSTANCE.getPackage_Version();
+
+		/**
+		 * The meta object literal for the '<em><b>Configuration</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PACKAGE__CONFIGURATION = eINSTANCE.getPackage_Configuration();
+
+		/**
+		 * The meta object literal for the '<em><b>Package Settings</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PACKAGE__PACKAGE_SETTINGS = eINSTANCE.getPackage_PackageSettings();
+
+		/**
+		 * The meta object literal for the '<em><b>Architecture</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PACKAGE__ARCHITECTURE = eINSTANCE.getPackage_Architecture();
 
 		/**
 		 * The meta object literal for the '{@link it.univaq.mancoosi.mancoosimm.impl.InstalledPackageImpl <em>Installed Package</em>}' class.
@@ -6637,14 +7570,6 @@ public interface MancoosiPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute INSTALLED_PACKAGE__MAINTAINER = eINSTANCE.getInstalledPackage_Maintainer();
-
-		/**
-		 * The meta object literal for the '<em><b>Architecture</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute INSTALLED_PACKAGE__ARCHITECTURE = eINSTANCE.getInstalledPackage_Architecture();
 
 		/**
 		 * The meta object literal for the '<em><b>File Size</b></em>' attribute feature.
@@ -6693,14 +7618,6 @@ public interface MancoosiPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute INSTALLED_PACKAGE__PRIORITY = eINSTANCE.getInstalledPackage_Priority();
-
-		/**
-		 * The meta object literal for the '<em><b>Status</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute INSTALLED_PACKAGE__STATUS = eINSTANCE.getInstalledPackage_Status();
 
 		/**
 		 * The meta object literal for the '<em><b>Uploaders</b></em>' attribute feature.
@@ -6807,6 +7724,222 @@ public interface MancoosiPackage extends EPackage {
 		 * @generated
 		 */
 		EClass NOT_INSTALLED_PACKAGE = eINSTANCE.getNotInstalledPackage();
+
+		/**
+		 * The meta object literal for the '{@link it.univaq.mancoosi.mancoosimm.impl.ConfigFilesPackageImpl <em>Config Files Package</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see it.univaq.mancoosi.mancoosimm.impl.ConfigFilesPackageImpl
+		 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getConfigFilesPackage()
+		 * @generated
+		 */
+		EClass CONFIG_FILES_PACKAGE = eINSTANCE.getConfigFilesPackage();
+
+		/**
+		 * The meta object literal for the '<em><b>Maintainer</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONFIG_FILES_PACKAGE__MAINTAINER = eINSTANCE.getConfigFilesPackage_Maintainer();
+
+		/**
+		 * The meta object literal for the '<em><b>Check Sum</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONFIG_FILES_PACKAGE__CHECK_SUM = eINSTANCE.getConfigFilesPackage_CheckSum();
+
+		/**
+		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONFIG_FILES_PACKAGE__DESCRIPTION = eINSTANCE.getConfigFilesPackage_Description();
+
+		/**
+		 * The meta object literal for the '<em><b>Section</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONFIG_FILES_PACKAGE__SECTION = eINSTANCE.getConfigFilesPackage_Section();
+
+		/**
+		 * The meta object literal for the '<em><b>Tag</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONFIG_FILES_PACKAGE__TAG = eINSTANCE.getConfigFilesPackage_Tag();
+
+		/**
+		 * The meta object literal for the '<em><b>Priority</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONFIG_FILES_PACKAGE__PRIORITY = eINSTANCE.getConfigFilesPackage_Priority();
+
+		/**
+		 * The meta object literal for the '<em><b>Uploaders</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONFIG_FILES_PACKAGE__UPLOADERS = eINSTANCE.getConfigFilesPackage_Uploaders();
+
+		/**
+		 * The meta object literal for the '{@link it.univaq.mancoosi.mancoosimm.impl.UnpackedPackageImpl <em>Unpacked Package</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see it.univaq.mancoosi.mancoosimm.impl.UnpackedPackageImpl
+		 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getUnpackedPackage()
+		 * @generated
+		 */
+		EClass UNPACKED_PACKAGE = eINSTANCE.getUnpackedPackage();
+
+		/**
+		 * The meta object literal for the '<em><b>Maintainer</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute UNPACKED_PACKAGE__MAINTAINER = eINSTANCE.getUnpackedPackage_Maintainer();
+
+		/**
+		 * The meta object literal for the '<em><b>Check Sum</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute UNPACKED_PACKAGE__CHECK_SUM = eINSTANCE.getUnpackedPackage_CheckSum();
+
+		/**
+		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute UNPACKED_PACKAGE__DESCRIPTION = eINSTANCE.getUnpackedPackage_Description();
+
+		/**
+		 * The meta object literal for the '<em><b>Section</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute UNPACKED_PACKAGE__SECTION = eINSTANCE.getUnpackedPackage_Section();
+
+		/**
+		 * The meta object literal for the '<em><b>Tag</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute UNPACKED_PACKAGE__TAG = eINSTANCE.getUnpackedPackage_Tag();
+
+		/**
+		 * The meta object literal for the '<em><b>Priority</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute UNPACKED_PACKAGE__PRIORITY = eINSTANCE.getUnpackedPackage_Priority();
+
+		/**
+		 * The meta object literal for the '<em><b>Uploaders</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute UNPACKED_PACKAGE__UPLOADERS = eINSTANCE.getUnpackedPackage_Uploaders();
+
+		/**
+		 * The meta object literal for the '<em><b>Files</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference UNPACKED_PACKAGE__FILES = eINSTANCE.getUnpackedPackage_Files();
+
+		/**
+		 * The meta object literal for the '{@link it.univaq.mancoosi.mancoosimm.impl.HalfConfiguredPackageImpl <em>Half Configured Package</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see it.univaq.mancoosi.mancoosimm.impl.HalfConfiguredPackageImpl
+		 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getHalfConfiguredPackage()
+		 * @generated
+		 */
+		EClass HALF_CONFIGURED_PACKAGE = eINSTANCE.getHalfConfiguredPackage();
+
+		/**
+		 * The meta object literal for the '{@link it.univaq.mancoosi.mancoosimm.impl.HalfInstalledPackageImpl <em>Half Installed Package</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see it.univaq.mancoosi.mancoosimm.impl.HalfInstalledPackageImpl
+		 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getHalfInstalledPackage()
+		 * @generated
+		 */
+		EClass HALF_INSTALLED_PACKAGE = eINSTANCE.getHalfInstalledPackage();
+
+		/**
+		 * The meta object literal for the '<em><b>Maintainer</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute HALF_INSTALLED_PACKAGE__MAINTAINER = eINSTANCE.getHalfInstalledPackage_Maintainer();
+
+		/**
+		 * The meta object literal for the '<em><b>Check Sum</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute HALF_INSTALLED_PACKAGE__CHECK_SUM = eINSTANCE.getHalfInstalledPackage_CheckSum();
+
+		/**
+		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute HALF_INSTALLED_PACKAGE__DESCRIPTION = eINSTANCE.getHalfInstalledPackage_Description();
+
+		/**
+		 * The meta object literal for the '<em><b>Section</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute HALF_INSTALLED_PACKAGE__SECTION = eINSTANCE.getHalfInstalledPackage_Section();
+
+		/**
+		 * The meta object literal for the '<em><b>Tag</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute HALF_INSTALLED_PACKAGE__TAG = eINSTANCE.getHalfInstalledPackage_Tag();
+
+		/**
+		 * The meta object literal for the '<em><b>Priority</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute HALF_INSTALLED_PACKAGE__PRIORITY = eINSTANCE.getHalfInstalledPackage_Priority();
+
+		/**
+		 * The meta object literal for the '<em><b>Uploaders</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute HALF_INSTALLED_PACKAGE__UPLOADERS = eINSTANCE.getHalfInstalledPackage_Uploaders();
 
 		/**
 		 * The meta object literal for the '{@link it.univaq.mancoosi.mancoosimm.impl.SrcPackageImpl <em>Src Package</em>}' class.
@@ -8381,40 +9514,6 @@ public interface MancoosiPackage extends EPackage {
 		 * @generated
 		 */
 		EReference OR_CONFLICT__CONFLICT = eINSTANCE.getOrConflict_Conflict();
-
-		/**
-		 * The meta object literal for the '{@link it.univaq.mancoosi.mancoosimm.impl.PackageImpl <em>Package</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see it.univaq.mancoosi.mancoosimm.impl.PackageImpl
-		 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getPackage()
-		 * @generated
-		 */
-		EClass PACKAGE = eINSTANCE.getPackage();
-
-		/**
-		 * The meta object literal for the '<em><b>Version</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute PACKAGE__VERSION = eINSTANCE.getPackage_Version();
-
-		/**
-		 * The meta object literal for the '<em><b>Configuration</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference PACKAGE__CONFIGURATION = eINSTANCE.getPackage_Configuration();
-
-		/**
-		 * The meta object literal for the '<em><b>Package Settings</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference PACKAGE__PACKAGE_SETTINGS = eINSTANCE.getPackage_PackageSettings();
 
 		/**
 		 * The meta object literal for the '{@link it.univaq.mancoosi.mancoosimm.PriorityType <em>Priority Type</em>}' enum.

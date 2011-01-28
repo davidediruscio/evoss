@@ -18,6 +18,7 @@ package it.univaq.mancoosi.mancoosimm;
  *   <li>{@link it.univaq.mancoosi.mancoosimm.Package#getVersion <em>Version</em>}</li>
  *   <li>{@link it.univaq.mancoosi.mancoosimm.Package#getConfiguration <em>Configuration</em>}</li>
  *   <li>{@link it.univaq.mancoosi.mancoosimm.Package#getPackageSettings <em>Package Settings</em>}</li>
+ *   <li>{@link it.univaq.mancoosi.mancoosimm.Package#getArchitecture <em>Architecture</em>}</li>
  * </ul>
  * </p>
  *
@@ -91,7 +92,7 @@ public interface Package extends NamedElement {
 	 * @see #setPackageSettings(PackageSetting)
 	 * @see it.univaq.mancoosi.mancoosimm.MancoosiPackage#getPackage_PackageSettings()
 	 * @see it.univaq.mancoosi.mancoosimm.PackageSetting#getPkg
-	 * @model opposite="pkg" containment="true" required="true" ordered="false"
+	 * @model opposite="pkg" containment="true" ordered="false"
 	 * @generated
 	 */
 	PackageSetting getPackageSettings();
@@ -105,5 +106,31 @@ public interface Package extends NamedElement {
 	 * @generated
 	 */
 	void setPackageSettings(PackageSetting value);
+
+	/**
+	 * Returns the value of the '<em><b>Architecture</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Architecture</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Architecture</em>' attribute.
+	 * @see #setArchitecture(String)
+	 * @see it.univaq.mancoosi.mancoosimm.MancoosiPackage#getPackage_Architecture()
+	 * @model unique="false" required="true" ordered="false"
+	 * @generated
+	 */
+	String getArchitecture();
+
+	/**
+	 * Sets the value of the '{@link it.univaq.mancoosi.mancoosimm.Package#getArchitecture <em>Architecture</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Architecture</em>' attribute.
+	 * @see #getArchitecture()
+	 * @generated
+	 */
+	void setArchitecture(String value);
 
 } // Package

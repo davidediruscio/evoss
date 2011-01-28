@@ -38,7 +38,6 @@ helper context INPackage!BooleanExpression def : getChildren () : OrderedSet(INP
 	;
 
 
--- Creates an ATL transformation module from a KM3 metamodel.
 rule Query {
 	from
 		s : INPackage!Package
