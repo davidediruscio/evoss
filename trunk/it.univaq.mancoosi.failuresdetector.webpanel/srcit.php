@@ -73,8 +73,7 @@ switch ($tipo[$cont]){
         print "<input onblur='updatethis(\"".$_GET['t']."\",\"".$campi[$cont]."\",".$IDz.");' id='".$_GET['t']."_".$campi[$cont]."_".$IDz."' class='inputedit' type='text' style='width: 98.5%;' name='".$campi[$cont]."' value='".$campix[$campi[$cont]]."' maxlength='".$grandezza[$cont]."' />";
         break;
 	    case "text":
-		if ($campi[$cont] == "query"){ print $campix[$campi[$cont]]; } else
-        { print "<textarea onblur='updatethis(\"".$_GET['t']."\",\"".$campi[$cont]."\",".$IDz.");' id='".$_GET['t']."_".$campi[$cont]."_".$IDz."' class='inputedit' name='".$campi[$cont]."' rows='5' style='width: 98.5%;'>".$campix[$campi[$cont]]."</textarea>"; }
+		print "<textarea onblur='updatethis(\"".$_GET['t']."\",\"".$campi[$cont]."\",".$IDz.");' id='".$_GET['t']."_".$campi[$cont]."_".$IDz."' class='inputedit' name='".$campi[$cont]."' rows='5' style='width: 98.5%;'>".$campix[$campi[$cont]]."</textarea>";
         break;
 		case "tinytext":
         print "<input onblur='updatethis(\"".$_GET['t']."\",\"".$campi[$cont]."\",".$IDz.");' id='".$_GET['t']."_".$campi[$cont]."_".$IDz."' class='inputedit' type='text' style='width: 98.5%;' name='".$campi[$cont]."' value='".$campix[$campi[$cont]]."' maxlength='30' />";
