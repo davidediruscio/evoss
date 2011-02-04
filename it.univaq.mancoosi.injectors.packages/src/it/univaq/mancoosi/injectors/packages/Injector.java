@@ -39,6 +39,7 @@ public class Injector {
 	    Output.println("   packages not processed correctly with scripts: " + errorPackageWithScript);
 	    Output.println("   packages not processed correctly without scripts: " + errorPackageNoScript);
 
+	    Output.close();
 	}
 	
 	

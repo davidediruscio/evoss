@@ -63,7 +63,6 @@ rule InstalledPackage {
         section <- s.section,
         tag <- s.tag,
         priority <- s.priority,
-        status <- s.status,
         uploaders <- s.uploaders,
         configuration <- s.configuration,
         packageSettings <- s.packageSettings,
@@ -288,6 +287,7 @@ rule Environment {
 					t.alternatives <- INConfiguration!Alternative.allInstancesFrom('IN')->collect(e | thisModule.Alternative(e)).asSequence().including(thisModule.createAlternative(nameAlt, thisModule.getFile(locationAlt)));
 				}
 			} else {
+				t.alternatives <- INConfiguration!Alternative.allInstancesFrom('IN')->collect(e | thisModule.Alternative(e));
 				thisModule.createErrorModel('add_alternative', 'The file '+ locationAlt + ' does not exist!');
 			}
 		}
@@ -595,10 +595,19 @@ rule createAlternative(name:String, current: INConfiguration!File) {
 		t;
 	}				 
 }
-   
+
+--
+rule createErrorModel(type:String, description:String) {
+     to
+       t : MMError!Report (
+       		errors <- thisModule.createError(type, description))
+	do {
+		t;
+	}	
+}
 
 -- 
-rule createErrorModel(type:String, description:String) {
+rule createError(type:String, description:String) {
      to
        t : MMError!Error (
        		statement <- thisModule.getStatementName.toString(),

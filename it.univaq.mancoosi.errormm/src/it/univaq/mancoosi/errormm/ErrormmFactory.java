@@ -26,22 +26,22 @@ public interface ErrormmFactory extends EFactory {
 	ErrormmFactory eINSTANCE = it.univaq.mancoosi.errormm.impl.ErrormmFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Error</em>'.
+	 * Returns a new object of class '<em>Report</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Error</em>'.
+	 * @return a new object of class '<em>Report</em>'.
 	 * @generated
 	 */
-	Error createError();
+	Report createReport();
 
 	/**
-	 * Returns a new object of class '<em>Named Element</em>'.
+	 * Returns a new object of class '<em>Message</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Named Element</em>'.
+	 * @return a new object of class '<em>Message</em>'.
 	 * @generated
 	 */
-	NamedElement createNamedElement();
+	Message createMessage();
 
 	/**
 	 * Returns a new object of class '<em>Warning</em>'.
@@ -51,6 +51,15 @@ public interface ErrormmFactory extends EFactory {
 	 * @generated
 	 */
 	Warning createWarning();
+
+	/**
+	 * Returns a new object of class '<em>Error</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Error</em>'.
+	 * @generated
+	 */
+	Error createError();
 
 	/**
 	 * Returns the package supported by this factory.

@@ -21,9 +21,8 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 
 import it.univaq.mancoosi.simulator.entity.StatementScript;
-import it.univaq.mancoosi.simulator.exceptions.ErrorModelFoundException;
 import it.univaq.mancoosi.simulator.exceptions.SimulatorException;
-import it.univaq.mancoosi.simulator.util.CurrentSystemModelFile;
+import it.univaq.mancoosi.simulator.util.CurrentModelsFile;
 import it.univaq.mancoosi.simulator.util.FileManagement;
 import it.univaq.mancoosi.simulator.util.SimulatorConfig;
 import it.univaq.mancoosi.simulator.util.TransformationRuleFilesMapping;
@@ -76,6 +75,7 @@ public class OrchestrationManager {
 	private WiresSpecification wiresSpecification;
 	private ArrayList<StatementScript> statementsScript;
 	private TransformationRuleFilesMapping mappingRule;
+	private ArrayList<String> errorModels;
 
 	/**
 	 * Constructor
@@ -96,6 +96,7 @@ public class OrchestrationManager {
 		this.pathPackageModel = pathPackageModel;
 		wiresSpecification = WiresFactory.eINSTANCE.createWiresSpecification();
 		mappingRule = TransformationRuleFilesMapping.getInstance();
+		errorModels = new ArrayList<String>();
 		
 		try {
 			createModel();
@@ -110,14 +111,23 @@ public class OrchestrationManager {
 
 	/**
 	 * Provides the execution of the model
-	 * 
-	 * @throws SimulatorException
+	 * @throws Exception 
 	 */
-	public Boolean runOrchestrationModel() throws SimulatorException {
+	public Boolean runOrchestrationModel() throws Exception {
 
 		try {
 			
+			 /*		PrintStream printStreamOriginal=System.err;
+
+			System.setErr(new PrintStream(new OutputStream() {
+				@Override
+				public void write(int arg0) throws IOException {
+				}
+			}));*/
+			
 			((WiresSpecificationImpl) wiresSpecification).runExecution();
+			
+			//System.setErr(printStreamOriginal);
 
 		} catch (InitialModelsNotFoundException e) {
 			throw new SimulatorException("Orchestration Error: No initial models!", e);
@@ -141,14 +151,17 @@ public class OrchestrationManager {
 			throw new SimulatorException("Orchestration execution error", e);
 		}
 		
-		File modelError = new File(config.getDirOutput() + config.getFileErrorModel());
-
-		if (modelError.exists()) throw new ErrorModelFoundException(
-				"Error model created from the execution" +
-				" of the script: "+ packageNameInput+"."+typeScript);
 		
-		return null;
+		ErrorModelManager errorManager = new ErrorModelManager();
+		errorManager.appendModel(errorModels);
+		Boolean existError = errorManager.existsErrors();
 		
+		if (existError || errorManager.existsWarnings()) {
+			File model = FileManagement.createTempFile("errorModel", "erromm");
+			errorManager.saveModel(model.getPath());
+			CurrentModelsFile.getInstance().addErrorModel(model);
+		}
+		return existError;
 	}
 
 	/**
@@ -207,7 +220,7 @@ public class OrchestrationManager {
 
 		// Configuration model - input
 		Model systemModelIn = createModel("systemModelInput", modelSystemType,
-				CurrentSystemModelFile.getInstance().getSystemModelCurrent().getPath());
+				CurrentModelsFile.getInstance().getSystemModelCurrent().getPath());
 
 		// Configuration model - output
 		String inputSystemModel = config.getFileInputSystemModel();
@@ -219,11 +232,8 @@ public class OrchestrationManager {
 						.length()));
 		Model systemModelOut = createModel("systemModelOutput",
 				modelSystemType, newTempFile.getPath());
-		CurrentSystemModelFile.getInstance().setSystemModelCurrent(newTempFile);
+		CurrentModelsFile.getInstance().setSystemModelCurrent(newTempFile);
 
-		// Error model
-		Model errorModel = createModel("errorModel", modelErrorType, config.getDirOutput()
-				+ config.getFileErrorModel());
 
 		// Statements temp
 		ArrayList<AtomicModelTransformation> transfTemp = new ArrayList<AtomicModelTransformation>();
@@ -321,7 +331,7 @@ public class OrchestrationManager {
 				} else {
 					createDataFlow(systemModelTempPreIf, conditionQuery, modelSystemType);
 					// For transformation with possible error model
-					errorModelManager(tempTransfIf, false, conditionQuery, errorModel, null, integerType, modelSystemType);
+					errorModelManager(tempTransfIf, false, conditionQuery, modelErrorType, systemModelOut, integerType, modelSystemType);
 				}
 
 			} else {
@@ -342,7 +352,7 @@ public class OrchestrationManager {
 					} else {
 						createDataFlow(thenTemp.get(thenTemp.size() - 2), atomicModelTransf, modelSystemType);
 						// For transformation with possible error
-						errorModelManager(thenTemp.get(thenTemp.size() - 2), false, atomicModelTransf, errorModel, null, integerType, modelSystemType);
+						errorModelManager(thenTemp.get(thenTemp.size() - 2), false, atomicModelTransf, modelErrorType, systemModelOut, integerType, modelSystemType);
 					}
 					
 				} else if (statementsScript.get(i).getContainingFeature().equals("else")) {
@@ -355,7 +365,7 @@ public class OrchestrationManager {
 					} else {
 						createDataFlow(elseTemp.get(elseTemp.size() - 2), atomicModelTransf, modelSystemType);
 						// For transformation with possible error
-						errorModelManager(elseTemp.get(elseTemp.size() - 2), false, atomicModelTransf, errorModel, null, integerType, modelSystemType);
+						errorModelManager(elseTemp.get(elseTemp.size() - 2), false, atomicModelTransf, modelErrorType, systemModelOut, integerType, modelSystemType);
 					}
 				} else if (i > 0 && statementsScript.get(i-1).getContainingFeature().equals("then")) {
 
@@ -387,7 +397,7 @@ public class OrchestrationManager {
 						createDataFlow(systemModelTempPostIdentity, atomicModelTransf, modelSystemType);
 						
 						// For transformation with possible error model
-						errorModelManager(thenTemp.get(thenTemp.size() - 1), true, atomicModelTransf, errorModel, null, integerType, modelSystemType);
+						errorModelManager(thenTemp.get(thenTemp.size() - 1), true, atomicModelTransf, modelErrorType, systemModelOut, integerType, modelSystemType);
 
 
 					} else if (i > 0 && statementsScript.get(i-1).getContainingFeature().equals("else")) {
@@ -399,11 +409,11 @@ public class OrchestrationManager {
 						createDataFlow(genQueriesTemp.get(genQueriesTemp.size()-1).getOutParams().get(0), decisNode.getInParams().get(0));
 
 						// else --> postIf
-						if (!errorModelManager(elseTemp.get(elseTemp.size() - 1), true, atomicModelTransf, errorModel, null, integerType, modelSystemType)) {
+						if (!errorModelManager(elseTemp.get(elseTemp.size() - 1), true, atomicModelTransf, modelErrorType, systemModelOut, integerType, modelSystemType)) {
 							createDataFlow(elseTemp.get(elseTemp.size()-1), atomicModelTransf, modelSystemType);
 						}
 						// then --> postIf
-						if (!errorModelManager(thenTemp.get(thenTemp.size() - 1), true, atomicModelTransf, errorModel, null, integerType, modelSystemType)) {
+						if (!errorModelManager(thenTemp.get(thenTemp.size() - 1), true, atomicModelTransf, modelErrorType, systemModelOut, integerType, modelSystemType)) {
 							createDataFlow(thenTemp.get(thenTemp.size()-1), atomicModelTransf, modelSystemType);
 						}
 						
@@ -415,17 +425,9 @@ public class OrchestrationManager {
 							createDataFlow(transfTemp.get(transfTemp.size() - 2), atomicModelTransf, modelSystemType);
 
 							// For transformation with possible error
-							errorModelManager(transfTemp.get(transfTemp.size() - 2), false, atomicModelTransf, errorModel, null, integerType, modelSystemType);
+							errorModelManager(transfTemp.get(transfTemp.size() - 2), false, atomicModelTransf, modelErrorType, systemModelOut, integerType, modelSystemType);
 
 						}
-						
-						//---
-						//thenTemp.clear();
-						//elseTemp.clear();
-						//genQueriesTemp.clear();
-						//systemModelTempPreIf = null;
-						//tempTransfIf = null;
-						//---
 					}
 
 						
@@ -435,7 +437,7 @@ public class OrchestrationManager {
 						if (i == (statementsScript.size() - 1)) {
 
 							// For transformation with possible error
-							Boolean res = errorModelManager(atomicModelTransf, false, atomicModelTransf, errorModel, systemModelOut, integerType, modelSystemType);
+							Boolean res = errorModelManager(atomicModelTransf, false, null, modelErrorType, systemModelOut, integerType, modelSystemType);
 							if (!res)  {
 								createDataFlow(atomicModelTransf, systemModelOut, modelSystemType);
 							}
@@ -535,11 +537,11 @@ public class OrchestrationManager {
 	 * @throws SimulatorException 
 	 */
 	private Boolean errorModelManager(Transformation transfWithError, Boolean thenOrElse,
-			Transformation transfPosterror, Model errorModel, Model sysModelOut,
+			Transformation transfPosterror, ModelType modelErrorType, Model sysModelOut,
 			BasicDataType integerType, ModelType systemType) throws SimulatorException {
 
 		Boolean result = false;
-		OutputActualParameter outActualError = getParamOut(transfWithError.getOutParams(), errorModel.getType());
+		OutputActualParameter outActualError = getParamOut(transfWithError.getOutParams(), modelErrorType);
 		if (outActualError != null) {
 			result = true;
 			// Error modelTemp
@@ -548,8 +550,11 @@ public class OrchestrationManager {
 					.substring(0, nameErrorModel.lastIndexOf(".")),
 					nameErrorModel.substring(
 							nameErrorModel.lastIndexOf(".") + 1, nameErrorModel.length()));
+			
+			errorModels.add(errorTempFile.getPath());
+			
 			Model errorModelTemp = createModel("errorModelTemp_"
-					+ this.getRandomNumber(), (ModelType)errorModel.getType(),
+					+ this.getRandomNumber(), modelErrorType,
 					errorTempFile.getPath());
 
 			// Dataflow: OUTActual --> TempErrorModel
@@ -557,7 +562,7 @@ public class OrchestrationManager {
 
 			if (!thenOrElse) {
 
-				createManagementErrorModel(errorModelTemp, transfPosterror, errorModel, sysModelOut, integerType);
+				createManagementErrorModel(transfWithError, errorModelTemp, transfPosterror, modelErrorType, sysModelOut, systemType, integerType);
 			} else {
 
 				// modelTemp1
@@ -578,7 +583,7 @@ public class OrchestrationManager {
 				
 				IdentityTransformation identity = createIdentityTransf(systemType);
 
-				createManagementErrorModel(errorModelTemp, identity, errorModel, sysModelOut, integerType);
+				createManagementErrorModel(transfWithError, errorModelTemp, identity, modelErrorType, sysModelOut, systemType, integerType);
 
 				createDataFlow(transfWithError, sysModelTemp1, systemType);
 
@@ -651,16 +656,17 @@ public class OrchestrationManager {
 	 * @throws SimulatorException 
 	 */
 	private void createManagementErrorModel(
+			Transformation transfWithError,
 			Model errorModelTemp,
 			Transformation transfPostError,
-			Model errorModel, Model sysModelOut, BasicDataType integerType) throws SimulatorException {
+			ModelType modelErrorType, Model sysModelOut, ModelType modelSysModel, BasicDataType integerType) throws SimulatorException {
 
 		QueryType isEmptyErrorModel = getQueryType("isEmptyErrorModel");
 		
 		if (isEmptyErrorModel == null) {
 			InputFormalParameter inputFormal = WiresFactory.eINSTANCE.createInputFormalParameter();
 			inputFormal.setName("INERR");
-			inputFormal.setTypeEl((ModelType)errorModel.getType());
+			inputFormal.setTypeEl(modelErrorType);
 			inputFormal.setTypeName("MMError");
 			
 			OutputFormalParameter outputFormal = WiresFactory.eINSTANCE.createOutputFormalParameter();
@@ -678,35 +684,35 @@ public class OrchestrationManager {
 		// DataFlow: ErrorTempModel --> Query
 		createDataFlow(errorModelTemp, isEmptyQuery.getInParams().get(0));
 		
-		// IdentityTransformation - ErrorModel
-		IdentityTransformation identityErrorModel = createIdentityTransf((ModelType)errorModel.getType());
+		// IdentityTransformation - ErrorExists
+		IdentityTransformation identityErrorExists = createIdentityTransf(modelSysModel);
 		
 		// DecisionNode
 		DecisionNode node;
+
+		// Configuration model - Temp
+		String inputSystemModel = config.getFileInputSystemModel();
+		String nameFileModel = inputSystemModel.substring(inputSystemModel
+				.lastIndexOf("/") + 1, inputSystemModel.length());
+		File newTempFile = FileManagement.createTempFile(nameFileModel.substring(0,
+				nameFileModel.lastIndexOf(".")), nameFileModel
+				.substring(nameFileModel.lastIndexOf(".") + 1,
+						nameFileModel.length()));
+		Model systemModelTemp = createModel("systemModelOutputTemp", modelSysModel,
+				newTempFile.getPath());
 		
-		if (sysModelOut == null) {
-			
-			node = createDecisionNode("x", "x>0", transfPostError, identityErrorModel);
+		// Dataflow: OutActualSystemModel --> tempSysModel
+		createDataFlow(transfWithError, systemModelTemp, modelSysModel);
+		
+		if (transfPostError != null) {
+			node = createDecisionNode("x", "x>0", transfPostError, identityErrorExists);
 			transfPostError.setControlNode(node);
-			
 		} else {
 			
-			// Configuration model - Temp
-			String inputSystemModel = config.getFileInputSystemModel();
-			String nameFileModel = inputSystemModel.substring(inputSystemModel
-					.lastIndexOf("/") + 1, inputSystemModel.length());
-			File newTempFile = FileManagement.createTempFile(nameFileModel.substring(0,
-					nameFileModel.lastIndexOf(".")), nameFileModel
-					.substring(nameFileModel.lastIndexOf(".") + 1,
-							nameFileModel.length()));
-			Model systemModelTemp = createModel("systemModelOutputTemp", (ModelType)sysModelOut.getType(),
-					newTempFile.getPath());
-			
-			// Dataflow: OutActualSystamModel --> tempSysModel
-			createDataFlow(transfPostError, systemModelTemp, (ModelType)sysModelOut.getType());
+
 			// IdentityTransformation - 
-			IdentityTransformation identitySysModel = createIdentityTransf((ModelType)systemModelTemp.getType());
-			node = createDecisionNode("x","x>0", identitySysModel, identityErrorModel);
+			IdentityTransformation identitySysModel = createIdentityTransf(modelSysModel);
+			node = createDecisionNode("x","x>0", identitySysModel, identityErrorExists);
 			
 			// DataFlow: TempSysModel --> Identity
 			createDataFlow(systemModelTemp, identitySysModel.getInParams().get(0));
@@ -715,16 +721,16 @@ public class OrchestrationManager {
 			createDataFlow(identitySysModel.getOutParams().get(0), sysModelOut);
 		}
 		
-		identityErrorModel.setControlNode(node);
+		identityErrorExists.setControlNode(node);
 		
 		// DataFlow: Query --> DecisionNode
 		createDataFlow(isEmptyQuery.getOutParams().get(0), node.getInParams().get(0));
 		
-		// DataFlow: TempErrorModel --> Identity
-		createDataFlow(errorModelTemp, identityErrorModel.getInParams().get(0));
+		// DataFlow: systemModelTemp --> Identity ErrorExist
+		createDataFlow(systemModelTemp, identityErrorExists.getInParams().get(0));
 		
-		// DataFlow: Identity --> errorModel
-		createDataFlow(identityErrorModel.getOutParams().get(0), errorModel);
+		// DataFlow: Identity ErrorExist --> sysModelOut
+		createDataFlow(identityErrorExists.getOutParams().get(0), sysModelOut);
 	}
 	
 	/**

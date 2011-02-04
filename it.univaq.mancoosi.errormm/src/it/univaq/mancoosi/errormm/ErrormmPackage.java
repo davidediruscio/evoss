@@ -9,6 +9,7 @@ package it.univaq.mancoosi.errormm;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 
 /**
  * <!-- begin-user-doc -->
@@ -59,60 +60,32 @@ public interface ErrormmPackage extends EPackage {
 	ErrormmPackage eINSTANCE = it.univaq.mancoosi.errormm.impl.ErrormmPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link it.univaq.mancoosi.errormm.impl.NamedElementImpl <em>Named Element</em>}' class.
+	 * The meta object id for the '{@link it.univaq.mancoosi.errormm.impl.ReportImpl <em>Report</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see it.univaq.mancoosi.errormm.impl.NamedElementImpl
-	 * @see it.univaq.mancoosi.errormm.impl.ErrormmPackageImpl#getNamedElement()
+	 * @see it.univaq.mancoosi.errormm.impl.ReportImpl
+	 * @see it.univaq.mancoosi.errormm.impl.ErrormmPackageImpl#getReport()
 	 * @generated
 	 */
-	int NAMED_ELEMENT = 1;
+	int REPORT = 0;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Warnings</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NAMED_ELEMENT__NAME = 0;
+	int REPORT__WARNINGS = 0;
 
 	/**
-	 * The number of structural features of the '<em>Named Element</em>' class.
+	 * The feature id for the '<em><b>Errors</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NAMED_ELEMENT_FEATURE_COUNT = 1;
-
-	/**
-	 * The meta object id for the '{@link it.univaq.mancoosi.errormm.impl.ErrorImpl <em>Error</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see it.univaq.mancoosi.errormm.impl.ErrorImpl
-	 * @see it.univaq.mancoosi.errormm.impl.ErrormmPackageImpl#getError()
-	 * @generated
-	 */
-	int ERROR = 0;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ERROR__NAME = NAMED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ERROR__TYPE = NAMED_ELEMENT_FEATURE_COUNT + 0;
+	int REPORT__ERRORS = 1;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -121,7 +94,44 @@ public interface ErrormmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ERROR__DESCRIPTION = NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int REPORT__DESCRIPTION = 2;
+
+	/**
+	 * The number of structural features of the '<em>Report</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REPORT_FEATURE_COUNT = 3;
+
+	/**
+	 * The meta object id for the '{@link it.univaq.mancoosi.errormm.impl.MessageImpl <em>Message</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see it.univaq.mancoosi.errormm.impl.MessageImpl
+	 * @see it.univaq.mancoosi.errormm.impl.ErrormmPackageImpl#getMessage()
+	 * @generated
+	 */
+	int MESSAGE = 1;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MESSAGE__TYPE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MESSAGE__DESCRIPTION = 1;
 
 	/**
 	 * The feature id for the '<em><b>Statement</b></em>' attribute.
@@ -130,7 +140,7 @@ public interface ErrormmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ERROR__STATEMENT = NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int MESSAGE__STATEMENT = 2;
 
 	/**
 	 * The feature id for the '<em><b>Script</b></em>' attribute.
@@ -139,7 +149,7 @@ public interface ErrormmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ERROR__SCRIPT = NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int MESSAGE__SCRIPT = 3;
 
 	/**
 	 * The feature id for the '<em><b>Package</b></em>' attribute.
@@ -148,16 +158,16 @@ public interface ErrormmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ERROR__PACKAGE = NAMED_ELEMENT_FEATURE_COUNT + 4;
+	int MESSAGE__PACKAGE = 4;
 
 	/**
-	 * The number of structural features of the '<em>Error</em>' class.
+	 * The number of structural features of the '<em>Message</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ERROR_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 5;
+	int MESSAGE_FEATURE_COUNT = 5;
 
 	/**
 	 * The meta object id for the '{@link it.univaq.mancoosi.errormm.impl.WarningImpl <em>Warning</em>}' class.
@@ -170,13 +180,13 @@ public interface ErrormmPackage extends EPackage {
 	int WARNING = 2;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int WARNING__NAME = NAMED_ELEMENT__NAME;
+	int WARNING__TYPE = MESSAGE__TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -185,16 +195,7 @@ public interface ErrormmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int WARNING__DESCRIPTION = NAMED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int WARNING__TYPE = NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int WARNING__DESCRIPTION = MESSAGE__DESCRIPTION;
 
 	/**
 	 * The feature id for the '<em><b>Statement</b></em>' attribute.
@@ -203,7 +204,7 @@ public interface ErrormmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int WARNING__STATEMENT = NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int WARNING__STATEMENT = MESSAGE__STATEMENT;
 
 	/**
 	 * The feature id for the '<em><b>Script</b></em>' attribute.
@@ -212,7 +213,7 @@ public interface ErrormmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int WARNING__SCRIPT = NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int WARNING__SCRIPT = MESSAGE__SCRIPT;
 
 	/**
 	 * The feature id for the '<em><b>Package</b></em>' attribute.
@@ -221,7 +222,7 @@ public interface ErrormmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int WARNING__PACKAGE = NAMED_ELEMENT_FEATURE_COUNT + 4;
+	int WARNING__PACKAGE = MESSAGE__PACKAGE;
 
 	/**
 	 * The number of structural features of the '<em>Warning</em>' class.
@@ -230,94 +231,180 @@ public interface ErrormmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int WARNING_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 5;
-
+	int WARNING_FEATURE_COUNT = MESSAGE_FEATURE_COUNT + 0;
 
 	/**
-	 * Returns the meta object for class '{@link it.univaq.mancoosi.errormm.Error <em>Error</em>}'.
+	 * The meta object id for the '{@link it.univaq.mancoosi.errormm.impl.ErrorImpl <em>Error</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Error</em>'.
-	 * @see it.univaq.mancoosi.errormm.Error
+	 * @see it.univaq.mancoosi.errormm.impl.ErrorImpl
+	 * @see it.univaq.mancoosi.errormm.impl.ErrormmPackageImpl#getError()
 	 * @generated
 	 */
-	EClass getError();
+	int ERROR = 3;
 
 	/**
-	 * Returns the meta object for the attribute '{@link it.univaq.mancoosi.errormm.Error#getType <em>Type</em>}'.
+	 * The feature id for the '<em><b>Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Type</em>'.
-	 * @see it.univaq.mancoosi.errormm.Error#getType()
-	 * @see #getError()
 	 * @generated
+	 * @ordered
 	 */
-	EAttribute getError_Type();
+	int ERROR__TYPE = MESSAGE__TYPE;
 
 	/**
-	 * Returns the meta object for the attribute '{@link it.univaq.mancoosi.errormm.Error#getDescription <em>Description</em>}'.
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ERROR__DESCRIPTION = MESSAGE__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Statement</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ERROR__STATEMENT = MESSAGE__STATEMENT;
+
+	/**
+	 * The feature id for the '<em><b>Script</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ERROR__SCRIPT = MESSAGE__SCRIPT;
+
+	/**
+	 * The feature id for the '<em><b>Package</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ERROR__PACKAGE = MESSAGE__PACKAGE;
+
+	/**
+	 * The number of structural features of the '<em>Error</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ERROR_FEATURE_COUNT = MESSAGE_FEATURE_COUNT + 0;
+
+
+	/**
+	 * Returns the meta object for class '{@link it.univaq.mancoosi.errormm.Report <em>Report</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Report</em>'.
+	 * @see it.univaq.mancoosi.errormm.Report
+	 * @generated
+	 */
+	EClass getReport();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link it.univaq.mancoosi.errormm.Report#getWarnings <em>Warnings</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Warnings</em>'.
+	 * @see it.univaq.mancoosi.errormm.Report#getWarnings()
+	 * @see #getReport()
+	 * @generated
+	 */
+	EReference getReport_Warnings();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link it.univaq.mancoosi.errormm.Report#getErrors <em>Errors</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Errors</em>'.
+	 * @see it.univaq.mancoosi.errormm.Report#getErrors()
+	 * @see #getReport()
+	 * @generated
+	 */
+	EReference getReport_Errors();
+
+	/**
+	 * Returns the meta object for the attribute '{@link it.univaq.mancoosi.errormm.Report#getDescription <em>Description</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Description</em>'.
-	 * @see it.univaq.mancoosi.errormm.Error#getDescription()
-	 * @see #getError()
+	 * @see it.univaq.mancoosi.errormm.Report#getDescription()
+	 * @see #getReport()
 	 * @generated
 	 */
-	EAttribute getError_Description();
+	EAttribute getReport_Description();
 
 	/**
-	 * Returns the meta object for the attribute '{@link it.univaq.mancoosi.errormm.Error#getStatement <em>Statement</em>}'.
+	 * Returns the meta object for class '{@link it.univaq.mancoosi.errormm.Message <em>Message</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Message</em>'.
+	 * @see it.univaq.mancoosi.errormm.Message
+	 * @generated
+	 */
+	EClass getMessage();
+
+	/**
+	 * Returns the meta object for the attribute '{@link it.univaq.mancoosi.errormm.Message#getType <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Type</em>'.
+	 * @see it.univaq.mancoosi.errormm.Message#getType()
+	 * @see #getMessage()
+	 * @generated
+	 */
+	EAttribute getMessage_Type();
+
+	/**
+	 * Returns the meta object for the attribute '{@link it.univaq.mancoosi.errormm.Message#getDescription <em>Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Description</em>'.
+	 * @see it.univaq.mancoosi.errormm.Message#getDescription()
+	 * @see #getMessage()
+	 * @generated
+	 */
+	EAttribute getMessage_Description();
+
+	/**
+	 * Returns the meta object for the attribute '{@link it.univaq.mancoosi.errormm.Message#getStatement <em>Statement</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Statement</em>'.
-	 * @see it.univaq.mancoosi.errormm.Error#getStatement()
-	 * @see #getError()
+	 * @see it.univaq.mancoosi.errormm.Message#getStatement()
+	 * @see #getMessage()
 	 * @generated
 	 */
-	EAttribute getError_Statement();
+	EAttribute getMessage_Statement();
 
 	/**
-	 * Returns the meta object for the attribute '{@link it.univaq.mancoosi.errormm.Error#getScript <em>Script</em>}'.
+	 * Returns the meta object for the attribute '{@link it.univaq.mancoosi.errormm.Message#getScript <em>Script</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Script</em>'.
-	 * @see it.univaq.mancoosi.errormm.Error#getScript()
-	 * @see #getError()
+	 * @see it.univaq.mancoosi.errormm.Message#getScript()
+	 * @see #getMessage()
 	 * @generated
 	 */
-	EAttribute getError_Script();
+	EAttribute getMessage_Script();
 
 	/**
-	 * Returns the meta object for the attribute '{@link it.univaq.mancoosi.errormm.Error#getPackage <em>Package</em>}'.
+	 * Returns the meta object for the attribute '{@link it.univaq.mancoosi.errormm.Message#getPackage <em>Package</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Package</em>'.
-	 * @see it.univaq.mancoosi.errormm.Error#getPackage()
-	 * @see #getError()
+	 * @see it.univaq.mancoosi.errormm.Message#getPackage()
+	 * @see #getMessage()
 	 * @generated
 	 */
-	EAttribute getError_Package();
-
-	/**
-	 * Returns the meta object for class '{@link it.univaq.mancoosi.errormm.NamedElement <em>Named Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Named Element</em>'.
-	 * @see it.univaq.mancoosi.errormm.NamedElement
-	 * @generated
-	 */
-	EClass getNamedElement();
-
-	/**
-	 * Returns the meta object for the attribute '{@link it.univaq.mancoosi.errormm.NamedElement#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see it.univaq.mancoosi.errormm.NamedElement#getName()
-	 * @see #getNamedElement()
-	 * @generated
-	 */
-	EAttribute getNamedElement_Name();
+	EAttribute getMessage_Package();
 
 	/**
 	 * Returns the meta object for class '{@link it.univaq.mancoosi.errormm.Warning <em>Warning</em>}'.
@@ -330,59 +417,14 @@ public interface ErrormmPackage extends EPackage {
 	EClass getWarning();
 
 	/**
-	 * Returns the meta object for the attribute '{@link it.univaq.mancoosi.errormm.Warning#getDescription <em>Description</em>}'.
+	 * Returns the meta object for class '{@link it.univaq.mancoosi.errormm.Error <em>Error</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Description</em>'.
-	 * @see it.univaq.mancoosi.errormm.Warning#getDescription()
-	 * @see #getWarning()
+	 * @return the meta object for class '<em>Error</em>'.
+	 * @see it.univaq.mancoosi.errormm.Error
 	 * @generated
 	 */
-	EAttribute getWarning_Description();
-
-	/**
-	 * Returns the meta object for the attribute '{@link it.univaq.mancoosi.errormm.Warning#getType <em>Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Type</em>'.
-	 * @see it.univaq.mancoosi.errormm.Warning#getType()
-	 * @see #getWarning()
-	 * @generated
-	 */
-	EAttribute getWarning_Type();
-
-	/**
-	 * Returns the meta object for the attribute '{@link it.univaq.mancoosi.errormm.Warning#getStatement <em>Statement</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Statement</em>'.
-	 * @see it.univaq.mancoosi.errormm.Warning#getStatement()
-	 * @see #getWarning()
-	 * @generated
-	 */
-	EAttribute getWarning_Statement();
-
-	/**
-	 * Returns the meta object for the attribute '{@link it.univaq.mancoosi.errormm.Warning#getScript <em>Script</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Script</em>'.
-	 * @see it.univaq.mancoosi.errormm.Warning#getScript()
-	 * @see #getWarning()
-	 * @generated
-	 */
-	EAttribute getWarning_Script();
-
-	/**
-	 * Returns the meta object for the attribute '{@link it.univaq.mancoosi.errormm.Warning#getPackage <em>Package</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Package</em>'.
-	 * @see it.univaq.mancoosi.errormm.Warning#getPackage()
-	 * @see #getWarning()
-	 * @generated
-	 */
-	EAttribute getWarning_Package();
+	EClass getError();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -407,22 +449,30 @@ public interface ErrormmPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link it.univaq.mancoosi.errormm.impl.ErrorImpl <em>Error</em>}' class.
+		 * The meta object literal for the '{@link it.univaq.mancoosi.errormm.impl.ReportImpl <em>Report</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see it.univaq.mancoosi.errormm.impl.ErrorImpl
-		 * @see it.univaq.mancoosi.errormm.impl.ErrormmPackageImpl#getError()
+		 * @see it.univaq.mancoosi.errormm.impl.ReportImpl
+		 * @see it.univaq.mancoosi.errormm.impl.ErrormmPackageImpl#getReport()
 		 * @generated
 		 */
-		EClass ERROR = eINSTANCE.getError();
+		EClass REPORT = eINSTANCE.getReport();
 
 		/**
-		 * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Warnings</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute ERROR__TYPE = eINSTANCE.getError_Type();
+		EReference REPORT__WARNINGS = eINSTANCE.getReport_Warnings();
+
+		/**
+		 * The meta object literal for the '<em><b>Errors</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference REPORT__ERRORS = eINSTANCE.getReport_Errors();
 
 		/**
 		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
@@ -430,7 +480,33 @@ public interface ErrormmPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute ERROR__DESCRIPTION = eINSTANCE.getError_Description();
+		EAttribute REPORT__DESCRIPTION = eINSTANCE.getReport_Description();
+
+		/**
+		 * The meta object literal for the '{@link it.univaq.mancoosi.errormm.impl.MessageImpl <em>Message</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see it.univaq.mancoosi.errormm.impl.MessageImpl
+		 * @see it.univaq.mancoosi.errormm.impl.ErrormmPackageImpl#getMessage()
+		 * @generated
+		 */
+		EClass MESSAGE = eINSTANCE.getMessage();
+
+		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MESSAGE__TYPE = eINSTANCE.getMessage_Type();
+
+		/**
+		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MESSAGE__DESCRIPTION = eINSTANCE.getMessage_Description();
 
 		/**
 		 * The meta object literal for the '<em><b>Statement</b></em>' attribute feature.
@@ -438,7 +514,7 @@ public interface ErrormmPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute ERROR__STATEMENT = eINSTANCE.getError_Statement();
+		EAttribute MESSAGE__STATEMENT = eINSTANCE.getMessage_Statement();
 
 		/**
 		 * The meta object literal for the '<em><b>Script</b></em>' attribute feature.
@@ -446,7 +522,7 @@ public interface ErrormmPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute ERROR__SCRIPT = eINSTANCE.getError_Script();
+		EAttribute MESSAGE__SCRIPT = eINSTANCE.getMessage_Script();
 
 		/**
 		 * The meta object literal for the '<em><b>Package</b></em>' attribute feature.
@@ -454,25 +530,7 @@ public interface ErrormmPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute ERROR__PACKAGE = eINSTANCE.getError_Package();
-
-		/**
-		 * The meta object literal for the '{@link it.univaq.mancoosi.errormm.impl.NamedElementImpl <em>Named Element</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see it.univaq.mancoosi.errormm.impl.NamedElementImpl
-		 * @see it.univaq.mancoosi.errormm.impl.ErrormmPackageImpl#getNamedElement()
-		 * @generated
-		 */
-		EClass NAMED_ELEMENT = eINSTANCE.getNamedElement();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute NAMED_ELEMENT__NAME = eINSTANCE.getNamedElement_Name();
+		EAttribute MESSAGE__PACKAGE = eINSTANCE.getMessage_Package();
 
 		/**
 		 * The meta object literal for the '{@link it.univaq.mancoosi.errormm.impl.WarningImpl <em>Warning</em>}' class.
@@ -485,44 +543,14 @@ public interface ErrormmPackage extends EPackage {
 		EClass WARNING = eINSTANCE.getWarning();
 
 		/**
-		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
+		 * The meta object literal for the '{@link it.univaq.mancoosi.errormm.impl.ErrorImpl <em>Error</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
+		 * @see it.univaq.mancoosi.errormm.impl.ErrorImpl
+		 * @see it.univaq.mancoosi.errormm.impl.ErrormmPackageImpl#getError()
 		 * @generated
 		 */
-		EAttribute WARNING__DESCRIPTION = eINSTANCE.getWarning_Description();
-
-		/**
-		 * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute WARNING__TYPE = eINSTANCE.getWarning_Type();
-
-		/**
-		 * The meta object literal for the '<em><b>Statement</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute WARNING__STATEMENT = eINSTANCE.getWarning_Statement();
-
-		/**
-		 * The meta object literal for the '<em><b>Script</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute WARNING__SCRIPT = eINSTANCE.getWarning_Script();
-
-		/**
-		 * The meta object literal for the '<em><b>Package</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute WARNING__PACKAGE = eINSTANCE.getWarning_Package();
+		EClass ERROR = eINSTANCE.getError();
 
 	}
 

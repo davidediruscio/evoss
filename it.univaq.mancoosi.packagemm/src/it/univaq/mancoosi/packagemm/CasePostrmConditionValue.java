@@ -90,7 +90,9 @@ public enum CasePostrmConditionValue implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	DISAPPEAR(7, "disappear", "disappear"), /**
+	DISAPPEAR(7, "disappear", "disappear"),
+
+	/**
 	 * The '<em><b>Failed upgrade</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

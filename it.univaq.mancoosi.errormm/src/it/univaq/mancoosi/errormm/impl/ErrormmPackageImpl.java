@@ -8,12 +8,14 @@ package it.univaq.mancoosi.errormm.impl;
 
 import it.univaq.mancoosi.errormm.ErrormmFactory;
 import it.univaq.mancoosi.errormm.ErrormmPackage;
-import it.univaq.mancoosi.errormm.NamedElement;
+import it.univaq.mancoosi.errormm.Message;
+import it.univaq.mancoosi.errormm.Report;
 import it.univaq.mancoosi.errormm.Warning;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
@@ -29,14 +31,14 @@ public class ErrormmPackageImpl extends EPackageImpl implements ErrormmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass errorEClass = null;
+	private EClass reportEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass namedElementEClass = null;
+	private EClass messageEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -44,6 +46,13 @@ public class ErrormmPackageImpl extends EPackageImpl implements ErrormmPackage {
 	 * @generated
 	 */
 	private EClass warningEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass errorEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -111,8 +120,8 @@ public class ErrormmPackageImpl extends EPackageImpl implements ErrormmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getError() {
-		return errorEClass;
+	public EClass getReport() {
+		return reportEClass;
 	}
 
 	/**
@@ -120,8 +129,8 @@ public class ErrormmPackageImpl extends EPackageImpl implements ErrormmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getError_Type() {
-		return (EAttribute)errorEClass.getEStructuralFeatures().get(0);
+	public EReference getReport_Warnings() {
+		return (EReference)reportEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -129,8 +138,8 @@ public class ErrormmPackageImpl extends EPackageImpl implements ErrormmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getError_Description() {
-		return (EAttribute)errorEClass.getEStructuralFeatures().get(1);
+	public EReference getReport_Errors() {
+		return (EReference)reportEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -138,8 +147,8 @@ public class ErrormmPackageImpl extends EPackageImpl implements ErrormmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getError_Statement() {
-		return (EAttribute)errorEClass.getEStructuralFeatures().get(2);
+	public EAttribute getReport_Description() {
+		return (EAttribute)reportEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -147,8 +156,8 @@ public class ErrormmPackageImpl extends EPackageImpl implements ErrormmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getError_Script() {
-		return (EAttribute)errorEClass.getEStructuralFeatures().get(3);
+	public EClass getMessage() {
+		return messageEClass;
 	}
 
 	/**
@@ -156,8 +165,8 @@ public class ErrormmPackageImpl extends EPackageImpl implements ErrormmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getError_Package() {
-		return (EAttribute)errorEClass.getEStructuralFeatures().get(4);
+	public EAttribute getMessage_Type() {
+		return (EAttribute)messageEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -165,8 +174,8 @@ public class ErrormmPackageImpl extends EPackageImpl implements ErrormmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getNamedElement() {
-		return namedElementEClass;
+	public EAttribute getMessage_Description() {
+		return (EAttribute)messageEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -174,8 +183,26 @@ public class ErrormmPackageImpl extends EPackageImpl implements ErrormmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getNamedElement_Name() {
-		return (EAttribute)namedElementEClass.getEStructuralFeatures().get(0);
+	public EAttribute getMessage_Statement() {
+		return (EAttribute)messageEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMessage_Script() {
+		return (EAttribute)messageEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMessage_Package() {
+		return (EAttribute)messageEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -192,44 +219,8 @@ public class ErrormmPackageImpl extends EPackageImpl implements ErrormmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getWarning_Description() {
-		return (EAttribute)warningEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getWarning_Type() {
-		return (EAttribute)warningEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getWarning_Statement() {
-		return (EAttribute)warningEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getWarning_Script() {
-		return (EAttribute)warningEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getWarning_Package() {
-		return (EAttribute)warningEClass.getEStructuralFeatures().get(4);
+	public EClass getError() {
+		return errorEClass;
 	}
 
 	/**
@@ -260,22 +251,21 @@ public class ErrormmPackageImpl extends EPackageImpl implements ErrormmPackage {
 		isCreated = true;
 
 		// Create classes and their features
-		errorEClass = createEClass(ERROR);
-		createEAttribute(errorEClass, ERROR__TYPE);
-		createEAttribute(errorEClass, ERROR__DESCRIPTION);
-		createEAttribute(errorEClass, ERROR__STATEMENT);
-		createEAttribute(errorEClass, ERROR__SCRIPT);
-		createEAttribute(errorEClass, ERROR__PACKAGE);
+		reportEClass = createEClass(REPORT);
+		createEReference(reportEClass, REPORT__WARNINGS);
+		createEReference(reportEClass, REPORT__ERRORS);
+		createEAttribute(reportEClass, REPORT__DESCRIPTION);
 
-		namedElementEClass = createEClass(NAMED_ELEMENT);
-		createEAttribute(namedElementEClass, NAMED_ELEMENT__NAME);
+		messageEClass = createEClass(MESSAGE);
+		createEAttribute(messageEClass, MESSAGE__TYPE);
+		createEAttribute(messageEClass, MESSAGE__DESCRIPTION);
+		createEAttribute(messageEClass, MESSAGE__STATEMENT);
+		createEAttribute(messageEClass, MESSAGE__SCRIPT);
+		createEAttribute(messageEClass, MESSAGE__PACKAGE);
 
 		warningEClass = createEClass(WARNING);
-		createEAttribute(warningEClass, WARNING__DESCRIPTION);
-		createEAttribute(warningEClass, WARNING__TYPE);
-		createEAttribute(warningEClass, WARNING__STATEMENT);
-		createEAttribute(warningEClass, WARNING__SCRIPT);
-		createEAttribute(warningEClass, WARNING__PACKAGE);
+
+		errorEClass = createEClass(ERROR);
 	}
 
 	/**
@@ -306,26 +296,25 @@ public class ErrormmPackageImpl extends EPackageImpl implements ErrormmPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		errorEClass.getESuperTypes().add(this.getNamedElement());
-		warningEClass.getESuperTypes().add(this.getNamedElement());
+		warningEClass.getESuperTypes().add(this.getMessage());
+		errorEClass.getESuperTypes().add(this.getMessage());
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(errorEClass, it.univaq.mancoosi.errormm.Error.class, "Error", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getError_Type(), ecorePackage.getEString(), "type", null, 0, 1, it.univaq.mancoosi.errormm.Error.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getError_Description(), ecorePackage.getEString(), "description", null, 0, 1, it.univaq.mancoosi.errormm.Error.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getError_Statement(), ecorePackage.getEString(), "statement", null, 0, 1, it.univaq.mancoosi.errormm.Error.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getError_Script(), ecorePackage.getEString(), "script", null, 0, 1, it.univaq.mancoosi.errormm.Error.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getError_Package(), ecorePackage.getEString(), "package", null, 0, 1, it.univaq.mancoosi.errormm.Error.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(reportEClass, Report.class, "Report", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getReport_Warnings(), this.getWarning(), null, "warnings", null, 0, -1, Report.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getReport_Errors(), this.getError(), null, "errors", null, 0, -1, Report.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getReport_Description(), ecorePackage.getEString(), "description", null, 0, 1, Report.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(namedElementEClass, NamedElement.class, "NamedElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getNamedElement_Name(), ecorePackage.getEString(), "name", null, 0, 1, NamedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(messageEClass, Message.class, "Message", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getMessage_Type(), ecorePackage.getEString(), "type", null, 0, 1, Message.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMessage_Description(), ecorePackage.getEString(), "description", null, 0, 1, Message.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMessage_Statement(), ecorePackage.getEString(), "statement", null, 0, 1, Message.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMessage_Script(), ecorePackage.getEString(), "script", null, 0, 1, Message.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMessage_Package(), ecorePackage.getEString(), "package", null, 0, 1, Message.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(warningEClass, Warning.class, "Warning", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getWarning_Description(), ecorePackage.getEString(), "description", null, 0, 1, Warning.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getWarning_Type(), ecorePackage.getEString(), "type", null, 0, 1, Warning.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getWarning_Statement(), ecorePackage.getEString(), "statement", null, 0, 1, Warning.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getWarning_Script(), ecorePackage.getEString(), "script", null, 0, 1, Warning.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getWarning_Package(), ecorePackage.getEString(), "package", null, 0, 1, Warning.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(errorEClass, it.univaq.mancoosi.errormm.Error.class, "Error", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

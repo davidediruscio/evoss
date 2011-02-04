@@ -8,7 +8,8 @@ package it.univaq.mancoosi.errormm.impl;
 
 import it.univaq.mancoosi.errormm.ErrormmFactory;
 import it.univaq.mancoosi.errormm.ErrormmPackage;
-import it.univaq.mancoosi.errormm.NamedElement;
+import it.univaq.mancoosi.errormm.Message;
+import it.univaq.mancoosi.errormm.Report;
 import it.univaq.mancoosi.errormm.Warning;
 
 import org.eclipse.emf.ecore.EClass;
@@ -63,9 +64,10 @@ public class ErrormmFactoryImpl extends EFactoryImpl implements ErrormmFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case ErrormmPackage.ERROR: return createError();
-			case ErrormmPackage.NAMED_ELEMENT: return createNamedElement();
+			case ErrormmPackage.REPORT: return createReport();
+			case ErrormmPackage.MESSAGE: return createMessage();
 			case ErrormmPackage.WARNING: return createWarning();
+			case ErrormmPackage.ERROR: return createError();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -76,9 +78,9 @@ public class ErrormmFactoryImpl extends EFactoryImpl implements ErrormmFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public it.univaq.mancoosi.errormm.Error createError() {
-		ErrorImpl error = new ErrorImpl();
-		return error;
+	public Report createReport() {
+		ReportImpl report = new ReportImpl();
+		return report;
 	}
 
 	/**
@@ -86,9 +88,9 @@ public class ErrormmFactoryImpl extends EFactoryImpl implements ErrormmFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NamedElement createNamedElement() {
-		NamedElementImpl namedElement = new NamedElementImpl();
-		return namedElement;
+	public Message createMessage() {
+		MessageImpl message = new MessageImpl();
+		return message;
 	}
 
 	/**
@@ -99,6 +101,16 @@ public class ErrormmFactoryImpl extends EFactoryImpl implements ErrormmFactory {
 	public Warning createWarning() {
 		WarningImpl warning = new WarningImpl();
 		return warning;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public it.univaq.mancoosi.errormm.Error createError() {
+		ErrorImpl error = new ErrorImpl();
+		return error;
 	}
 
 	/**

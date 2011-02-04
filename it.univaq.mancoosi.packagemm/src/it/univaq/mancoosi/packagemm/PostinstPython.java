@@ -57,7 +57,7 @@ public interface PostinstPython extends UpdateEnvironmentStatement {
 	 * The list contents are of type {@link it.univaq.mancoosi.packagemm.File}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Dirlist</em>' reference list isn't clear,
+	 * If the meaning of the '<em>Dirlist</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->

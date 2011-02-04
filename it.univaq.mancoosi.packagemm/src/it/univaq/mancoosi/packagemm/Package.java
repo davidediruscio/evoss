@@ -521,7 +521,7 @@ public interface Package extends NamedElement {
 	 * It is bidirectional and its opposite is '{@link it.univaq.mancoosi.packagemm.DocumentationFile#getPkg <em>Pkg</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Documentation Files</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Documentation Files</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->

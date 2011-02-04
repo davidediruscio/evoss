@@ -1,22 +1,37 @@
 package it.univaq.mancoosi.simulator.controller.states;
 
 import it.univaq.mancoosi.simulator.controller.managers.SystemModelManager;
+import it.univaq.mancoosi.simulator.exceptions.ErrorModelFoundException;
 
 public class NotInstalledState extends SimulatorState {
 
 	public void successfulExit(SimulatorContext fsm) throws Exception {
-
-		fsm.logger.info("-Simulator- Package: " + fsm.pkgModel.getName() + "- Final.");
-
+		
+		System.gc();
+		
+		fsm.logger.info("NotInstalledState - successfulExit");
 		SystemModelManager sysModel = new SystemModelManager();
 
-		sysModel.removeInstalledPackage(fsm.pkgModel.getName(), fsm.pkgModel.getVersion());
+		sysModel.setNotInstalledPackage(fsm.pkgModel.getName(), fsm.pkgModel.getVersion());
 
 		sysModel.saveModel();
 
 	}
+	
+	
+	public void errorExit(SimulatorContext fsm) throws Exception {
+		System.gc();
+		
+		fsm.logger.info("NotInstalledState - errorExit");	
+		
+		throw new ErrorModelFoundException();
+
+	}
+		
+	
 
 	public void install(SimulatorContext fsm) throws Exception {
+		fsm.logger.info("NotInstalledState - install");
 		fsm.setState(fsm.PREINST);
 		fsm.install();
 	}

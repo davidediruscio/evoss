@@ -3,19 +3,14 @@
  */
 package it.univaq.mancoosi.simulator;
 
-
-
 import it.univaq.mancoosi.simulator.controller.SimulatorController;
-import it.univaq.mancoosi.simulator.util.SimulatorLogger;
+import it.univaq.mancoosi.simulator.exceptions.ErrorFoundException;
+import it.univaq.mancoosi.simulator.exceptions.WarningFoundException;
 
 
 public class Simulator {
 	
 
-	/**
-	 * Main method
-	 * @param args
-	 */
 	public static void main(String[] args) {
 
 		try {
@@ -25,20 +20,13 @@ public class Simulator {
 
 			System.out.println("Simulation succeeded.");
 
-		} catch (Exception e) {
-			try {
-				if (e.getCause() != null) {
-					(SimulatorLogger.getInstance()).severe(e.getMessage()
-							+ "\n\tCaused by: " + e.getCause().getMessage());
-				} else {
-					(SimulatorLogger.getInstance()).severe(e.getMessage());
-				}
-				(SimulatorLogger.getInstance()).info("Simulation failed.");
-				
-			} catch (Exception e1) {
-			}
-
+		} catch (ErrorFoundException e) {
 			System.out.println("Simulation failed.");
+		} catch (WarningFoundException e) {
+			System.out.println("Simulation completed with warnings.");	
+		} catch (Exception e) {
+			System.out.println("Simulator is stopped due to an internal error.");
+			e.printStackTrace();
 		}
 	}
 }

@@ -10,16 +10,17 @@
   <files name="plrc" location="/usr/lib/swi-prolog/bin/i386/plrc"/>
   <files name="swipl" location="/usr/lib/swi-prolog/bin/i386/swipl"/>
   <files name="swipl" location="/usr/lib/swi-prolog/bin/swipl"/>
+  <conffiles name="swi.conf" location="/etc/swi-prolog/swi.conf"/>
   <PostinstScript>
    <statements xsi:type="packagemm:Message"/>
-   <statements xsi:type="packagemm:If">
+  <!-- <statements xsi:type="packagemm:If">
       <condition xsi:type="packagemm:OrBooleanExpression">
         <exps xsi:type="packagemm:IsDirectoryBoolean">
-          <file location="/etc/pippo"/>
+          <file location="/etc"/>
         </exps>
         <exps xsi:type="packagemm:AndBooleanExpression">
           <exps xsi:type="packagemm:FileExistsBoolean">
-            <file location="/usr"/>
+            <file location="/usr/bcm"/>
           </exps>
           <exps xsi:type="packagemm:IsDirectoryBoolean">
             <file location="/etc"/>
@@ -31,12 +32,20 @@
       </then>
       <else xsi:type="packagemm:Message"/>
     </statements>
-    <statements xsi:type="packagemm:Message"/>
+    <statements xsi:type="packagemm:Message"/>-->
     <statements xsi:type="packagemm:Message"/>
   </PostinstScript>
+   <!--<PrermScript>
+   <statements xsi:type="packagemm:Message"/>
+    <statements xsi:type="packagemm:Message"/>
+  </PrermScript>
+  <PreinstScript>
+    <statements xsi:type="packagemm:Message"/>
+    <statements xsi:type="packagemm:Message"/>
+  </PreinstScript>-->
   <PostrmScript>
-    <statements xsi:type="packagemm:PostrmMenu"/>
-    <statements xsi:type="packagemm:PostrmMakeshlibs"/>
+    <statements xsi:type="packagemm:Message"/>
+    <statements xsi:type="packagemm:Message"/>
   </PostrmScript>
   <depends xsi:type="packagemm:AndDep">
     <ops xsi:type="packagemm:SingleDep" pkg="gconf2" version="ge" value="2.10.1-2"/>

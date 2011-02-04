@@ -281,7 +281,18 @@ public class PackageModelManager {
 		}
 		return has;
 	}
-	
+
+	/**
+	 * 
+	 * @return Boolean
+	 */
+	public Boolean hasConfFiles() {
+		Boolean has = false;
+		if (packContent.getConffiles().size() != 0) {
+			has = true;
+		}
+		return has;
+	}
 	
 	/**
 	 * 

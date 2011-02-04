@@ -5,4 +5,9 @@
 	     <param name="version" value="5.6.58"/>
 	     <param name="architecture" value="all"/>
   </selectionState>
+  <selectionState type="purge">
+	     <param name="package" value="swi-prolog"/>
+	     <param name="version" value="5.6.58"/>
+	     <param name="architecture" value="all"/>
+  </selectionState>
 </selectionStates>
