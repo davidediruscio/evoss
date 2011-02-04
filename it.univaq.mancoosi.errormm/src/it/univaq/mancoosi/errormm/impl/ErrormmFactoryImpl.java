@@ -8,7 +8,6 @@ package it.univaq.mancoosi.errormm.impl;
 
 import it.univaq.mancoosi.errormm.ErrormmFactory;
 import it.univaq.mancoosi.errormm.ErrormmPackage;
-import it.univaq.mancoosi.errormm.Message;
 import it.univaq.mancoosi.errormm.Report;
 import it.univaq.mancoosi.errormm.Warning;
 
@@ -65,7 +64,6 @@ public class ErrormmFactoryImpl extends EFactoryImpl implements ErrormmFactory {
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case ErrormmPackage.REPORT: return createReport();
-			case ErrormmPackage.MESSAGE: return createMessage();
 			case ErrormmPackage.WARNING: return createWarning();
 			case ErrormmPackage.ERROR: return createError();
 			default:
@@ -81,16 +79,6 @@ public class ErrormmFactoryImpl extends EFactoryImpl implements ErrormmFactory {
 	public Report createReport() {
 		ReportImpl report = new ReportImpl();
 		return report;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Message createMessage() {
-		MessageImpl message = new MessageImpl();
-		return message;
 	}
 
 	/**

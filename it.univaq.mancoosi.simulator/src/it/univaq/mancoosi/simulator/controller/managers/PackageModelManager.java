@@ -394,8 +394,10 @@ public class PackageModelManager {
 			Boolean found = false;
 
 			for (int j = 0; j < listConfFile.size() && !found; j++) {
+
 				if (listAllFile.get(i).getLocation().equals(
-						listConfFile.get(j).getLocation())) {
+						listConfFile.get(j).getLocation())
+					|| listConfFile.get(j).getLocation().startsWith(listAllFile.get(i).getLocation())) {
 					found = true;
 				}
 			}

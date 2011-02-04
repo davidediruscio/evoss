@@ -6,10 +6,13 @@ import it.univaq.mancoosi.simulator.controller.managers.PackageModelManager;
 public class PostrmState extends SimulatorState {
 
 	public void abortInstall(SimulatorContext fsm) throws Exception {
-		fsm.logger.info("PostrmState - abortInstall");
+		
 		Boolean errorExist = false;
 		
 		if (fsm.pkgModel.hasPostrmScript()) {
+		
+			fsm.logger.info("Postrm - abort-install");
+			
 			String[] initParams = {"abort_install"};
 			errorExist = this.execute(fsm.pkgModel, initParams);
 		}
@@ -24,10 +27,13 @@ public class PostrmState extends SimulatorState {
 	}
 	
 	public void abortInstall(SimulatorContext fsm, String configStatePackageVersion) throws Exception {
-		fsm.logger.info("PostrmState - abortInstall");
+
 		Boolean errorExist = false;
 		
 		if (fsm.pkgModel.hasPostrmScript()) {
+
+			fsm.logger.info("Postrm - abort-install "+configStatePackageVersion);
+			
 			String[] initParams = {"abort_install", configStatePackageVersion};
 			errorExist = this.execute(fsm.pkgModel, initParams);
 		}
@@ -42,10 +48,13 @@ public class PostrmState extends SimulatorState {
 	}
 	
 	public void remove(SimulatorContext fsm) throws Exception {
-		fsm.logger.info("PostrmState - remove");
+
 		Boolean errorExist = false;
 		
 		if (fsm.pkgModel.hasPostrmScript()) {
+
+			fsm.logger.info("Postrm - remove");
+			
 			String[] initParams = {"remove"};
 			errorExist = this.execute(fsm.pkgModel, initParams);
 		}
@@ -67,11 +76,11 @@ public class PostrmState extends SimulatorState {
 		if (fsm.pkgModel.hasPostrmScript()) {
 			
 			if (fsm.DELETE_CONFFILES == fsm.getPreviousState()) {
-				fsm.logger.info("PostrmState - purge - purge");
+				fsm.logger.info("Postrm - purge");
 				String[] initParams = {"purge"};
 				errorExist = this.execute(fsm.pkgModel, initParams);
 			} else {
-				fsm.logger.info("PostrmState - purge - remove");
+				fsm.logger.info("Postrm - remove");
 				String[] initParams = {"remove"};
 				errorExist = this.execute(fsm.pkgModel, initParams);
 			}
@@ -100,11 +109,13 @@ public class PostrmState extends SimulatorState {
 	
 	
 	public void abortUpgrade(SimulatorContext fsm, PackageModelManager installedPkgModel) throws Exception {
-		fsm.logger.info("PostrmState - abortUpgrade");
+
 		Boolean errorExist = false;
 		
 		if (fsm.pkgModel.hasPostrmScript()) {
 
+			fsm.logger.info("Postrm - "+fsm.pkgModel.getVersion()+"->abort-upgrade "+installedPkgModel.getVersion());
+			
 			String[] initParams = {"abort_upgrade", installedPkgModel.getVersion()};
 			errorExist = this.execute(fsm.pkgModel, initParams);
 		}
@@ -120,11 +131,13 @@ public class PostrmState extends SimulatorState {
 	
 	
 	public void upgrade(SimulatorContext fsm, PackageModelManager installedPkgModel) throws Exception {
-		fsm.logger.info("PostrmState - upgrade");
+
 		Boolean errorExist = false;
 		
 		if (installedPkgModel.hasPostrmScript()) {
 
+			fsm.logger.info("Postrm - "+installedPkgModel.getVersion()+"->upgrade "+fsm.pkgModel.getVersion());
+			
 			String[] initParams = {"upgrade", fsm.pkgModel.getVersion()};
 			errorExist = this.execute(installedPkgModel, initParams);
 		}
@@ -140,10 +153,13 @@ public class PostrmState extends SimulatorState {
 	
 	
 	public void failedUpgrade(SimulatorContext fsm, PackageModelManager installedPkgModel) throws Exception {
-		fsm.logger.info("PostrmState - failedUpgrade");
+
 		Boolean errorExist = false;
 		
 		if (fsm.pkgModel.hasPostrmScript()) {
+
+			fsm.logger.info("PostrmState - failed-upgrade "+fsm.pkgModel.getVersion());
+			
 			String[] initParams = {"failed_upgrade", fsm.pkgModel.getVersion()};
 			errorExist = this.execute(fsm.pkgModel, initParams);
 		}

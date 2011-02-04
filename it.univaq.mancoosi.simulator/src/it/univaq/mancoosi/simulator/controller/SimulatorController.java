@@ -11,6 +11,8 @@ import it.univaq.mancoosi.simulator.controller.managers.SystemModelManager;
 import it.univaq.mancoosi.simulator.controller.states.SimulatorContext;
 import it.univaq.mancoosi.simulator.exceptions.ErrorFoundException;
 import it.univaq.mancoosi.simulator.exceptions.ErrorModelFoundException;
+import it.univaq.mancoosi.simulator.exceptions.SelectionStateNotFoundException;
+import it.univaq.mancoosi.simulator.exceptions.SelectionStateNotPermittedException;
 import it.univaq.mancoosi.simulator.exceptions.SimulatorException;
 import it.univaq.mancoosi.simulator.exceptions.WarningFoundException;
 import it.univaq.mancoosi.simulator.util.CurrentModelsFile;
@@ -66,93 +68,114 @@ public class SimulatorController {
 	public void start() throws Exception {
 		
 		try {
-		//(SimulatorLogger.getInstance()).info("Simulation started.");
-		
-		for (int i = 0; i < sequencePkg.getSizePackageSequence(); i++) {
-
-			String action = sequencePkg.getPackageAction(i);
+			//(SimulatorLogger.getInstance()).info("Simulation started.");
 			
-			String pathPackageModel = PackageModelRetrieval.getPath(sequencePkg.getPackageName(i),
-														 sequencePkg.getPackageVersion(i),
-														 sequencePkg.getPackageArchitecture(i));
-			
-			SystemModelManager sysModel = new SystemModelManager();
-			
-			SimulatorContext p;
-			
-			if (action.equals("install")) {
-				// TODO version compare...
-				if (sysModel.isInstalledPackage(sequencePkg.getPackageName(i))) {
-					// upgrade + reinstall
-					
-					InstalledPackage old = sysModel.getInstalledPackage(sequencePkg.getPackageName(i));
-					
-					String pathPackageOldModel = PackageModelRetrieval.getPath(old.getName(),
-							old.getVersion(), old.getArchitecture());
-					
-					System.out.println("Upgrate of '"+sequencePkg.getPackageName(i)+"' "
-							+old.getVersion()+" to "+sequencePkg.getPackageVersion(i));
-					
-					p = new SimulatorContext(pathPackageModel, pathPackageOldModel);
-					p.setState(p.INSTALLED);
-					p.upgrade();
+			for (int i = 0; i < sequencePkg.getSizePackageSequence(); i++) {
+	
+				String action = sequencePkg.getPackageAction(i);
 				
-				} else if (sysModel.isConfigFilesPackage(sequencePkg.getPackageName(i))) { 
-					// install from configFiles state
+				String pathPackageModel = PackageModelRetrieval.getPath(sequencePkg.getPackageName(i),
+															 sequencePkg.getPackageVersion(i),
+															 sequencePkg.getPackageArchitecture(i));
+				
+				SystemModelManager sysModel = new SystemModelManager();
+				
+				SimulatorContext p;
+				
+				if (i>0) System.out.println("-------");
+				
+				if (action.equals("install")) {
+					// TODO version compare...
+					if (sysModel.isInstalledPackage(sequencePkg.getPackageName(i))) {
+						// upgrade + reinstall
+						
+						InstalledPackage old = sysModel.getInstalledPackage(sequencePkg.getPackageName(i));
+						
+						String pathPackageOldModel = PackageModelRetrieval.getPath(old.getName(),
+								old.getVersion(), old.getArchitecture());
+						
+						System.out.println("Upgrate of '"+sequencePkg.getPackageName(i)+"' "
+								+old.getVersion()+" to "+sequencePkg.getPackageVersion(i));
+						
+						p = new SimulatorContext(pathPackageModel, pathPackageOldModel);
+						p.setState(p.INSTALLED);
+						p.upgrade();
 					
-					ConfigFilesPackage old = sysModel.getConfigFilesPackage(sequencePkg.getPackageName(i));
-					System.out.println("Installation of '"+sequencePkg.getPackageName(i)+"' "+sequencePkg.getPackageVersion(i)
-										+"(Config-files "+ old.getVersion()+")");
+					} else if (sysModel.isConfigFilesPackage(sequencePkg.getPackageName(i))) { 
+						// install from configFiles state
+						
+						ConfigFilesPackage old = sysModel.getConfigFilesPackage(sequencePkg.getPackageName(i));
+						System.out.println("Installation of "+sequencePkg.getPackageName(i)+" "+sequencePkg.getPackageVersion(i)
+											+" (Config-files "+ old.getVersion()+")");
+						
+						p = new SimulatorContext(pathPackageModel);
+						p.setState(p.CONFIG_FILES);
+						p.install(old.getVersion());
+	
+					} else if (!(sysModel.isHalfConfiguredPackage(sequencePkg.getPackageName(i))
+								|| sysModel.isHalfInstalledPackage(sequencePkg.getPackageName(i))
+								|| sysModel.isUnpackedPackage(sequencePkg.getPackageName(i)))) {
+						
+						// simple case: install from NotInstalledState
+						System.out.println("Installation of "+sequencePkg.getPackageName(i)+" "
+								+sequencePkg.getPackageVersion(i)+" (Not-installed)");
+						
+						p = new SimulatorContext(pathPackageModel);
+						p.setState(p.NOT_INSTALLED);
+						p.install();	
+					} else {
+						throw new SelectionStateNotPermittedException("The requested selection-state '"+action
+								+"' is not allowed on the current status of the package "+sequencePkg.getPackageName(i)
+								+" "+sequencePkg.getPackageVersion(i));
+					}
+	
+				} else if (action.equals("remove")) {
+					// Remove from Installed state
+					if (sysModel.isInstalledPackage(sequencePkg.getPackageName(i))) {
+						System.out.println("Remove of "+sequencePkg.getPackageName(i)+" "
+								+sequencePkg.getPackageVersion(i)+" (Installed)");
+						
+						p = new SimulatorContext(pathPackageModel);
+						p.setState(p.INSTALLED);
+						p.remove();
+					} else {
+						throw new SelectionStateNotPermittedException("The requested selection-state '"+action
+								+"' is not allowed on the current status of the package "+sequencePkg.getPackageName(i)
+								+" "+sequencePkg.getPackageVersion(i));
+					}
+				
+				} else if (action.equals("purge")) {
 					
-					p = new SimulatorContext(pathPackageModel);
-					p.setState(p.CONFIG_FILES);
-					p.install(old.getVersion());
-
+					if (sysModel.isInstalledPackage(sequencePkg.getPackageName(i))) {
+						// Purge from Installed state
+						
+						System.out.println("Purge of "+sequencePkg.getPackageName(i)+" "
+								+sequencePkg.getPackageVersion(i)+" (Installed)");
+						
+						p = new SimulatorContext(pathPackageModel);
+						p.setState(p.INSTALLED);
+						p.purge();
+						
+					} else if (sysModel.isConfigFilesPackage(sequencePkg.getPackageName(i))) {
+						// Purge from ConfigFiles state
+						System.out.println("Remove of "+sequencePkg.getPackageName(i)+" "
+								+sequencePkg.getPackageVersion(i)+" (Config-Files)");
+						
+						p = new SimulatorContext(pathPackageModel);
+						p.setState(p.CONFIG_FILES);
+						p.purge();
+						
+					} else {
+						throw new SelectionStateNotPermittedException("The requested selection-state '"+action
+								+"' is not allowed on the current status of the package "+sequencePkg.getPackageName(i)
+								+" "+sequencePkg.getPackageVersion(i));
+					}
+					
 				} else {
-					// simple case: install from NotInstalledState
-					
-					System.out.println("Installation of "+sequencePkg.getPackageName(i)+" "
-							+sequencePkg.getPackageVersion(i)+" (Not-installed)");
-					
-					p = new SimulatorContext(pathPackageModel);
-					p.setState(p.NOT_INSTALLED);
-					p.install();	
+					throw new SelectionStateNotFoundException("The requested selection-state '"
+							+action+"' is not manageable.");
 				}
-
-			} else if (action.equals("remove")) {
-				// Remove from Installed state
-
-				System.out.println("Remove of "+sequencePkg.getPackageName(i)+" "
-						+sequencePkg.getPackageVersion(i)+" (Installed)");
-				
-				p = new SimulatorContext(pathPackageModel);
-				p.setState(p.INSTALLED);
-				p.remove();
-			
-			} else if (action.equals("purge")) {
-				
-				if (sysModel.isInstalledPackage(sequencePkg.getPackageName(i))) {
-					// Purge from Installed state
-					
-					System.out.println("Purge of "+sequencePkg.getPackageName(i)+" "
-							+sequencePkg.getPackageVersion(i)+" (Installed)");
-					
-					p = new SimulatorContext(pathPackageModel);
-					p.setState(p.INSTALLED);
-					p.purge();
-				} else {
-					// Purge from ConfigFiles state
-					
-					System.out.println("Remove of "+sequencePkg.getPackageName(i)+" "
-							+sequencePkg.getPackageVersion(i)+" (Config-Files)");
-					
-					p = new SimulatorContext(pathPackageModel);
-					p.setState(p.CONFIG_FILES);
-					p.purge();
-				}
-
 			}
-		}
 
 		} catch (ErrorModelFoundException e) {
 			// Generate final error model

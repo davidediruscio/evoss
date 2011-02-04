@@ -6,10 +6,13 @@ import it.univaq.mancoosi.simulator.controller.managers.PackageModelManager;
 public class PrermState extends SimulatorState {
 
 	public void remove(SimulatorContext fsm) throws Exception {
-		fsm.logger.info("PrermState - remove");
+
 		Boolean errorExist = false;
 		
 		if (fsm.pkgModel.hasPrermScript()) {
+			
+			fsm.logger.info("Prerm - remove");
+			
 			String[] initParams = {"remove"};
 			errorExist = this.execute(fsm.pkgModel, initParams);
 		}
@@ -24,10 +27,13 @@ public class PrermState extends SimulatorState {
 	}
 	
 	public void purge(SimulatorContext fsm) throws Exception {
-		fsm.logger.info("PrermState - purge");
+
 		Boolean errorExist = false;
 		
 		if (fsm.pkgModel.hasPrermScript()) {
+			
+			fsm.logger.info("Prerm - purge");
+			
 			String[] initParams = {"remove"};
 			errorExist = this.execute(fsm.pkgModel, initParams);
 		}
@@ -43,10 +49,13 @@ public class PrermState extends SimulatorState {
 	
 	
 	public void failedUpgrade(SimulatorContext fsm, PackageModelManager installedPkgModel) throws Exception {
-		fsm.logger.info("PrermState - failedUpgrade");
+
 		Boolean errorExist = false;
 		
 		if (fsm.pkgModel.hasPrermScript()) {
+			
+			fsm.logger.info("Prerm - "+fsm.pkgModel.getVersion()+"->failed-upgrade "+installedPkgModel.getVersion());
+			
 			String[] initParams = {"failed_upgrade", installedPkgModel.getVersion()};
 			errorExist = this.execute(fsm.pkgModel, initParams);
 		}
@@ -61,10 +70,13 @@ public class PrermState extends SimulatorState {
 	}
 	
 	public void upgrade(SimulatorContext fsm, PackageModelManager installedPkgModel) throws Exception {
-		fsm.logger.info("PrermState - upgrade");
+
 		Boolean errorExist = false;
 		
 		if (installedPkgModel.hasPrermScript()) {
+			
+			fsm.logger.info("Prerm - "+installedPkgModel.getVersion()+"->upgrade "+fsm.pkgModel.getVersion());
+			
 			String[] initParams = {"upgrade", fsm.pkgModel.getVersion()};
 			errorExist = this.execute(installedPkgModel, initParams);
 		}

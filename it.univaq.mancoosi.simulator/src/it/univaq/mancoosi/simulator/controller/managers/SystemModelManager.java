@@ -992,8 +992,13 @@ public class SystemModelManager {
 			fileToBeDeleted = allFilesIterator.next();
 			if (fileToBeDeleted.getLocation().equals(location)) {
 				found = true;
-				
-				EcoreUtil.delete(fileToBeDeleted, true);
+
+				if (fileToBeDeleted.isIsDirectory() && fileToBeDeleted.getChilds().size()==0) {
+					// Delete only empty directory
+					EcoreUtil.delete(fileToBeDeleted, true);
+				} else if (!fileToBeDeleted.isIsDirectory()) {
+					EcoreUtil.delete(fileToBeDeleted, true);
+				}
 			}
 		}
 		return found;
