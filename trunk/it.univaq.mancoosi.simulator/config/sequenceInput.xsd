@@ -17,7 +17,7 @@
             <xs:restriction base="xs:string">
               <xs:enumeration value="install" />
               <xs:enumeration value="purge" />
-              <xs:enumeration value="deinstall" />
+              <xs:enumeration value="remove" />
             </xs:restriction>
           </xs:simpleType>
       </xs:attribute>

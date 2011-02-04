@@ -32,7 +32,6 @@ rule InstalledPackage {
         section <- s.section,
         tag <- s.tag,
         priority <- s.priority,
-        status <- s.status,
         uploaders <- s.uploaders,
         configuration <- s.configuration,
         packageSettings <- s.packageSettings,

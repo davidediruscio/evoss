@@ -1,5 +1,8 @@
 package it.univaq.mancoosi.simulator.controller.states;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import it.univaq.mancoosi.simulator.controller.managers.PackageModelManager;
 import it.univaq.mancoosi.simulator.util.SimulatorLogger;
 
@@ -21,11 +24,29 @@ public class SimulatorContext {
 	protected String pathPackageModel;
 	protected SimulatorLogger logger;
 	protected PackageModelManager pkgModel;
+	protected PackageModelManager installedPkgModel;
+	
+	// history
+	private List<Integer> oldStates;
+	
+	// Current state
+	private int currentState;
+	
 
 	public SimulatorContext(String pathPackageModel) throws Exception {
 		this.pathPackageModel = pathPackageModel;
 		pkgModel = new PackageModelManager(pathPackageModel);
 		logger = SimulatorLogger.getInstance();
+		oldStates = new ArrayList<Integer>();
+	}
+	
+	
+	public SimulatorContext(String pathPackageModelNew, String pathInstalledPackageModel) throws Exception {
+		this.pathPackageModel = pathPackageModelNew;
+		pkgModel = new PackageModelManager(pathPackageModel);
+		installedPkgModel = new PackageModelManager(pathInstalledPackageModel);
+		logger = SimulatorLogger.getInstance();
+		oldStates = new ArrayList<Integer>();
 	}
 
 	// States array
@@ -44,11 +65,13 @@ public class SimulatorContext {
 			new HalfInstalledState(), // HALF_INSTALLED = 11;
 	};
 
-	// Current state
-	private int currentState = NOT_INSTALLED;
 
 	public void install() throws Exception {
 		states[currentState].install(this);
+	}
+	
+	public void install(String configStatePackageVersion) throws Exception {
+		states[currentState].install(this, configStatePackageVersion);
 	}
 	
 	public void remove() throws Exception {
@@ -63,8 +86,16 @@ public class SimulatorContext {
 		states[currentState].configure(this);
 	}
 	
+	public void configure(String configStatePackageVersion) throws Exception {
+		states[currentState].configure(this, configStatePackageVersion);
+	}
+	
 	public void abortInstall() throws Exception {
 		states[currentState].abortInstall(this);
+	}
+	
+	public void abortInstall(String configStatePackageVersion) throws Exception {
+		states[currentState].abortInstall(this, configStatePackageVersion);
 	}
 
 	public void successfulExit() throws Exception {
@@ -74,7 +105,19 @@ public class SimulatorContext {
 	public void errorExit() throws Exception {
 		states[currentState].errorExit(this);
 	}
+	
+	public void errorExitReinstRequired() throws Exception {
+		states[currentState].errorExitReinstRequired(this);
+	}
+	
+	public void errorExitReinstRequired(PackageModelManager installedPkgModel) throws Exception {
+		states[currentState].errorExitReinstRequired(this, installedPkgModel);
+	}
 
+	public void errorExit(PackageModelManager installedPkgModel) throws Exception {
+		states[currentState].errorExit(this, installedPkgModel);
+	}
+	
 	public void configFiles() throws Exception {
 		states[currentState].configFiles(this);
 	}
@@ -86,16 +129,29 @@ public class SimulatorContext {
 	public void upgrade() throws Exception {
 		states[currentState].upgrade(this);
 	}
+	
+	public void upgrade(PackageModelManager installedPkgModel) throws Exception {
+		states[currentState].upgrade(this, installedPkgModel);
+	}
 
-	public void failedUpgrade() throws Exception {
-		states[currentState].failedUpgrade(this);
+	public void failedUpgrade(PackageModelManager installedPkgModel) throws Exception {
+		states[currentState].failedUpgrade(this, installedPkgModel);
+	}
+
+	public void abortUpgrade(PackageModelManager installedPkgModel) throws Exception {
+		states[currentState].abortUpgrade(this, installedPkgModel);
+	}
+
+	public void setState(int newState) {
+		oldStates.add(currentState);
+		currentState = newState;
 	}
 	
-	public void abortUpgrade() throws Exception {
-		states[currentState].abortUpgrade(this);
+	public Integer getPreviousState() {
+		return oldStates.get(oldStates.size()-1);
 	}
-
-	public void setState(int index) {
-		currentState = index;
+	
+	public List<Integer> getHistory() {
+		return oldStates;
 	}
 }

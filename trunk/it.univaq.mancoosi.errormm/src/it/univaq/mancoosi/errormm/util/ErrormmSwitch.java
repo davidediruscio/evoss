@@ -7,7 +7,8 @@
 package it.univaq.mancoosi.errormm.util;
 
 import it.univaq.mancoosi.errormm.ErrormmPackage;
-import it.univaq.mancoosi.errormm.NamedElement;
+import it.univaq.mancoosi.errormm.Message;
+import it.univaq.mancoosi.errormm.Report;
 import it.univaq.mancoosi.errormm.Warning;
 
 import java.util.List;
@@ -89,23 +90,29 @@ public class ErrormmSwitch<T> {
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case ErrormmPackage.ERROR: {
-				it.univaq.mancoosi.errormm.Error error = (it.univaq.mancoosi.errormm.Error)theEObject;
-				T result = caseError(error);
-				if (result == null) result = caseNamedElement(error);
+			case ErrormmPackage.REPORT: {
+				Report report = (Report)theEObject;
+				T result = caseReport(report);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ErrormmPackage.NAMED_ELEMENT: {
-				NamedElement namedElement = (NamedElement)theEObject;
-				T result = caseNamedElement(namedElement);
+			case ErrormmPackage.MESSAGE: {
+				Message message = (Message)theEObject;
+				T result = caseMessage(message);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case ErrormmPackage.WARNING: {
 				Warning warning = (Warning)theEObject;
 				T result = caseWarning(warning);
-				if (result == null) result = caseNamedElement(warning);
+				if (result == null) result = caseMessage(warning);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ErrormmPackage.ERROR: {
+				it.univaq.mancoosi.errormm.Error error = (it.univaq.mancoosi.errormm.Error)theEObject;
+				T result = caseError(error);
+				if (result == null) result = caseMessage(error);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -114,32 +121,32 @@ public class ErrormmSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Error</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Report</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Error</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Report</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseError(it.univaq.mancoosi.errormm.Error object) {
+	public T caseReport(Report object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Named Element</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Message</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Named Element</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Message</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseNamedElement(NamedElement object) {
+	public T caseMessage(Message object) {
 		return null;
 	}
 
@@ -155,6 +162,21 @@ public class ErrormmSwitch<T> {
 	 * @generated
 	 */
 	public T caseWarning(Warning object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Error</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Error</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseError(it.univaq.mancoosi.errormm.Error object) {
 		return null;
 	}
 

@@ -6,8 +6,12 @@ package it.univaq.mancoosi.simulator.util;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.logging.ErrorManager;
 import java.util.logging.FileHandler;
+import java.util.logging.Formatter;
+import java.util.logging.Handler;
 import java.util.logging.Level;
+import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
@@ -49,15 +53,15 @@ public class SimulatorLogger {
 			if (config.isConsoleLog() || config.isSaveFileLog()) {
 				
 				if (config.isConsoleLog()) {
-					logger.setUseParentHandlers(true);
-				} else {
 					logger.setUseParentHandlers(false);
+					Handler ch = new MyHandler();
+					logger.addHandler(ch);
 				}
 				
 				if (config.isSaveFileLog()) {
 					fh = new FileHandler(config.getDirLog() + "log_" + getTime() + ".txt");
-					SimpleFormatter formatter = new SimpleFormatter();
-					fh.setFormatter(formatter);
+					
+					fh.setFormatter(new SimpleFormatter());
 					logger.addHandler(fh);
 				}
 				
@@ -151,5 +155,42 @@ public class SimulatorLogger {
 	public void severe(String msg) {
 		logger.severe(msg);
 	}
+}
 
+class MyHandler extends Handler {
+	@Override
+	public void publish(LogRecord record) {
+		if (getFormatter() == null) {
+			setFormatter(new MyFormatter());
+		}
+
+		try {
+			String message = getFormatter().format(record);
+			if (record.getLevel().intValue() >= Level.WARNING.intValue()) {
+				System.err.write(message.getBytes());
+			} else {
+				System.out.write(message.getBytes());
+			}
+		} catch (Exception exception) {
+			reportError(null, exception, ErrorManager.FORMAT_FAILURE);
+			return;
+		}
+
+	}
+
+	@Override
+	public void close() throws SecurityException {
+	}
+
+	@Override
+	public void flush() {
+	}
+}
+
+
+class MyFormatter extends Formatter {
+	@Override
+	public String format(LogRecord record) {
+		return "  "+record.getLevel().getName() + ": " + record.getMessage() + "\n";
+	}
 }

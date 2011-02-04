@@ -7,7 +7,8 @@
 package it.univaq.mancoosi.errormm.util;
 
 import it.univaq.mancoosi.errormm.ErrormmPackage;
-import it.univaq.mancoosi.errormm.NamedElement;
+import it.univaq.mancoosi.errormm.Message;
+import it.univaq.mancoosi.errormm.Report;
 import it.univaq.mancoosi.errormm.Warning;
 
 import org.eclipse.emf.common.notify.Adapter;
@@ -74,16 +75,20 @@ public class ErrormmAdapterFactory extends AdapterFactoryImpl {
 	protected ErrormmSwitch<Adapter> modelSwitch =
 		new ErrormmSwitch<Adapter>() {
 			@Override
-			public Adapter caseError(it.univaq.mancoosi.errormm.Error object) {
-				return createErrorAdapter();
+			public Adapter caseReport(Report object) {
+				return createReportAdapter();
 			}
 			@Override
-			public Adapter caseNamedElement(NamedElement object) {
-				return createNamedElementAdapter();
+			public Adapter caseMessage(Message object) {
+				return createMessageAdapter();
 			}
 			@Override
 			public Adapter caseWarning(Warning object) {
 				return createWarningAdapter();
+			}
+			@Override
+			public Adapter caseError(it.univaq.mancoosi.errormm.Error object) {
+				return createErrorAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -106,30 +111,30 @@ public class ErrormmAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link it.univaq.mancoosi.errormm.Error <em>Error</em>}'.
+	 * Creates a new adapter for an object of class '{@link it.univaq.mancoosi.errormm.Report <em>Report</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see it.univaq.mancoosi.errormm.Error
+	 * @see it.univaq.mancoosi.errormm.Report
 	 * @generated
 	 */
-	public Adapter createErrorAdapter() {
+	public Adapter createReportAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link it.univaq.mancoosi.errormm.NamedElement <em>Named Element</em>}'.
+	 * Creates a new adapter for an object of class '{@link it.univaq.mancoosi.errormm.Message <em>Message</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see it.univaq.mancoosi.errormm.NamedElement
+	 * @see it.univaq.mancoosi.errormm.Message
 	 * @generated
 	 */
-	public Adapter createNamedElementAdapter() {
+	public Adapter createMessageAdapter() {
 		return null;
 	}
 
@@ -144,6 +149,20 @@ public class ErrormmAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createWarningAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link it.univaq.mancoosi.errormm.Error <em>Error</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see it.univaq.mancoosi.errormm.Error
+	 * @generated
+	 */
+	public Adapter createErrorAdapter() {
 		return null;
 	}
 

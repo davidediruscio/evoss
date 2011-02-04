@@ -6,16 +6,18 @@ package it.univaq.mancoosi.simulator.util;
 import it.univaq.mancoosi.simulator.exceptions.SimulatorException;
 
 import java.io.File;
+import java.util.ArrayList;
 
 /**
  * Class used to track changes made to the configuration model.
  * 
  * @author max
  */
-public class CurrentSystemModelFile {
+public class CurrentModelsFile {
 
-	private static CurrentSystemModelFile instance = null;
+	private static CurrentModelsFile instance = null;
 	private File systemModelCurrentFile;
+	private ArrayList<File> errorModels;
 
 	/**
 	 * Singleton
@@ -23,9 +25,9 @@ public class CurrentSystemModelFile {
 	 * @return CurrentSystemModelFile
 	 * @throws SimulatorException 
 	 */
-	public static CurrentSystemModelFile getInstance() throws SimulatorException {
+	public static CurrentModelsFile getInstance() throws SimulatorException {
 		if (instance == null)
-			instance = new CurrentSystemModelFile();
+			instance = new CurrentModelsFile();
 		return instance;
 	}
 
@@ -33,8 +35,9 @@ public class CurrentSystemModelFile {
 	 * Private constructor
 	 * @throws SimulatorException 
 	 */
-	private CurrentSystemModelFile() throws SimulatorException {
+	private CurrentModelsFile() throws SimulatorException {
 		systemModelCurrentFile = new File(SimulatorConfig.getInstance().getFileInputSystemModel());
+		errorModels = new ArrayList<File>();
 		//System.out.println("SET: "+systemModelCurrentFile.getPath());
 	}
 
@@ -53,5 +56,17 @@ public class CurrentSystemModelFile {
 	public File getSystemModelCurrent() {
 		//System.out.println("GET: "+systemModelCurrentFile.getPath());
 		return systemModelCurrentFile;
+	}
+
+	public void addErrorModel(File last) {
+		errorModels.add(last);
+	}
+	
+	public void setErrorModels(ArrayList<File> errorModels) {
+		this.errorModels = errorModels;
+	}
+
+	public ArrayList<File> getErrorModels() {
+		return errorModels;
 	}
 }

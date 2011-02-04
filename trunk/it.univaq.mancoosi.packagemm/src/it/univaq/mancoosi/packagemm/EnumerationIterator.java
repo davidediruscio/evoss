@@ -8,7 +8,6 @@ package it.univaq.mancoosi.packagemm;
 
 import org.eclipse.emf.common.util.EList;
 
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Enumeration Iterator</b></em>'.
