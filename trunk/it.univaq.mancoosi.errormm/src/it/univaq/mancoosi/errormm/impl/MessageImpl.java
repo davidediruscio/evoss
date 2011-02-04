@@ -33,7 +33,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  *
  * @generated
  */
-public class MessageImpl extends EObjectImpl implements Message {
+public abstract class MessageImpl extends EObjectImpl implements Message {
 	/**
 	 * The default value of the '{@link #getType() <em>Type</em>}' attribute.
 	 * <!-- begin-user-doc -->

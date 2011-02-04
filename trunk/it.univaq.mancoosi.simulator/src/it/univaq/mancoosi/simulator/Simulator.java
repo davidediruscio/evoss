@@ -5,6 +5,8 @@ package it.univaq.mancoosi.simulator;
 
 import it.univaq.mancoosi.simulator.controller.SimulatorController;
 import it.univaq.mancoosi.simulator.exceptions.ErrorFoundException;
+import it.univaq.mancoosi.simulator.exceptions.SelectionStateNotFoundException;
+import it.univaq.mancoosi.simulator.exceptions.SelectionStateNotPermittedException;
 import it.univaq.mancoosi.simulator.exceptions.WarningFoundException;
 
 
@@ -23,10 +25,17 @@ public class Simulator {
 		} catch (ErrorFoundException e) {
 			System.out.println("Simulation failed.");
 		} catch (WarningFoundException e) {
-			System.out.println("Simulation completed with warnings.");	
+			System.out.println("Simulation completed with warnings.");
+		} catch (SelectionStateNotFoundException e) {
+			System.out.println(e.getMessage());
+			System.out.println("Simulation failed.");
+		} catch (SelectionStateNotPermittedException e) {
+			System.out.println(e.getMessage());
+			System.out.println("Simulation failed.");
 		} catch (Exception e) {
 			System.out.println("Simulator is stopped due to an internal error.");
-			e.printStackTrace();
+			System.out.println(e.getMessage());
+			System.out.println("Simulation failed.");
 		}
 	}
 }

@@ -35,15 +35,6 @@ public interface ErrormmFactory extends EFactory {
 	Report createReport();
 
 	/**
-	 * Returns a new object of class '<em>Message</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Message</em>'.
-	 * @generated
-	 */
-	Message createMessage();
-
-	/**
 	 * Returns a new object of class '<em>Warning</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

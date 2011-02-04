@@ -6,11 +6,13 @@ import it.univaq.mancoosi.simulator.controller.managers.PackageModelManager;
 public class PostinstState extends SimulatorState {
 
 	public void configure(SimulatorContext fsm) throws Exception {
-		fsm.logger.info("PostinstState - configure");
+		
 		Boolean errorExist = false;
 		
 		if (fsm.pkgModel.hasPostinstScript()) {
 
+			fsm.logger.info("Postinst - configure");
+			
 			String[] initParams = {"configure"};
 			errorExist = this.execute(fsm.pkgModel, initParams);
 		}
@@ -25,11 +27,13 @@ public class PostinstState extends SimulatorState {
 	}
 	
 	public void configure(SimulatorContext fsm, String configStatePackageVersion) throws Exception {
-		fsm.logger.info("PostinstState - configure");
+		
 		Boolean errorExist = false;
 		
 		if (fsm.pkgModel.hasPostinstScript()) {
 
+			fsm.logger.info("Postinst - configure "+configStatePackageVersion);
+			
 			String[] initParams = {"configure", configStatePackageVersion};
 			errorExist = this.execute(fsm.pkgModel, initParams);
 		}
@@ -45,10 +49,12 @@ public class PostinstState extends SimulatorState {
 	
 	
 	public void abortRemove(SimulatorContext fsm) throws Exception {
-		fsm.logger.info("PostinstState - abortRemove");
+		
 		Boolean errorExist = false;
 		
 		if (fsm.pkgModel.hasPostinstScript()) {
+			
+			fsm.logger.info("Postinst - abort-remove");
 
 			String[] initParams = {"abort_remove"};
 			errorExist = this.execute(fsm.pkgModel, initParams);
@@ -65,11 +71,13 @@ public class PostinstState extends SimulatorState {
 	
 	
 	public void abortUpgrade(SimulatorContext fsm, PackageModelManager installedPkgModel) throws Exception {
-		fsm.logger.info("PostinstState - abortUpgrade");
+
 		Boolean errorExist = false;
 		
 		if (installedPkgModel.hasPostinstScript()) {
 
+			fsm.logger.info("Postinst - "+ installedPkgModel.getVersion()+"->abort-upgrade "+ fsm.pkgModel.getVersion());
+			
 			String[] initParams = {"abort_upgrade", fsm.pkgModel.getVersion()};
 			errorExist = this.execute(installedPkgModel, initParams);
 		}

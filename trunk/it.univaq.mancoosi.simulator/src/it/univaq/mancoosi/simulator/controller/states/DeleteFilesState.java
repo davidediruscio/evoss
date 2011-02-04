@@ -42,7 +42,7 @@ public class DeleteFilesState extends SimulatorState {
 			SystemModelManager sysModel = new SystemModelManager();
 			ArrayList<String> list = pkgModel.getNotConfFiles();
 
-			for (int i = 0; i < list.size(); i++) {
+			for (int i = list.size()-1; i >= 0; i--) {
 				sysModel.deleteFile(list.get(i));
 			}
 			sysModel.saveModel();
@@ -74,7 +74,7 @@ public class DeleteFilesState extends SimulatorState {
 				if (!found) listOldButNotNew.add(listOld.get(i));
 			}
 
-			for (int i = 0; i < listOldButNotNew.size(); i++) {
+			for (int i = listOldButNotNew.size()-1; i >=0 ; i--) {
 				sysModel.deleteFile(listOldButNotNew.get(i));
 			}
 			sysModel.saveModel();

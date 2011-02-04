@@ -25,7 +25,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  *
  * @see it.univaq.mancoosi.errormm.ErrormmPackage#getMessage()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface Message extends EObject {
