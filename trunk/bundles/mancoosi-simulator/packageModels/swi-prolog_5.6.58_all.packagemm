@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<packagemm:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:packagemm="packagemm" name="swi-prolog" version="5.6.58" installedSize="8345" maintainer="Ubuntu Core Developers &lt;ubuntu-devel-discuss@lists.ubuntu.com>" architecture="all" section="interpreters" priority="optional">
+  <files name="usr" location="/usr"/>  
+  <files name="bin" location="/usr/bin"/>
+  <files name="swi-prolog" location="/usr/bin/swi-prolog"/>
+  <files name="plld" location="/usr/bin/plld"/>
+  <files name="plrc" location="/usr/bin/plrc"/>
+  <files name="swipl" location="/usr/bin/swipl"/>
+  <files name="lib" location="/usr/lib"/>
+  <files name="libpl.so" location="/usr/lib/libpl.so"/>
+  <files name="libpl.so.5.6.58" location="/usr/lib/libpl.so.5.6.58"/>
+  <files name="swi-prolog" location="/usr/lib/swi-prolog"/>
+  <files name="bin" location="/usr/lib/swi-prolog/bin"/>
+  <files name="swipl" location="/usr/lib/swi-prolog/bin/swipl"/>
+  <files name="i386" location="/usr/lib/swi-prolog/bin/i386"/>
+  <files name="plld" location="/usr/lib/swi-prolog/bin/i386/plld"/>
+  <files name="plrc" location="/usr/lib/swi-prolog/bin/i386/plrc"/>
+  <files name="swipl" location="/usr/lib/swi-prolog/bin/i386/swipl"/>
+  <files name="etc" location="/etc"/>
+  <files name="swi-prolog" location="/etc/swi-prolog"/>
+  <files name="swi.conf" location="/etc/swi-prolog/swi.conf"/>
+  <conffiles name="swi.conf" location="/etc/swi-prolog/swi.conf"/>
+  <PostinstScript>
+   <statements xsi:type="packagemm:Message"/>
+   <statements xsi:type="packagemm:If">
+      <condition xsi:type="packagemm:OrBooleanExpression">
+        <exps xsi:type="packagemm:IsDirectoryBoolean">
+          <file location="/etc"/>
+        </exps>
+        <exps xsi:type="packagemm:AndBooleanExpression">
+          <exps xsi:type="packagemm:FileExistsBoolean">
+            <file location="/usr/bcm"/>
+          </exps>
+          <exps xsi:type="packagemm:IsDirectoryBoolean">
+            <file location="/etc"/>
+          </exps>
+        </exps>
+      </condition>
+      <then xsi:type="packagemm:PostinstAddAlternative">
+        <master link="/usr/bin/prolog" name="prolog" path="/usr/bin/swipl" priority="10"/>
+      </then>
+      <else xsi:type="packagemm:Message"/>
+    </statements>
+    <statements xsi:type="packagemm:Message"/>
+    <statements xsi:type="packagemm:Message"/>
+  </PostinstScript>
+   <PrermScript>
+   <statements xsi:type="packagemm:Message"/>
+  </PrermScript>
+  <PreinstScript>
+    <statements xsi:type="packagemm:Message"/>
+  </PreinstScript>
+  <PostrmScript>
+    <statements xsi:type="packagemm:Message"/>
+  </PostrmScript>
+  <depends xsi:type="packagemm:AndDep">
+    <ops xsi:type="packagemm:SingleDep" pkg="gconf2" version="ge" value="2.10.1-2"/>
+    <ops xsi:type="packagemm:SingleDep" pkg="iso-codes"/>
+    <ops xsi:type="packagemm:SingleDep" pkg="libatk1.0-0" version="ge" value="1.20.0"/>
+    <ops xsi:type="packagemm:SingleDep" pkg="libattr1" version="ge" value="2.4.4-1"/>
+    <ops xsi:type="packagemm:SingleDep" pkg="libc6" version="ge" value="2.4"/>
+    <ops xsi:type="packagemm:SingleDep" pkg="libcairo2" version="ge" value="1.6.0"/>
+    <ops xsi:type="packagemm:SingleDep" pkg="libenchant1c2a"/>
+    <ops xsi:type="packagemm:SingleDep" pkg="libgconf2-4" version="ge" value="2.13.5"/>
+    <ops xsi:type="packagemm:SingleDep" pkg="libglade2-0" version="ge" value="1:2.6.1"/>
+    <ops xsi:type="packagemm:SingleDep" pkg="libglib2.0-0" version="ge" value="2.16.0"/>
+    <ops xsi:type="packagemm:SingleDep" pkg="libgnome2-0" version="ge" value="2.17.3"/>
+    <ops xsi:type="packagemm:SingleDep" pkg="libgnomeui-0" version="ge" value="2.17.1"/>
+    <ops xsi:type="packagemm:SingleDep" pkg="libgnomevfs2-0" version="ge" value="1:2.17.90"/>
+    <ops xsi:type="packagemm:SingleDep" pkg="libgtk2.0-0" version="ge" value="2.12.0"/>
+    <ops xsi:type="packagemm:SingleDep" pkg="libgtksourceview2.0-0" version="ge" value="2.2.0"/>
+    <ops xsi:type="packagemm:SingleDep" pkg="liblaunchpad-integration1" version="ge" value="0.1.17"/>
+    <ops xsi:type="packagemm:SingleDep" pkg="libpango1.0-0" version="ge" value="1.20.5"/>
+    <ops xsi:type="packagemm:SingleDep" pkg="libx11-6"/>
+    <ops xsi:type="packagemm:SingleDep" pkg="scrollkeeper"/>
+  </depends>
+</packagemm:Package>
