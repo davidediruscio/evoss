@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<selectionStates  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <selectionState type="install">
+	     <param name="package" value="swi-prolog"/>
+	     <param name="version" value="5.6.58"/>
+	     <param name="architecture" value="all"/>
+  </selectionState>
+  <selectionState type="remove">
+	     <param name="package" value="swi-prolog"/>
+	     <param name="version" value="5.6.58"/>
+	     <param name="architecture" value="all"/>
+  </selectionState>
+  <selectionState type="install">
+	     <param name="package" value="swi-prolog"/>
+	     <param name="version" value="5.6.58"/>
+	     <param name="architecture" value="all"/>
+  </selectionState>
+  <selectionState type="install">
+	     <param name="package" value="swi-prolog"/>
+	     <param name="version" value="5.7.59"/>
+	     <param name="architecture" value="all"/>
+  </selectionState>
+</selectionStates>
