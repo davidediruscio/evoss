@@ -23,7 +23,13 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 
@@ -289,8 +295,6 @@ public class DebianPackageManager extends PackageManager {
 
 		String[] spl = pathPackage.split("/");
 
-		System.out.println("Processing the file '" + spl[spl.length - 1] + "'");
-
 		String nameModel = spl[spl.length - 1];
 
 		String name = (nameModel.split("_"))[0];
@@ -323,51 +327,59 @@ public class DebianPackageManager extends PackageManager {
 
 		String result = config.getResultLocation() + name + "_" + version + "_"	+ architecture + "." + config.getMetamodelMainPackage();
 
-		pkg = createModelScript(result, pkg, listScript);
-
-		// set name
-		pkg.setName(name);
-		FileInputStream f = new FileInputStream(pathTemp + "/control");
-		DataInputStream i = new DataInputStream(f);
-		BufferedReader infoPkg = new BufferedReader(new InputStreamReader(i));
-		processPackageMetadata(infoPkg, pkg);
-		infoPkg.close();
-		in.close();
-
-		if ((new File(pathTemp + "/md5sums")).exists()) {
-			// set all files
-			String[] cmdFiles = { "/bin/sh", "-c", " cat " + pathTemp + "/md5sums | awk '{print $2}'" };
-			Process pgFiles = Runtime.getRuntime().exec(cmdFiles);
-			BufferedReader infoFile = new BufferedReader(new InputStreamReader(pgFiles.getInputStream()));
-			processAllFiles(infoFile, pkg);
-			infoFile.close();
-			// pgFiles.destroy();
-		}
-
-		if ((new File(pathTemp + "/conffiles")).exists()) {
-			// set confiles
-			FileInputStream fstreamConf = new FileInputStream(pathTemp
-					+ "/conffiles");
-			DataInputStream inConf = new DataInputStream(fstreamConf);
-			BufferedReader infoConfFile = new BufferedReader(new InputStreamReader(inConf));
-			String lineConfFiles;
-			List<String> confBlock = new ArrayList<String>();
-			while ((lineConfFiles = infoConfFile.readLine()) != null) {
-				confBlock.add(lineConfFiles);
+	
+		if (!((!config.isOverwriteModels()) && (new File(result)).exists())) {
+		
+			System.out.println("Processing the file '" + spl[spl.length - 1] + "'");
+				
+			pkg = createModelScript(result, pkg, listScript);
+	
+			// set name
+			pkg.setName(name);
+			FileInputStream f = new FileInputStream(pathTemp + "/control");
+			DataInputStream i = new DataInputStream(f);
+			BufferedReader infoPkg = new BufferedReader(new InputStreamReader(i));
+			processPackageMetadata(infoPkg, pkg);
+			infoPkg.close();
+			in.close();
+	
+			if ((new File(pathTemp + "/md5sums")).exists()) {
+				// set all files
+				String[] cmdFiles = { "/bin/sh", "-c", " cat " + pathTemp + "/md5sums | awk '{print $2}'" };
+				Process pgFiles = Runtime.getRuntime().exec(cmdFiles);
+				BufferedReader infoFile = new BufferedReader(new InputStreamReader(pgFiles.getInputStream()));
+				processAllFilesFile(infoFile, pkg);
+				infoFile.close();
 			}
-			processConfFiles(confBlock, pkg);
-			infoConfFile.close();
+	
+			if ((new File(pathTemp + "/conffiles")).exists()) {
+				// set confiles
+				FileInputStream fstreamConf = new FileInputStream(pathTemp + "/conffiles");
+				DataInputStream inConf = new DataInputStream(fstreamConf);
+				BufferedReader infoConfFile = new BufferedReader(new InputStreamReader(inConf));
+				
+				String lineConfFiles;
+				List<String> confBlock = new ArrayList<String>();
+				while ((lineConfFiles = infoConfFile.readLine()) != null) {
+					confBlock.add(lineConfFiles);
+				}
+				processConfFiles(confBlock, pkg);
+				infoConfFile.close();
+				
+				FileInputStream fstreamConfAllFile = new FileInputStream(pathTemp + "/conffiles");
+				DataInputStream inConfAllFile = new DataInputStream(fstreamConfAllFile);
+				BufferedReader infoConfAllFile = new BufferedReader(new InputStreamReader(inConfAllFile));
+				processAllFilesFile(infoConfAllFile, pkg);
+				infoConfAllFile.close();
+			}
+			saveModel(result, pkg);
 		}
-		saveModel(result, pkg);
-
 		FileManagement.deleteDir(new File(pathTemp));
 	}
 
 
 	public void createModelFromInstalledPackage(String name) throws Exception {
 		// Installed package list
-
-		System.out.println("Processing the package '"+name+"'");
 
 		String linePkg;
 		String version="";
@@ -392,29 +404,34 @@ public class DebianPackageManager extends PackageManager {
 
 		String result = config.getResultLocation() + name + "_" + version + "_" + architecture + "." + config.getMetamodelMainPackage();
 
-		List<String> listScript = retrieveScriptsPath(name);
-
-		Package pkg = factory.createPackage();
-
-		pkg = createModelScript(result, pkg, listScript);
-
-		Process proPkg = Runtime.getRuntime().exec(cmdPkg);
-		BufferedReader pkgInfo = new BufferedReader (new InputStreamReader(proPkg.getInputStream()));
-		pkg.setName(name);
-		processPackageMetadata(pkgInfo, pkg);
-
-
-		String[] c = {"/bin/sh","-c"," dpkg -L " + pkg.getName()};
-		Process pg = Runtime.getRuntime().exec(c);
-
-		BufferedReader infoFile = new BufferedReader (new InputStreamReader(pg.getInputStream()));
-		processAllFiles(infoFile, pkg);
-		saveModel(result, pkg);
-
-		infoFile.close();
-		pg.destroy();
-		pkgInfo.close();
-		proPkg.destroy();
+		if (!((!config.isOverwriteModels()) && (new File(result)).exists())) {
+			
+			System.out.println("Processing the package '"+name+"'");
+			
+			List<String> listScript = retrieveScriptsPath(name);
+	
+			Package pkg = factory.createPackage();
+	
+			pkg = createModelScript(result, pkg, listScript);
+	
+			Process proPkg = Runtime.getRuntime().exec(cmdPkg);
+			BufferedReader pkgInfo = new BufferedReader (new InputStreamReader(proPkg.getInputStream()));
+			pkg.setName(name);
+			processPackageMetadata(pkgInfo, pkg);
+	
+	
+			String[] c = {"/bin/sh","-c"," dpkg -L " + pkg.getName()};
+			Process pg = Runtime.getRuntime().exec(c);
+	
+			BufferedReader infoFile = new BufferedReader (new InputStreamReader(pg.getInputStream()));
+			processAllFiles(infoFile, pkg);
+			saveModel(result, pkg);
+	
+			infoFile.close();
+			pg.destroy();
+			pkgInfo.close();
+			proPkg.destroy();
+		}
 	}
 
 
@@ -503,6 +520,54 @@ public class DebianPackageManager extends PackageManager {
 		}
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	protected void processAllFilesFile(BufferedReader info, Package pkg) throws Exception {
+
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		
+		String lineFile;
+		while (((lineFile = info.readLine()) != null)) {
+			if (!lineFile.equals("/.")) {
+				String[] fSplit = lineFile.split("/");
+
+				for (int i=1; i < fSplit.length; i++) {
+					String concat = "";
+					for (int j=1; j<=i; j++) {
+						concat = concat+"/"+ fSplit[j];
+						
+						if (!map.containsKey(concat)) {
+							map.put(concat, j+1);
+						}
+					}
+				}
+			}
+		}
+		
+		// sort map for value
+		List list = new LinkedList(map.entrySet());
+	     Collections.sort(list, new Comparator() {
+			public int compare(Object o1, Object o2) {
+	               return ((Comparable) ((Map.Entry) (o1)).getValue())
+	              .compareTo(((Map.Entry) (o2)).getValue());
+	          }
+	     });
+
+
+	    for (Iterator it = list.iterator(); it.hasNext();) {
+	        Map.Entry<String, Integer> entry = (Map.Entry)it.next();
+	        
+			it.univaq.mancoosi.packagemm.File f = factory.createFile();
+			f.setLocation(entry.getKey());
+
+			String[] fSplitResult = entry.getKey().split("/");
+			f.setName(fSplitResult[fSplitResult.length-1]);
+			pkg.getFiles().add(f);
+	    }
+		
+
+	}
+
+	
 	@Override
 	public void createModelFromCacheDirectory() throws Exception {
 

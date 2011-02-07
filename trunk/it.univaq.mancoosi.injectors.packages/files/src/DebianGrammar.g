@@ -1,4 +1,4 @@
-grammar GrammarShellForMancoosi;
+grammar DebianGrammar;
 
 options {
 	backtrack=true;
