@@ -17,7 +17,7 @@ public abstract class InjectorConfig {
 	protected String grammarName;
 	protected String grammarMainRule;
 	protected String maintainerScriptsLocation;
-	private String transformationLocation;
+	protected String transformationLocation;
 	private String metamodelLocation;
 	protected String packagesLocation;
 	protected String resultLocation;
@@ -51,8 +51,6 @@ public abstract class InjectorConfig {
 			throw new InjectorException("IO Error in properties file", e);
 		}
 		
-
-		transformationLocation = props.getProperty("transformationLocation");
 		metamodelLocation = props.getProperty("metamodelLocation");
 		metamodelMainPackage = props.getProperty("metamodelMainPackage");
 		
@@ -82,13 +80,9 @@ public abstract class InjectorConfig {
 
 	public abstract String getMaintainerScriptsLocation();
 
-	public void setTransformationLocation(String transformationLocation) {
-		this.transformationLocation = transformationLocation;
-	}
+	public abstract void setTransformationLocation(String transformationLocation);
 
-	public String getTransformationLocation() {
-		return transformationLocation;
-	}
+	public abstract String getTransformationLocation();
 
 	public void setMetamodelLocation(String metamodelLocation) {
 		this.metamodelLocation = metamodelLocation;

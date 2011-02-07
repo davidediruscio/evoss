@@ -37,18 +37,18 @@
     <property name="grammarMainRule" value="mainRule"/>
 	
 	<!-- Source files -->
-	<property name="sourceFilesLocation" value="files/src/scripts"/>
-	<property name="sourceFilesFilter" value="*"/>
+	<!--<property name="sourceFilesLocation" value="files/src/scripts"/>-->
+	<!--<property name="sourceFilesFilter" value="*"/>-->
 	
 	<!-- Gra2MoL transformation -->
-    <property name="transformationLocation" value="files/src/extractScript.g2m"/>
+	<!--<property name="transformationLocation" value="files/src/DebianExtractScript.g2m"/> -->
 	
 	<!-- Target metamodel -->
-    <property name="metamodelLocation" value="files/metamodels/packagemm.ecore"/>
-    <property name="metamodelMainPackage" value="packagemm"/>
+	<!--<property name="metamodelLocation" value="files/metamodels/packagemm.ecore"/> -->
+    <!--<property name="metamodelMainPackage" value="packagemm"/> -->
 	
 	<!-- Target model -->
-    <property name="resultLocation" value="resultModel.packagemm"/>	
+	<!--<property name="resultLocation" value="resultModel.packagemm"/>	-->
 	
 	<!-- Classpath (it should not be modified) -->
     <path id="path.taskdef">
@@ -135,27 +135,27 @@
 	</target>
 
 
-	<target name="phaseTwo"
-		description="This second phase executes the interpreter of Gra2MoL">
+	<!--	<target name="phaseTwo">-->
+	<!--	description="This second phase executes the interpreter of Gra2MoL"> -->
 				
 		<!-- PHASE TWO -->
-		<echo>Executing Phase 2</echo>
+	<!--	<echo>Executing Phase 2</echo> -->
 		<!-- Interpreter of Gra2MoL -->
-		<taskdef name="Gra2MoLDinamicInterpreter" classname="gts.modernization.util.Gra2MoLDinamicInterpreterAntTask" classpathref="path.taskdef"/>
-		<Gra2MoLDinamicInterpreter 
+	<!--	<taskdef name="Gra2MoLDinamicInterpreter" classname="gts.modernization.util.Gra2MoLDinamicInterpreterAntTask" classpathref="path.taskdef"/> -->
+	<!--	<Gra2MoLDinamicInterpreter
 					pathSourceView="${transformationLocation}" 
-					pathMetamodel="${metamodelLocation}"
+					pathMetamodel="${metamodelLocation}" 
 					targetMetamodel="${metamodelMainPackage}"
 					result="${resultLocation}"
-					grammar="${grammarName}" 
+					grammar="${grammarName}"
 					mainRule="${grammarMainRule}" 
 					caseSensitive="true">
 			<fileset dir="${sourceFilesLocation}" includes="${sourceFilesFilter}"/>
-		</Gra2MoLDinamicInterpreter>
+		</Gra2MoLDinamicInterpreter>-->
 		
 		<!-- Interpreter of Gra2MoL which uses CDO--> 
-		<taskdef name="Gra2MoLCDOInterpreter" classname="gts.modernization.util.Gra2MoLCDOInterpreterAntTask" classpathref="path.taskdef"/>
-		<!--<Gra2MoLCDOInterpreter 
+	<!--	<taskdef name="Gra2MoLCDOInterpreter" classname="gts.modernization.util.Gra2MoLCDOInterpreterAntTask" classpathref="path.taskdef"/> -->
+		<!--<Gra2MoLCDOInterpreter
 					pathTransformation="${transformationLocation}" 
 					pathMetamodel="${metamodelLocation}"
 					targetMetamodel="${metamodelMainPackage}"
@@ -168,7 +168,7 @@
 					CDOResource="/mytest">
 			<fileset dir="${sourceFilesLocation}" includes="${sourceFilesFilter}"/>
 		</Gra2MoLCDOInterpreter>--> 
-	</target>
+<!--	</target> -->
 	
 
 	<target name="checkExtensions">
