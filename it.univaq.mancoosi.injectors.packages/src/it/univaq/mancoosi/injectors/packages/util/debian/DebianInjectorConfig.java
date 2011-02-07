@@ -34,6 +34,7 @@ public class DebianInjectorConfig extends InjectorConfig {
 				.getProperty("maintainerScriptsLocation");
 		grammarName = props.getProperty("grammarName");
 		grammarMainRule = props.getProperty("grammarMainRule");
+		transformationLocation = props.getProperty("transformationLocation");
 		packagesLocation = props.getProperty("packagesLocation");
 		resultLocation = props.getProperty("resultLocation");
 		tempLocation = props.getProperty("tempLocation");
@@ -104,5 +105,17 @@ public class DebianInjectorConfig extends InjectorConfig {
 	@Override
 	public String getGrammarMainRule() {
 		return grammarMainRule;
+	}
+
+
+	@Override
+	public void setTransformationLocation(String transformationLocation) {
+		this.transformationLocation = transformationLocation;
+	}
+
+
+	@Override
+	public String getTransformationLocation() {
+		return transformationLocation;
 	}
 }
