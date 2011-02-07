@@ -130,7 +130,7 @@ import it.univaq.mancoosi.packagemm.Package;
 				
 				stats.incrementErrorPackageWithScript();
 				
-				if (config.getSkipFilesWithError()) {
+				if (config.isSkipFilesWithError()) {
 					createMaintainerScriptModel(result, listOut);
 					pkg = loadModelPackage(result);
 				} else {
@@ -177,6 +177,8 @@ import it.univaq.mancoosi.packagemm.Package;
 	protected abstract String unpackPackageFile(String path, String name) throws Exception;
 
 	protected abstract void processAllFiles(BufferedReader info, Package pkg) throws Exception;
+	
+	protected abstract void processAllFilesFile(BufferedReader info, Package pkg) throws Exception;
 
 	public abstract void createModelFromCacheDirectory() throws Exception;
 	

@@ -32,8 +32,8 @@
 	<!-- MAIN TRANSFORMATION PROPERTIES -->
 	<!-- These properties configure the main elements involved in the Gra2MoL transformation -->
 	<!-- Source grammar -->
-    <property name="grammarName" value="GrammarShellForMancoosi"/>
-    <property name="grammarLocation" value="files/src/GrammarShellForMancoosi.g"/>
+    <property name="grammarName" value="DebianGrammar"/>
+    <property name="grammarLocation" value="files/src/DebianGrammar.g"/>
     <property name="grammarMainRule" value="mainRule"/>
 	
 	<!-- Source files -->

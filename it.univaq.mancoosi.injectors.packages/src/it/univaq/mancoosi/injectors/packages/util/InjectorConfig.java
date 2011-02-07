@@ -14,8 +14,8 @@ public abstract class InjectorConfig {
 
 	protected static InjectorConfig INSTANCE = null;
 
-	private String grammarName;
-	private String grammarMainRule;
+	protected String grammarName;
+	protected String grammarMainRule;
 	protected String maintainerScriptsLocation;
 	private String transformationLocation;
 	private String metamodelLocation;
@@ -24,6 +24,7 @@ public abstract class InjectorConfig {
 	private String metamodelMainPackage;
 	protected String tempLocation;
 	private Boolean skipFilesWithError;
+	private Boolean overwriteModels;
 
 
 	/**
@@ -50,8 +51,7 @@ public abstract class InjectorConfig {
 			throw new InjectorException("IO Error in properties file", e);
 		}
 		
-		grammarName = props.getProperty("grammarName");
-		grammarMainRule = props.getProperty("grammarMainRule");
+
 		transformationLocation = props.getProperty("transformationLocation");
 		metamodelLocation = props.getProperty("metamodelLocation");
 		metamodelMainPackage = props.getProperty("metamodelMainPackage");
@@ -61,25 +61,22 @@ public abstract class InjectorConfig {
 		} else {
 			this.skipFilesWithError = false;
 		}
+		
+		if (props.getProperty("overwriteModels").equals("true")) {
+			this.overwriteModels = true;
+		} else {
+			this.overwriteModels = false;
+		}
 	}
 
 
-	public void setGrammarName(String grammarName) {
-		this.grammarName = grammarName;
-	}
+	public abstract void setGrammarName(String grammarName);
 
-	public String getGrammarName() {
-		return grammarName;
-	}
+	public abstract String getGrammarName();
 
+	public abstract void setGrammarMainRule(String grammarMainRule);
 
-	public void setGrammarMainRule(String grammarMainRule) {
-		this.grammarMainRule = grammarMainRule;
-	}
-
-	public String getGrammarMainRule() {
-		return grammarMainRule;
-	}
+	public abstract String getGrammarMainRule();
 
 	public abstract void setMaintainerScriptsLocation(String maintainerScriptsLocation);
 
@@ -125,7 +122,15 @@ public abstract class InjectorConfig {
 		this.skipFilesWithError = skipFilesWithError;
 	}
 
-	public Boolean getSkipFilesWithError() {
+	public Boolean isSkipFilesWithError() {
 		return skipFilesWithError;
+	}
+
+	public void setOverwriteModels(Boolean overwriteModels) {
+		this.overwriteModels = overwriteModels;
+	}
+
+	public Boolean isOverwriteModels() {
+		return overwriteModels;
 	}
 }
