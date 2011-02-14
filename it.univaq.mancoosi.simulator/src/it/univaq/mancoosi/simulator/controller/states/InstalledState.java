@@ -7,8 +7,6 @@ public class InstalledState extends SimulatorState {
 	
 	public void successfulExit(SimulatorContext fsm) throws Exception {
 		
-		System.gc();
-		
 		fsm.logger.info("InstalledState - successfulExit");	
 		SystemModelManager sysModel = new SystemModelManager();
 
@@ -23,7 +21,6 @@ public class InstalledState extends SimulatorState {
 	
 	
 	public void errorExit(SimulatorContext fsm) throws Exception {
-		System.gc();
 		
 		fsm.logger.info("InstalledState - errorExit");	
 		

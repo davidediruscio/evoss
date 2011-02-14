@@ -92,13 +92,17 @@ public class PrermState extends SimulatorState {
 	
 	
 	private Boolean execute(PackageModelManager pkgModel, String[] initParams) throws Exception {
+
+		String pathPkgModel = pkgModel.setInitParamsPrerm(initParams);
 		
-		System.gc();
-		
-		OrchestrationManager orchestrationPrermScript = new OrchestrationManager(pkgModel.getName(),
-				"PrermScript", pkgModel.setInitParamsPrerm(initParams), pkgModel.getStatementPrermScript());
+		OrchestrationManager orchestrationPrermScript = new OrchestrationManager(
+				pkgModel.getName(),
+				"PrermScript",
+				pathPkgModel,
+				pkgModel.getStatementPrermScript());
 
 		Boolean errorExists = orchestrationPrermScript.runOrchestrationModel();
+		
 		return errorExists;
 	}
 }

@@ -29,7 +29,6 @@ rule InstalledPackage {
         section <- s.section,
         tag <- s.tag,
         priority <- s.priority,
-        status <- s.status,
         uploaders <- s.uploaders,
         configuration <- s.configuration,
         packageSettings <- s.packageSettings,
@@ -54,6 +53,78 @@ rule NotInstalledPackage {
         configuration <- s.configuration,
         packageSettings <- s.packageSettings)
 }
+
+
+rule ConfigFilesPackage {
+    from s : INConfiguration!ConfigFilesPackage
+    to t : OUTConfiguration!ConfigFilesPackage (
+        name <- s.name,
+        version <- s.version,
+        architecture <- s.architecture,
+        maintainer <- s.maintainer,
+        checkSum <- s.checkSum,
+        description <- s.description,
+        section <- s.section,
+        tag <- s.tag,
+        priority <- s.priority,
+        uploaders <- s.uploaders,
+        configuration <- s.configuration,
+        packageSettings <- s.packageSettings)
+}
+
+rule UnpackedPackage {
+    from s : INConfiguration!UnpackedPackage (s.oclIsTypeOf(INConfiguration!UnpackedPackage))
+    to t : OUTConfiguration!UnpackedPackage (
+        name <- s.name,
+        version <- s.version,
+        architecture <- s.architecture,
+        maintainer <- s.maintainer,
+        checkSum <- s.checkSum,
+        description <- s.description,
+        section <- s.section,
+        tag <- s.tag,
+        priority <- s.priority,
+        uploaders <- s.uploaders,
+        configuration <- s.configuration,
+        packageSettings <- s.packageSettings,
+        files <- s.files)
+}
+
+rule HalfConfiguredPackage {
+    from s : INConfiguration!HalfConfiguredPackage
+    to t : OUTConfiguration!HalfConfiguredPackage (
+        name <- s.name,
+        version <- s.version,
+        architecture <- s.architecture,
+        maintainer <- s.maintainer,
+        checkSum <- s.checkSum,
+        description <- s.description,
+        section <- s.section,
+        tag <- s.tag,
+        priority <- s.priority,
+        uploaders <- s.uploaders,
+        configuration <- s.configuration,
+        packageSettings <- s.packageSettings,
+        files <- s.files)
+}
+
+rule HalfInstalledPackage {
+    from s : INConfiguration!HalfInstalledPackage
+    to t : OUTConfiguration!HalfInstalledPackage (
+        name <- s.name,
+        version <- s.version,
+        architecture <- s.architecture,
+        maintainer <- s.maintainer,
+        checkSum <- s.checkSum,
+        description <- s.description,
+        section <- s.section,
+        tag <- s.tag,
+        priority <- s.priority,
+        uploaders <- s.uploaders,
+        configuration <- s.configuration,
+        packageSettings <- s.packageSettings)
+}
+
 
 rule SrcPackage {
     from s : INConfiguration!SrcPackage

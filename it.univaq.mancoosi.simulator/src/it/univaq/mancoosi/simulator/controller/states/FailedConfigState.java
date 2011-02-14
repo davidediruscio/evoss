@@ -25,8 +25,7 @@ public class FailedConfigState extends SimulatorState {
 
 	
 	private void execute(PackageModelManager pkgModel) throws Exception {
-		System.gc();
-		
+
 		SystemModelManager sysModel = new SystemModelManager();
 
 		sysModel.setFailedConfigPackage(pkgModel.getName(),

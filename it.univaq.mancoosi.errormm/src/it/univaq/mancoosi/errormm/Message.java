@@ -21,6 +21,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link it.univaq.mancoosi.errormm.Message#getStatement <em>Statement</em>}</li>
  *   <li>{@link it.univaq.mancoosi.errormm.Message#getScript <em>Script</em>}</li>
  *   <li>{@link it.univaq.mancoosi.errormm.Message#getPackage <em>Package</em>}</li>
+ *   <li>{@link it.univaq.mancoosi.errormm.Message#getVersion <em>Version</em>}</li>
+ *   <li>{@link it.univaq.mancoosi.errormm.Message#getArchitecture <em>Architecture</em>}</li>
  * </ul>
  * </p>
  *
@@ -158,5 +160,57 @@ public interface Message extends EObject {
 	 * @generated
 	 */
 	void setPackage(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Version</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Version</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Version</em>' attribute.
+	 * @see #setVersion(String)
+	 * @see it.univaq.mancoosi.errormm.ErrormmPackage#getMessage_Version()
+	 * @model
+	 * @generated
+	 */
+	String getVersion();
+
+	/**
+	 * Sets the value of the '{@link it.univaq.mancoosi.errormm.Message#getVersion <em>Version</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Version</em>' attribute.
+	 * @see #getVersion()
+	 * @generated
+	 */
+	void setVersion(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Architecture</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Architecture</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Architecture</em>' attribute.
+	 * @see #setArchitecture(String)
+	 * @see it.univaq.mancoosi.errormm.ErrormmPackage#getMessage_Architecture()
+	 * @model
+	 * @generated
+	 */
+	String getArchitecture();
+
+	/**
+	 * Sets the value of the '{@link it.univaq.mancoosi.errormm.Message#getArchitecture <em>Architecture</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Architecture</em>' attribute.
+	 * @see #getArchitecture()
+	 * @generated
+	 */
+	void setArchitecture(String value);
 
 } // Message

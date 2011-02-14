@@ -77,8 +77,8 @@ public class PackageModelManager {
 		java.io.File modelPackageFile = new java.io.File(this.pathPackageModel);
 
 		if (!modelPackageFile.exists())
-				throw new PackageModelFileNotFoundException("Model Package '"
-						+ this.pathPackageModel + "' not found!");
+				throw new PackageModelFileNotFoundException("The Package model '"
+						+ this.pathPackageModel + "' does not exist!");
 
 
 		URI fileURI = URI.createFileURI(modelPackageFile.getAbsolutePath());

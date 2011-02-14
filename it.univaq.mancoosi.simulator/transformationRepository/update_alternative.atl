@@ -5,12 +5,30 @@ create OUT : OUTConfiguration, OUTERR: MMError  from IN : INConfiguration, INPAC
 
 helper def : getPosition : Integer = INCurrentPosition!Counter.allInstancesFrom('INPOS')->first().position;
 
-helper def : getScript : String = INCurrentPosition!Counter.allInstancesFrom('INPOS')->first().script;
+helper def : getScriptName : String = INCurrentPosition!Counter.allInstancesFrom('INPOS')->first().script.toString();
+
+helper def : getScript : INPackage!Script = INPackage!Script.allInstancesFrom('INPACK')->select(e | e.oclType().toString() = ('INPackage!'+thisModule.getScriptName))->first();
+
+helper def : getPackage : String = INPackage!Package.allInstancesFrom('INPACK')->first().name;
+
+helper def : getArchitecturePackage : String = INPackage!Package.allInstancesFrom('INPACK')->first().architecture;
+
+helper def : getVersionPackage : String = INPackage!Package.allInstancesFrom('INPACK')->first().version;
 
 helper def : getStatementName : String = INCurrentPosition!Counter.allInstancesFrom('INPOS')->first().name;
 
-helper def : getStatement : INPackage!Statement = INPackage!Statement.allInstancesFrom('INPACK')->select(e | (e.refImmediateComposite().oclType().toString() = ('INPackage!'+thisModule.getScript.toString()))
-	and (e.oclType().toString() = ('INPackage!'+thisModule.getStatementName.toString())))->at(thisModule.getPosition);
+helper def : getStatement : INPackage!Statement = INPackage!Statement.allInstancesFrom('INPACK')->select(e | (e.oclType().toString() = ('INPackage!'+thisModule.getStatementName.toString()))
+	and (e.firstContainerOfType(thisModule.getScript.oclType())))->at(thisModule.getPosition);
+
+helper context INPackage!Statement def: firstContainerOfType(type: OclType) : Boolean = 
+            if self.refImmediateComposite().oclIsTypeOf(type)
+			then true
+			else if (self.refImmediateComposite().oclIsKindOf(INPackage!Script) or self.refImmediateComposite().oclIsUndefined())
+		    then false 
+			else
+				self.refImmediateComposite().firstContainerOfType(type)
+			endif
+		endif;
 
 helper def : existsAlternative(n:String) : Boolean = INConfiguration!Alternative.allInstancesFrom('IN')->collect(e | e.name)->exists(e | e = n);
 
@@ -47,7 +65,6 @@ rule InstalledPackage {
         section <- s.section,
         tag <- s.tag,
         priority <- s.priority,
-        status <- s.status,
         uploaders <- s.uploaders,
         configuration <- s.configuration,
         packageSettings <- s.packageSettings,
@@ -72,6 +89,78 @@ rule NotInstalledPackage {
         configuration <- s.configuration,
         packageSettings <- s.packageSettings)
 }
+
+
+rule ConfigFilesPackage {
+    from s : INConfiguration!ConfigFilesPackage
+    to t : OUTConfiguration!ConfigFilesPackage (
+        name <- s.name,
+        version <- s.version,
+        architecture <- s.architecture,
+        maintainer <- s.maintainer,
+        checkSum <- s.checkSum,
+        description <- s.description,
+        section <- s.section,
+        tag <- s.tag,
+        priority <- s.priority,
+        uploaders <- s.uploaders,
+        configuration <- s.configuration,
+        packageSettings <- s.packageSettings)
+}
+
+rule UnpackedPackage {
+    from s : INConfiguration!UnpackedPackage (s.oclIsTypeOf(INConfiguration!UnpackedPackage))
+    to t : OUTConfiguration!UnpackedPackage (
+        name <- s.name,
+        version <- s.version,
+        architecture <- s.architecture,
+        maintainer <- s.maintainer,
+        checkSum <- s.checkSum,
+        description <- s.description,
+        section <- s.section,
+        tag <- s.tag,
+        priority <- s.priority,
+        uploaders <- s.uploaders,
+        configuration <- s.configuration,
+        packageSettings <- s.packageSettings,
+        files <- s.files)
+}
+
+rule HalfConfiguredPackage {
+    from s : INConfiguration!HalfConfiguredPackage
+    to t : OUTConfiguration!HalfConfiguredPackage (
+        name <- s.name,
+        version <- s.version,
+        architecture <- s.architecture,
+        maintainer <- s.maintainer,
+        checkSum <- s.checkSum,
+        description <- s.description,
+        section <- s.section,
+        tag <- s.tag,
+        priority <- s.priority,
+        uploaders <- s.uploaders,
+        configuration <- s.configuration,
+        packageSettings <- s.packageSettings,
+        files <- s.files)
+}
+
+rule HalfInstalledPackage {
+    from s : INConfiguration!HalfInstalledPackage
+    to t : OUTConfiguration!HalfInstalledPackage (
+        name <- s.name,
+        version <- s.version,
+        architecture <- s.architecture,
+        maintainer <- s.maintainer,
+        checkSum <- s.checkSum,
+        description <- s.description,
+        section <- s.section,
+        tag <- s.tag,
+        priority <- s.priority,
+        uploaders <- s.uploaders,
+        configuration <- s.configuration,
+        packageSettings <- s.packageSettings)
+}
+
 
 rule SrcPackage {
     from s : INConfiguration!SrcPackage
@@ -236,6 +325,7 @@ rule NotInv {
     to t : OUTConfiguration!NotInv (
         elem <- s.elem)
 }
+
 --
 rule Environment {
     from s : INConfiguration!Environment
@@ -267,9 +357,11 @@ rule Environment {
 					thisModule.getAlternative(nameAlt).current <- thisModule.getFile(locationAlt);
 					t.alternatives <- INConfiguration!Alternative.allInstancesFrom('IN')->collect(e | thisModule.Alternative(e));
 				} else {
-				thisModule.createErrorModel('updateAlternative', 'Alternative '+ nameAlt + ' not exist.');				}
-			} else {
-				thisModule.createErrorModel('updateAlternative', 'File '+ locationAlt + ' not exist.');
+					t.alternatives <- INConfiguration!Alternative.allInstancesFrom('IN')->collect(e | thisModule.Alternative(e)).asSequence().including(thisModule.createAlternative(nameAlt, thisModule.getFile(locationAlt)));					
+					thisModule.createErrorModel('updateAlternative', 'Alternative '+ nameAlt + ' not exist.');				}
+				} else {
+					t.alternatives <- INConfiguration!Alternative.allInstancesFrom('IN')->collect(e | thisModule.Alternative(e)).asSequence().including(thisModule.createAlternative(nameAlt, thisModule.getFile(locationAlt)));
+					thisModule.createErrorModel('updateAlternative', 'File '+ locationAlt + ' not exist.');
 			}
 		}
 }
@@ -568,7 +660,22 @@ rule OrConflict {
 -- 
 rule createErrorModel(type:String, description:String) {
      to
+       t : MMError!Report (
+       		errors <- thisModule.createError(type, description))
+	do {
+		t;
+	}	
+}
+
+-- 
+rule createError(type:String, description:String) {
+     to
        t : MMError!Error (
+       		statement <- thisModule.getStatementName.toString(),
+       		package <- thisModule.getPackage.toString(),
+			version <- thisModule.getVersionPackage.toString(),
+			architecture <- thisModule.getArchitecturePackage.toString(),
+       		script <- thisModule.getScriptName.toString(),
            	type <- type,
             description <- description)
 	do {

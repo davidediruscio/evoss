@@ -36,13 +36,10 @@ public class HalfInstalledState extends SimulatorState {
 	
 	
 	private void execute(PackageModelManager pkgModel) throws Exception {
-		
-		System.gc();
-		
+
 		SystemModelManager sysModel = new SystemModelManager();
 
-		sysModel.setHalfInstalledPackage(pkgModel.getName(),
-				pkgModel.getVersion());
+		sysModel.setHalfInstalledPackage(pkgModel.getName(), pkgModel.getVersion(), pkgModel.getArchitecture());
 		sysModel.saveModel();
 		
 	}
