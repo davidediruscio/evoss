@@ -38,9 +38,7 @@ public class UnpackedState extends SimulatorState {
 	
 	public void errorExit(SimulatorContext fsm, PackageModelManager installedPkgModel) throws Exception {
 		fsm.logger.info("UnpackedState - errorExit");
-		
-		System.gc();
-		
+
 		SystemModelManager sysModel = new SystemModelManager();
 		
 		sysModel.setUnpackedPackage(installedPkgModel.getName(),
@@ -55,9 +53,7 @@ public class UnpackedState extends SimulatorState {
 	}
 	
 	private void unpack(PackageModelManager pkgModel) throws Exception {
-		
-		System.gc();
-		
+
 		if (pkgModel.hasFiles()) {
 
 			SystemModelManager sysModel = new SystemModelManager();

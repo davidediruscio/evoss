@@ -1,5 +1,6 @@
 package it.univaq.mancoosi.injectors.packages;
 
+import it.univaq.mancoosi.injectors.packages.managers.PackageManager;
 import it.univaq.mancoosi.injectors.packages.managers.debian.DebianPackageManager;
 import it.univaq.mancoosi.injectors.packages.util.InjectorStatistics;
 
@@ -15,8 +16,9 @@ public class Injector {
 	public static void printHelpCommand() {
 		System.out.println("Commands:");
 		System.out.println("  -i|--installed");
-		System.out.println("  -p|--package   <package file name>");
+		System.out.println("  -f|--file <package_filename>");
 		System.out.println("  -c|--cachedir");
+		System.out.println("  -p|--package <name> <version> <architecture>");
 	}
 	
 	private static void printStats() throws FileNotFoundException {
@@ -43,43 +45,63 @@ public class Injector {
 	}
 	
 	
-	public static void main(String[] args) throws Exception {
-		
-		HashMap<String, Integer> options =  new HashMap<String, Integer>();
+	public static void main(String[] args) {
+
+		HashMap<String, Integer> options = new HashMap<String, Integer>();
 		options.put("-i", 1);
 		options.put("--installed", 1);
-		options.put("-p", 2);
-		options.put("--package", 2);
+		options.put("-f", 2);
+		options.put("--file", 2);
 		options.put("-c", 3);
 		options.put("--cachedir", 3);
-		
-		if (args == null || args.length ==0 || args.length >2 || !options.containsKey(args[0])) {
+		options.put("-p", 4);
+		options.put("--package", 4);
+
+		if (args == null || args.length == 0 || !options.containsKey(args[0])) {
 			printHelpCommand();
 			System.exit(1);
 		}
-		
-		if ((new File("/etc/debian_version")).exists()
-		   ||(new File("/etc/ubuntu_version")).exists()) {
-			
-			switch (options.get(args[0])) {
-				case 1: 
-					DebianPackageManager.getInstance().createModelFromInstalledPackages();
-					break;
-				case 2:
-					DebianPackageManager.getInstance().createModelFromPackageFile(args[1]);
-					break;
-				case 3:
-					DebianPackageManager.getInstance().createModelFromCacheDirectory();
-					break;
-				default:
-					printHelpCommand();
-					System.exit(1);
+		try {
+			PackageManager manager = null;
+
+			if ((new File("/etc/debian_version")).exists()
+					|| (new File("/etc/ubuntu_version")).exists()) {
+
+				manager = DebianPackageManager.getInstance();
+
+			} else if ((new File("/etc/caixa_version")).exists()) {
+
+			} else {
+				System.out.println("The system is not supported.");
+				System.exit(1);
 			}
-			
-		} else if ((new File("/etc/caixa_version")).exists()) {
+
+			switch (options.get(args[0])) {
+			case 1: // -i | --installed
+				manager.createModelFromInstalledPackages();
+				break;
+			case 2: // -f | --file
+				if (args[1] != null) {
+					manager.createModelFromPackageFile(args[1]);
+				}
+				break;
+			case 3: // -c | --cachedir
+				manager.createModelFromCacheDirectory();
+				break;
+			case 4: // -p | --package
+				if (args[1] != null && args[2] != null && args[3] != null) {
+					manager.createModelFromPackageData(args[1], args[2], args[3]);
+				}
+				break;
+			default:
+				printHelpCommand();
+				System.exit(1);
+			}
+			printStats();
+		 
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
-		
-		printStats();
 	}
 
 }

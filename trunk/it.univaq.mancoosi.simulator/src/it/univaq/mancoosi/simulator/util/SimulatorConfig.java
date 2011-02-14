@@ -25,14 +25,19 @@ public class SimulatorConfig {
 	private String dirOutput;
 	private String dirTmp;
 	private String dirLog;
+	private String dirBackup;
 	private String filePackageSequence;
 	private String fileInputSystemModel;
 	private String fileExtensionPackageModel;
 	private String fileErrorModel;
+	private String injectorPackageName;
+	private String injectorPackageDirectory;
 	private boolean saveFileLog;
 	private boolean saveOrchestrationModel;
 	private boolean saveTempFiles;
 	private boolean consoleLog;
+	private int deleteFilesOlderThanNdays;
+
 
 	/**
 	 * Singleton
@@ -85,21 +90,21 @@ public class SimulatorConfig {
 			saveOrchestrationModel = false;
 		}
 
-		dirInputPackageModels = props
-				.getProperty("directory_input_package_models");
+		dirInputPackageModels = props.getProperty("directory_input_package_models");
 		dirModelTypes = props.getProperty("directory_model_types");
-		dirTransformationRepository = props
-				.getProperty("directory_transformation_repository");
-		dirOrchestrationModels = props
-				.getProperty("directory_orchestration_models");
-		dirOutput = props
-				.getProperty("directory_output_models");
+		dirTransformationRepository = props.getProperty("directory_transformation_repository");
+		dirOrchestrationModels = props.getProperty("directory_orchestration_models");
+		dirOutput = props.getProperty("directory_output_models");
 		dirTmp = props.getProperty("directory_tmp");
 		dirLog = props.getProperty("directory_log");
+		dirBackup = props.getProperty("directory_backup");
 		filePackageSequence = props.getProperty("file_package_sequence");
 		fileInputSystemModel = props.getProperty("file_input_system_model");
 		fileExtensionPackageModel = props.getProperty("file_extension_package_model");
 		fileErrorModel = props.getProperty("file_error_model");
+		injectorPackageName = props.getProperty("injector_package_name");
+		injectorPackageDirectory = props.getProperty("injector_package_directory");
+		deleteFilesOlderThanNdays = Integer.valueOf(props.getProperty("delete_files_older_thanNdays"));
 	}
 
 	/**
@@ -239,5 +244,38 @@ public class SimulatorConfig {
 	public boolean isConsoleLog() {
 		return consoleLog;
 	}
+
+	public void setInjectorPackageName(String injectorPackageName) {
+		this.injectorPackageName = injectorPackageName;
+	}
+
+	public String getInjectorPackageName() {
+		return injectorPackageName;
+	}
+
+	public void setInjectorPackageDirectory(String injectorPackageDirectory) {
+		this.injectorPackageDirectory = injectorPackageDirectory;
+	}
+
+	public String getInjectorPackageDirectory() {
+		return injectorPackageDirectory;
+	}
+
+	public void setDeleteFilesOlderThanNdays(int deleteFilesOlderThanNdays) {
+		this.deleteFilesOlderThanNdays = deleteFilesOlderThanNdays;
+	}
+
+	public int getDeleteFilesOlderThanNdays() {
+		return deleteFilesOlderThanNdays;
+	}
+
+	public void setDirBackup(String dirBackup) {
+		this.dirBackup = dirBackup;
+	}
+
+	public String getDirBackup() {
+		return dirBackup;
+	}
+
 
 }

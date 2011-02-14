@@ -1,5 +1,6 @@
 package it.univaq.mancoosi.simulator.controller.states;
 
+
 import it.univaq.mancoosi.simulator.controller.managers.OrchestrationManager;
 import it.univaq.mancoosi.simulator.controller.managers.PackageModelManager;
 
@@ -93,15 +94,16 @@ public class PreinstState extends SimulatorState {
 
 	
 	private Boolean execute(PackageModelManager pkgModel, String[] initParams) throws Exception {
-		
-		System.gc();
+
+		String pathPkgModel = pkgModel.setInitParamsPreinst(initParams);
 		
 		OrchestrationManager orchestrationPreinstScript = new OrchestrationManager(
 				pkgModel.getName(), 
 				"PreinstScript",
-				pkgModel.setInitParamsPreinst(initParams),
+				pathPkgModel,
 				pkgModel.getStatementPreinstScript());
 		Boolean errorExists = orchestrationPreinstScript.runOrchestrationModel();
+		
 		return errorExists;
 	}
 

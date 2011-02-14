@@ -175,15 +175,16 @@ public class PostrmState extends SimulatorState {
 
 	
 	private Boolean execute(PackageModelManager pkgModel, String[] initParams) throws Exception {
-		
-		System.gc();
+
+		String pathPkgModel = pkgModel.setInitParamsPostrm(initParams);
 		
 		OrchestrationManager orchestrationPostrmScript = new OrchestrationManager(
 				pkgModel.getName(),
 				"PostrmScript",
-				pkgModel.setInitParamsPostrm(initParams),
+				pathPkgModel,
 				pkgModel.getStatementPostrmScript());
 		Boolean errorExists = orchestrationPostrmScript.runOrchestrationModel();
+		
 		return errorExists;
 	}
 }

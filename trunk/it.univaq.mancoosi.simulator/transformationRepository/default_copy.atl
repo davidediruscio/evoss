@@ -13,9 +13,9 @@ rule Configuration {
         fileSystem <- s.fileSystem,
         environment <- s.environment,
         notInstalledPackages <- s.notInstalledPackages)
-	do {
-		('Execution: default_copy.atl').println();
-	}
+	--do {
+		--('Execution: default_copy.atl').println();
+	--}
 }
 
 rule InstalledPackage {

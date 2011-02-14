@@ -36,8 +36,6 @@ public class DeleteFilesState extends SimulatorState {
 	
 	private void execute(PackageModelManager pkgModel) throws Exception {
 
-		System.gc();
-		
 		if (pkgModel.hasFiles()) {
 			SystemModelManager sysModel = new SystemModelManager();
 			ArrayList<String> list = pkgModel.getNotConfFiles();
@@ -52,8 +50,6 @@ public class DeleteFilesState extends SimulatorState {
 	
 	private void execute(PackageModelManager newpkgModel, PackageModelManager oldPkgModel) throws Exception {
 
-		System.gc();
-		
 		if (oldPkgModel.hasFiles()) {
 			SystemModelManager sysModel = new SystemModelManager();
 			

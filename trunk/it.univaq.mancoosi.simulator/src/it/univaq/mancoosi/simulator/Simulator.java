@@ -36,6 +36,7 @@ public class Simulator {
 			System.out.println("Simulator is stopped due to an internal error.");
 			System.out.println(e.getMessage());
 			System.out.println("Simulation failed.");
+			e.printStackTrace();
 		}
 	}
 }

@@ -28,6 +28,8 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  *   <li>{@link it.univaq.mancoosi.errormm.impl.MessageImpl#getStatement <em>Statement</em>}</li>
  *   <li>{@link it.univaq.mancoosi.errormm.impl.MessageImpl#getScript <em>Script</em>}</li>
  *   <li>{@link it.univaq.mancoosi.errormm.impl.MessageImpl#getPackage <em>Package</em>}</li>
+ *   <li>{@link it.univaq.mancoosi.errormm.impl.MessageImpl#getVersion <em>Version</em>}</li>
+ *   <li>{@link it.univaq.mancoosi.errormm.impl.MessageImpl#getArchitecture <em>Architecture</em>}</li>
  * </ul>
  * </p>
  *
@@ -133,6 +135,46 @@ public abstract class MessageImpl extends EObjectImpl implements Message {
 	 * @ordered
 	 */
 	protected String package_ = PACKAGE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getVersion() <em>Version</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVersion()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String VERSION_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getVersion() <em>Version</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVersion()
+	 * @generated
+	 * @ordered
+	 */
+	protected String version = VERSION_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getArchitecture() <em>Architecture</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getArchitecture()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ARCHITECTURE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getArchitecture() <em>Architecture</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getArchitecture()
+	 * @generated
+	 * @ordered
+	 */
+	protected String architecture = ARCHITECTURE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -263,6 +305,48 @@ public abstract class MessageImpl extends EObjectImpl implements Message {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getVersion() {
+		return version;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setVersion(String newVersion) {
+		String oldVersion = version;
+		version = newVersion;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ErrormmPackage.MESSAGE__VERSION, oldVersion, version));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getArchitecture() {
+		return architecture;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setArchitecture(String newArchitecture) {
+		String oldArchitecture = architecture;
+		architecture = newArchitecture;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ErrormmPackage.MESSAGE__ARCHITECTURE, oldArchitecture, architecture));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -276,6 +360,10 @@ public abstract class MessageImpl extends EObjectImpl implements Message {
 				return getScript();
 			case ErrormmPackage.MESSAGE__PACKAGE:
 				return getPackage();
+			case ErrormmPackage.MESSAGE__VERSION:
+				return getVersion();
+			case ErrormmPackage.MESSAGE__ARCHITECTURE:
+				return getArchitecture();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -302,6 +390,12 @@ public abstract class MessageImpl extends EObjectImpl implements Message {
 				return;
 			case ErrormmPackage.MESSAGE__PACKAGE:
 				setPackage((String)newValue);
+				return;
+			case ErrormmPackage.MESSAGE__VERSION:
+				setVersion((String)newValue);
+				return;
+			case ErrormmPackage.MESSAGE__ARCHITECTURE:
+				setArchitecture((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -330,6 +424,12 @@ public abstract class MessageImpl extends EObjectImpl implements Message {
 			case ErrormmPackage.MESSAGE__PACKAGE:
 				setPackage(PACKAGE_EDEFAULT);
 				return;
+			case ErrormmPackage.MESSAGE__VERSION:
+				setVersion(VERSION_EDEFAULT);
+				return;
+			case ErrormmPackage.MESSAGE__ARCHITECTURE:
+				setArchitecture(ARCHITECTURE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -352,6 +452,10 @@ public abstract class MessageImpl extends EObjectImpl implements Message {
 				return SCRIPT_EDEFAULT == null ? script != null : !SCRIPT_EDEFAULT.equals(script);
 			case ErrormmPackage.MESSAGE__PACKAGE:
 				return PACKAGE_EDEFAULT == null ? package_ != null : !PACKAGE_EDEFAULT.equals(package_);
+			case ErrormmPackage.MESSAGE__VERSION:
+				return VERSION_EDEFAULT == null ? version != null : !VERSION_EDEFAULT.equals(version);
+			case ErrormmPackage.MESSAGE__ARCHITECTURE:
+				return ARCHITECTURE_EDEFAULT == null ? architecture != null : !ARCHITECTURE_EDEFAULT.equals(architecture);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -376,6 +480,10 @@ public abstract class MessageImpl extends EObjectImpl implements Message {
 		result.append(script);
 		result.append(", package: ");
 		result.append(package_);
+		result.append(", version: ");
+		result.append(version);
+		result.append(", architecture: ");
+		result.append(architecture);
 		result.append(')');
 		return result.toString();
 	}

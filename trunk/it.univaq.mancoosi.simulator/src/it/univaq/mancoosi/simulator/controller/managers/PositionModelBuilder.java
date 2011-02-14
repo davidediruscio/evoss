@@ -18,10 +18,7 @@ import it.univaq.mancoosi.positionmm.Counter;
 import it.univaq.mancoosi.positionmm.PositionmmFactory;
 import it.univaq.mancoosi.positionmm.TypeScript;
 
-/**
- * @author max
- * 
- */
+
 public class PositionModelBuilder {
 
 	private Counter counterPosition = null;

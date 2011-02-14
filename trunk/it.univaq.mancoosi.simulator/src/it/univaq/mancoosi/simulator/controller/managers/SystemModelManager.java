@@ -6,6 +6,7 @@ package it.univaq.mancoosi.simulator.controller.managers;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
@@ -35,6 +36,7 @@ import it.univaq.mancoosi.mancoosimm.UnpackedPackage;
 import it.univaq.mancoosi.mancoosimm.VersionType;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -105,6 +107,8 @@ public class SystemModelManager {
 					.substring(0, nameFileModel.lastIndexOf(".")),
 					nameFileModel.substring(nameFileModel.lastIndexOf(".") + 1,
 							nameFileModel.length()));
+			
+			CurrentModelsFile.getInstance().setSystemModelCurrent(newTempFile);
 
 			ResourceSet resourceSet = new ResourceSetImpl();
 			resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap()
@@ -117,8 +121,6 @@ public class SystemModelManager {
 			configuration.setCreationTime((new GregorianCalendar()).getTime().toString());
 			
 			poResource.getContents().add(configuration);
-
-			CurrentModelsFile.getInstance().setSystemModelCurrent(newTempFile);
 
 			poResource.save(Collections.EMPTY_MAP);
 
@@ -143,11 +145,25 @@ public class SystemModelManager {
 		
 		while ((packIterator.hasNext()) && (!found)) {
 			pkgElem = packIterator.next();
-				if ((pkgElem.getVersion()).equals(version)
-						&& (pkgElem.getName()).equals(packageName)
-						&& (pkgElem.getArchitecture()).equals(architecture)) {
+			if ((pkgElem.getName()).equals(packageName)) {
+				if (pkgElem.getVersion() != null) {
+					if (pkgElem.getArchitecture() != null) {
+						if ((pkgElem.getVersion()).equals(version) && (pkgElem.getArchitecture()).equals(architecture)) {
+							found = true;
+						} else {
+							found = false;
+						}
+					} else {
+						if ((pkgElem.getVersion()).equals(version)) {
+							found = true;
+						} else {
+							found = false;
+						}
+					}
+				} else {
 					found = true;
 				}
+			}
 		}
 		
 		return found;
@@ -169,11 +185,25 @@ public class SystemModelManager {
 		
 		while ((packIterator.hasNext()) && (!found)) {
 			pkgElem = packIterator.next();
-			if ((pkgElem.getVersion()).equals(version)
-					&& (pkgElem.getName()).equals(packageName)
-					&& (pkgElem.getArchitecture()).equals(architecture)) {
+			if ((pkgElem.getName()).equals(packageName)) {
+				if (pkgElem.getVersion() != null) {
+					if (pkgElem.getArchitecture() != null) {
+						if ((pkgElem.getVersion()).equals(version) && (pkgElem.getArchitecture()).equals(architecture)) {
+							found = true;
+						} else {
+							found = false;
+						}
+					} else {
+						if ((pkgElem.getVersion()).equals(version)) {
+							found = true;
+						} else {
+							found = false;
+						}
+					}
+				} else {
 					found = true;
 				}
+			}
 		}
 		
 		return found;
@@ -195,11 +225,25 @@ public class SystemModelManager {
 		
 		while ((packIterator.hasNext()) && (!found)) {
 			pkgElem = packIterator.next();
-			if ((pkgElem.getVersion()).equals(version)
-					&& (pkgElem.getName()).equals(packageName)
-					&& (pkgElem.getArchitecture()).equals(architecture)) {
+			if ((pkgElem.getName()).equals(packageName)) {
+				if (pkgElem.getVersion() != null) {
+					if (pkgElem.getArchitecture() != null) {
+						if ((pkgElem.getVersion()).equals(version) && (pkgElem.getArchitecture()).equals(architecture)) {
+							found = true;
+						} else {
+							found = false;
+						}
+					} else {
+						if ((pkgElem.getVersion()).equals(version)) {
+							found = true;
+						} else {
+							found = false;
+						}
+					}
+				} else {
 					found = true;
 				}
+			}
 		}
 		
 		return found;
@@ -221,11 +265,25 @@ public class SystemModelManager {
 		
 		while ((packIterator.hasNext()) && (!found)) {
 			pkgElem = packIterator.next();
-			if ((pkgElem.getVersion()).equals(version)
-					&& (pkgElem.getName()).equals(packageName)
-					&& (pkgElem.getArchitecture()).equals(architecture)) {
+			if ((pkgElem.getName()).equals(packageName)) {
+				if (pkgElem.getVersion() != null) {
+					if (pkgElem.getArchitecture() != null) {
+						if ((pkgElem.getVersion()).equals(version) && (pkgElem.getArchitecture()).equals(architecture)) {
+							found = true;
+						} else {
+							found = false;
+						}
+					} else {
+						if ((pkgElem.getVersion()).equals(version)) {
+							found = true;
+						} else {
+							found = false;
+						}
+					}
+				} else {
 					found = true;
 				}
+			}
 		}
 		
 		return found;
@@ -247,11 +305,25 @@ public class SystemModelManager {
 		
 		while ((packIterator.hasNext()) && (!found)) {
 			pkgElem = packIterator.next();
-			if ((pkgElem.getVersion()).equals(version)
-					&& (pkgElem.getName()).equals(packageName)
-					&& (pkgElem.getArchitecture()).equals(architecture)) {
+			if ((pkgElem.getName()).equals(packageName)) {
+				if (pkgElem.getVersion() != null) {
+					if (pkgElem.getArchitecture() != null) {
+						if ((pkgElem.getVersion()).equals(version) && (pkgElem.getArchitecture()).equals(architecture)) {
+							found = true;
+						} else {
+							found = false;
+						}
+					} else {
+						if ((pkgElem.getVersion()).equals(version)) {
+							found = true;
+						} else {
+							found = false;
+						}
+					}
+				} else {
 					found = true;
 				}
+			}
 		}
 		
 		return found;
@@ -273,11 +345,25 @@ public class SystemModelManager {
 		
 		while ((packIterator.hasNext()) && (!found)) {
 			pkgElem = packIterator.next();
-			if ((pkgElem.getVersion()).equals(version)
-					&& (pkgElem.getName()).equals(packageName)
-					&& (pkgElem.getArchitecture()).equals(architecture)) {
+			if ((pkgElem.getName()).equals(packageName)) {
+				if (pkgElem.getVersion() != null) {
+					if (pkgElem.getArchitecture() != null) {
+						if ((pkgElem.getVersion()).equals(version) && (pkgElem.getArchitecture()).equals(architecture)) {
+							found = true;
+						} else {
+							found = false;
+						}
+					} else {
+						if ((pkgElem.getVersion()).equals(version)) {
+							found = true;
+						} else {
+							found = false;
+						}
+					}
+				} else {
 					found = true;
 				}
+			}
 		}
 		
 		return found;
@@ -299,10 +385,17 @@ public class SystemModelManager {
 		
 		while ((packIterator.hasNext()) && (!found)) {
 			pkgElem = packIterator.next();
-				if ((pkgElem.getVersion()).equals(version)
-						&& (pkgElem.getName()).equals(packageName)) {
+			if ((pkgElem.getName()).equals(packageName)) {
+				if (pkgElem.getVersion() != null) {
+						if ((pkgElem.getVersion()).equals(version)) {
+							found = true;
+						} else {
+							found = false;
+						}
+				} else {
 					found = true;
 				}
+			}
 		}
 		
 		return found;
@@ -323,10 +416,17 @@ public class SystemModelManager {
 		
 		while ((packIterator.hasNext()) && (!found)) {
 			pkgElem = packIterator.next();
-			if ((pkgElem.getVersion()).equals(version)
-					&& (pkgElem.getName()).equals(packageName)) {
+			if ((pkgElem.getName()).equals(packageName)) {
+				if (pkgElem.getVersion() != null) {
+						if ((pkgElem.getVersion()).equals(version)) {
+							found = true;
+						} else {
+							found = false;
+						}
+				} else {
 					found = true;
 				}
+			}
 		}
 		
 		return found;
@@ -347,10 +447,17 @@ public class SystemModelManager {
 		
 		while ((packIterator.hasNext()) && (!found)) {
 			pkgElem = packIterator.next();
-			if ((pkgElem.getVersion()).equals(version)
-					&& (pkgElem.getName()).equals(packageName)) {
+			if ((pkgElem.getName()).equals(packageName)) {
+				if (pkgElem.getVersion() != null) {
+						if ((pkgElem.getVersion()).equals(version)) {
+							found = true;
+						} else {
+							found = false;
+						}
+				} else {
 					found = true;
 				}
+			}
 		}
 		
 		return found;
@@ -371,10 +478,17 @@ public class SystemModelManager {
 		
 		while ((packIterator.hasNext()) && (!found)) {
 			pkgElem = packIterator.next();
-			if ((pkgElem.getVersion()).equals(version)
-					&& (pkgElem.getName()).equals(packageName)) {
+			if ((pkgElem.getName()).equals(packageName)) {
+				if (pkgElem.getVersion() != null) {
+						if ((pkgElem.getVersion()).equals(version)) {
+							found = true;
+						} else {
+							found = false;
+						}
+				} else {
 					found = true;
 				}
+			}
 		}
 		
 		return found;
@@ -395,10 +509,17 @@ public class SystemModelManager {
 		
 		while ((packIterator.hasNext()) && (!found)) {
 			pkgElem = packIterator.next();
-			if ((pkgElem.getVersion()).equals(version)
-					&& (pkgElem.getName()).equals(packageName)) {
+			if ((pkgElem.getName()).equals(packageName)) {
+				if (pkgElem.getVersion() != null) {
+						if ((pkgElem.getVersion()).equals(version)) {
+							found = true;
+						} else {
+							found = false;
+						}
+				} else {
 					found = true;
 				}
+			}
 		}
 		
 		return found;
@@ -419,10 +540,17 @@ public class SystemModelManager {
 		
 		while ((packIterator.hasNext()) && (!found)) {
 			pkgElem = packIterator.next();
-			if ((pkgElem.getVersion()).equals(version)
-					&& (pkgElem.getName()).equals(packageName)) {
+			if ((pkgElem.getName()).equals(packageName)) {
+				if (pkgElem.getVersion() != null) {
+						if ((pkgElem.getVersion()).equals(version)) {
+							found = true;
+						} else {
+							found = false;
+						}
+				} else {
 					found = true;
 				}
+			}
 		}
 		
 		return found;
@@ -572,27 +700,437 @@ public class SystemModelManager {
 	 * @param version
 	 * @return Boolean
 	 */
+	public InstalledPackage getInstalledPackage(String packageName, String version, String architecture) {
+		
+		Boolean found = false;
+		Iterator<InstalledPackage> packIterator = configuration.getInstalledPackages().iterator();
+		InstalledPackage pkgElem = null;
+
+		while ((packIterator.hasNext()) && (!found)) {
+			pkgElem = packIterator.next();
+			if ((pkgElem.getName()).equals(packageName)) {
+				if (pkgElem.getVersion() != null) {
+					if (pkgElem.getArchitecture() != null) {
+						if ((pkgElem.getVersion()).equals(version) && (pkgElem.getArchitecture()).equals(architecture)) {
+							found = true;
+						} else {
+							found = false;
+						}
+					} else {
+						if ((pkgElem.getVersion()).equals(version)) {
+							found = true;
+						} else {
+							found = false;
+						}
+					}
+				} else {
+					found = true;
+				}
+			}
+		}
+
+		return pkgElem;
+	}
+
+	
+	/**
+	 * 
+	 * @param packageName
+	 * @param version
+	 * @return Boolean
+	 */
+	public InstalledPackage getInstalledPackage(String packageName, String version) {
+		
+		Boolean found = false;
+		Iterator<InstalledPackage> packIterator = configuration.getInstalledPackages().iterator();
+		InstalledPackage pkgElem = null;
+
+		while ((packIterator.hasNext()) && (!found)) {
+			pkgElem = packIterator.next();
+			if ((pkgElem.getName()).equals(packageName)) {
+				if (pkgElem.getVersion() != null) {
+						if ((pkgElem.getVersion()).equals(version)) {
+							found = true;
+						} else {
+							found = false;
+						}
+				} else {
+					found = true;
+				}
+			}
+		}
+
+		return pkgElem;
+	}
+	
+	
+	/**
+	 * 
+	 * @param packageName
+	 * @return Boolean
+	 */
 	public InstalledPackage getInstalledPackage(String packageName) {
 		
 		Boolean found = false;
 		Iterator<InstalledPackage> packIterator = configuration.getInstalledPackages().iterator();
 		InstalledPackage pkgElem = null;
-		
+
 		while ((packIterator.hasNext()) && (!found)) {
 			pkgElem = packIterator.next();
-				if ((pkgElem.getName()).equals(packageName)) {
-					found = true;
-				}
+			if ((pkgElem.getName()).equals(packageName)) {
+				found = true;
+			}
 		}
-		
 		return pkgElem;
 	}
-	
 
+	
 	/**
 	 * 
 	 * @param packageName
 	 * @param version
+	 * @return Boolean
+	 */
+	public HalfInstalledPackage getHalfInstalledPackage(String packageName, String version, String architecture) {
+		
+		Boolean found = false;
+		Iterator<HalfInstalledPackage> packIterator = configuration.getHalfInstalledPackages().iterator();
+		HalfInstalledPackage pkgElem = null;
+
+		while ((packIterator.hasNext()) && (!found)) {
+			pkgElem = packIterator.next();
+			if ((pkgElem.getName()).equals(packageName)) {
+				if (pkgElem.getVersion() != null) {
+					if (pkgElem.getArchitecture() != null) {
+						if ((pkgElem.getVersion()).equals(version) && (pkgElem.getArchitecture()).equals(architecture)) {
+							found = true;
+						} else {
+							found = false;
+						}
+					} else {
+						if ((pkgElem.getVersion()).equals(version)) {
+							found = true;
+						} else {
+							found = false;
+						}
+					}
+				} else {
+					found = true;
+				}
+			}
+		}
+
+		return pkgElem;
+	}
+
+	
+	/**
+	 * 
+	 * @param packageName
+	 * @param version
+	 * @return Boolean
+	 */
+	public HalfInstalledPackage getHalfInstalledPackage(String packageName, String version) {
+		
+		Boolean found = false;
+		Iterator<HalfInstalledPackage> packIterator = configuration.getHalfInstalledPackages().iterator();
+		HalfInstalledPackage pkgElem = null;
+
+		while ((packIterator.hasNext()) && (!found)) {
+			pkgElem = packIterator.next();
+			if ((pkgElem.getName()).equals(packageName)) {
+				if (pkgElem.getVersion() != null) {
+						if ((pkgElem.getVersion()).equals(version)) {
+							found = true;
+						} else {
+							found = false;
+						}
+				} else {
+					found = true;
+				}
+			}
+		}
+
+		return pkgElem;
+	}
+	
+	
+	/**
+	 * 
+	 * @param packageName
+	 * @return Boolean
+	 */
+	public HalfInstalledPackage getHalfInstalledPackage(String packageName) {
+		
+		Boolean found = false;
+		Iterator<HalfInstalledPackage> packIterator = configuration.getHalfInstalledPackages().iterator();
+		HalfInstalledPackage pkgElem = null;
+
+		while ((packIterator.hasNext()) && (!found)) {
+			pkgElem = packIterator.next();
+			if ((pkgElem.getName()).equals(packageName)) {
+				found = true;
+			}
+		}
+		return pkgElem;
+	}
+	
+	
+	/**
+	 * 
+	 * @param packageName
+	 * @param version
+	 * @return Boolean
+	 */
+	public HalfConfiguredPackage getHalfConfiguredPackage(String packageName, String version, String architecture) {
+		
+		Boolean found = false;
+		Iterator<HalfConfiguredPackage> packIterator = configuration.getHalfConfiguredPackages().iterator();
+		HalfConfiguredPackage pkgElem = null;
+
+		while ((packIterator.hasNext()) && (!found)) {
+			pkgElem = packIterator.next();
+			if ((pkgElem.getName()).equals(packageName)) {
+				if (pkgElem.getVersion() != null) {
+					if (pkgElem.getArchitecture() != null) {
+						if ((pkgElem.getVersion()).equals(version) && (pkgElem.getArchitecture()).equals(architecture)) {
+							found = true;
+						} else {
+							found = false;
+						}
+					} else {
+						if ((pkgElem.getVersion()).equals(version)) {
+							found = true;
+						} else {
+							found = false;
+						}
+					}
+				} else {
+					found = true;
+				}
+			}
+		}
+
+		return pkgElem;
+	}
+
+	
+	/**
+	 * 
+	 * @param packageName
+	 * @param version
+	 * @return Boolean
+	 */
+	public HalfConfiguredPackage getHalfConfiguredPackage(String packageName, String version) {
+		
+		Boolean found = false;
+		Iterator<HalfConfiguredPackage> packIterator = configuration.getHalfConfiguredPackages().iterator();
+		HalfConfiguredPackage pkgElem = null;
+
+		while ((packIterator.hasNext()) && (!found)) {
+			pkgElem = packIterator.next();
+			if ((pkgElem.getName()).equals(packageName)) {
+				if (pkgElem.getVersion() != null) {
+						if ((pkgElem.getVersion()).equals(version)) {
+							found = true;
+						} else {
+							found = false;
+						}
+				} else {
+					found = true;
+				}
+			}
+		}
+
+		return pkgElem;
+	}
+	
+	
+	/**
+	 * 
+	 * @param packageName
+	 * @return Boolean
+	 */
+	public HalfConfiguredPackage getHalfConfiguredPackage(String packageName) {
+		
+		Boolean found = false;
+		Iterator<HalfConfiguredPackage> packIterator = configuration.getHalfConfiguredPackages().iterator();
+		HalfConfiguredPackage pkgElem = null;
+
+		while ((packIterator.hasNext()) && (!found)) {
+			pkgElem = packIterator.next();
+			if ((pkgElem.getName()).equals(packageName)) {
+				found = true;
+			}
+		}
+		return pkgElem;
+	}
+
+	
+	/**
+	 * 
+	 * @param packageName
+	 * @param version
+	 * @return Boolean
+	 */
+	public UnpackedPackage getUnpackedPackage(String packageName, String version, String architecture) {
+		
+		Boolean found = false;
+		Iterator<UnpackedPackage> packIterator = configuration.getUnpackedPackages().iterator();
+		UnpackedPackage pkgElem = null;
+
+		while ((packIterator.hasNext()) && (!found)) {
+			pkgElem = packIterator.next();
+			if ((pkgElem.getName()).equals(packageName)) {
+				if (pkgElem.getVersion() != null) {
+					if (pkgElem.getArchitecture() != null) {
+						if ((pkgElem.getVersion()).equals(version) && (pkgElem.getArchitecture()).equals(architecture)) {
+							found = true;
+						} else {
+							found = false;
+						}
+					} else {
+						if ((pkgElem.getVersion()).equals(version)) {
+							found = true;
+						} else {
+							found = false;
+						}
+					}
+				} else {
+					found = true;
+				}
+			}
+		}
+
+		return pkgElem;
+	}
+
+	
+	/**
+	 * 
+	 * @param packageName
+	 * @param version
+	 * @return Boolean
+	 */
+	public UnpackedPackage getUnpackedPackage(String packageName, String version) {
+		
+		Boolean found = false;
+		Iterator<UnpackedPackage> packIterator = configuration.getUnpackedPackages().iterator();
+		UnpackedPackage pkgElem = null;
+
+		while ((packIterator.hasNext()) && (!found)) {
+			pkgElem = packIterator.next();
+			if ((pkgElem.getName()).equals(packageName)) {
+				if (pkgElem.getVersion() != null) {
+						if ((pkgElem.getVersion()).equals(version)) {
+							found = true;
+						} else {
+							found = false;
+						}
+				} else {
+					found = true;
+				}
+			}
+		}
+
+		return pkgElem;
+	}
+	
+	
+	/**
+	 * 
+	 * @param packageName
+	 * @return Boolean
+	 */
+	public UnpackedPackage getUnpackedPackage(String packageName) {
+		
+		Boolean found = false;
+		Iterator<UnpackedPackage> packIterator = configuration.getUnpackedPackages().iterator();
+		UnpackedPackage pkgElem = null;
+
+		while ((packIterator.hasNext()) && (!found)) {
+			pkgElem = packIterator.next();
+			if ((pkgElem.getName()).equals(packageName)) {
+				found = true;
+			}
+		}
+		return pkgElem;
+	}
+	
+	
+	/**
+	 * 
+	 * @param packageName
+	 * @param version
+	 * @return Boolean
+	 */
+	public NotInstalledPackage getNotInstalledPackage(String packageName, String version, String architecture) {
+		
+		Boolean found = false;
+		Iterator<NotInstalledPackage> packIterator = configuration.getNotInstalledPackages().iterator();
+		NotInstalledPackage pkgElem = null;
+
+		while ((packIterator.hasNext()) && (!found)) {
+			pkgElem = packIterator.next();
+			if ((pkgElem.getName()).equals(packageName)) {
+				if (pkgElem.getVersion() != null) {
+					if (pkgElem.getArchitecture() != null) {
+						if ((pkgElem.getVersion()).equals(version) && (pkgElem.getArchitecture()).equals(architecture)) {
+							found = true;
+						} else {
+							found = false;
+						}
+					} else {
+						if ((pkgElem.getVersion()).equals(version)) {
+							found = true;
+						} else {
+							found = false;
+						}
+					}
+				} else {
+					found = true;
+				}
+			}
+		}
+
+		return pkgElem;
+	}
+
+	
+	/**
+	 * 
+	 * @param packageName
+	 * @param version
+	 * @return Boolean
+	 */
+	public NotInstalledPackage getNotInstalledPackage(String packageName, String version) {
+		
+		Boolean found = false;
+		Iterator<NotInstalledPackage> packIterator = configuration.getNotInstalledPackages().iterator();
+		NotInstalledPackage pkgElem = null;
+
+		while ((packIterator.hasNext()) && (!found)) {
+			pkgElem = packIterator.next();
+			if ((pkgElem.getName()).equals(packageName)) {
+				if (pkgElem.getVersion() != null) {
+						if ((pkgElem.getVersion()).equals(version)) {
+							found = true;
+						} else {
+							found = false;
+						}
+				} else {
+					found = true;
+				}
+			}
+		}
+
+		return pkgElem;
+	}
+	
+	
+	/**
+	 * 
+	 * @param packageName
 	 * @return Boolean
 	 */
 	public NotInstalledPackage getNotInstalledPackage(String packageName) {
@@ -600,16 +1138,86 @@ public class SystemModelManager {
 		Boolean found = false;
 		Iterator<NotInstalledPackage> packIterator = configuration.getNotInstalledPackages().iterator();
 		NotInstalledPackage pkgElem = null;
-		
+
 		while ((packIterator.hasNext()) && (!found)) {
 			pkgElem = packIterator.next();
-				if ((pkgElem.getName()).equals(packageName)) {
-					found = true;
-				}
+			if ((pkgElem.getName()).equals(packageName)) {
+				found = true;
+			}
 		}
-		
 		return pkgElem;
 	}
+
+	
+	/**
+	 * 
+	 * @param packageName
+	 * @param version
+	 * @return Boolean
+	 */
+	public ConfigFilesPackage getConfigFilesPackage(String packageName, String version, String architecture) {
+		
+		Boolean found = false;
+		Iterator<ConfigFilesPackage> packIterator = configuration.getConfigFilesPackages().iterator();
+		ConfigFilesPackage pkgElem = null;
+
+		while ((packIterator.hasNext()) && (!found)) {
+			pkgElem = packIterator.next();
+			if ((pkgElem.getName()).equals(packageName)) {
+				if (pkgElem.getVersion() != null) {
+					if (pkgElem.getArchitecture() != null) {
+						if ((pkgElem.getVersion()).equals(version) && (pkgElem.getArchitecture()).equals(architecture)) {
+							found = true;
+						} else {
+							found = false;
+						}
+					} else {
+						if ((pkgElem.getVersion()).equals(version)) {
+							found = true;
+						} else {
+							found = false;
+						}
+					}
+				} else {
+					found = true;
+				}
+			}
+		}
+
+		return pkgElem;
+	}
+
+	
+	/**
+	 * 
+	 * @param packageName
+	 * @param version
+	 * @return Boolean
+	 */
+	public ConfigFilesPackage getConfigFilesPackage(String packageName, String version) {
+		
+		Boolean found = false;
+		Iterator<ConfigFilesPackage> packIterator = configuration.getConfigFilesPackages().iterator();
+		ConfigFilesPackage pkgElem = null;
+
+		while ((packIterator.hasNext()) && (!found)) {
+			pkgElem = packIterator.next();
+			if ((pkgElem.getName()).equals(packageName)) {
+				if (pkgElem.getVersion() != null) {
+						if ((pkgElem.getVersion()).equals(version)) {
+							found = true;
+						} else {
+							found = false;
+						}
+				} else {
+					found = true;
+				}
+			}
+		}
+
+		return pkgElem;
+	}
+	
 	
 	/**
 	 * 
@@ -632,44 +1240,59 @@ public class SystemModelManager {
 		
 		return pkgElem;
 	}
+
+	
+	/**
+	 * 
+	 * @param oldPkgStatus
+	 * @param newPkgStatus
+	 */
+	@SuppressWarnings("rawtypes")
+	private void findReferenceAndSetNewStatus(Package oldPkgStatus,  Package newPkgStatus) {
+
+		Collection references = EcoreUtil.UsageCrossReferencer.find(oldPkgStatus, oldPkgStatus.eResource().getResourceSet());
+		
+		for (Iterator iter = references.iterator(); iter.hasNext(); ) {
+			  EStructuralFeature.Setting setting = (EStructuralFeature.Setting)iter.next();
+			  if (setting.getEObject() instanceof  SingleDep) {
+				  SingleDep s = (SingleDep)setting.getEObject();
+				  s.setPkg(newPkgStatus);
+			  }
+			  
+			  if (setting.getEObject() instanceof  SingleConflict) {
+				  SingleConflict s = (SingleConflict)setting.getEObject();
+				  s.setPkg(newPkgStatus);
+			  }
+		}
+	}
 	
 	/**
 	 * 
 	 * @param packageName
 	 * @param version
-	 * @return
 	 */
-	public Boolean setConfigFilesPackage(String packageName, String version) {
+	public void setConfigFilesPackage(String packageName, String version, String architecture) {
 		
-		// TODO : check configfilespackage case
-		Boolean found = false;
-		Iterator<InstalledPackage> packIterator = configuration.getInstalledPackages().iterator();
-		InstalledPackage pkgElem = null;
-		
-		while ((packIterator.hasNext()) && (!found)) {
-			pkgElem = packIterator.next();
-				if ((pkgElem.getVersion()).equals(version)
-						&& (pkgElem.getName()).equals(packageName)) {
-				found = true;
-			}
-		}
+		InstalledPackage pkgInstElem = getInstalledPackage(packageName, version, architecture);
 
-		if (found) {
+		if (pkgInstElem != null) {
 
 			PackageSetting pkgSet = MancoosiFactory.eINSTANCE.createPackageSetting();
 
-			if (pkgElem.getPackageSettings() != null) {
-				for (int i = 0; i < pkgElem.getPackageSettings().getFiles().size(); i++) {
-					pkgSet.getFiles().add(pkgElem.getPackageSettings().getFiles().get(i));
+			if (pkgInstElem.getPackageSettings() != null) {
+				for (int i = 0; i < pkgInstElem.getPackageSettings().getFiles().size(); i++) {
+					pkgSet.getFiles().add(pkgInstElem.getPackageSettings().getFiles().get(i));
 				}
-				
 			}
-			
+
 			ConfigFilesPackage pkgConffiles = MancoosiFactory.eINSTANCE.createConfigFilesPackage();
+
+			this.findReferenceAndSetNewStatus(pkgInstElem, pkgConffiles);
 			
 			pkgConffiles.setName(packageName);
 			
 			if (version != null) pkgConffiles.setVersion(version);
+			if (architecture != null) pkgConffiles.setArchitecture(architecture);
 			
 			if (pkgSet != null && pkgSet.getFiles().size() > 0) {
 				pkgConffiles.setPackageSettings(pkgSet);
@@ -677,48 +1300,69 @@ public class SystemModelManager {
 
 			configuration.getConfigFilesPackages().add(pkgConffiles);
 
-			EcoreUtil.delete(pkgElem, true);
+			EcoreUtil.delete(pkgInstElem, true);
 		}
-		return found;
 	}
 	
 	
-	
-	public Boolean setNotInstalledPackage(String packageName, String version) {
-		Boolean found = false;
-		Iterator<InstalledPackage> packIterator = configuration.getInstalledPackages().iterator();
-		InstalledPackage pkgElem = null;
+	/**
+	 * 
+	 * @param packageName
+	 * @param version
+	 * @param architecture
+	 */
+	public void setNotInstalledPackage(String packageName, String version, String architecture) {
+
+		InstalledPackage pkgElem = getInstalledPackage(packageName, version, architecture);
 		
-		while ((packIterator.hasNext()) && (!found)) {
-			pkgElem = packIterator.next();
-				if ((pkgElem.getVersion()).equals(version)
-						&& (pkgElem.getName()).equals(packageName)) {
-				found = true;
-			}
-		}
+		ConfigFilesPackage pkgConfElem = getConfigFilesPackage(packageName, version, architecture);
+		
+		NotInstalledPackage pkgNotInst = MancoosiFactory.eINSTANCE.createNotInstalledPackage();
+		
+		pkgNotInst.setName(packageName);
+		
+		if (version != null) pkgNotInst.setVersion(version);
+		if (architecture != null) pkgNotInst.setArchitecture(architecture);
 
-		if (found) {
+		if (pkgElem != null) {
 
+			this.findReferenceAndSetNewStatus(pkgElem, pkgNotInst);
+			
+			// Implicit conffiles
 			PackageSetting pkgSet = MancoosiFactory.eINSTANCE.createPackageSetting();
-
 			if (pkgElem.getPackageSettings() != null) {
 				for (int i = 0; i < pkgElem.getPackageSettings().getFiles().size(); i++) {
-					
 					pkgSet.getFiles().add(pkgElem.getPackageSettings().getFiles().get(i));
 				}
 			}
-			NotInstalledPackage pkgNotInst = MancoosiFactory.eINSTANCE.createNotInstalledPackage();
-			pkgNotInst.setName(packageName);
-			if (version != null) pkgNotInst.setVersion(version);
-			if (pkgSet != null && pkgSet.getFiles().size() > 0)
+			
+			if (pkgSet != null && pkgSet.getFiles().size() > 0) {
 				pkgNotInst.setPackageSettings(pkgSet);
+			}
 
 			EcoreUtil.delete(pkgElem, true);
-
-			configuration.getNotInstalledPackages().add(pkgNotInst);
-
 		}
-		return found;
+		
+		if (pkgConfElem != null) {
+
+			 this.findReferenceAndSetNewStatus(pkgConfElem, pkgNotInst);
+			
+			// Implicit conffiles
+			PackageSetting pkgSet = MancoosiFactory.eINSTANCE.createPackageSetting();
+			if (pkgConfElem.getPackageSettings() != null) {
+				for (int i = 0; i < pkgConfElem.getPackageSettings().getFiles().size(); i++) {
+					pkgSet.getFiles().add(pkgConfElem.getPackageSettings().getFiles().get(i));
+				}
+			}
+			
+			if (pkgSet != null && pkgSet.getFiles().size() > 0) {
+				pkgNotInst.setPackageSettings(pkgSet);
+			}
+
+			EcoreUtil.delete(pkgConfElem, true);
+		}
+
+		configuration.getNotInstalledPackages().add(pkgNotInst);	
 	}
 	
 	/**
@@ -733,75 +1377,166 @@ public class SystemModelManager {
 	 * @param architecture
 	 * @param section
 	 * @param priority
-	 * @return
 	 */
-	public Boolean setInstalledPackage(String packageName, String version, 
+	public void setInstalledPackage(String packageName, String version, 
 			ArrayList<DepConfl> listDep, ArrayList<DepConfl> listConfl,
 			ArrayList<String> listFiles, Integer installedSize, String maintainer, 
 			String architecture, String section, String priority) {
-		Boolean found = false;
 
-		Iterator<NotInstalledPackage> packIterator = configuration
-				.getNotInstalledPackages().iterator();
-		NotInstalledPackage pkgElem = null;
+		NotInstalledPackage pkgNotInstElem = getNotInstalledPackage(packageName, version, architecture);
 
-		while ((packIterator.hasNext()) && (!found)) {
-			pkgElem = packIterator.next();
-			if (pkgElem.getVersion() != null) {
-				if ((pkgElem.getName()).equals(packageName)
-						&& (pkgElem.getVersion()).equals(version)) {
-					found = true;
-				}
-			} else {
-				if ((pkgElem.getName()).equals(packageName)) {
-					found = true;
-				}
-			}
-		}
-
-		if (found) {
-			EcoreUtil.delete(pkgElem, true);
+		InstalledPackage pkgInstElem = getInstalledPackage(packageName);
+		
+		ConfigFilesPackage pkgConfElem = getConfigFilesPackage(packageName);
+		
+		InstalledPackage pkgInst = MancoosiFactory.eINSTANCE.createInstalledPackage();
+		
+		pkgInst.setName(packageName);
+		
+		if (version != null) pkgInst.setVersion(version);
+		if (installedSize != null) pkgInst.setInstalledSize(installedSize);
+		if (maintainer != null) pkgInst.setMaintainer(maintainer);
+		if (architecture != null) pkgInst.setArchitecture(architecture);
+		if (section != null) pkgInst.setSection(section);
+		if (priority != null) pkgInst.setPriority(PriorityType.get(priority));
+			
+		if (listDep != null && listDep.size()>0) pkgInst.setDepends(setDependences(listDep));
+		if (listConfl != null && listConfl.size()>0) pkgInst.setConflict(setConflicts(listConfl));
+		if (listFiles != null && listFiles.size()>0) pkgInst.setPackageSettings(setPackageSetting(listFiles));
+		
+		if (pkgNotInstElem != null) {
+			this.findReferenceAndSetNewStatus(pkgNotInstElem, pkgInst);
+			EcoreUtil.delete(pkgNotInstElem, true);
 		}
 		
-		found = false;
-
-		Iterator<InstalledPackage> packInstIterator = configuration
-				.getInstalledPackages().iterator();
-		InstalledPackage pkgInstElem = null;
-
-		while ((packInstIterator.hasNext()) && (!found)) {
-			pkgInstElem = packInstIterator.next();
-				if ((pkgInstElem.getName()).equals(packageName)) {
-					found = true;
-				}
-		}
-
-		if (found) {
+		if (pkgInstElem != null) {
+			this.findReferenceAndSetNewStatus(pkgInstElem, pkgInst);
 			EcoreUtil.delete(pkgInstElem, true);
 		}
 		
+		if (pkgConfElem != null) {
+			this.findReferenceAndSetNewStatus(pkgConfElem, pkgInst);
+			EcoreUtil.delete(pkgConfElem, true);
+		}
 		
-			InstalledPackage pkgInst = MancoosiFactory.eINSTANCE
-					.createInstalledPackage();
-			pkgInst.setName(packageName);
-			if (version != null) pkgInst.setVersion(version);
-		
-			if (installedSize != null) pkgInst.setInstalledSize(installedSize);
-			if (maintainer != null) pkgInst.setMaintainer(maintainer);
-			if (architecture != null) pkgInst.setArchitecture(architecture);
-			if (section != null) pkgInst.setSection(section);
-			if (priority != null) pkgInst.setPriority(PriorityType.get(priority));
-			
-			if (listDep != null && listDep.size()>0) pkgInst.setDepends(setDependences(listDep));
-			if (listConfl != null && listConfl.size()>0) pkgInst.setConflict(setConflicts(listConfl));
-			if (listFiles != null && listFiles.size()>0) pkgInst.setPackageSettings(setPackageSetting(listFiles));
-			
-			configuration.getInstalledPackages().add(pkgInst);
-
-		
-		return found;
+		configuration.getInstalledPackages().add(pkgInst);
 	}
 
+	
+	/**
+	 * 
+	 * @param packageName
+	 * @param version
+	 * @param confFiles
+	 * @param maintainer
+	 * @param architecture
+	 * @param section
+	 * @param priority
+	 */
+	public void setFailedConfigPackage(String packageName, String version,
+			ArrayList<String> confFiles,
+			String maintainer, String architecture, String section,
+			String priority) {
+
+
+		NotInstalledPackage pkgNotInstElem = getNotInstalledPackage(packageName, version, architecture);
+		InstalledPackage pkgInstElem = getInstalledPackage(packageName, version, architecture);
+
+		HalfConfiguredPackage pkgHalfConf = MancoosiFactory.eINSTANCE.createHalfConfiguredPackage();
+		
+		pkgHalfConf.setName(packageName);
+		
+		if (version != null) pkgHalfConf.setVersion(version);
+		if (maintainer != null) pkgHalfConf.setMaintainer(maintainer);
+		if (architecture != null) pkgHalfConf.setArchitecture(architecture);
+		if (section != null) pkgHalfConf.setSection(section);
+		if (priority != null) pkgHalfConf.setPriority(PriorityType.get(priority));
+
+		if (confFiles != null && confFiles.size()>0) pkgHalfConf.setPackageSettings(setPackageSetting(confFiles));
+
+		if (pkgInstElem != null) {
+			this.findReferenceAndSetNewStatus(pkgInstElem, pkgHalfConf);
+			EcoreUtil.delete(pkgInstElem, true);
+		}
+		
+		if (pkgNotInstElem != null) {
+			this.findReferenceAndSetNewStatus(pkgNotInstElem, pkgHalfConf);
+			EcoreUtil.delete(pkgNotInstElem, true);
+		}
+		
+		configuration.getHalfConfiguredPackages().add(pkgHalfConf);
+	}
+	
+	
+	/**
+	 * 
+	 * @param packageName
+	 * @param version
+	 * @param confFiles
+	 * @param maintainer
+	 * @param architecture
+	 * @param section
+	 * @param priority
+	 */
+	public void setUnpackedPackage(String packageName, String version,
+			ArrayList<String> confFiles,
+			String maintainer, String architecture, String section,
+			String priority) {
+
+		NotInstalledPackage pkgNotInstElem = getNotInstalledPackage(packageName, version, architecture);
+
+		InstalledPackage pkgInstElem = getInstalledPackage(packageName, version, architecture);
+
+		UnpackedPackage pkgUnpack = MancoosiFactory.eINSTANCE.createUnpackedPackage();
+		
+		pkgUnpack.setName(packageName);
+		if (version != null) pkgUnpack.setVersion(version);
+		if (maintainer != null) pkgUnpack.setMaintainer(maintainer);
+		if (architecture != null) pkgUnpack.setArchitecture(architecture);
+		if (section != null) pkgUnpack.setSection(section);
+		if (priority != null) pkgUnpack.setPriority(PriorityType.get(priority));
+
+		if (confFiles != null && confFiles.size()>0) pkgUnpack.setPackageSettings(setPackageSetting(confFiles));
+
+		if (pkgInstElem != null) {
+			this.findReferenceAndSetNewStatus(pkgInstElem, pkgUnpack);
+			EcoreUtil.delete(pkgInstElem, true);
+		}
+		
+		if (pkgNotInstElem != null) {
+			this.findReferenceAndSetNewStatus(pkgNotInstElem, pkgUnpack);
+			EcoreUtil.delete(pkgNotInstElem, true);
+		}
+		
+		configuration.getUnpackedPackages().add(pkgUnpack);
+	}
+
+	
+	public void setHalfInstalledPackage(String packageName, String version, String architecture) {
+		
+		NotInstalledPackage pkgNotInstElem = getNotInstalledPackage(packageName, version, architecture);
+
+		InstalledPackage pkgInstElem = getInstalledPackage(packageName);
+
+		HalfInstalledPackage pkgHalfInst = MancoosiFactory.eINSTANCE.createHalfInstalledPackage();
+		pkgHalfInst.setName(packageName);
+
+		if (version != null) pkgHalfInst.setVersion(version);
+		if (architecture != null) pkgHalfInst.setArchitecture(architecture);
+
+		if (pkgNotInstElem != null) {
+			this.findReferenceAndSetNewStatus(pkgNotInstElem, pkgHalfInst);
+			EcoreUtil.delete(pkgNotInstElem, true);
+		}
+		
+		if (pkgInstElem != null) {
+			this.findReferenceAndSetNewStatus(pkgInstElem, pkgHalfInst);
+			EcoreUtil.delete(pkgInstElem, true);
+		}
+		
+		configuration.getHalfInstalledPackages().add(pkgHalfInst);
+	}
+	
 	
 	/**
 	 * 
@@ -993,10 +1728,9 @@ public class SystemModelManager {
 			if (fileToBeDeleted.getLocation().equals(location)) {
 				found = true;
 
-				if (fileToBeDeleted.isIsDirectory() && fileToBeDeleted.getChilds().size()==0) {
-					// Delete only empty directory
-					EcoreUtil.delete(fileToBeDeleted, true);
-				} else if (!fileToBeDeleted.isIsDirectory()) {
+				if ((fileToBeDeleted.isIsDirectory() && fileToBeDeleted.getChilds().size()==0)
+					|| (!fileToBeDeleted.isIsDirectory())) {
+					// Delete only empty directory or file
 					EcoreUtil.delete(fileToBeDeleted, true);
 				}
 			}
@@ -1041,95 +1775,5 @@ public class SystemModelManager {
 			}
 		}
 		return added;
-	}
-
-	public void setFailedConfigPackage(String packageName, String version,
-			ArrayList<String> confFiles,
-			String maintainer, String architecture, String section,
-			String priority) {
-
-
-		NotInstalledPackage pkgElem = getNotInstalledPackage(packageName);
-
-		if (pkgElem != null) {
-			EcoreUtil.delete(pkgElem, true);
-		}
-
-		InstalledPackage pkgInstElem = getInstalledPackage(packageName);
-
-		if (pkgInstElem != null) {
-			EcoreUtil.delete(pkgInstElem, true);
-		}
-
-
-		HalfConfiguredPackage pkgInst = MancoosiFactory.eINSTANCE.createHalfConfiguredPackage();
-		pkgInst.setName(packageName);
-		if (version != null) pkgInst.setVersion(version);
-
-		if (maintainer != null) pkgInst.setMaintainer(maintainer);
-		if (architecture != null) pkgInst.setArchitecture(architecture);
-		if (section != null) pkgInst.setSection(section);
-		if (priority != null) pkgInst.setPriority(PriorityType.get(priority));
-
-		if (confFiles != null && confFiles.size()>0) pkgInst.setPackageSettings(setPackageSetting(confFiles));
-
-		configuration.getHalfConfiguredPackages().add(pkgInst);
-	}
-	
-	
-	public void setUnpackedPackage(String packageName, String version,
-			ArrayList<String> confFiles,
-			String maintainer, String architecture, String section,
-			String priority) {
-
-
-		NotInstalledPackage pkgElem = getNotInstalledPackage(packageName);
-
-		if (pkgElem != null) {
-			EcoreUtil.delete(pkgElem, true);
-		}
-
-		InstalledPackage pkgInstElem = getInstalledPackage(packageName);
-
-		if (pkgInstElem != null) {
-			EcoreUtil.delete(pkgInstElem, true);
-		}
-
-
-		UnpackedPackage pkgInst = MancoosiFactory.eINSTANCE.createUnpackedPackage();
-		pkgInst.setName(packageName);
-		if (version != null) pkgInst.setVersion(version);
-
-		if (maintainer != null) pkgInst.setMaintainer(maintainer);
-		if (architecture != null) pkgInst.setArchitecture(architecture);
-		if (section != null) pkgInst.setSection(section);
-		if (priority != null) pkgInst.setPriority(PriorityType.get(priority));
-
-		if (confFiles != null && confFiles.size()>0) pkgInst.setPackageSettings(setPackageSetting(confFiles));
-
-		configuration.getUnpackedPackages().add(pkgInst);
-	}
-
-	
-	public void setHalfInstalledPackage(String packageName, String version) {
-		
-		NotInstalledPackage pkgElem = getNotInstalledPackage(packageName);
-		if (pkgElem != null) {
-			EcoreUtil.delete(pkgElem, true);
-		}
-
-		InstalledPackage pkgInstElem = getInstalledPackage(packageName);
-		if (pkgInstElem != null) {
-			EcoreUtil.delete(pkgInstElem, true);
-		}
-
-
-		HalfInstalledPackage pkgInst = MancoosiFactory.eINSTANCE.createHalfInstalledPackage();
-		pkgInst.setName(packageName);
-
-		if (version != null) pkgInst.setVersion(version);
-
-		configuration.getHalfInstalledPackages().add(pkgInst);
-		
 	}
 }

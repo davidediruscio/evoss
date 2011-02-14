@@ -181,5 +181,7 @@ import it.univaq.mancoosi.packagemm.Package;
 	protected abstract void processAllFilesFile(BufferedReader info, Package pkg) throws Exception;
 
 	public abstract void createModelFromCacheDirectory() throws Exception;
+
+	public abstract void createModelFromPackageData(String name, String version, String architecture) throws Exception;
 	
 }

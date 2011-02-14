@@ -210,6 +210,24 @@ public class ErrormmPackageImpl extends EPackageImpl implements ErrormmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getMessage_Version() {
+		return (EAttribute)messageEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMessage_Architecture() {
+		return (EAttribute)messageEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getWarning() {
 		return warningEClass;
 	}
@@ -262,6 +280,8 @@ public class ErrormmPackageImpl extends EPackageImpl implements ErrormmPackage {
 		createEAttribute(messageEClass, MESSAGE__STATEMENT);
 		createEAttribute(messageEClass, MESSAGE__SCRIPT);
 		createEAttribute(messageEClass, MESSAGE__PACKAGE);
+		createEAttribute(messageEClass, MESSAGE__VERSION);
+		createEAttribute(messageEClass, MESSAGE__ARCHITECTURE);
 
 		warningEClass = createEClass(WARNING);
 
@@ -311,6 +331,8 @@ public class ErrormmPackageImpl extends EPackageImpl implements ErrormmPackage {
 		initEAttribute(getMessage_Statement(), ecorePackage.getEString(), "statement", null, 0, 1, Message.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMessage_Script(), ecorePackage.getEString(), "script", null, 0, 1, Message.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMessage_Package(), ecorePackage.getEString(), "package", null, 0, 1, Message.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMessage_Version(), ecorePackage.getEString(), "version", null, 0, 1, Message.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMessage_Architecture(), ecorePackage.getEString(), "architecture", null, 0, 1, Message.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(warningEClass, Warning.class, "Warning", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

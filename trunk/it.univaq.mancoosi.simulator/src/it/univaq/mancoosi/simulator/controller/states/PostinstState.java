@@ -98,15 +98,16 @@ public class PostinstState extends SimulatorState {
 		
 	
 	private Boolean execute(PackageModelManager pkgModel, String[] initParams) throws Exception {
-		
-		System.gc();
+
+		String pathPkgModel = pkgModel.setInitParamsPostinst(initParams);
 		
 		OrchestrationManager orchestrationPostinstScript = new OrchestrationManager(
 				pkgModel.getName(),
 				"PostinstScript",
-				pkgModel.setInitParamsPostinst(initParams),
+				pathPkgModel,
 				pkgModel.getStatementPostinstScript());
 		Boolean errorExists = orchestrationPostinstScript.runOrchestrationModel();
+
 		return errorExists;
 	}
 }

@@ -20,9 +20,7 @@ import it.univaq.mancoosi.errormm.Warning;
 
 
 /**
- * Manages the creation and saving of the model error.
- * This model is created when there is an error condition
- * such that the simulation fails.
+ * Manages the creation and saving of the error model.
  */
 public class ErrorModelManager {
 

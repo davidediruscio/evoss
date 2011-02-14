@@ -161,13 +161,31 @@ public interface ErrormmPackage extends EPackage {
 	int MESSAGE__PACKAGE = 4;
 
 	/**
+	 * The feature id for the '<em><b>Version</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MESSAGE__VERSION = 5;
+
+	/**
+	 * The feature id for the '<em><b>Architecture</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MESSAGE__ARCHITECTURE = 6;
+
+	/**
 	 * The number of structural features of the '<em>Message</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MESSAGE_FEATURE_COUNT = 5;
+	int MESSAGE_FEATURE_COUNT = 7;
 
 	/**
 	 * The meta object id for the '{@link it.univaq.mancoosi.errormm.impl.WarningImpl <em>Warning</em>}' class.
@@ -223,6 +241,24 @@ public interface ErrormmPackage extends EPackage {
 	 * @ordered
 	 */
 	int WARNING__PACKAGE = MESSAGE__PACKAGE;
+
+	/**
+	 * The feature id for the '<em><b>Version</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WARNING__VERSION = MESSAGE__VERSION;
+
+	/**
+	 * The feature id for the '<em><b>Architecture</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WARNING__ARCHITECTURE = MESSAGE__ARCHITECTURE;
 
 	/**
 	 * The number of structural features of the '<em>Warning</em>' class.
@@ -287,6 +323,24 @@ public interface ErrormmPackage extends EPackage {
 	 * @ordered
 	 */
 	int ERROR__PACKAGE = MESSAGE__PACKAGE;
+
+	/**
+	 * The feature id for the '<em><b>Version</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ERROR__VERSION = MESSAGE__VERSION;
+
+	/**
+	 * The feature id for the '<em><b>Architecture</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ERROR__ARCHITECTURE = MESSAGE__ARCHITECTURE;
 
 	/**
 	 * The number of structural features of the '<em>Error</em>' class.
@@ -405,6 +459,28 @@ public interface ErrormmPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getMessage_Package();
+
+	/**
+	 * Returns the meta object for the attribute '{@link it.univaq.mancoosi.errormm.Message#getVersion <em>Version</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Version</em>'.
+	 * @see it.univaq.mancoosi.errormm.Message#getVersion()
+	 * @see #getMessage()
+	 * @generated
+	 */
+	EAttribute getMessage_Version();
+
+	/**
+	 * Returns the meta object for the attribute '{@link it.univaq.mancoosi.errormm.Message#getArchitecture <em>Architecture</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Architecture</em>'.
+	 * @see it.univaq.mancoosi.errormm.Message#getArchitecture()
+	 * @see #getMessage()
+	 * @generated
+	 */
+	EAttribute getMessage_Architecture();
 
 	/**
 	 * Returns the meta object for class '{@link it.univaq.mancoosi.errormm.Warning <em>Warning</em>}'.
@@ -531,6 +607,22 @@ public interface ErrormmPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute MESSAGE__PACKAGE = eINSTANCE.getMessage_Package();
+
+		/**
+		 * The meta object literal for the '<em><b>Version</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MESSAGE__VERSION = eINSTANCE.getMessage_Version();
+
+		/**
+		 * The meta object literal for the '<em><b>Architecture</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MESSAGE__ARCHITECTURE = eINSTANCE.getMessage_Architecture();
 
 		/**
 		 * The meta object literal for the '{@link it.univaq.mancoosi.errormm.impl.WarningImpl <em>Warning</em>}' class.

@@ -58,8 +58,7 @@ public class TransformationRuleFilesMapping {
 	 */
 	private void parseFile() throws SimulatorException {
 		try {
-			File file = new File(config.getDirTransformationRepository()
-					+ "mapping.xml");
+			File file = new File(config.getDirTransformationRepository() + "mapping.xml");
 
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();

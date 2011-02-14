@@ -10,6 +10,10 @@ helper def : getScript : INPackage!Script = INPackage!Script.allInstancesFrom('I
 
 helper def : getPackage : String = INPackage!Package.allInstancesFrom('INPACK')->first().name;
 
+helper def : getArchitecturePackage : String = INPackage!Package.allInstancesFrom('INPACK')->first().architecture;
+
+helper def : getVersionPackage : String = INPackage!Package.allInstancesFrom('INPACK')->first().version;
+
 helper def : getStatementName : String = INCurrentPosition!Counter.allInstancesFrom('INPOS')->first().name;
 
 helper def : getStatement : INPackage!Statement = INPackage!Statement.allInstancesFrom('INPACK')->select(e | (e.oclType().toString() = ('INPackage!'+thisModule.getStatementName.toString()))
@@ -44,9 +48,9 @@ rule Configuration {
         fileSystem <- s.fileSystem,
         environment <- s.environment,
         notInstalledPackages <- s.notInstalledPackages)
-	do {
-		('Execution: add_alternative_deb.atl').println();
-	}
+--	do {
+	--	('Execution: add_alternative_deb.atl').println();
+	--}
 }
 
 rule InstalledPackage {
@@ -288,7 +292,6 @@ rule SingleDep {
         pkg <- s.pkg)
 }
 
-
 rule Invariant {
     from s : INConfiguration!Invariant
     to t : OUTConfiguration!Invariant (
@@ -324,7 +327,6 @@ rule NotInv {
     to t : OUTConfiguration!NotInv (
         elem <- s.elem)
 }
-
 
 --
 rule Environment {
@@ -684,6 +686,8 @@ rule createError(type:String, description:String) {
        t : MMError!Error (
        		statement <- thisModule.getStatementName.toString(),
        		package <- thisModule.getPackage.toString(),
+			version <- thisModule.getVersionPackage.toString(),
+			architecture <- thisModule.getArchitecturePackage.toString(),
        		script <- thisModule.getScriptName.toString(),
            	type <- type,
             description <- description)

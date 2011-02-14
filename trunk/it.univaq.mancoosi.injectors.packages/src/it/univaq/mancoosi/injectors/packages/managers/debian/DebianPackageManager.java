@@ -581,4 +581,49 @@ public class DebianPackageManager extends PackageManager {
 		}
 
 	}
+
+	@Override
+	public void createModelFromPackageData(String name, String version, String architecture) throws Exception {
+		
+		String filenamePackage = name+"_"+version+"_"+architecture+".deb";
+		
+		String path = config.getPackagesLocation()+filenamePackage.replaceAll(":", "%3a");
+		
+		if ((new File(path)).exists()) {
+			createModelFromPackageFile(path);
+		} else {
+			
+			String linePkg;
+			String ver="";
+			String arch="";
+			String status="";
+			String[] cmdPkg = {"/bin/sh","-c"," dpkg -s " + name};
+			Process pPkg = Runtime.getRuntime().exec(cmdPkg);
+			BufferedReader info = new BufferedReader (new InputStreamReader(pPkg.getInputStream()));
+			while ((linePkg = info.readLine()) != null) {
+				String[] lin = linePkg.split(": ");
+
+				if (lin[0].equals("Version")) {
+					ver = lin[1].trim();
+				}
+
+				if (lin[0].equals("Architecture")) {
+					arch = lin[1];
+				}
+				
+				if (lin[0].equals("Status")) {
+					status = lin[1];
+				}
+			}
+			info.close();
+			pPkg.destroy();
+
+			if (status.startsWith("install ok") && version.equals(ver) && architecture.equals(arch)) {
+				createModelFromInstalledPackage(name);
+			
+			} else {
+				throw new InjectorException("The package "+path+" does not exist!");
+			}
+		}
+	}
 }

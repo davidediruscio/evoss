@@ -19,8 +19,6 @@ public class DeleteConffilesState extends SimulatorState {
 	
 	private void execute(PackageModelManager pkgModel) throws Exception {
 
-		System.gc();
-		
 		if (pkgModel.hasConfFiles()) {
 			SystemModelManager sysModel = new SystemModelManager();
 			ArrayList<String> list = pkgModel.getConfFiles();
