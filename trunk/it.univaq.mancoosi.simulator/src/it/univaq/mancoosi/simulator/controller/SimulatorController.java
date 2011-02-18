@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import it.univaq.mancoosi.mancoosimm.ConfigFilesPackage;
 import it.univaq.mancoosi.mancoosimm.InstalledPackage;
 import it.univaq.mancoosi.simulator.controller.managers.ErrorModelManager;
+import it.univaq.mancoosi.simulator.controller.managers.PackageModelManager;
 import it.univaq.mancoosi.simulator.controller.managers.SystemModelManager;
 import it.univaq.mancoosi.simulator.controller.states.SimulatorContext;
 import it.univaq.mancoosi.simulator.exceptions.ErrorFoundException;
@@ -28,6 +29,8 @@ public class SimulatorController {
 	private CurrentModelsFile systemModelCurrent;
 	private SimulatorConfig config;
 	private static SimulatorController instance;
+	private long start;
+	private long end;
 
 	
 	/**
@@ -71,6 +74,8 @@ public class SimulatorController {
 	 */
 	public void start() throws Exception {
 		
+		start = System.currentTimeMillis();
+		
 		ArrayList<String> usedModels = new ArrayList<String>();
 		
 		try {
@@ -106,9 +111,10 @@ public class SimulatorController {
 						System.out.println("Upgrate of "+sequencePkg.getPackageName(i)+" "
 								+old.getVersion()+" to "+sequencePkg.getPackageVersion(i));
 						
-						p = new SimulatorContext(pathPackageModel, pathPackageOldModel);
-						p.setState(p.INSTALLED);
-						p.upgrade();
+						PackageModelManager newPkgManager = new PackageModelManager(pathPackageModel);
+						PackageModelManager installedPkgManager = new PackageModelManager(pathPackageOldModel);
+						p = new SimulatorContext(newPkgManager);
+						p.upgrade(installedPkgManager);
 					
 					} else if (sysModel.isConfigFilesPackage(sequencePkg.getPackageName(i))) { 
 						// install from configFiles state
@@ -117,8 +123,8 @@ public class SimulatorController {
 						System.out.println("Installation of "+sequencePkg.getPackageName(i)+" "+sequencePkg.getPackageVersion(i)
 											+" (Config-files "+ old.getVersion()+")");
 						
-						p = new SimulatorContext(pathPackageModel);
-						p.setState(p.CONFIG_FILES);
+						PackageModelManager newPkgManager = new PackageModelManager(pathPackageModel);
+						p = new SimulatorContext(newPkgManager);
 						p.install(old.getVersion());
 	
 					} else if (!(sysModel.isHalfConfiguredPackage(sequencePkg.getPackageName(i))
@@ -129,8 +135,8 @@ public class SimulatorController {
 						System.out.println("Installation of "+sequencePkg.getPackageName(i)+" "
 								+sequencePkg.getPackageVersion(i)+" (Not-installed)");
 						
-						p = new SimulatorContext(pathPackageModel);
-						p.setState(p.NOT_INSTALLED);
+						PackageModelManager newPkgManager = new PackageModelManager(pathPackageModel);
+						p = new SimulatorContext(newPkgManager);
 						p.install();	
 					} else {
 						throw new SelectionStateNotPermittedException("The requested selection-state '"+action
@@ -144,8 +150,8 @@ public class SimulatorController {
 						System.out.println("Remove of "+sequencePkg.getPackageName(i)+" "
 								+sequencePkg.getPackageVersion(i)+" (Installed)");
 						
-						p = new SimulatorContext(pathPackageModel);
-						p.setState(p.INSTALLED);
+						PackageModelManager newPkgManager = new PackageModelManager(pathPackageModel);
+						p = new SimulatorContext(newPkgManager);
 						p.remove();
 					} else {
 						throw new SelectionStateNotPermittedException("The requested selection-state '"+action
@@ -161,18 +167,18 @@ public class SimulatorController {
 						System.out.println("Purge of "+sequencePkg.getPackageName(i)+" "
 								+sequencePkg.getPackageVersion(i)+" (Installed)");
 						
-						p = new SimulatorContext(pathPackageModel);
-						p.setState(p.INSTALLED);
-						p.purge();
+						PackageModelManager newPkgManager = new PackageModelManager(pathPackageModel);
+						p = new SimulatorContext(newPkgManager);
+						p.purgeInstalled();
 						
 					} else if (sysModel.isConfigFilesPackage(sequencePkg.getPackageName(i))) {
 						// Purge from ConfigFiles state
 						System.out.println("Remove of "+sequencePkg.getPackageName(i)+" "
 								+sequencePkg.getPackageVersion(i)+" (Config-Files)");
 						
-						p = new SimulatorContext(pathPackageModel);
-						p.setState(p.CONFIG_FILES);
-						p.purge();
+						PackageModelManager newPkgManager = new PackageModelManager(pathPackageModel);
+						p = new SimulatorContext(newPkgManager);
+						p.purgeConfFiles();
 						
 					} else {
 						throw new SelectionStateNotPermittedException("The requested selection-state '"+action
@@ -200,9 +206,9 @@ public class SimulatorController {
 			errorManager.saveModel(finalModel);
 
 			if (errorManager.existsErrors()) {
-				throw new ErrorFoundException();
+				throw new ErrorFoundException("Simulation failed.");
 			} else {
-				throw new WarningFoundException();
+				throw new WarningFoundException("Simulation completed with warnings.");
 			}
 			
 		} finally {
@@ -218,6 +224,10 @@ public class SimulatorController {
 			
 			// Create tar.gz archive
 			createArchive(usedModels, finalSystemModelFile);
+			
+			end = System.currentTimeMillis();
+			
+			System.out.println("Time: "+(end-start));
 		}
 		
 	}

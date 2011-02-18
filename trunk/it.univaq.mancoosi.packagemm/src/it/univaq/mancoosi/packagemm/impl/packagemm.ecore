@@ -28,8 +28,6 @@
         lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="priority" ordered="false"
         unique="false" lowerBound="1" eType="#//PriorityType"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" ordered="false"
-        unique="false" lowerBound="1" eType="#//StatusType"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="uploaders" ordered="false"
         unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="recommends" ordered="false"
@@ -665,10 +663,6 @@
     <eLiterals name="important" value="3" literal="important"/>
     <eLiterals name="optional" value="4" literal="optional"/>
     <eLiterals name="extra" value="5" literal="extra"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="StatusType">
-    <eLiterals name="installed" value="1" literal="installed"/>
-    <eLiterals name="none" value="2" literal="none"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="VersionType">
     <eLiterals name="eq" value="1" literal="eq"/>

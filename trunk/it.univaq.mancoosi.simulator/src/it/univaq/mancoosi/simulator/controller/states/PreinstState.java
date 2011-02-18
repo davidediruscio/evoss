@@ -87,8 +87,8 @@ public class PreinstState extends SimulatorState {
 			fsm.setState(fsm.POSTRM);
 			fsm.abortUpgrade(installedPkgModel);
 		} else {
-			fsm.setState(fsm.HALF_INSTALLED);
-			fsm.errorExitReinstRequired(installedPkgModel);
+			fsm.setState(fsm.ERROR_EXIT_REINST_REQUIRED);
+			fsm.halfInstalled(installedPkgModel);
 		}
 	}
 

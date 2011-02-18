@@ -26,7 +26,6 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link it.univaq.mancoosi.packagemm.Package#getSection <em>Section</em>}</li>
  *   <li>{@link it.univaq.mancoosi.packagemm.Package#getTag <em>Tag</em>}</li>
  *   <li>{@link it.univaq.mancoosi.packagemm.Package#getPriority <em>Priority</em>}</li>
- *   <li>{@link it.univaq.mancoosi.packagemm.Package#getStatus <em>Status</em>}</li>
  *   <li>{@link it.univaq.mancoosi.packagemm.Package#getUploaders <em>Uploaders</em>}</li>
  *   <li>{@link it.univaq.mancoosi.packagemm.Package#getRecommends <em>Recommends</em>}</li>
  *   <li>{@link it.univaq.mancoosi.packagemm.Package#getSuggests <em>Suggests</em>}</li>
@@ -313,35 +312,6 @@ public interface Package extends NamedElement {
 	 * @generated
 	 */
 	void setPriority(PriorityType value);
-
-	/**
-	 * Returns the value of the '<em><b>Status</b></em>' attribute.
-	 * The literals are from the enumeration {@link it.univaq.mancoosi.packagemm.StatusType}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Status</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Status</em>' attribute.
-	 * @see it.univaq.mancoosi.packagemm.StatusType
-	 * @see #setStatus(StatusType)
-	 * @see it.univaq.mancoosi.packagemm.PackagemmPackage#getPackage_Status()
-	 * @model unique="false" required="true" ordered="false"
-	 * @generated
-	 */
-	StatusType getStatus();
-
-	/**
-	 * Sets the value of the '{@link it.univaq.mancoosi.packagemm.Package#getStatus <em>Status</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Status</em>' attribute.
-	 * @see it.univaq.mancoosi.packagemm.StatusType
-	 * @see #getStatus()
-	 * @generated
-	 */
-	void setStatus(StatusType value);
 
 	/**
 	 * Returns the value of the '<em><b>Uploaders</b></em>' attribute.

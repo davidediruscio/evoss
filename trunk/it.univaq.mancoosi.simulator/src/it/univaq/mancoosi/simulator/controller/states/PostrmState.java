@@ -18,11 +18,11 @@ public class PostrmState extends SimulatorState {
 		}
 		
 		if (!errorExist) {
-			fsm.setState(fsm.NOT_INSTALLED);
-			fsm.errorExit();
+			fsm.setState(fsm.ERROR_EXIT);
+			fsm.notInstalled();
 		} else {
-			fsm.setState(fsm.HALF_INSTALLED);
-			fsm.errorExitReinstRequired();
+			fsm.setState(fsm.ERROR_EXIT_REINST_REQUIRED);
+			fsm.halfInstalled();
 		}
 	}
 	
@@ -39,11 +39,11 @@ public class PostrmState extends SimulatorState {
 		}
 		
 		if (!errorExist) {
-			fsm.setState(fsm.CONFIG_FILES);
-			fsm.errorExit();
+			fsm.setState(fsm.ERROR_EXIT);
+			fsm.configFiles();
 		} else {
-			fsm.setState(fsm.HALF_INSTALLED);
-			fsm.errorExitReinstRequired();
+			fsm.setState(fsm.ERROR_EXIT_REINST_REQUIRED);
+			fsm.halfInstalled();
 		}
 	}
 	
@@ -60,11 +60,11 @@ public class PostrmState extends SimulatorState {
 		}
 		
 		if (!errorExist) {
-			fsm.setState(fsm.CONFIG_FILES);
-			fsm.successfulExit();
+			fsm.setState(fsm.SUCCESSFUL_EXIT);
+			fsm.configFiles();
 		} else {
-			fsm.setState(fsm.HALF_INSTALLED);
-			fsm.errorExit();
+			fsm.setState(fsm.ERROR_EXIT);
+			fsm.halfInstalled();
 		}
 	}
 	
@@ -89,8 +89,8 @@ public class PostrmState extends SimulatorState {
 		
 		if (!errorExist) {
 			if (fsm.DELETE_CONFFILES == fsm.getPreviousState()) {
-				fsm.setState(fsm.NOT_INSTALLED);
-				fsm.successfulExit();
+				fsm.setState(fsm.SUCCESSFUL_EXIT);
+				fsm.notInstalled();
 			} else {
 				fsm.setState(fsm.DELETE_CONFFILES);
 				fsm.purge();
@@ -98,11 +98,11 @@ public class PostrmState extends SimulatorState {
 
 		} else {
 			if (fsm.DELETE_CONFFILES == fsm.getPreviousState()) {
-				fsm.setState(fsm.CONFIG_FILES);
-				fsm.errorExit();
+				fsm.setState(fsm.ERROR_EXIT);
+				fsm.configFiles();
 			} else {
-				fsm.setState(fsm.HALF_INSTALLED);
-				fsm.errorExit();
+				fsm.setState(fsm.ERROR_EXIT);
+				fsm.halfInstalled();
 			}
 		}
 	}
@@ -124,8 +124,8 @@ public class PostrmState extends SimulatorState {
 			fsm.setState(fsm.POSTINST);
 			fsm.abortUpgrade(installedPkgModel);
 		} else {
-				fsm.setState(fsm.HALF_INSTALLED);
-				fsm.errorExitReinstRequired(installedPkgModel);
+				fsm.setState(fsm.ERROR_EXIT_REINST_REQUIRED);
+				fsm.halfInstalled(installedPkgModel);
 		}
 	}
 	

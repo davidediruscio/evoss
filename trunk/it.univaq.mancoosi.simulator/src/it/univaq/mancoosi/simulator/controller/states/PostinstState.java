@@ -18,11 +18,11 @@ public class PostinstState extends SimulatorState {
 		}
 
 		if (!errorExist) {
-			fsm.setState(fsm.INSTALLED);
-			fsm.successfulExit();
+			fsm.setState(fsm.SUCCESSFUL_EXIT);
+			fsm.install();
 		} else {
-			fsm.setState(fsm.FAILED_CONFIG);
-			fsm.errorExit();
+			fsm.setState(fsm.ERROR_EXIT);
+			fsm.failedConfig();
 		}
 	}
 	
@@ -39,11 +39,11 @@ public class PostinstState extends SimulatorState {
 		}
 		
 		if (!errorExist) {
-			fsm.setState(fsm.INSTALLED);
-			fsm.successfulExit();
+			fsm.setState(fsm.SUCCESSFUL_EXIT);
+			fsm.install();
 		} else {
-			fsm.setState(fsm.FAILED_CONFIG);
-			fsm.errorExit();
+			fsm.setState(fsm.ERROR_EXIT);
+			fsm.failedConfig();
 		}
 	}
 	
@@ -61,11 +61,11 @@ public class PostinstState extends SimulatorState {
 		}
 		
 		if (!errorExist) {
-			fsm.setState(fsm.INSTALLED);
-			fsm.errorExit();
+			fsm.setState(fsm.ERROR_EXIT);
+			fsm.install();
 		} else {
-			fsm.setState(fsm.FAILED_CONFIG);
-			fsm.errorExit();
+			fsm.setState(fsm.ERROR_EXIT);
+			fsm.failedConfig();
 		}
 	}
 	
@@ -83,15 +83,15 @@ public class PostinstState extends SimulatorState {
 		}
 		
 		if (!errorExist) {
-			fsm.setState(fsm.INSTALLED);
-			fsm.errorExit();
+			fsm.setState(fsm.ERROR_EXIT);
+			fsm.install();
 		} else {
 			if (fsm.getPreviousState() == fsm.POSTRM) {
-				fsm.setState(fsm.UNPACK);
-				fsm.errorExit(installedPkgModel);
+				fsm.setState(fsm.ERROR_EXIT);
+				fsm.unpacked(installedPkgModel);
 			} else {
-				fsm.setState(fsm.FAILED_CONFIG);
-				fsm.errorExitReinstRequired(installedPkgModel);
+				fsm.setState(fsm.ERROR_EXIT_REINST_REQUIRED);
+				fsm.failedConfig(installedPkgModel);
 			}
 		}
 	}
