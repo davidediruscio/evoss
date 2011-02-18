@@ -198,22 +198,13 @@ public interface PackagemmPackage extends EPackage {
 	int PACKAGE__PRIORITY = NAMED_ELEMENT_FEATURE_COUNT + 9;
 
 	/**
-	 * The feature id for the '<em><b>Status</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PACKAGE__STATUS = NAMED_ELEMENT_FEATURE_COUNT + 10;
-
-	/**
 	 * The feature id for the '<em><b>Uploaders</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PACKAGE__UPLOADERS = NAMED_ELEMENT_FEATURE_COUNT + 11;
+	int PACKAGE__UPLOADERS = NAMED_ELEMENT_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Recommends</b></em>' attribute.
@@ -222,7 +213,7 @@ public interface PackagemmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PACKAGE__RECOMMENDS = NAMED_ELEMENT_FEATURE_COUNT + 12;
+	int PACKAGE__RECOMMENDS = NAMED_ELEMENT_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Suggests</b></em>' attribute.
@@ -231,7 +222,7 @@ public interface PackagemmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PACKAGE__SUGGESTS = NAMED_ELEMENT_FEATURE_COUNT + 13;
+	int PACKAGE__SUGGESTS = NAMED_ELEMENT_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Enhances</b></em>' attribute.
@@ -240,7 +231,7 @@ public interface PackagemmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PACKAGE__ENHANCES = NAMED_ELEMENT_FEATURE_COUNT + 14;
+	int PACKAGE__ENHANCES = NAMED_ELEMENT_FEATURE_COUNT + 13;
 
 	/**
 	 * The feature id for the '<em><b>Predepends</b></em>' attribute.
@@ -249,7 +240,7 @@ public interface PackagemmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PACKAGE__PREDEPENDS = NAMED_ELEMENT_FEATURE_COUNT + 15;
+	int PACKAGE__PREDEPENDS = NAMED_ELEMENT_FEATURE_COUNT + 14;
 
 	/**
 	 * The feature id for the '<em><b>Replaces</b></em>' attribute.
@@ -258,7 +249,7 @@ public interface PackagemmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PACKAGE__REPLACES = NAMED_ELEMENT_FEATURE_COUNT + 16;
+	int PACKAGE__REPLACES = NAMED_ELEMENT_FEATURE_COUNT + 15;
 
 	/**
 	 * The feature id for the '<em><b>Files</b></em>' containment reference list.
@@ -267,7 +258,7 @@ public interface PackagemmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PACKAGE__FILES = NAMED_ELEMENT_FEATURE_COUNT + 17;
+	int PACKAGE__FILES = NAMED_ELEMENT_FEATURE_COUNT + 16;
 
 	/**
 	 * The feature id for the '<em><b>Documentation Files</b></em>' reference list.
@@ -276,7 +267,7 @@ public interface PackagemmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PACKAGE__DOCUMENTATION_FILES = NAMED_ELEMENT_FEATURE_COUNT + 18;
+	int PACKAGE__DOCUMENTATION_FILES = NAMED_ELEMENT_FEATURE_COUNT + 17;
 
 	/**
 	 * The feature id for the '<em><b>Preinst Script</b></em>' containment reference.
@@ -285,7 +276,7 @@ public interface PackagemmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PACKAGE__PREINST_SCRIPT = NAMED_ELEMENT_FEATURE_COUNT + 19;
+	int PACKAGE__PREINST_SCRIPT = NAMED_ELEMENT_FEATURE_COUNT + 18;
 
 	/**
 	 * The feature id for the '<em><b>Postinst Script</b></em>' containment reference.
@@ -294,7 +285,7 @@ public interface PackagemmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PACKAGE__POSTINST_SCRIPT = NAMED_ELEMENT_FEATURE_COUNT + 20;
+	int PACKAGE__POSTINST_SCRIPT = NAMED_ELEMENT_FEATURE_COUNT + 19;
 
 	/**
 	 * The feature id for the '<em><b>Prerm Script</b></em>' containment reference.
@@ -303,7 +294,7 @@ public interface PackagemmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PACKAGE__PRERM_SCRIPT = NAMED_ELEMENT_FEATURE_COUNT + 21;
+	int PACKAGE__PRERM_SCRIPT = NAMED_ELEMENT_FEATURE_COUNT + 20;
 
 	/**
 	 * The feature id for the '<em><b>Postrm Script</b></em>' containment reference.
@@ -312,7 +303,7 @@ public interface PackagemmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PACKAGE__POSTRM_SCRIPT = NAMED_ELEMENT_FEATURE_COUNT + 22;
+	int PACKAGE__POSTRM_SCRIPT = NAMED_ELEMENT_FEATURE_COUNT + 21;
 
 	/**
 	 * The feature id for the '<em><b>Config Script</b></em>' containment reference.
@@ -321,7 +312,7 @@ public interface PackagemmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PACKAGE__CONFIG_SCRIPT = NAMED_ELEMENT_FEATURE_COUNT + 23;
+	int PACKAGE__CONFIG_SCRIPT = NAMED_ELEMENT_FEATURE_COUNT + 22;
 
 	/**
 	 * The feature id for the '<em><b>Conflict</b></em>' containment reference.
@@ -330,7 +321,7 @@ public interface PackagemmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PACKAGE__CONFLICT = NAMED_ELEMENT_FEATURE_COUNT + 24;
+	int PACKAGE__CONFLICT = NAMED_ELEMENT_FEATURE_COUNT + 23;
 
 	/**
 	 * The feature id for the '<em><b>Depends</b></em>' containment reference.
@@ -339,7 +330,7 @@ public interface PackagemmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PACKAGE__DEPENDS = NAMED_ELEMENT_FEATURE_COUNT + 25;
+	int PACKAGE__DEPENDS = NAMED_ELEMENT_FEATURE_COUNT + 24;
 
 	/**
 	 * The feature id for the '<em><b>Conffiles</b></em>' containment reference list.
@@ -348,7 +339,7 @@ public interface PackagemmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PACKAGE__CONFFILES = NAMED_ELEMENT_FEATURE_COUNT + 26;
+	int PACKAGE__CONFFILES = NAMED_ELEMENT_FEATURE_COUNT + 25;
 
 	/**
 	 * The number of structural features of the '<em>Package</em>' class.
@@ -357,7 +348,7 @@ public interface PackagemmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PACKAGE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 27;
+	int PACKAGE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 26;
 
 	/**
 	 * The meta object id for the '{@link it.univaq.mancoosi.packagemm.impl.ScriptImpl <em>Script</em>}' class.
@@ -10544,16 +10535,6 @@ public interface PackagemmPackage extends EPackage {
 	int PRIORITY_TYPE = 150;
 
 	/**
-	 * The meta object id for the '{@link it.univaq.mancoosi.packagemm.StatusType <em>Status Type</em>}' enum.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see it.univaq.mancoosi.packagemm.StatusType
-	 * @see it.univaq.mancoosi.packagemm.impl.PackagemmPackageImpl#getStatusType()
-	 * @generated
-	 */
-	int STATUS_TYPE = 151;
-
-	/**
 	 * The meta object id for the '{@link it.univaq.mancoosi.packagemm.VersionType <em>Version Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10561,7 +10542,7 @@ public interface PackagemmPackage extends EPackage {
 	 * @see it.univaq.mancoosi.packagemm.impl.PackagemmPackageImpl#getVersionType()
 	 * @generated
 	 */
-	int VERSION_TYPE = 152;
+	int VERSION_TYPE = 151;
 
 	/**
 	 * The meta object id for the '{@link it.univaq.mancoosi.packagemm.ReturnStatementValue <em>Return Statement Value</em>}' enum.
@@ -10571,7 +10552,7 @@ public interface PackagemmPackage extends EPackage {
 	 * @see it.univaq.mancoosi.packagemm.impl.PackagemmPackageImpl#getReturnStatementValue()
 	 * @generated
 	 */
-	int RETURN_STATEMENT_VALUE = 153;
+	int RETURN_STATEMENT_VALUE = 152;
 
 	/**
 	 * The meta object id for the '{@link it.univaq.mancoosi.packagemm.CasePrermConditionValue <em>Case Prerm Condition Value</em>}' enum.
@@ -10581,7 +10562,7 @@ public interface PackagemmPackage extends EPackage {
 	 * @see it.univaq.mancoosi.packagemm.impl.PackagemmPackageImpl#getCasePrermConditionValue()
 	 * @generated
 	 */
-	int CASE_PRERM_CONDITION_VALUE = 154;
+	int CASE_PRERM_CONDITION_VALUE = 153;
 
 	/**
 	 * The meta object id for the '{@link it.univaq.mancoosi.packagemm.CasePostrmConditionValue <em>Case Postrm Condition Value</em>}' enum.
@@ -10591,7 +10572,7 @@ public interface PackagemmPackage extends EPackage {
 	 * @see it.univaq.mancoosi.packagemm.impl.PackagemmPackageImpl#getCasePostrmConditionValue()
 	 * @generated
 	 */
-	int CASE_POSTRM_CONDITION_VALUE = 155;
+	int CASE_POSTRM_CONDITION_VALUE = 154;
 
 	/**
 	 * The meta object id for the '{@link it.univaq.mancoosi.packagemm.CasePreinstConditionValue <em>Case Preinst Condition Value</em>}' enum.
@@ -10601,7 +10582,7 @@ public interface PackagemmPackage extends EPackage {
 	 * @see it.univaq.mancoosi.packagemm.impl.PackagemmPackageImpl#getCasePreinstConditionValue()
 	 * @generated
 	 */
-	int CASE_PREINST_CONDITION_VALUE = 156;
+	int CASE_PREINST_CONDITION_VALUE = 155;
 
 	/**
 	 * The meta object id for the '{@link it.univaq.mancoosi.packagemm.CasePostinstConditionValue <em>Case Postinst Condition Value</em>}' enum.
@@ -10611,7 +10592,7 @@ public interface PackagemmPackage extends EPackage {
 	 * @see it.univaq.mancoosi.packagemm.impl.PackagemmPackageImpl#getCasePostinstConditionValue()
 	 * @generated
 	 */
-	int CASE_POSTINST_CONDITION_VALUE = 157;
+	int CASE_POSTINST_CONDITION_VALUE = 156;
 
 
 	/**
@@ -10754,17 +10735,6 @@ public interface PackagemmPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getPackage_Priority();
-
-	/**
-	 * Returns the meta object for the attribute '{@link it.univaq.mancoosi.packagemm.Package#getStatus <em>Status</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Status</em>'.
-	 * @see it.univaq.mancoosi.packagemm.Package#getStatus()
-	 * @see #getPackage()
-	 * @generated
-	 */
-	EAttribute getPackage_Status();
 
 	/**
 	 * Returns the meta object for the attribute '{@link it.univaq.mancoosi.packagemm.Package#getUploaders <em>Uploaders</em>}'.
@@ -14510,16 +14480,6 @@ public interface PackagemmPackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getPriorityType();
-
-	/**
-	 * Returns the meta object for enum '{@link it.univaq.mancoosi.packagemm.StatusType <em>Status Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>Status Type</em>'.
-	 * @see it.univaq.mancoosi.packagemm.StatusType
-	 * @generated
-	 */
-	EEnum getStatusType();
 
 	/**
 	 * Returns the meta object for enum '{@link it.univaq.mancoosi.packagemm.VersionType <em>Version Type</em>}'.

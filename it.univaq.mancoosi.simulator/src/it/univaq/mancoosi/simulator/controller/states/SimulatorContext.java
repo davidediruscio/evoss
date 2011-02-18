@@ -8,23 +8,20 @@ import it.univaq.mancoosi.simulator.util.SimulatorLogger;
 
 public class SimulatorContext {
 
-	public final int NOT_INSTALLED = 0;
+	public final int INIT = 0;
 	public final int PREINST = 1;
 	public final int UNPACK = 2;
 	public final int POSTINST = 3;
-	public final int INSTALLED = 4;
-	public final int PRERM = 5;
-	public final int POSTRM = 6;
-	public final int CONFIG_FILES = 7;
-	public final int DELETE_CONFFILES = 8;
-	public final int DELETE_FILES = 9;
-	public final int FAILED_CONFIG = 10;
-	public final int HALF_INSTALLED = 11;
+	public final int PRERM = 4;
+	public final int POSTRM = 5;
+	public final int DELETE_CONFFILES = 6;
+	public final int DELETE_FILES = 7;
+	public final int SUCCESSFUL_EXIT = 8;
+	public final int ERROR_EXIT = 9;
+	public final int ERROR_EXIT_REINST_REQUIRED = 10;
 
-	protected String pathPackageModel;
 	protected SimulatorLogger logger;
 	protected PackageModelManager pkgModel;
-	protected PackageModelManager installedPkgModel;
 	
 	// history
 	private List<Integer> oldStates;
@@ -33,36 +30,27 @@ public class SimulatorContext {
 	private int currentState;
 	
 
-	public SimulatorContext(String pathPackageModel) throws Exception {
-		this.pathPackageModel = pathPackageModel;
-		pkgModel = new PackageModelManager(pathPackageModel);
-		logger = SimulatorLogger.getInstance();
-		oldStates = new ArrayList<Integer>();
-	}
-	
-	
-	public SimulatorContext(String pathPackageModelNew, String pathInstalledPackageModel) throws Exception {
-		this.pathPackageModel = pathPackageModelNew;
-		pkgModel = new PackageModelManager(pathPackageModel);
-		installedPkgModel = new PackageModelManager(pathInstalledPackageModel);
+	public SimulatorContext(PackageModelManager pkgModel) throws Exception {
+		this.currentState = INIT; // INIT_STATE - default
+		this.pkgModel = pkgModel;
 		logger = SimulatorLogger.getInstance();
 		oldStates = new ArrayList<Integer>();
 	}
 
+	
 	// States array
 	private SimulatorState[] states = { 
-			new NotInstalledState(), // NOT_INSTALLED = 0
+			new InitState(), // INIT = 0
 			new PreinstState(), // PREINST = 1
-			new UnpackedState(), // UNPACK = 2
+			new UnpackFilesState(), // UNPACK = 2
 			new PostinstState(),// POSTINST = 3
-			new InstalledState(), // INSTALLED = 4
-			new PrermState(), // PRERM = 5
-			new PostrmState(), // POSTRM = 6
-			new ConfigFilesState(), // CONFIG_FILES = 7;
-			new DeleteConffilesState(), // DELETE_CONFFILES = 8;
-			new DeleteFilesState(), // DELETE_FILES = 9;
-			new FailedConfigState(), // FAILED_CONFIG = 10;
-			new HalfInstalledState(), // HALF_INSTALLED = 11;
+			new PrermState(), // PRERM = 4
+			new PostrmState(), // POSTRM = 5
+			new DeleteConffilesState(), // DELETE_CONFFILES = 6;
+			new DeleteFilesState(), // DELETE_FILES = 7;
+			new SuccessfulExitState(), // SUCCESSFUL_EXIT = 8;
+			new ErrorExitState(), // ERROR_EXIT = 9;
+			new ErrorExitReinstRequiredState(), // ERROR_EXIT_REINST_REQUIRED = 10;
 	};
 
 
@@ -82,8 +70,24 @@ public class SimulatorContext {
 		states[currentState].purge(this);
 	}
 	
+	public void purgeConfFiles() throws Exception {
+		states[currentState].purgeConfFiles(this);
+	}
+	
+	public void purgeInstalled() throws Exception {
+		states[currentState].purgeInstalled(this);
+	}
+	
+	public void notInstalled() throws Exception {
+		states[currentState].notInstalled(this);
+	}
+	
 	public void configure() throws Exception {
 		states[currentState].configure(this);
+	}
+	
+	public void failedConfig() throws Exception {
+		states[currentState].failedConfig(this);
 	}
 	
 	public void configure(String configStatePackageVersion) throws Exception {
@@ -97,26 +101,6 @@ public class SimulatorContext {
 	public void abortInstall(String configStatePackageVersion) throws Exception {
 		states[currentState].abortInstall(this, configStatePackageVersion);
 	}
-
-	public void successfulExit() throws Exception {
-		states[currentState].successfulExit(this);
-	}
-	
-	public void errorExit() throws Exception {
-		states[currentState].errorExit(this);
-	}
-	
-	public void errorExitReinstRequired() throws Exception {
-		states[currentState].errorExitReinstRequired(this);
-	}
-	
-	public void errorExitReinstRequired(PackageModelManager installedPkgModel) throws Exception {
-		states[currentState].errorExitReinstRequired(this, installedPkgModel);
-	}
-
-	public void errorExit(PackageModelManager installedPkgModel) throws Exception {
-		states[currentState].errorExit(this, installedPkgModel);
-	}
 	
 	public void configFiles() throws Exception {
 		states[currentState].configFiles(this);
@@ -126,8 +110,8 @@ public class SimulatorContext {
 		states[currentState].abortRemove(this);
 	}
 	
-	public void upgrade() throws Exception {
-		states[currentState].upgrade(this);
+	public void halfInstalled() throws Exception {
+		states[currentState].halfInstalled(this);
 	}
 	
 	public void upgrade(PackageModelManager installedPkgModel) throws Exception {
@@ -140,6 +124,18 @@ public class SimulatorContext {
 
 	public void abortUpgrade(PackageModelManager installedPkgModel) throws Exception {
 		states[currentState].abortUpgrade(this, installedPkgModel);
+	}
+	
+	public void halfInstalled(PackageModelManager installedPkgModel) throws Exception {
+		states[currentState].halfInstalled(this, installedPkgModel);
+	}
+	
+	public void failedConfig(PackageModelManager installedPkgModel) throws Exception {
+		states[currentState].failedConfig(this, installedPkgModel);
+	}
+	
+	public void unpacked(PackageModelManager installedPkgModel) throws Exception {
+		states[currentState].unpacked(this, installedPkgModel);
 	}
 
 	public void setState(int newState) {

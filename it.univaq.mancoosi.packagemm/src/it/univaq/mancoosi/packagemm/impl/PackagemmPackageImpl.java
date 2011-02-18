@@ -1105,13 +1105,6 @@ public class PackagemmPackageImpl extends EPackageImpl implements PackagemmPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EEnum statusTypeEEnum = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EEnum versionTypeEEnum = null;
 
 	/**
@@ -1336,7 +1329,7 @@ public class PackagemmPackageImpl extends EPackageImpl implements PackagemmPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPackage_Status() {
+	public EAttribute getPackage_Uploaders() {
         return (EAttribute)getPackage().getEStructuralFeatures().get(10);
 	}
 
@@ -1345,7 +1338,7 @@ public class PackagemmPackageImpl extends EPackageImpl implements PackagemmPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPackage_Uploaders() {
+	public EAttribute getPackage_Recommends() {
         return (EAttribute)getPackage().getEStructuralFeatures().get(11);
 	}
 
@@ -1354,7 +1347,7 @@ public class PackagemmPackageImpl extends EPackageImpl implements PackagemmPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPackage_Recommends() {
+	public EAttribute getPackage_Suggests() {
         return (EAttribute)getPackage().getEStructuralFeatures().get(12);
 	}
 
@@ -1363,7 +1356,7 @@ public class PackagemmPackageImpl extends EPackageImpl implements PackagemmPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPackage_Suggests() {
+	public EAttribute getPackage_Enhances() {
         return (EAttribute)getPackage().getEStructuralFeatures().get(13);
 	}
 
@@ -1372,7 +1365,7 @@ public class PackagemmPackageImpl extends EPackageImpl implements PackagemmPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPackage_Enhances() {
+	public EAttribute getPackage_Predepends() {
         return (EAttribute)getPackage().getEStructuralFeatures().get(14);
 	}
 
@@ -1381,7 +1374,7 @@ public class PackagemmPackageImpl extends EPackageImpl implements PackagemmPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPackage_Predepends() {
+	public EAttribute getPackage_Replaces() {
         return (EAttribute)getPackage().getEStructuralFeatures().get(15);
 	}
 
@@ -1390,17 +1383,8 @@ public class PackagemmPackageImpl extends EPackageImpl implements PackagemmPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPackage_Replaces() {
-        return (EAttribute)getPackage().getEStructuralFeatures().get(16);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getPackage_Files() {
-        return (EReference)getPackage().getEStructuralFeatures().get(17);
+        return (EReference)getPackage().getEStructuralFeatures().get(16);
 	}
 
 	/**
@@ -1409,7 +1393,7 @@ public class PackagemmPackageImpl extends EPackageImpl implements PackagemmPacka
 	 * @generated
 	 */
 	public EReference getPackage_DocumentationFiles() {
-        return (EReference)getPackage().getEStructuralFeatures().get(18);
+        return (EReference)getPackage().getEStructuralFeatures().get(17);
 	}
 
 	/**
@@ -1418,7 +1402,7 @@ public class PackagemmPackageImpl extends EPackageImpl implements PackagemmPacka
 	 * @generated
 	 */
 	public EReference getPackage_PreinstScript() {
-        return (EReference)getPackage().getEStructuralFeatures().get(19);
+        return (EReference)getPackage().getEStructuralFeatures().get(18);
 	}
 
 	/**
@@ -1427,7 +1411,7 @@ public class PackagemmPackageImpl extends EPackageImpl implements PackagemmPacka
 	 * @generated
 	 */
 	public EReference getPackage_PostinstScript() {
-        return (EReference)getPackage().getEStructuralFeatures().get(20);
+        return (EReference)getPackage().getEStructuralFeatures().get(19);
 	}
 
 	/**
@@ -1436,7 +1420,7 @@ public class PackagemmPackageImpl extends EPackageImpl implements PackagemmPacka
 	 * @generated
 	 */
 	public EReference getPackage_PrermScript() {
-        return (EReference)getPackage().getEStructuralFeatures().get(21);
+        return (EReference)getPackage().getEStructuralFeatures().get(20);
 	}
 
 	/**
@@ -1445,7 +1429,7 @@ public class PackagemmPackageImpl extends EPackageImpl implements PackagemmPacka
 	 * @generated
 	 */
 	public EReference getPackage_PostrmScript() {
-        return (EReference)getPackage().getEStructuralFeatures().get(22);
+        return (EReference)getPackage().getEStructuralFeatures().get(21);
 	}
 
 	/**
@@ -1454,7 +1438,7 @@ public class PackagemmPackageImpl extends EPackageImpl implements PackagemmPacka
 	 * @generated
 	 */
 	public EReference getPackage_ConfigScript() {
-        return (EReference)getPackage().getEStructuralFeatures().get(23);
+        return (EReference)getPackage().getEStructuralFeatures().get(22);
 	}
 
 	/**
@@ -1463,7 +1447,7 @@ public class PackagemmPackageImpl extends EPackageImpl implements PackagemmPacka
 	 * @generated
 	 */
 	public EReference getPackage_Conflict() {
-        return (EReference)getPackage().getEStructuralFeatures().get(24);
+        return (EReference)getPackage().getEStructuralFeatures().get(23);
 	}
 
 	/**
@@ -1472,7 +1456,7 @@ public class PackagemmPackageImpl extends EPackageImpl implements PackagemmPacka
 	 * @generated
 	 */
 	public EReference getPackage_Depends() {
-        return (EReference)getPackage().getEStructuralFeatures().get(25);
+        return (EReference)getPackage().getEStructuralFeatures().get(24);
 	}
 
 	/**
@@ -1481,7 +1465,7 @@ public class PackagemmPackageImpl extends EPackageImpl implements PackagemmPacka
 	 * @generated
 	 */
 	public EReference getPackage_Conffiles() {
-        return (EReference)getPackage().getEStructuralFeatures().get(26);
+        return (EReference)getPackage().getEStructuralFeatures().get(25);
 	}
 
 	/**
@@ -4791,7 +4775,7 @@ public class PackagemmPackageImpl extends EPackageImpl implements PackagemmPacka
 	 */
 	public EClass getSingleConflict() {
 		if (singleConflictEClass == null) {
-			singleConflictEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(PackagemmPackage.eNS_URI).getEClassifiers().get(153);
+			singleConflictEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(PackagemmPackage.eNS_URI).getEClassifiers().get(152);
 		}
 		return singleConflictEClass;
 	}
@@ -4830,7 +4814,7 @@ public class PackagemmPackageImpl extends EPackageImpl implements PackagemmPacka
 	 */
 	public EClass getConflict() {
 		if (conflictEClass == null) {
-			conflictEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(PackagemmPackage.eNS_URI).getEClassifiers().get(154);
+			conflictEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(PackagemmPackage.eNS_URI).getEClassifiers().get(153);
 		}
 		return conflictEClass;
 	}
@@ -4878,7 +4862,7 @@ public class PackagemmPackageImpl extends EPackageImpl implements PackagemmPacka
 	 */
 	public EClass getAndConflict() {
 		if (andConflictEClass == null) {
-			andConflictEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(PackagemmPackage.eNS_URI).getEClassifiers().get(155);
+			andConflictEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(PackagemmPackage.eNS_URI).getEClassifiers().get(154);
 		}
 		return andConflictEClass;
 	}
@@ -4908,7 +4892,7 @@ public class PackagemmPackageImpl extends EPackageImpl implements PackagemmPacka
 	 */
 	public EClass getOrConflict() {
 		if (orConflictEClass == null) {
-			orConflictEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(PackagemmPackage.eNS_URI).getEClassifiers().get(156);
+			orConflictEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(PackagemmPackage.eNS_URI).getEClassifiers().get(155);
 		}
 		return orConflictEClass;
 	}
@@ -4938,7 +4922,7 @@ public class PackagemmPackageImpl extends EPackageImpl implements PackagemmPacka
 	 */
 	public EClass getAssignment() {
 		if (assignmentEClass == null) {
-			assignmentEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(PackagemmPackage.eNS_URI).getEClassifiers().get(157);
+			assignmentEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(PackagemmPackage.eNS_URI).getEClassifiers().get(156);
 		}
 		return assignmentEClass;
 	}
@@ -4978,21 +4962,9 @@ public class PackagemmPackageImpl extends EPackageImpl implements PackagemmPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EEnum getStatusType() {
-		if (statusTypeEEnum == null) {
-			statusTypeEEnum = (EEnum)EPackage.Registry.INSTANCE.getEPackage(PackagemmPackage.eNS_URI).getEClassifiers().get(146);
-		}
-		return statusTypeEEnum;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EEnum getVersionType() {
 		if (versionTypeEEnum == null) {
-			versionTypeEEnum = (EEnum)EPackage.Registry.INSTANCE.getEPackage(PackagemmPackage.eNS_URI).getEClassifiers().get(147);
+			versionTypeEEnum = (EEnum)EPackage.Registry.INSTANCE.getEPackage(PackagemmPackage.eNS_URI).getEClassifiers().get(146);
 		}
 		return versionTypeEEnum;
 	}
@@ -5004,7 +4976,7 @@ public class PackagemmPackageImpl extends EPackageImpl implements PackagemmPacka
 	 */
 	public EEnum getReturnStatementValue() {
 		if (returnStatementValueEEnum == null) {
-			returnStatementValueEEnum = (EEnum)EPackage.Registry.INSTANCE.getEPackage(PackagemmPackage.eNS_URI).getEClassifiers().get(148);
+			returnStatementValueEEnum = (EEnum)EPackage.Registry.INSTANCE.getEPackage(PackagemmPackage.eNS_URI).getEClassifiers().get(147);
 		}
 		return returnStatementValueEEnum;
 	}
@@ -5016,7 +4988,7 @@ public class PackagemmPackageImpl extends EPackageImpl implements PackagemmPacka
 	 */
 	public EEnum getCasePrermConditionValue() {
 		if (casePrermConditionValueEEnum == null) {
-			casePrermConditionValueEEnum = (EEnum)EPackage.Registry.INSTANCE.getEPackage(PackagemmPackage.eNS_URI).getEClassifiers().get(149);
+			casePrermConditionValueEEnum = (EEnum)EPackage.Registry.INSTANCE.getEPackage(PackagemmPackage.eNS_URI).getEClassifiers().get(148);
 		}
 		return casePrermConditionValueEEnum;
 	}
@@ -5028,7 +5000,7 @@ public class PackagemmPackageImpl extends EPackageImpl implements PackagemmPacka
 	 */
 	public EEnum getCasePostrmConditionValue() {
 		if (casePostrmConditionValueEEnum == null) {
-			casePostrmConditionValueEEnum = (EEnum)EPackage.Registry.INSTANCE.getEPackage(PackagemmPackage.eNS_URI).getEClassifiers().get(150);
+			casePostrmConditionValueEEnum = (EEnum)EPackage.Registry.INSTANCE.getEPackage(PackagemmPackage.eNS_URI).getEClassifiers().get(149);
 		}
 		return casePostrmConditionValueEEnum;
 	}
@@ -5040,7 +5012,7 @@ public class PackagemmPackageImpl extends EPackageImpl implements PackagemmPacka
 	 */
 	public EEnum getCasePreinstConditionValue() {
 		if (casePreinstConditionValueEEnum == null) {
-			casePreinstConditionValueEEnum = (EEnum)EPackage.Registry.INSTANCE.getEPackage(PackagemmPackage.eNS_URI).getEClassifiers().get(151);
+			casePreinstConditionValueEEnum = (EEnum)EPackage.Registry.INSTANCE.getEPackage(PackagemmPackage.eNS_URI).getEClassifiers().get(150);
 		}
 		return casePreinstConditionValueEEnum;
 	}
@@ -5052,7 +5024,7 @@ public class PackagemmPackageImpl extends EPackageImpl implements PackagemmPacka
 	 */
 	public EEnum getCasePostinstConditionValue() {
 		if (casePostinstConditionValueEEnum == null) {
-			casePostinstConditionValueEEnum = (EEnum)EPackage.Registry.INSTANCE.getEPackage(PackagemmPackage.eNS_URI).getEClassifiers().get(152);
+			casePostinstConditionValueEEnum = (EEnum)EPackage.Registry.INSTANCE.getEPackage(PackagemmPackage.eNS_URI).getEClassifiers().get(151);
 		}
 		return casePostinstConditionValueEEnum;
 	}

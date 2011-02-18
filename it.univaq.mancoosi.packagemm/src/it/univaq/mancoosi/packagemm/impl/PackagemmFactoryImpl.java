@@ -139,7 +139,6 @@ import it.univaq.mancoosi.packagemm.SingleConflict;
 import it.univaq.mancoosi.packagemm.SingleDep;
 import it.univaq.mancoosi.packagemm.StatementBoolean;
 import it.univaq.mancoosi.packagemm.StatementExistsBoolean;
-import it.univaq.mancoosi.packagemm.StatusType;
 import it.univaq.mancoosi.packagemm.StrinNotNullBoolean;
 import it.univaq.mancoosi.packagemm.StringEqualBoolean;
 import it.univaq.mancoosi.packagemm.StringGreaterBoolean;
@@ -360,8 +359,6 @@ public class PackagemmFactoryImpl extends EFactoryImpl implements PackagemmFacto
 		switch (eDataType.getClassifierID()) {
 			case PackagemmPackage.PRIORITY_TYPE:
 				return createPriorityTypeFromString(eDataType, initialValue);
-			case PackagemmPackage.STATUS_TYPE:
-				return createStatusTypeFromString(eDataType, initialValue);
 			case PackagemmPackage.VERSION_TYPE:
 				return createVersionTypeFromString(eDataType, initialValue);
 			case PackagemmPackage.RETURN_STATEMENT_VALUE:
@@ -389,8 +386,6 @@ public class PackagemmFactoryImpl extends EFactoryImpl implements PackagemmFacto
 		switch (eDataType.getClassifierID()) {
 			case PackagemmPackage.PRIORITY_TYPE:
 				return convertPriorityTypeToString(eDataType, instanceValue);
-			case PackagemmPackage.STATUS_TYPE:
-				return convertStatusTypeToString(eDataType, instanceValue);
 			case PackagemmPackage.VERSION_TYPE:
 				return convertVersionTypeToString(eDataType, instanceValue);
 			case PackagemmPackage.RETURN_STATEMENT_VALUE:
@@ -1805,26 +1800,6 @@ public class PackagemmFactoryImpl extends EFactoryImpl implements PackagemmFacto
 	 * @generated
 	 */
 	public String convertPriorityTypeToString(EDataType eDataType, Object instanceValue) {
-		return instanceValue == null ? null : instanceValue.toString();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public StatusType createStatusTypeFromString(EDataType eDataType, String initialValue) {
-		StatusType result = StatusType.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String convertStatusTypeToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

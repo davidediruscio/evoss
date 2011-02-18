@@ -7,8 +7,7 @@ rule 'mapPackage'
      stPreI  : //#file{filename.endsWith(".preinst")}//#statement;
      stPreR  : //#file{filename.endsWith(".prerm")}//#statement;
    mappings
-     name = ext ExtractFilename(f);
-	 
+   	 
 	 if (stPostI.hasResults) then
      	PostinstScript = new packagemm::PostinstScript;
      	PostinstScript.statements = stPostI;

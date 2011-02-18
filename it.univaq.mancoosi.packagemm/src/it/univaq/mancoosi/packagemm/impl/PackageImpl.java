@@ -17,7 +17,6 @@ import it.univaq.mancoosi.packagemm.PostrmScript;
 import it.univaq.mancoosi.packagemm.PreinstScript;
 import it.univaq.mancoosi.packagemm.PrermScript;
 import it.univaq.mancoosi.packagemm.PriorityType;
-import it.univaq.mancoosi.packagemm.StatusType;
 
 import java.util.Collection;
 
@@ -52,7 +51,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link it.univaq.mancoosi.packagemm.impl.PackageImpl#getSection <em>Section</em>}</li>
  *   <li>{@link it.univaq.mancoosi.packagemm.impl.PackageImpl#getTag <em>Tag</em>}</li>
  *   <li>{@link it.univaq.mancoosi.packagemm.impl.PackageImpl#getPriority <em>Priority</em>}</li>
- *   <li>{@link it.univaq.mancoosi.packagemm.impl.PackageImpl#getStatus <em>Status</em>}</li>
  *   <li>{@link it.univaq.mancoosi.packagemm.impl.PackageImpl#getUploaders <em>Uploaders</em>}</li>
  *   <li>{@link it.univaq.mancoosi.packagemm.impl.PackageImpl#getRecommends <em>Recommends</em>}</li>
  *   <li>{@link it.univaq.mancoosi.packagemm.impl.PackageImpl#getSuggests <em>Suggests</em>}</li>
@@ -274,26 +272,6 @@ public class PackageImpl extends NamedElementImpl implements it.univaq.mancoosi.
 	 * @ordered
 	 */
 	protected PriorityType priority = PRIORITY_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getStatus() <em>Status</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getStatus()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final StatusType STATUS_EDEFAULT = StatusType.INSTALLED;
-
-	/**
-	 * The cached value of the '{@link #getStatus() <em>Status</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getStatus()
-	 * @generated
-	 * @ordered
-	 */
-	protected StatusType status = STATUS_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getUploaders() <em>Uploaders</em>}' attribute.
@@ -742,27 +720,6 @@ public class PackageImpl extends NamedElementImpl implements it.univaq.mancoosi.
 		priority = newPriority == null ? PRIORITY_EDEFAULT : newPriority;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, PackagemmPackage.PACKAGE__PRIORITY, oldPriority, priority));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public StatusType getStatus() {
-		return status;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setStatus(StatusType newStatus) {
-		StatusType oldStatus = status;
-		status = newStatus == null ? STATUS_EDEFAULT : newStatus;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, PackagemmPackage.PACKAGE__STATUS, oldStatus, status));
 	}
 
 	/**
@@ -1323,8 +1280,6 @@ public class PackageImpl extends NamedElementImpl implements it.univaq.mancoosi.
 				return getTag();
 			case PackagemmPackage.PACKAGE__PRIORITY:
 				return getPriority();
-			case PackagemmPackage.PACKAGE__STATUS:
-				return getStatus();
 			case PackagemmPackage.PACKAGE__UPLOADERS:
 				return getUploaders();
 			case PackagemmPackage.PACKAGE__RECOMMENDS:
@@ -1399,9 +1354,6 @@ public class PackageImpl extends NamedElementImpl implements it.univaq.mancoosi.
 				return;
 			case PackagemmPackage.PACKAGE__PRIORITY:
 				setPriority((PriorityType)newValue);
-				return;
-			case PackagemmPackage.PACKAGE__STATUS:
-				setStatus((StatusType)newValue);
 				return;
 			case PackagemmPackage.PACKAGE__UPLOADERS:
 				setUploaders((String)newValue);
@@ -1496,9 +1448,6 @@ public class PackageImpl extends NamedElementImpl implements it.univaq.mancoosi.
 			case PackagemmPackage.PACKAGE__PRIORITY:
 				setPriority(PRIORITY_EDEFAULT);
 				return;
-			case PackagemmPackage.PACKAGE__STATUS:
-				setStatus(STATUS_EDEFAULT);
-				return;
 			case PackagemmPackage.PACKAGE__UPLOADERS:
 				setUploaders(UPLOADERS_EDEFAULT);
 				return;
@@ -1579,8 +1528,6 @@ public class PackageImpl extends NamedElementImpl implements it.univaq.mancoosi.
 				return TAG_EDEFAULT == null ? tag != null : !TAG_EDEFAULT.equals(tag);
 			case PackagemmPackage.PACKAGE__PRIORITY:
 				return priority != PRIORITY_EDEFAULT;
-			case PackagemmPackage.PACKAGE__STATUS:
-				return status != STATUS_EDEFAULT;
 			case PackagemmPackage.PACKAGE__UPLOADERS:
 				return UPLOADERS_EDEFAULT == null ? uploaders != null : !UPLOADERS_EDEFAULT.equals(uploaders);
 			case PackagemmPackage.PACKAGE__RECOMMENDS:
@@ -1647,8 +1594,6 @@ public class PackageImpl extends NamedElementImpl implements it.univaq.mancoosi.
 		result.append(tag);
 		result.append(", priority: ");
 		result.append(priority);
-		result.append(", status: ");
-		result.append(status);
 		result.append(", uploaders: ");
 		result.append(uploaders);
 		result.append(", recommends: ");
