@@ -111,6 +111,7 @@ public class PackageModelManager {
 			if (!(elem.eContainingFeature().getName().equals("condition")
 					|| elem.eContainingFeature().getName().equals("exps")
 					|| elem.eContainingFeature().getName().equals("master")
+					|| elem.eContainingFeature().getName().equals("slave")
 					|| elem.eContainingFeature().getName().equals("file")
 					|| elem.eClass().getName().equals("InputParameter"))) {
 
