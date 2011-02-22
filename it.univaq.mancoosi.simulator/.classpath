@@ -9,7 +9,6 @@
 	<classpathentry kind="lib" path="lib/org.eclipse.m2m.atl_2.0.2.v200812191010.jar"/>
 	<classpathentry kind="lib" path="lib/org.eclipse.m2m.atl.compilers.atl2006_2.0.2.v200812191010.jar"/>
 	<classpathentry kind="lib" path="lib/org.eclipse.m2m.atl.drivers.emf4atl_2.0.2.v200812191010.jar"/>
-	<classpathentry kind="lib" path="lib/org.eclipse.m2m.atl.engine.emfvm_2.0.2.v200812191010.jar"/>
 	<classpathentry kind="lib" path="lib/org.eclipse.m2m.atl.engine.jar"/>
 	<classpathentry kind="lib" path="lib/org.eclipse.m2m.atl.ocl.core_2.0.2.v200812191010.jar"/>
 	<classpathentry kind="lib" path="lib/org.eclipse.m2m.atl.service.core_2.0.2.v200812191010.jar"/>
@@ -28,6 +27,7 @@
 	<classpathentry kind="lib" path="lib/org.eclipse.osgi_3.4.3.R34x_v20081215-1030.jar"/>
 	<classpathentry kind="lib" path="lib/commons-compress-1.1.jar"/>
 	<classpathentry kind="lib" path="lib/org.eclipse.m2m.atl.engine.vm_2.0.2.v200812191010.jar"/>
-	<classpathentry kind="lib" path="lib/WiresFixed_AtlRegolarVM_1.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.m2m.atl.engine.emfvm_2.0.2.v201102210830.jar"/>
+	<classpathentry kind="lib" path="lib/WiresFixed_AtlEMFVM_1.0.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -108,7 +108,7 @@ public class SimulatorController {
 						
 						usedModels.add(pathPackageOldModel);
 						
-						System.out.println("Upgrate of "+sequencePkg.getPackageName(i)+" "
+						System.out.println("Upgrade of "+sequencePkg.getPackageName(i)+" "
 								+old.getVersion()+" to "+sequencePkg.getPackageVersion(i));
 						
 						PackageModelManager newPkgManager = new PackageModelManager(pathPackageModel);
@@ -190,9 +190,30 @@ public class SimulatorController {
 					throw new SelectionStateNotFoundException("The requested selection-state '"
 							+action+"' is not manageable.");
 				}
+				
+				System.gc();
+			}
+			
+			// Generate final error model
+			ArrayList<File> errorModels = CurrentModelsFile.getInstance().getErrorModels();
+			
+			ErrorModelManager errorManager = new ErrorModelManager();
+			
+			for (int i=0; i< errorModels.size(); i++) {
+				errorManager.appendModel(errorModels.get(i).getPath());
+			}
+			
+			if (errorManager.existsWarnings()) {
+				String finalModel = config.getDirOutput() + config.getFileErrorModel();
+				errorManager.saveModel(finalModel);
+				generateFinalConfigurationModel(usedModels);
+				throw new WarningFoundException("Simulation completed with warnings.");
+			} else {
+				generateFinalConfigurationModel(usedModels);
 			}
 
 		} catch (ErrorModelFoundException e) {
+			
 			// Generate final error model
 			ArrayList<File> errorModels = CurrentModelsFile.getInstance().getErrorModels();
 			
@@ -204,36 +225,40 @@ public class SimulatorController {
 			
 			String finalModel = config.getDirOutput() + config.getFileErrorModel();
 			errorManager.saveModel(finalModel);
+			generateFinalConfigurationModel(usedModels);
 
-			if (errorManager.existsErrors()) {
-				throw new ErrorFoundException("Simulation failed.");
-			} else {
-				throw new WarningFoundException("Simulation completed with warnings.");
-			}
-			
-		} finally {
-			
-			// Generate final configuration model
-			String inputSystemModel = config.getFileInputSystemModel();
-			String nameFileModel = inputSystemModel.substring(inputSystemModel
-					.lastIndexOf("/") + 1, inputSystemModel.length());
-			File finalSystemModelFile = new File(config.getDirOutput()
-					+ nameFileModel);
-			FileManagement.copyFile(systemModelCurrent.getSystemModelCurrent(),
-					finalSystemModelFile);
-			
-			// Create tar.gz archive
-			createArchive(usedModels, finalSystemModelFile);
-			
-			end = System.currentTimeMillis();
-			
-			System.out.println("Time: "+(end-start));
+			throw new ErrorFoundException("Simulation failed.");
 		}
-		
 	}
 
 	
-    /**
+    private void generateFinalConfigurationModel(ArrayList<String> usedModels) throws Exception {
+		// Generate final configuration model
+		String inputSystemModel = config.getFileInputSystemModel();
+		String nameFileModel = inputSystemModel.substring(inputSystemModel
+				.lastIndexOf("/") + 1, inputSystemModel.length());
+		File finalSystemModelFile = new File(config.getDirOutput()
+				+ nameFileModel);
+		FileManagement.copyFile(systemModelCurrent.getSystemModelCurrent(),
+				finalSystemModelFile);
+		
+		// Create tar.gz archive
+		createArchive(usedModels, finalSystemModelFile);
+		
+		end = System.currentTimeMillis();
+		
+		double tot = (end-start);
+
+		if (tot != 0) {
+			tot = tot/1000.0;
+		}
+		
+		System.out.println("Time: "+tot+" seconds.");
+		
+	}
+
+
+	/**
      * 
      */
     private void deleteOldModel() {

@@ -171,7 +171,7 @@ public class OrchestrationManager {
 	private void saveModel() throws SimulatorException {
 
 		String pathFile = config.getDirOrchestrationModels() + packageNameInput
-				+ "_" + typeScript + ".wires";
+				+ "_" + typeScript + getRandomNumber() +".wires";
 		ResourceSet resourceSet = new ResourceSetImpl();
 
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("wires", new EcoreResourceFactoryImpl());
