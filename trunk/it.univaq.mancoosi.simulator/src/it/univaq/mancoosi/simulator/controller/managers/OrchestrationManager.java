@@ -117,16 +117,17 @@ public class OrchestrationManager {
 
 		try {
 			
-			 /*		PrintStream printStreamOriginal=System.err;
-
-			System.setErr(new PrintStream(new OutputStream() {
-				@Override
-				public void write(int arg0) throws IOException {
-				}
-			}));*/
+			//PrintStream printStreamOriginal=System.err;
+			//System.setErr(new PrintStream(new OutputStream() {
+			//	@Override
+			//	public void write(int arg0) throws IOException {
+			//	}
+			//}));
+			System.gc();
 			
 			((WiresSpecificationImpl) wiresSpecification).runExecution();
 			
+			System.gc();
 			//System.setErr(printStreamOriginal);
 
 		} catch (InitialModelsNotFoundException e) {
@@ -225,7 +226,7 @@ public class OrchestrationManager {
 		// Configuration model - output
 		String inputSystemModel = config.getFileInputSystemModel();
 		String nameFileModel = inputSystemModel.substring(inputSystemModel
-				.lastIndexOf("/") + 1, inputSystemModel.length());
+				.lastIndexOf(File.separator) + 1, inputSystemModel.length());
 		File newTempFile = FileManagement.createTempFile(nameFileModel
 				.substring(0, nameFileModel.lastIndexOf(".")), nameFileModel
 				.substring(nameFileModel.lastIndexOf(".") + 1, nameFileModel
@@ -545,7 +546,7 @@ public class OrchestrationManager {
 		if (outActualError != null) {
 			result = true;
 			// Error modelTemp
-			String nameErrorModel = config.getFileErrorModel();
+			String nameErrorModel = new File(config.getFileErrorModel()).getName();
 			File errorTempFile = FileManagement.createTempFile(nameErrorModel
 					.substring(0, nameErrorModel.lastIndexOf(".")),
 					nameErrorModel.substring(
@@ -567,7 +568,7 @@ public class OrchestrationManager {
 
 				// modelTemp1
 				String path = config.getFileInputSystemModel();
-				String nameModel = path.substring(path.lastIndexOf("/") + 1, path.length());
+				String nameModel = path.substring(path.lastIndexOf(File.separator) + 1, path.length());
 				File tempFile1 = FileManagement.createTempFile(nameModel.substring(0, nameModel.lastIndexOf(".")),
 						nameModel.substring(nameModel.lastIndexOf(".") + 1, nameModel.length()));
 				Model sysModelTemp1 = createModel("modelTemp1_"
@@ -693,7 +694,7 @@ public class OrchestrationManager {
 		// Configuration model - Temp
 		String inputSystemModel = config.getFileInputSystemModel();
 		String nameFileModel = inputSystemModel.substring(inputSystemModel
-				.lastIndexOf("/") + 1, inputSystemModel.length());
+				.lastIndexOf(File.separator) + 1, inputSystemModel.length());
 		File newTempFile = FileManagement.createTempFile(nameFileModel.substring(0,
 				nameFileModel.lastIndexOf(".")), nameFileModel
 				.substring(nameFileModel.lastIndexOf(".") + 1,

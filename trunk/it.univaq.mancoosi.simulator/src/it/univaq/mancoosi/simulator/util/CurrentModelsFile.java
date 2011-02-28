@@ -36,9 +36,7 @@ public class CurrentModelsFile {
 	 * @throws SimulatorException 
 	 */
 	private CurrentModelsFile() throws SimulatorException {
-		systemModelCurrentFile = new File(SimulatorConfig.getInstance().getFileInputSystemModel());
 		errorModels = new ArrayList<File>();
-		//System.out.println("SET: "+systemModelCurrentFile.getPath());
 	}
 
 	/**

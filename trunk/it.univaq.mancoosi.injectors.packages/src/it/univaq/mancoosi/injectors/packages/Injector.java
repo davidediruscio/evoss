@@ -64,8 +64,7 @@ public class Injector {
 		try {
 			PackageManager manager = null;
 
-			if ((new File("/etc/debian_version")).exists()
-					|| (new File("/etc/ubuntu_version")).exists()) {
+			if ((new File("/etc/debian_version")).exists() || (new File("/etc/ubuntu_version")).exists()) {
 
 				manager = DebianPackageManager.getInstance();
 
@@ -76,7 +75,7 @@ public class Injector {
 				System.exit(1);
 			}
 
-			switch (options.get(args[0])) {
+		switch (options.get(args[0])) {
 			case 1: // -i | --installed
 				manager.createModelFromInstalledPackages();
 				break;
@@ -101,6 +100,7 @@ public class Injector {
 		 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
+			System.exit(1);
 		}
 	}
 

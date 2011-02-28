@@ -17,7 +17,7 @@ public abstract class PackageSequence {
 
 	protected static PackageSequence INSTANCE = null;
 
-	public static PackageSequence getInstance()throws SimulatorException {
+	public static PackageSequence getInstance() throws SimulatorException {
 		
 		if (INSTANCE == null) {
 
@@ -27,7 +27,7 @@ public abstract class PackageSequence {
 			if ((config.getFilePackageSequence()).endsWith(".xml")) {
 				INSTANCE = new XmlPackageSequence();
 			} else {
-					throw new PackageSequenceFileException("Format PackageSequence '" +config.getFilePackageSequence() + "' not supported");
+				throw new PackageSequenceFileException("Format PackageSequence '" +config.getFilePackageSequence() + "' not supported");
 			}
 		}
 

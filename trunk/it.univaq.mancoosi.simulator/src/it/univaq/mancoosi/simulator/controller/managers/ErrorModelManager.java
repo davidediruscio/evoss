@@ -228,24 +228,24 @@ public class ErrorModelManager {
 		int numberError = report.getErrors().size();
 		
 		if (numberError > 0) {
-			System.out.println("Errors:");
+			System.out.println("\n Errors:");
 		}
 		
 		for(int i=0; i< numberError; i++) {
 			Error err = report.getErrors().get(i);
-			if (err.getDescription() != null) System.out.println(err.getDescription());
+			if (err.getDescription() != null) System.out.println("   Description: "+err.getDescription());
 		}
 		
 		int numberWarning = report.getWarnings().size();
 		
 		if (numberWarning > 0) {
-			System.out.println("Warnings:");
+			System.out.println("\n Warnings:");
 			System.out.println();
 		}
 		
 		for(int i=0; i< numberWarning; i++) {
 			Warning warn = report.getWarnings().get(i);
-			if (warn.getDescription() != null) System.out.println(warn.getDescription());
+			if (warn.getDescription() != null) System.out.println("   Description: "+warn.getDescription());
 		}
 	}
 }

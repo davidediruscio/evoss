@@ -3,6 +3,7 @@
  */
 package it.univaq.mancoosi.simulator.util;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -11,8 +12,7 @@ import java.util.Properties;
 import it.univaq.mancoosi.simulator.exceptions.SimulatorException;
 
 /**
- * Manages the recovery of the
- * configuration of the simulator
+ * This class manages the configuration
  */
 public class SimulatorConfig {
 
@@ -22,16 +22,15 @@ public class SimulatorConfig {
 	private String dirModelTypes;
 	private String dirTransformationRepository;
 	private String dirOrchestrationModels;
-	private String dirOutput;
 	private String dirTmp;
 	private String dirLog;
 	private String dirBackup;
 	private String filePackageSequence;
 	private String fileInputSystemModel;
+	private String fileOutputSystemModel;
 	private String fileExtensionPackageModel;
 	private String fileErrorModel;
-	private String injectorPackageName;
-	private String injectorPackageDirectory;
+	private String packageInjectorFile;
 	private boolean saveFileLog;
 	private boolean saveOrchestrationModel;
 	private boolean saveTempFiles;
@@ -58,7 +57,7 @@ public class SimulatorConfig {
 
 		Properties props = new Properties();
 		try {
-			props.load(new FileInputStream("config/settings.properties"));
+			props.load(new FileInputStream("config" + File.separator + "simulator_settings.properties"));
 		} catch (FileNotFoundException e) {
 			throw new SimulatorException("Error properties file not found", e);
 		} catch (IOException e) {
@@ -91,19 +90,53 @@ public class SimulatorConfig {
 		}
 
 		dirInputPackageModels = props.getProperty("directory_input_package_models");
+		if (!dirInputPackageModels.endsWith(File.separator)) {
+			dirInputPackageModels = dirInputPackageModels + File.separator;
+		}
+
+		
 		dirModelTypes = props.getProperty("directory_model_types");
+		if (!dirModelTypes.endsWith(File.separator)) {
+			dirModelTypes = dirModelTypes + File.separator;
+		}
+
+				
 		dirTransformationRepository = props.getProperty("directory_transformation_repository");
+		if (!dirTransformationRepository.endsWith(File.separator)) {
+			dirTransformationRepository = dirTransformationRepository + File.separator;
+		}
+		
+		
 		dirOrchestrationModels = props.getProperty("directory_orchestration_models");
-		dirOutput = props.getProperty("directory_output_models");
+		if (!dirOrchestrationModels.endsWith(File.separator)) {
+			dirOrchestrationModels = dirOrchestrationModels + File.separator;
+		}
+
+		
 		dirTmp = props.getProperty("directory_tmp");
+		if (!dirTmp.endsWith(File.separator)) {
+			dirTmp = dirTmp + File.separator;
+		}
+
+		
 		dirLog = props.getProperty("directory_log");
+		if (!dirLog.endsWith(File.separator)) {
+			dirLog = dirLog + File.separator;
+		}
+
+		
 		dirBackup = props.getProperty("directory_backup");
-		filePackageSequence = props.getProperty("file_package_sequence");
+		if (!dirBackup.endsWith(File.separator)) {
+			dirBackup = dirBackup + File.separator;
+		}
+
+		
+		filePackageSequence = props.getProperty("file_input_package_sequence");
 		fileInputSystemModel = props.getProperty("file_input_system_model");
 		fileExtensionPackageModel = props.getProperty("file_extension_package_model");
-		fileErrorModel = props.getProperty("file_error_model");
-		injectorPackageName = props.getProperty("injector_package_name");
-		injectorPackageDirectory = props.getProperty("injector_package_directory");
+		fileErrorModel = props.getProperty("file_output_error_model");
+		fileOutputSystemModel = props.getProperty("file_output_system_model");
+		packageInjectorFile = props.getProperty("package_injector");
 		deleteFilesOlderThanNdays = Integer.valueOf(props.getProperty("delete_files_older_thanNdays"));
 	}
 
@@ -129,6 +162,14 @@ public class SimulatorConfig {
 	public void setDirModelTypes(String dirModelTypes) {
 		this.dirModelTypes = dirModelTypes;
 	}
+	
+	/**
+	 * @param filePackageSequence
+	 *            the filePackageSequence to set
+	 */
+	public void setFilePackageSequence(String filePackageSequence) {
+		this.filePackageSequence = filePackageSequence;
+	}
 
 	/**
 	 * @return the dirModelTypes
@@ -153,6 +194,14 @@ public class SimulatorConfig {
 	}
 
 	/**
+	 * @param fileInputSystemModel
+	 *            the fileInputSystemModel to set
+	 */
+	public void setFileInputSystemModel(String fileInputSystemModel) {
+		this.fileInputSystemModel = fileInputSystemModel;
+	}
+	
+	/**
 	 * @param dirTransformationRepository
 	 *            the dirTransformationRepository to set
 	 */
@@ -162,17 +211,18 @@ public class SimulatorConfig {
 	}
 
 	/**
+	 * @param fileErrorModel
+	 *            the fileErrorModel to set
+	 */
+	public void setFileErrorModel(String fileErrorModel) {
+		this.fileErrorModel = fileErrorModel;
+	}
+	
+	/**
 	 * @return the dirTransformationRepository
 	 */
 	public String getDirTransformationRepository() {
 		return dirTransformationRepository;
-	}
-
-	/**
-	 * @return the dirOutputConfiguration
-	 */
-	public String getDirOutput() {
-		return dirOutput;
 	}
 
 	/**
@@ -245,20 +295,12 @@ public class SimulatorConfig {
 		return consoleLog;
 	}
 
-	public void setInjectorPackageName(String injectorPackageName) {
-		this.injectorPackageName = injectorPackageName;
+	public void setPackageInjectorFile(String injectorPackageFile) {
+		this.packageInjectorFile = injectorPackageFile;
 	}
 
-	public String getInjectorPackageName() {
-		return injectorPackageName;
-	}
-
-	public void setInjectorPackageDirectory(String injectorPackageDirectory) {
-		this.injectorPackageDirectory = injectorPackageDirectory;
-	}
-
-	public String getInjectorPackageDirectory() {
-		return injectorPackageDirectory;
+	public String getPackageInjectorFile() {
+		return packageInjectorFile;
 	}
 
 	public void setDeleteFilesOlderThanNdays(int deleteFilesOlderThanNdays) {
@@ -275,6 +317,20 @@ public class SimulatorConfig {
 
 	public String getDirBackup() {
 		return dirBackup;
+	}
+
+	/**
+	 * @param fileOutputSystemModel the fileOutputSystemModel to set
+	 */
+	public void setFileOutputSystemModel(String fileOutputSystemModel) {
+		this.fileOutputSystemModel = fileOutputSystemModel;
+	}
+
+	/**
+	 * @return the fileOutputSystemModel
+	 */
+	public String getFileOutputSystemModel() {
+		return fileOutputSystemModel;
 	}
 
 

@@ -379,7 +379,6 @@ public class DebianPackageManager extends PackageManager {
 
 
 	public void createModelFromInstalledPackage(String name) throws Exception {
-		// Installed package list
 
 		String linePkg;
 		String version="";
@@ -622,7 +621,7 @@ public class DebianPackageManager extends PackageManager {
 				createModelFromInstalledPackage(name);
 			
 			} else {
-				throw new InjectorException("The package "+path+" does not exist!");
+				throw new InjectorException("Package model creation failed.");
 			}
 		}
 	}

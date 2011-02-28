@@ -6,7 +6,7 @@ package it.univaq.mancoosi.simulator.util;
 
 import it.univaq.mancoosi.simulator.exceptions.SimulatorException;
 
-import java.io.BufferedOutputStream;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -14,11 +14,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
-import org.apache.commons.compress.archivers.tar.TarArchiveEntry;
-import org.apache.commons.compress.archivers.tar.TarArchiveOutputStream;
-import org.apache.commons.compress.compressors.gzip.GzipCompressorOutputStream;
-import org.apache.commons.compress.utils.IOUtils;
 
 /**
  * The class handles file copying,
@@ -133,7 +131,7 @@ public class FileManagement {
 			throw new SimulatorException("Could not create temp directory: " + temp.getAbsolutePath());
 		}
 
-		return (temp);
+		return temp;
 	}
 	
 	
@@ -222,81 +220,40 @@ public class FileManagement {
 			}
 		}
 	
-	
+
 	/**
 	 * 
-	 * @param directoryPath
-	 * @param tarGzPath
-	 * @throws Exception 
+	 * @param dir
+	 * @param zipfile
 	 * @throws IOException
+	 * @throws IllegalArgumentException
 	 */
-	public static void createTarGzOfDirectory(String directoryPath, String tarGzPath) throws Exception {
-	   
-		FileOutputStream fOut = null;
-	    BufferedOutputStream bOut = null;
-	    GzipCompressorOutputStream gzOut = null;
-	    TarArchiveOutputStream tOut = null;
-	 
-	    try {
-	        fOut = new FileOutputStream(new File(tarGzPath));
-	        bOut = new BufferedOutputStream(fOut);
-	        gzOut = new GzipCompressorOutputStream(bOut);
-	        tOut = new TarArchiveOutputStream(gzOut);
-	 
-	        addFileToTarGz(tOut, directoryPath, "");
-	    } catch (Exception e) {
-			throw new SimulatorException("Error in the creation of the tar.gz file", e);
-		} finally {
-	        try {
-				tOut.finish();
-		        tOut.close();
-		        gzOut.close();
-		        bOut.close();
-		        fOut.close();
-			} catch (IOException e) {
-				throw new SimulatorException("Error in the creation of the tar.gz file", e);
-			} 
-	    }
-	}
+	public static void createZipDirectory(String dir, String zipfile)
+			throws IOException, IllegalArgumentException {
+		// Check that the directory is a directory, and get its contents
+		File d = new File(dir);
+		if (!d.isDirectory())
+			throw new IllegalArgumentException("Not a directory:  " + dir);
+		File[] f = d.listFiles();
+		byte[] buffer = new byte[4096]; // Create a buffer for copying
+		int bytesRead;
 
-	
-	/**
-	 * 
-	 * @param tOut
-	 * @param path
-	 * @param base
-	 * @throws Exception 
-	 * @throws IOException
-	 */
-	private static void addFileToTarGz(TarArchiveOutputStream tOut, String path, String base) throws Exception {
-	    File f = new File(path);
-	    String entryName = base + f.getName();
-	    TarArchiveEntry tarEntry = new TarArchiveEntry(f, entryName);
-	 
-	    tOut.setLongFileMode(TarArchiveOutputStream.LONGFILE_GNU);
-		try {
-			tOut.putArchiveEntry(tarEntry);
+		ZipOutputStream out = new ZipOutputStream(new FileOutputStream(zipfile));
 
-			if (f.isFile()) {
-				IOUtils.copy(new FileInputStream(f), tOut);
+		for (int i = 0; i < f.length; i++) {
 
-				tOut.closeArchiveEntry();
-			} else {
-				tOut.closeArchiveEntry();
-
-				File[] children = f.listFiles();
-
-				if (children != null) {
-					for (File child : children) {
-						addFileToTarGz(tOut, child.getAbsolutePath(), entryName
-								+ "/");
-					}
-				}
-			}
-		} catch (IOException e) {
-			throw new SimulatorException("Error in the creation of the tar.gz file", e);
+			if (f[i].isDirectory())
+				continue;// Ignore directory
+			FileInputStream in = new FileInputStream(f[i]); // Stream to read file
+			ZipEntry entry = new ZipEntry(f[i].getPath()); // Make a ZipEntry
+			out.putNextEntry(entry); // Store entry
+			while ((bytesRead = in.read(buffer)) != -1)
+				out.write(buffer, 0, bytesRead);
+			in.close();
 		}
+		out.close();
 	}
+
 	
 	
 	/**
