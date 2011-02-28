@@ -25,8 +25,7 @@ import it.univaq.mancoosi.simulator.util.SimulatorConfig;
 
 public class SimulatorController {
 
-	private PackageSequence sequencePkg;
-	private CurrentModelsFile systemModelCurrent;
+
 	private SimulatorConfig config;
 	private static SimulatorController instance;
 	private long start;
@@ -52,8 +51,6 @@ public class SimulatorController {
 	 */
 	private SimulatorController() throws Exception {
 		
-		sequencePkg = PackageSequence.getInstance();
-		systemModelCurrent = CurrentModelsFile.getInstance();
 		config = SimulatorConfig.getInstance();
 		
 		// delete archives older than N days
@@ -65,6 +62,25 @@ public class SimulatorController {
 		
 	}
 
+	
+	/**
+	 * 
+	 * @param args
+	 */
+	public void setArgs(String[] args) {
+		for (int i = 0; i < args.length; i++) {		
+			if (args[i].endsWith(".xml")) {
+				config.setFilePackageSequence(args[i]);
+			} else if (args[i].endsWith(".mancoosimm") && (new File(args[i]).exists())) {
+				config.setFileInputSystemModel(args[i]);
+			} else if (args[i].endsWith(".mancoosimm") && !(new File(args[i]).exists())) {
+				config.setFileOutputSystemModel(args[i]);
+			} else if (args[i].endsWith(".errormm")) {
+				config.setFileErrorModel(args[i]);
+			}
+		}
+	}
+	
 
 	/**
 	 * 
@@ -76,6 +92,10 @@ public class SimulatorController {
 		
 		start = System.currentTimeMillis();
 		
+		CurrentModelsFile.getInstance().setSystemModelCurrent(new File(config.getFileInputSystemModel()));
+		
+		PackageSequence sequencePkg = PackageSequence.getInstance();
+		
 		ArrayList<String> usedModels = new ArrayList<String>();
 		
 		try {
@@ -83,12 +103,6 @@ public class SimulatorController {
 			for (int i = 0; i < sequencePkg.getSizePackageSequence(); i++) {
 	
 				String action = sequencePkg.getPackageAction(i);
-				
-				String pathPackageModel = PackageModelRetrieval.getPath(config, sequencePkg.getPackageName(i),
-						  sequencePkg.getPackageVersion(i),
-						  sequencePkg.getPackageArchitecture(i));
-				
-				usedModels.add(pathPackageModel);
 				
 				SystemModelManager sysModel = new SystemModelManager();
 				
@@ -111,6 +125,12 @@ public class SimulatorController {
 						System.out.println("Upgrade of "+sequencePkg.getPackageName(i)+" "
 								+old.getVersion()+" to "+sequencePkg.getPackageVersion(i));
 						
+						String pathPackageModel = PackageModelRetrieval.getPath(config, sequencePkg.getPackageName(i),
+								  sequencePkg.getPackageVersion(i),
+								  sequencePkg.getPackageArchitecture(i));
+						
+						usedModels.add(pathPackageModel);
+						
 						PackageModelManager newPkgManager = new PackageModelManager(pathPackageModel);
 						PackageModelManager installedPkgManager = new PackageModelManager(pathPackageOldModel);
 						p = new SimulatorContext(newPkgManager);
@@ -123,6 +143,12 @@ public class SimulatorController {
 						System.out.println("Installation of "+sequencePkg.getPackageName(i)+" "+sequencePkg.getPackageVersion(i)
 											+" (Config-files "+ old.getVersion()+")");
 						
+						String pathPackageModel = PackageModelRetrieval.getPath(config, sequencePkg.getPackageName(i),
+								  sequencePkg.getPackageVersion(i),
+								  sequencePkg.getPackageArchitecture(i));
+						
+						usedModels.add(pathPackageModel);
+						
 						PackageModelManager newPkgManager = new PackageModelManager(pathPackageModel);
 						p = new SimulatorContext(newPkgManager);
 						p.install(old.getVersion());
@@ -134,6 +160,12 @@ public class SimulatorController {
 						// simple case: install from NotInstalledState
 						System.out.println("Installation of "+sequencePkg.getPackageName(i)+" "
 								+sequencePkg.getPackageVersion(i)+" (Not-installed)");
+						
+						String pathPackageModel = PackageModelRetrieval.getPath(config, sequencePkg.getPackageName(i),
+								  sequencePkg.getPackageVersion(i),
+								  sequencePkg.getPackageArchitecture(i));
+						
+						usedModels.add(pathPackageModel);
 						
 						PackageModelManager newPkgManager = new PackageModelManager(pathPackageModel);
 						p = new SimulatorContext(newPkgManager);
@@ -149,6 +181,16 @@ public class SimulatorController {
 					if (sysModel.isInstalledPackage(sequencePkg.getPackageName(i))) {
 						System.out.println("Remove of "+sequencePkg.getPackageName(i)+" "
 								+sequencePkg.getPackageVersion(i)+" (Installed)");
+						
+						String name = sequencePkg.getPackageName(i);
+						String version = sequencePkg.getPackageVersion(i);
+						String architecture = sequencePkg.getPackageArchitecture(i);						
+						if (architecture == null) {
+							architecture = sysModel.getInstalledPackage(name, version).getArchitecture();
+						}
+
+						String pathPackageModel = PackageModelRetrieval.getPath(config, name, version, architecture);
+						usedModels.add(pathPackageModel);
 						
 						PackageModelManager newPkgManager = new PackageModelManager(pathPackageModel);
 						p = new SimulatorContext(newPkgManager);
@@ -167,6 +209,16 @@ public class SimulatorController {
 						System.out.println("Purge of "+sequencePkg.getPackageName(i)+" "
 								+sequencePkg.getPackageVersion(i)+" (Installed)");
 						
+						String name = sequencePkg.getPackageName(i);
+						String version = sequencePkg.getPackageVersion(i);
+						String architecture = sequencePkg.getPackageArchitecture(i);						
+						if (architecture == null) {
+							architecture = sysModel.getInstalledPackage(name, version).getArchitecture();
+						}
+
+						String pathPackageModel = PackageModelRetrieval.getPath(config, name, version, architecture);
+						usedModels.add(pathPackageModel);
+						
 						PackageModelManager newPkgManager = new PackageModelManager(pathPackageModel);
 						p = new SimulatorContext(newPkgManager);
 						p.purgeInstalled();
@@ -175,6 +227,16 @@ public class SimulatorController {
 						// Purge from ConfigFiles state
 						System.out.println("Remove of "+sequencePkg.getPackageName(i)+" "
 								+sequencePkg.getPackageVersion(i)+" (Config-Files)");
+						
+						String name = sequencePkg.getPackageName(i);
+						String version = sequencePkg.getPackageVersion(i);
+						String architecture = sequencePkg.getPackageArchitecture(i);						
+						if (architecture == null) {
+							architecture = sysModel.getConfigFilesPackage(name, version).getArchitecture();
+						}
+
+						String pathPackageModel = PackageModelRetrieval.getPath(config, name, version, architecture);
+						usedModels.add(pathPackageModel);
 						
 						PackageModelManager newPkgManager = new PackageModelManager(pathPackageModel);
 						p = new SimulatorContext(newPkgManager);
@@ -190,8 +252,6 @@ public class SimulatorController {
 					throw new SelectionStateNotFoundException("The requested selection-state '"
 							+action+"' is not manageable.");
 				}
-				
-				System.gc();
 			}
 			
 			// Generate final error model
@@ -204,8 +264,9 @@ public class SimulatorController {
 			}
 			
 			if (errorManager.existsWarnings()) {
-				String finalModel = config.getDirOutput() + config.getFileErrorModel();
+				String finalModel = config.getFileErrorModel();
 				errorManager.saveModel(finalModel);
+				errorManager.printModel();
 				generateFinalConfigurationModel(usedModels);
 				throw new WarningFoundException("Simulation completed with warnings.");
 			} else {
@@ -223,7 +284,8 @@ public class SimulatorController {
 				errorManager.appendModel(errorModels.get(i).getPath());
 			}
 			
-			String finalModel = config.getDirOutput() + config.getFileErrorModel();
+			String finalModel = config.getFileErrorModel();
+			errorManager.printModel();
 			errorManager.saveModel(finalModel);
 			generateFinalConfigurationModel(usedModels);
 
@@ -234,12 +296,8 @@ public class SimulatorController {
 	
     private void generateFinalConfigurationModel(ArrayList<String> usedModels) throws Exception {
 		// Generate final configuration model
-		String inputSystemModel = config.getFileInputSystemModel();
-		String nameFileModel = inputSystemModel.substring(inputSystemModel
-				.lastIndexOf("/") + 1, inputSystemModel.length());
-		File finalSystemModelFile = new File(config.getDirOutput()
-				+ nameFileModel);
-		FileManagement.copyFile(systemModelCurrent.getSystemModelCurrent(),
+		File finalSystemModelFile = new File(config.getFileOutputSystemModel());
+		FileManagement.copyFile(CurrentModelsFile.getInstance().getSystemModelCurrent(),
 				finalSystemModelFile);
 		
 		// Create tar.gz archive
@@ -247,12 +305,7 @@ public class SimulatorController {
 		
 		end = System.currentTimeMillis();
 		
-		double tot = (end-start);
-
-		if (tot != 0) {
-			tot = tot/1000.0;
-		}
-		
+		double tot = (end-start)/1000.0;
 		System.out.println("Time: "+tot+" seconds.");
 		
 	}
@@ -262,14 +315,10 @@ public class SimulatorController {
      * 
      */
     private void deleteOldModel() {
-            String inputSystemModel = config.getFileInputSystemModel();
-            String nameFileModel = inputSystemModel.substring(inputSystemModel
-                            .lastIndexOf("/") + 1, inputSystemModel.length());
-            File finalSystemModelFile = new File(config.getDirOutput()
-                            + nameFileModel);
+
+            File finalSystemModelFile = new File(config.getFileOutputSystemModel());
             if (finalSystemModelFile.exists()) finalSystemModelFile.delete();
-            File finalErrorModelFile = new File(config.getDirOutput()
-                            + config.getFileErrorModel());
+            File finalErrorModelFile = new File(config.getFileErrorModel());
             if (finalErrorModelFile.exists()) finalErrorModelFile.delete();
     }
 	
@@ -285,34 +334,35 @@ public class SimulatorController {
 		
 		for (int i=0; i<usedModels.size(); i++) {
 			File f = new File(usedModels.get(i));
-			File copy = new File(tmpDir.getPath()+"/"+f.getName());
+			File copy = new File(tmpDir.getPath()+File.separator+f.getName());
 			if (!copy.exists()) {
 				FileManagement.copyFile(f, copy);
 			}
 		}
 		
 		File sequence = new File(config.getFilePackageSequence());
-		File sequenceCopy = new File(tmpDir.getPath()+"/"+sequence.getName());
+		File sequenceCopy = new File(tmpDir.getPath()+File.separator+sequence.getName());
 		FileManagement.copyFile(sequence, sequenceCopy);
 		
 		File input = new File(config.getFileInputSystemModel());
-		File inputCopy = new File(tmpDir.getPath()+"/"+"input_"+input.getName());
+		File inputCopy = new File(tmpDir.getPath()+File.separator+"input_"+input.getName());
 		FileManagement.copyFile(input, inputCopy);
 		
-		File outputCopy = new File(tmpDir.getPath()+"/"+"output_"+finalSystemModelFile.getName());
+		File outputCopy = new File(tmpDir.getPath()+File.separator+"output_"+finalSystemModelFile.getName());
 		FileManagement.copyFile(finalSystemModelFile, outputCopy);
 		
 		
-		File outputError = new File(config.getDirOutput() + config.getFileErrorModel());
+		File outputError = new File(config.getFileErrorModel());
 		
 		if (outputError.exists()) {
-			File outputErrorCopy = new File(tmpDir.getPath()+"/"+config.getFileErrorModel());
+			String nameModelError = new File(config.getFileErrorModel()).getName();
+			File outputErrorCopy = new File(tmpDir.getPath()+File.separator+nameModelError);
 			FileManagement.copyFile(outputError, outputErrorCopy);
 		}
 		
 		FileManagement.renameFilesDir(config.getDirBackup());
 		
-		FileManagement.createTarGzOfDirectory(tmpDir.getPath(), config.getDirBackup()+"simulation.tar.gz");
+		FileManagement.createZipDirectory(tmpDir.getPath(), config.getDirBackup()+"simulation.zip");
 		
 		FileManagement.deleteDir(tmpDir);
 		

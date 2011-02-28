@@ -32,7 +32,6 @@ import it.univaq.mancoosi.packagemm.SingleDep;
 import it.univaq.mancoosi.simulator.entity.DepConfl;
 import it.univaq.mancoosi.simulator.entity.StatementScript;
 import it.univaq.mancoosi.simulator.exceptions.PackageModelFileNotFoundException;
-import it.univaq.mancoosi.simulator.exceptions.RuleNotFoundException;
 import it.univaq.mancoosi.simulator.exceptions.SimulatorException;
 import it.univaq.mancoosi.simulator.util.FileManagement;
 import it.univaq.mancoosi.simulator.util.TransformationRuleFilesMapping;
@@ -107,39 +106,40 @@ public class PackageModelManager {
 		while (tree.hasNext()) {
 
 			EObject elem = tree.next();
-			
-			if (!(elem.eContainingFeature().getName().equals("condition")
-					|| elem.eContainingFeature().getName().equals("exps")
-					|| elem.eContainingFeature().getName().equals("master")
-					|| elem.eContainingFeature().getName().equals("slave")
-					|| elem.eContainingFeature().getName().equals("file")
-					|| elem.eClass().getName().equals("InputParameter"))) {
 
+			// if (!(elem.eContainingFeature().getName().equals("condition")
+			// || elem.eContainingFeature().getName().equals("exps")
+			// || elem.eContainingFeature().getName().equals("master")
+			// || elem.eContainingFeature().getName().equals("slave")
+			// || elem.eContainingFeature().getName().equals("file")
+			// || elem.eClass().getName().equals("InputParameter"))) {
+			//
 			if (mapElementTransformation.existsTransformationRule(elem.eClass().getName())) {
+				//System.out.println(elem.eClass().getName());
+				int position;
 
-					int position;
+				if (posMap.containsKey(elem.eClass().getName())) {
+					position = posMap.get(elem.eClass().getName()) + 1;
+				} else {
+					position = 1;
+				}
 
-					if (posMap.containsKey(elem.eClass().getName())) {
-						position = posMap.get(elem.eClass().getName()) + 1;
-					} else {
-						position = 1;
-					}
+				posMap.put(elem.eClass().getName(), position);
 
-					posMap.put(elem.eClass().getName(), position);
-
-					statements.add(new StatementScript(elem.eClass().getName(),
-							elem.eContainer().eClass().getName(), elem
-									.eContainingFeature().getName(), position));
+				statements.add(new StatementScript(elem.eClass().getName(),
+						elem.eContainer().eClass().getName(), elem
+								.eContainingFeature().getName(), position));
+				// } else {
+				// throw new RuleNotFoundException("The rule for '" +
+				// elem.eClass().getName() + "' does not exist!");
+				// }
 			} else {
-				throw new RuleNotFoundException("The rule for '"
-						+ elem.eClass().getName() + "' does not exist!");
+				tree.prune();
 			}
 		}
-	}
 
 		return statements;
 	}
-
 	
 	/**
 	 * 
@@ -462,7 +462,7 @@ public class PackageModelManager {
 			
 
 			String nameFileModel = inputPackageModel.substring(inputPackageModel
-					.lastIndexOf("/") + 1, inputPackageModel.length());
+					.lastIndexOf(java.io.File.separator) + 1, inputPackageModel.length());
 
 			java.io.File newTempFile = FileManagement.createTempFile(nameFileModel
 					.substring(0, nameFileModel.lastIndexOf(".")),

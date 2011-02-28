@@ -101,7 +101,7 @@ public class SystemModelManager {
 			String inputSystemModel = config.getFileInputSystemModel();
 
 			String nameFileModel = inputSystemModel.substring(inputSystemModel
-					.lastIndexOf("/") + 1, inputSystemModel.length());
+					.lastIndexOf(java.io.File.separator) + 1, inputSystemModel.length());
 
 			java.io.File newTempFile = FileManagement.createTempFile(nameFileModel
 					.substring(0, nameFileModel.lastIndexOf(".")),

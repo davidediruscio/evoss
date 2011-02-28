@@ -1,5 +1,6 @@
 package it.univaq.mancoosi.injectors.packages.util.debian;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -23,7 +24,7 @@ public class DebianInjectorConfig extends InjectorConfig {
 
 		Properties props = new Properties();
 		try {
-			props.load(new FileInputStream("config/settings-debian.properties"));
+			props.load(new FileInputStream("config"+File.separator+"pkginj_settings-debian.properties"));
 		} catch (FileNotFoundException e) {
 			throw new InjectorException("Error properties file not found", e);
 		} catch (IOException e) {

@@ -17,8 +17,9 @@ public class PackageModelRetrieval {
 	 * @param packageArchitecture
 	 * @return pathPackageModel
 	 * @throws SimulatorException 
+	 * @throws IOException 
 	 */
-	public static String getPath (SimulatorConfig config, String packageName, String packageVersion, String packageArchitecture) throws SimulatorException {
+	public static String getPath (SimulatorConfig config, String packageName, String packageVersion, String packageArchitecture) throws SimulatorException, IOException {
 		
 		String pathPackageModel = config.getDirInputPackageModels() 
 									+ packageName + "_" + packageVersion + "_" + packageArchitecture
@@ -26,11 +27,17 @@ public class PackageModelRetrieval {
 		
 		if (!(new File(pathPackageModel)).exists()) {
 
-			String nameInj = config.getInjectorPackageName();
-			String workingDirInj = config.getInjectorPackageDirectory();
+			File jarFile = new File(config.getPackageInjectorFile());
+			
+			if (!jarFile.exists()) {
+				throw new SimulatorException("File" +config.getPackageInjectorFile()+ "not found");
+			}
+			
+			String nameComponent = jarFile.getName();
+			String pathWorkDir = jarFile.getParent();
 
-			ProcessBuilder pb = new ProcessBuilder("java", "-jar", nameInj,	"--package", packageName, packageVersion, packageArchitecture);
-			pb.directory(new File(workingDirInj));
+			ProcessBuilder pb = new ProcessBuilder("java", "-jar", nameComponent,	"--package", packageName, packageVersion, packageArchitecture);
+			pb.directory(new File(pathWorkDir));
 
 			System.out.println(" The package model '"+pathPackageModel+"' has not yet been generated.");
 			System.out.println(" --> Generating the package model ...");
@@ -45,9 +52,13 @@ public class PackageModelRetrieval {
 					System.out.println(" --> " + line);
 				}
 				input.close();
+				
+				p.waitFor();
 
 			} catch (IOException e) {
-				throw new SimulatorException("Invocation of package injector failed.");
+				throw new SimulatorException(" <-- Invocation of package injector failed.");
+			} catch (InterruptedException e) {
+				throw new SimulatorException(" <-- Model generation failed.");
 			}
 
 			if ((new File(pathPackageModel)).exists()) {

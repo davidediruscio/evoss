@@ -16,18 +16,17 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/it.univaq.mancoosi.packagemm"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/it.univaq.mancoosi.positionmm"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/it.univaq.mancoosi.mancoosimm"/>
-	<classpathentry kind="lib" path="lib/org.eclipse.core.jobs_3.4.1.R34x_v20081128.jar"/>
 	<classpathentry kind="lib" path="lib/org.eclipse.core.resources_3.4.2.R34x_v20090126.jar"/>
-	<classpathentry kind="lib" path="lib/org.eclipse.core.runtime_3.4.0.v20080512.jar"/>
 	<classpathentry kind="lib" path="lib/org.eclipse.core.runtime.compatibility_3.2.0.v20071008.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.m2m.atl.engine.vm_2.0.2.v200812191010.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.m2m.atl.engine.emfvm_2.0.2.v201102210830.jar"/>
+	<classpathentry kind="lib" path="lib/WiresFixed_AtlEMFVM_1.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.core.jobs_3.4.1.R34x_v20081128.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.core.runtime_3.4.0.v20080512.jar"/>
 	<classpathentry kind="lib" path="lib/org.eclipse.emf.common_2.4.0.v200902171115.jar"/>
 	<classpathentry kind="lib" path="lib/org.eclipse.emf.ecore_2.4.2.v200902171115.jar"/>
 	<classpathentry kind="lib" path="lib/org.eclipse.emf.ecore.xmi_2.4.1.v200902171115.jar"/>
 	<classpathentry kind="lib" path="lib/org.eclipse.equinox.common_3.4.0.v20080421-2006.jar"/>
 	<classpathentry kind="lib" path="lib/org.eclipse.osgi_3.4.3.R34x_v20081215-1030.jar"/>
-	<classpathentry kind="lib" path="lib/commons-compress-1.1.jar"/>
-	<classpathentry kind="lib" path="lib/org.eclipse.m2m.atl.engine.vm_2.0.2.v200812191010.jar"/>
-	<classpathentry kind="lib" path="lib/org.eclipse.m2m.atl.engine.emfvm_2.0.2.v201102210830.jar"/>
-	<classpathentry kind="lib" path="lib/WiresFixed_AtlEMFVM_1.0.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
