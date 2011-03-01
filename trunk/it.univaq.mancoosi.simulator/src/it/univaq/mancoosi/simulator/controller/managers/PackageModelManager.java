@@ -431,6 +431,14 @@ public class PackageModelManager {
 	 * 
 	 * @return
 	 */
+	public String getDescription() {
+		return packContent.getDescription();
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public String getArchitecture() {
 		return packContent.getArchitecture();
 	}

@@ -42,7 +42,7 @@ public class ErrorExitReinstRequiredState extends SimulatorState {
 				installedPkgModel.getVersion(), installedPkgModel.getConfFiles(),
 				installedPkgModel.getMaintainer(),
 				installedPkgModel.getArchitecture(), installedPkgModel.getSection(),
-				installedPkgModel.getPriority());
+				installedPkgModel.getPriority(), installedPkgModel.getDescription());
 		sysModel.saveModel();
 		
 		throw new ErrorModelFoundException();

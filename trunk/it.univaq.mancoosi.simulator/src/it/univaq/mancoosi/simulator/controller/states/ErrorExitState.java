@@ -46,7 +46,7 @@ public class ErrorExitState extends SimulatorState {
 				fsm.pkgModel.getVersion(), fsm.pkgModel.getConfFiles(),
 				fsm.pkgModel.getMaintainer(),
 				fsm.pkgModel.getArchitecture(), fsm.pkgModel.getSection(),
-				fsm.pkgModel.getPriority());
+				fsm.pkgModel.getPriority(), fsm.pkgModel.getDescription());
 		sysModel.saveModel();
 		
 		throw new ErrorModelFoundException();
@@ -61,7 +61,8 @@ public class ErrorExitState extends SimulatorState {
 		sysModel.setUnpackedPackage(installedPkgModel.getName(),
 				installedPkgModel.getVersion(), installedPkgModel.getConfFiles(), 
 				installedPkgModel.getMaintainer(), installedPkgModel.getArchitecture(),
-				installedPkgModel.getSection(), installedPkgModel.getPriority());
+				installedPkgModel.getSection(), installedPkgModel.getPriority(),
+				installedPkgModel.getDescription());
 		
 		sysModel.saveModel();
 		
