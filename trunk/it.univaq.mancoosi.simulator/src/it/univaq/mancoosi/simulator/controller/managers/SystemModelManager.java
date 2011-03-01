@@ -729,6 +729,11 @@ public class SystemModelManager {
 			}
 		}
 
+
+		if (found == false) {
+			pkgElem = null;
+		}
+
 		return pkgElem;
 	}
 
@@ -760,6 +765,10 @@ public class SystemModelManager {
 			}
 		}
 
+		if (found == false) {
+			pkgElem = null;
+		}
+
 		return pkgElem;
 	}
 	
@@ -781,6 +790,11 @@ public class SystemModelManager {
 				found = true;
 			}
 		}
+
+		if (found == false) {
+			pkgElem = null;
+		}
+
 		return pkgElem;
 	}
 
@@ -820,6 +834,10 @@ public class SystemModelManager {
 			}
 		}
 
+		if (found == false) {
+			pkgElem = null;
+		}
+
 		return pkgElem;
 	}
 
@@ -851,6 +869,10 @@ public class SystemModelManager {
 			}
 		}
 
+		if (found == false) {
+			pkgElem = null;
+		}
+
 		return pkgElem;
 	}
 	
@@ -872,6 +894,11 @@ public class SystemModelManager {
 				found = true;
 			}
 		}
+
+		if (found == false) {
+			pkgElem = null;
+		}
+
 		return pkgElem;
 	}
 	
@@ -911,6 +938,10 @@ public class SystemModelManager {
 			}
 		}
 
+		if (found == false) {
+			pkgElem = null;
+		}
+
 		return pkgElem;
 	}
 
@@ -942,6 +973,10 @@ public class SystemModelManager {
 			}
 		}
 
+		if (found == false) {
+			pkgElem = null;
+		}
+
 		return pkgElem;
 	}
 	
@@ -963,6 +998,11 @@ public class SystemModelManager {
 				found = true;
 			}
 		}
+
+		if (found == false) {
+			pkgElem = null;
+		}
+
 		return pkgElem;
 	}
 
@@ -1002,6 +1042,10 @@ public class SystemModelManager {
 			}
 		}
 
+		if (found == false) {
+			pkgElem = null;
+		}
+
 		return pkgElem;
 	}
 
@@ -1033,6 +1077,10 @@ public class SystemModelManager {
 			}
 		}
 
+		if (found == false) {
+			pkgElem = null;
+		}
+
 		return pkgElem;
 	}
 	
@@ -1054,6 +1102,11 @@ public class SystemModelManager {
 				found = true;
 			}
 		}
+
+		if (found == false) {
+			pkgElem = null;
+		}
+
 		return pkgElem;
 	}
 	
@@ -1093,6 +1146,10 @@ public class SystemModelManager {
 			}
 		}
 
+		if (found == false) {
+			pkgElem = null;
+		}
+
 		return pkgElem;
 	}
 
@@ -1124,6 +1181,10 @@ public class SystemModelManager {
 			}
 		}
 
+		if (found == false) {
+			pkgElem = null;
+		}
+
 		return pkgElem;
 	}
 	
@@ -1145,6 +1206,11 @@ public class SystemModelManager {
 				found = true;
 			}
 		}
+
+		if (found == false) {
+			pkgElem = null;
+		}
+
 		return pkgElem;
 	}
 
@@ -1184,6 +1250,10 @@ public class SystemModelManager {
 			}
 		}
 
+		if (found == false) {
+			pkgElem = null;
+		}
+
 		return pkgElem;
 	}
 
@@ -1215,6 +1285,10 @@ public class SystemModelManager {
 			}
 		}
 
+		if (found == false) {
+			pkgElem = null;
+		}
+
 		return pkgElem;
 	}
 	
@@ -1238,6 +1312,10 @@ public class SystemModelManager {
 				}
 		}
 		
+		if (found == false) {
+			pkgElem = null;
+		}
+
 		return pkgElem;
 	}
 
