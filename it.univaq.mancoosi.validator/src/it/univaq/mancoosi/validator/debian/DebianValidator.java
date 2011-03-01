@@ -21,7 +21,7 @@ public class DebianValidator extends Validator {
 	protected  void createXML(String params, String filePath) throws Exception {
 
 		String line;
-		String[] cmd = {"/bin/sh","-c","apt-get --simulate "+params+" | awk '/Inst/ || /Purg/ || /Remv/'"};
+		String[] cmd = {"/bin/sh","-c","apt-get -s "+params+" | awk '/Inst/ || /Purg/ || /Remv/'"};
 		Process p = Runtime.getRuntime().exec(cmd);
 		BufferedReader input = new BufferedReader (new InputStreamReader(p.getInputStream()));
 
@@ -41,9 +41,23 @@ public class DebianValidator extends Validator {
 				if (elements.length > 5) {
 					xml.createInstallSelection(elements[1], elements[3].substring(1), 
 							elements[5].substring(1, elements[5].length()-2));
+				} else if (elements.length < 5) {
+					String name = elements[1];
+					String version = elements[2].substring(1);
+					String architecture = getArchitecture(name, version);
+					xml.createInstallSelection(name, version, architecture);
 				} else {
-					xml.createInstallSelection(elements[1], elements[2].substring(1), 
-							elements[4].substring(1, elements[4].length()-2));
+					if (elements[2].startsWith("[")) {
+						String name = elements[1];
+						String version = elements[3].substring(1);
+						String architecture = getArchitecture(name, version);
+						xml.createInstallSelection(name, version, architecture);
+					} else {
+						String name = elements[1];
+						String version = elements[2].substring(1);
+						String architecture = getArchitecture(name, version);
+						xml.createInstallSelection(name, version, architecture);
+					}
 				}
 			}
 
@@ -52,11 +66,11 @@ public class DebianValidator extends Validator {
 				String version = elements[2].substring(1, elements[2].length()-1);
 				String architecture = getArchitecture(name, version);
 				
-				if (architecture != null) {
+				//if (architecture != null) {
 					xml.createPurgeSelection(name, version, architecture);
-				} else {
-					xml.createPurgeSelection(name, version);
-				}
+				//} else {
+				//	xml.createPurgeSelection(name, version);
+				//}
 			}
 
 			if (elements[0].equals("Remv")) {
@@ -64,11 +78,11 @@ public class DebianValidator extends Validator {
 				String version = elements[2].substring(1, elements[2].length()-1);
 				String architecture = getArchitecture(name, version);
 				
-				if (architecture != null) {
+				//if (architecture != null) {
 					xml.createRemoveSelection(name, version, architecture);
-				} else {
-					xml.createRemoveSelection(name, version);
-				}
+				//} else {
+				//	xml.createRemoveSelection(name, version);
+				//}
 			}
 		}
 		p.waitFor();
@@ -93,7 +107,7 @@ public class DebianValidator extends Validator {
 		String ver="";
 		String arch="";
 
-		String[] cmdPkg = {"/bin/sh","-c"," dpkg -s " + name};
+		String[] cmdPkg = {"/bin/sh","-c","apt-cache show " + name};
 		Process pPkg = Runtime.getRuntime().exec(cmdPkg);
 		BufferedReader info = new BufferedReader (new InputStreamReader(pPkg.getInputStream()));
 		while ((linePkg = info.readLine()) != null) {
@@ -133,7 +147,7 @@ public class DebianValidator extends Validator {
 		input.close();
 		p.waitFor();
 		if (p.exitValue() != 0) {
-			throw new ValidationException("Error exit status in real upgrade.");
+			throw new ValidationException("An error has occurred during the upgrade.");
 		}
 		p.destroy();
 	}
@@ -154,7 +168,7 @@ public class DebianValidator extends Validator {
 		//input.close();
 		p.waitFor();
 		if (p.exitValue() != 0) {
-			throw new ValidationException("Error exit status in retrieving packages.");
+			throw new ValidationException("An error has occurred during the download.");
 		}
 		p.destroy();
 	}

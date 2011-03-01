@@ -30,7 +30,7 @@ public class PackageModelRetrieval {
 			File jarFile = new File(config.getPackageInjectorFile());
 			
 			if (!jarFile.exists()) {
-				throw new SimulatorException("File" +config.getPackageInjectorFile()+ "not found");
+				throw new SimulatorException("File" +config.getPackageInjectorFile()+ " not found");
 			}
 			
 			String nameComponent = jarFile.getName();
@@ -39,7 +39,7 @@ public class PackageModelRetrieval {
 			ProcessBuilder pb = new ProcessBuilder("java", "-jar", nameComponent,	"--package", packageName, packageVersion, packageArchitecture);
 			pb.directory(new File(pathWorkDir));
 
-			System.out.println(" The package model '"+pathPackageModel+"' has not yet been generated.");
+			System.out.println(" The package model '"+pathPackageModel+"' has not been generated yet.");
 			System.out.println(" --> Generating the package model ...");
 
 			Process p;
