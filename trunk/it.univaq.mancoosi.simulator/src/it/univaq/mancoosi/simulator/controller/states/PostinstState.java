@@ -1,7 +1,10 @@
 package it.univaq.mancoosi.simulator.controller.states;
 
+import java.util.ArrayList;
+
 import it.univaq.mancoosi.simulator.controller.managers.OrchestrationManager;
 import it.univaq.mancoosi.simulator.controller.managers.PackageModelManager;
+import it.univaq.mancoosi.simulator.entity.StatementScript;
 
 public class PostinstState extends SimulatorState {
 
@@ -99,15 +102,18 @@ public class PostinstState extends SimulatorState {
 	
 	private Boolean execute(PackageModelManager pkgModel, String[] initParams) throws Exception {
 
-		String pathPkgModel = pkgModel.setInitParamsPostinst(initParams);
-		
-		OrchestrationManager orchestrationPostinstScript = new OrchestrationManager(
-				pkgModel.getName(),
-				"PostinstScript",
-				pathPkgModel,
-				pkgModel.getStatementPostinstScript());
-		Boolean errorExists = orchestrationPostinstScript.runOrchestrationModel();
+		Boolean errorExists = false;
 
+		ArrayList<StatementScript> statementList = pkgModel.getStatementPostinstScript();
+
+		if (statementList.size() > 0) {
+			String pathPkgModel = pkgModel.setInitParamsPostinst(initParams);
+
+			OrchestrationManager orchestrationPostinstScript = new OrchestrationManager(
+					pkgModel.getName(), "PostinstScript", pathPkgModel,
+					statementList);
+			errorExists = orchestrationPostinstScript.runOrchestrationModel();
+		}
 		return errorExists;
 	}
 }

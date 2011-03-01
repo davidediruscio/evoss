@@ -75,7 +75,6 @@ public abstract class Validator {
 		System.out.println(" install pkg1 [pkg2 ...]");
 		System.out.println(" remove  pkg1 [pkg2 ...]");
 		System.out.println(" purge   pkg1 [pkg2 ...]\n");
-		System.out.println("         This Validator has Super Cow Powers.\n");
 	}
 
 	/**
@@ -108,7 +107,8 @@ public abstract class Validator {
 		while ( str != null ) {
 		  if (!str.equals("yes")) {
 			FileManagement.deleteDir(dir);
-		    System.out.println("Program terminated. Bye!");
+		    System.out.println("Program terminated.");
+		    System.exit(0);
 		  } else {
 			  break;
 		  }
@@ -117,9 +117,16 @@ public abstract class Validator {
 		in.close();
 		
 		// Injector system - pre-upgrade
-		System.out.println("\nInjection system...");
-		launchInjector(config.getSysinjJarPath());
+		System.out.println("\nInjecting the system...");
+		
 		String workingDir = new File(config.getSysinjJarPath()).getParent();
+		
+		// Delete old configuration model
+		//File systemModelOldOld = new File(workingDir + File.separator + "model" + File.separator + "systemModel.mancoosimm");
+		//systemModelOldOld.delete();
+		
+		launchInjector(config.getSysinjJarPath());
+
 		File systemModel = new File(workingDir + File.separator + "model" + File.separator + "systemModel.mancoosimm");
 		if (!systemModel.exists()) {
 			throw new ValidatorException("File " + systemModel.getPath()
@@ -140,7 +147,7 @@ public abstract class Validator {
 		
 		System.out.println("                                                       done.");
 		// Simulator
-		System.out.println("Simulating upgrade...");
+		System.out.println("Simulating the upgrade...");
 		File postSimulUpgrade = new File(dir.getPath() + File.separator
 				+ "postSimulUpgrade_" + systemModel.getName());
 		launchSimulator(config.getSimulatorJarPath(),
@@ -156,7 +163,12 @@ public abstract class Validator {
 
 		System.out.println("                                                       done.");
 		// Injector system - post-upgrade
-		System.out.println("Injection system...");
+		System.out.println("Injecting the system...");
+		
+		// Delete old configuration model
+		//File systemModelOld = new File(workingDir + File.separator + "model" + File.separator + "systemModel.mancoosimm");
+		//systemModelOld.delete();
+		
 		launchInjector(config.getSysinjJarPath());
 		File systemModelPost = new File(workingDir + File.separator + "model"
 				+ File.separator + "systemModel.mancoosimm");
@@ -176,8 +188,8 @@ public abstract class Validator {
 		if (!(new File(outputDiff).exists())) {
 			throw new ValidatorException("File "+outputDiff+" is not created correctly.");
 		}
-		System.out.println("Done. Bye !");
-
+		System.out.println("Done.");
+		System.exit(0);
 	}
 
 	
@@ -206,7 +218,7 @@ public abstract class Validator {
 		proc.waitFor();
 		
 		if (proc.exitValue() != 0) {
-			throw new ValidationException("Error exit status in the simulation fase.");
+			throw new ValidationException("An error  occurred during the simulation.");
 		}
 		
 		proc.destroy();
@@ -244,7 +256,7 @@ public abstract class Validator {
 		proc.waitFor();
 		
 		if (proc.exitValue() != 0) {
-			throw new ValidationException("Error in the injection fase.");
+			throw new ValidationException("An error  occurred during the injection.");
 		}
 
 		proc.destroy();

@@ -59,7 +59,7 @@ public abstract class FileSystemManager {
 		
 		String line;
 		String[] fileInformations = null;
-		String[] cmd = {"/bin/sh","-c","ls -dl ".concat(location)};
+		String[] cmd = {"/bin/sh","-c","ls --time-style=long-iso -dl ".concat(location)};
 		
 		try {
 		      Process p = Runtime.getRuntime().exec(cmd);
@@ -188,3 +188,4 @@ public abstract class FileSystemManager {
 
 	
 }
+

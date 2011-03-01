@@ -36,7 +36,7 @@ public class UbuntuAlternativesManager extends AlternativesManager{
 		   String line;
 			
 			try {
-			      String[] cmd = {"/bin/sh","-c","ls -l /etc/alternatives | awk '{print $8 \" -> \"  $10}'"};
+			      String[] cmd = {"/bin/sh","-c","ls --time-style=long-iso -l /etc/alternatives | awk '{print $8 \" -> \"  $10}'"};
 			      Process p = Runtime.getRuntime().exec(cmd);
 			      BufferedReader input =
 			        new BufferedReader
@@ -63,3 +63,4 @@ public class UbuntuAlternativesManager extends AlternativesManager{
 	   }
 
 }
+
