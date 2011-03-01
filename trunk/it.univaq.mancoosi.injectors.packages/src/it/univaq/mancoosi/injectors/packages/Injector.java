@@ -1,7 +1,9 @@
 package it.univaq.mancoosi.injectors.packages;
 
+import it.univaq.mancoosi.injectors.packages.exceptions.InjectorException;
 import it.univaq.mancoosi.injectors.packages.managers.PackageManager;
 import it.univaq.mancoosi.injectors.packages.managers.debian.DebianPackageManager;
+import it.univaq.mancoosi.injectors.packages.util.InjectorConfig;
 import it.univaq.mancoosi.injectors.packages.util.InjectorStatistics;
 
 import java.io.File;
@@ -21,7 +23,7 @@ public class Injector {
 		System.out.println("  -p|--package <name> <version> <architecture>");
 	}
 	
-	private static void printStats() throws FileNotFoundException {
+	private static void printStats() throws FileNotFoundException, InjectorException {
 		
 		InjectorStatistics stat = InjectorStatistics.getInstance();
 		
@@ -31,7 +33,7 @@ public class Injector {
 		Integer errorPackageWithScript = stat.getErrorPackageWithScript();
 		Integer total = correctPackageNoScript + correctPackageWithScript + errorPackageNoScript + errorPackageWithScript;
 		
-	    FileOutputStream file = new FileOutputStream("stats.txt");
+	    FileOutputStream file = new FileOutputStream(InjectorConfig.getInstance().getStatsFile());
 	    PrintStream Output = new PrintStream(file);
 
 		

@@ -26,6 +26,12 @@ public abstract class InjectorConfig {
 	protected String tempLocation;
 	private Boolean skipFilesWithError;
 	private Boolean overwriteModels;
+	
+	protected String statsFile;
+	protected String correctPackageWithScriptFile;
+	protected String correctPackageNoScriptFile;
+	protected String errorPackageWithScriptFile;
+	protected String errorPackageNoScriptFile;
 
 
 	/**
@@ -54,6 +60,12 @@ public abstract class InjectorConfig {
 		
 		metamodelLocation = props.getProperty("metamodelLocation");
 		metamodelMainPackage = props.getProperty("metamodelMainPackage");
+		
+		statsFile = props.getProperty("statsFile");
+		correctPackageWithScriptFile = props.getProperty("correctPackageWithScriptFile");
+		correctPackageNoScriptFile = props.getProperty("correctPackageNoScriptFile");
+		errorPackageWithScriptFile = props.getProperty("errorPackageWithScriptFile");
+		errorPackageNoScriptFile = props.getProperty("errorPackageNoScriptFile");
 		
 		if (props.getProperty("skipFilesWithError").equals("true")) {
 			this.skipFilesWithError = true;
@@ -92,6 +104,29 @@ public abstract class InjectorConfig {
 	public String getMetamodelLocation() {
 		return metamodelLocation;
 	}
+	
+	public String getStatsFile() {
+		return statsFile;
+	} 
+	
+	public String getCorrectPackageWithScriptFile() {
+		return correctPackageWithScriptFile;
+	}
+	
+	public String getCorrectPackageNoScriptFile() {
+		return correctPackageNoScriptFile; 
+		
+	}
+	
+	public String getErrorPackageWithScriptFile() {
+		return errorPackageWithScriptFile; 
+	} 
+	
+	public String getErrorPackageNoScriptFile() {
+		return errorPackageNoScriptFile;
+	}
+	
+	
 
 	public abstract void setPackagesLocation(String packagesLocation);
 

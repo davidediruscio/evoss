@@ -125,10 +125,12 @@ import it.univaq.mancoosi.packagemm.Package;
 				createMaintainerScriptModel(result, listScript);
 				pkg = loadModelPackage(result);
 				stats.incrementCorrectPackageWithScript();
+				stats.appendCorrectPackageWithScript(result);
 				
 			} else {
 				
 				stats.incrementErrorPackageWithScript();
+				stats.appendErrorPackageWithScript(result);
 				
 				if (config.isSkipFilesWithError()) {
 					createMaintainerScriptModel(result, listOut);
@@ -141,6 +143,7 @@ import it.univaq.mancoosi.packagemm.Package;
 
 		} else {
 			stats.incrementCorrectPackageNoScript();
+			stats.appendCorrectPackageNoScript(result);
 		}
 		return pkg;
 	}
