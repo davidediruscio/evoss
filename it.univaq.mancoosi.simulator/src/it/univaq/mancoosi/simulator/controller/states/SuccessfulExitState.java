@@ -14,7 +14,7 @@ public class SuccessfulExitState extends SimulatorState {
 				fsm.pkgModel.getConflicts(), fsm.pkgModel.getConfFiles(),
 				fsm.pkgModel.getInstalledSize(), fsm.pkgModel.getMaintainer(),
 				fsm.pkgModel.getArchitecture(), fsm.pkgModel.getSection(),
-				fsm.pkgModel.getPriority());
+				fsm.pkgModel.getPriority(), fsm.pkgModel.getDescription());
 		sysModel.saveModel();
 	}
 	

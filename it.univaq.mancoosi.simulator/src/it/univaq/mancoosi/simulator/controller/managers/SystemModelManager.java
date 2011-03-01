@@ -1459,7 +1459,7 @@ public class SystemModelManager {
 	public void setInstalledPackage(String packageName, String version, 
 			ArrayList<DepConfl> listDep, ArrayList<DepConfl> listConfl,
 			ArrayList<String> listFiles, Integer installedSize, String maintainer, 
-			String architecture, String section, String priority) {
+			String architecture, String section, String priority, String description) {
 
 		NotInstalledPackage pkgNotInstElem = getNotInstalledPackage(packageName, version, architecture);
 
@@ -1475,6 +1475,7 @@ public class SystemModelManager {
 		if (installedSize != null) pkgInst.setInstalledSize(installedSize);
 		if (maintainer != null) pkgInst.setMaintainer(maintainer);
 		if (architecture != null) pkgInst.setArchitecture(architecture);
+		if (description != null) pkgInst.setDescription(description);
 		if (section != null) pkgInst.setSection(section);
 		if (priority != null) pkgInst.setPriority(PriorityType.get(priority));
 			
@@ -1514,7 +1515,7 @@ public class SystemModelManager {
 	public void setFailedConfigPackage(String packageName, String version,
 			ArrayList<String> confFiles,
 			String maintainer, String architecture, String section,
-			String priority) {
+			String priority, String description) {
 
 
 		NotInstalledPackage pkgNotInstElem = getNotInstalledPackage(packageName, version, architecture);
@@ -1529,6 +1530,7 @@ public class SystemModelManager {
 		if (architecture != null) pkgHalfConf.setArchitecture(architecture);
 		if (section != null) pkgHalfConf.setSection(section);
 		if (priority != null) pkgHalfConf.setPriority(PriorityType.get(priority));
+		if (description != null) pkgHalfConf.setDescription(description);
 
 		if (confFiles != null && confFiles.size()>0) pkgHalfConf.setPackageSettings(setPackageSetting(confFiles));
 
@@ -1559,7 +1561,7 @@ public class SystemModelManager {
 	public void setUnpackedPackage(String packageName, String version,
 			ArrayList<String> confFiles,
 			String maintainer, String architecture, String section,
-			String priority) {
+			String priority, String description) {
 
 		NotInstalledPackage pkgNotInstElem = getNotInstalledPackage(packageName, version, architecture);
 
@@ -1571,6 +1573,7 @@ public class SystemModelManager {
 		if (version != null) pkgUnpack.setVersion(version);
 		if (maintainer != null) pkgUnpack.setMaintainer(maintainer);
 		if (architecture != null) pkgUnpack.setArchitecture(architecture);
+		if (description != null) pkgUnpack.setDescription(description);
 		if (section != null) pkgUnpack.setSection(section);
 		if (priority != null) pkgUnpack.setPriority(PriorityType.get(priority));
 
@@ -1786,6 +1789,10 @@ public class SystemModelManager {
 				found = true;
 		}
 
+		if (found == false) {
+			fileParent = configuration.getFileSystem().getRoot();
+		}
+		
 		return fileParent;
 	}
 	
