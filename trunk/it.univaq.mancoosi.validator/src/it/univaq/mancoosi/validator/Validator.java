@@ -218,7 +218,7 @@ public abstract class Validator {
 		proc.waitFor();
 		
 		if (proc.exitValue() != 0) {
-			throw new ValidationException("An error  occurred during the simulation.");
+			throw new ValidationException("An error occurred during the simulation.");
 		}
 		
 		proc.destroy();
@@ -256,7 +256,7 @@ public abstract class Validator {
 		proc.waitFor();
 		
 		if (proc.exitValue() != 0) {
-			throw new ValidationException("An error  occurred during the injection.");
+			throw new ValidationException("An error occurred during the injection.");
 		}
 
 		proc.destroy();

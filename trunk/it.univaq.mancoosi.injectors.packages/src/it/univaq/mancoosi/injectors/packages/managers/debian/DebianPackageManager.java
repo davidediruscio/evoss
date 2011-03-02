@@ -507,15 +507,36 @@ public class DebianPackageManager extends PackageManager {
 	@Override
 	protected void processAllFiles(BufferedReader info, Package pkg) throws Exception {
 
+		ArrayList<String> listAllFiles = new ArrayList<String>();
+		
 		String lineFile;
 		while (((lineFile = info.readLine()) != null)) {
 			if (!lineFile.equals("/.")) {
-				it.univaq.mancoosi.packagemm.File f = factory.createFile();
-				f.setLocation(lineFile);
-				String[] fSplit = lineFile.split("/");
-				f.setName(fSplit[fSplit.length-1]);
-				pkg.getFiles().add(f);
+				listAllFiles.add(lineFile);
 			}
+		}
+		
+		for (int j=0; j<listAllFiles.size(); j++) {
+			it.univaq.mancoosi.packagemm.File f = factory.createFile();
+			f.setLocation(listAllFiles.get(j));
+			
+			// check if file is a directory
+			Boolean isDirectory = false;
+			int i=0; 
+			while (i<listAllFiles.size() && !isDirectory) {
+				if (listAllFiles.get(i).startsWith(listAllFiles.get(j)+"/")) {
+					isDirectory = true;
+				}
+				i++;
+			}
+
+			if (isDirectory) {
+				f.setIsDirectory(isDirectory);
+			}
+			
+			String[] fSplit = listAllFiles.get(j).split("/");
+			f.setName(fSplit[fSplit.length-1]);
+			pkg.getFiles().add(f);	
 		}
 	}
 
@@ -523,10 +544,18 @@ public class DebianPackageManager extends PackageManager {
 	protected void processAllFilesFile(BufferedReader info, Package pkg) throws Exception {
 
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		ArrayList<String> listAllFiles = new ArrayList<String>();
 		
 		String lineFile;
 		while (((lineFile = info.readLine()) != null)) {
 			if (!lineFile.equals("/.")) {
+				
+				if (!lineFile.startsWith("/")) {
+					lineFile = "/"+lineFile;
+				}
+				
+				listAllFiles.add(lineFile);
+				
 				String[] fSplit = lineFile.split("/");
 
 				for (int i=1; i < fSplit.length; i++) {
@@ -557,7 +586,21 @@ public class DebianPackageManager extends PackageManager {
 	        
 			it.univaq.mancoosi.packagemm.File f = factory.createFile();
 			f.setLocation(entry.getKey());
+			
+			// check if file is a directory
+			Boolean isDirectory = false;
+			int i=0; 
+			while (i<listAllFiles.size() && !isDirectory) {
+				if (listAllFiles.get(i).startsWith(entry.getKey()+"/")) {
+					isDirectory = true;
+				}
+				i++;
+			}
 
+			if (isDirectory) {
+				f.setIsDirectory(isDirectory);
+			}
+			
 			String[] fSplitResult = entry.getKey().split("/");
 			f.setName(fSplitResult[fSplitResult.length-1]);
 			pkg.getFiles().add(f);

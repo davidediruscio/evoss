@@ -12,6 +12,7 @@ import java.util.GregorianCalendar;
 import java.util.Iterator;
 
 import it.univaq.mancoosi.mancoosimm.ConfigFilesPackage;
+import it.univaq.mancoosi.mancoosimm.Group;
 import it.univaq.mancoosi.mancoosimm.HalfConfiguredPackage;
 import it.univaq.mancoosi.mancoosimm.HalfInstalledPackage;
 import it.univaq.mancoosi.mancoosimm.Package;
@@ -33,8 +34,10 @@ import it.univaq.mancoosi.mancoosimm.PriorityType;
 import it.univaq.mancoosi.mancoosimm.SingleConflict;
 import it.univaq.mancoosi.mancoosimm.SingleDep;
 import it.univaq.mancoosi.mancoosimm.UnpackedPackage;
+import it.univaq.mancoosi.mancoosimm.User;
 import it.univaq.mancoosi.mancoosimm.VersionType;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -1822,43 +1825,89 @@ public class SystemModelManager {
 		}
 		return found;
 	}
+	
+	/**
+	 * 
+	 * @param name
+	 * @return
+	 */
+	private Group getGroupByName(String name) {
+		
+		EList<Group> groups = configuration.getEnvironment().getGroups();
+		Group g = null;
+		Boolean found = false;
+		
+		for (int i=0; i<groups.size() && !found; i++) {
+			if (groups.get(i).getName().equals(name)) {
+				g = groups.get(i);
+				found = true;
+			}
+		}
+		
+		return g;
+	}
+	
+	/**
+	 * 
+	 * @param name
+	 * @return
+	 */
+	private User getUserByName(String name) {
+		
+		EList<User> users = configuration.getEnvironment().getUsers();
+		User u = null;
+		Boolean found = false;
+		
+		for (int i=0; i<users.size() && !found; i++) {
+			if (users.get(i).getName().equals(name)) {
+				u = users.get(i);
+				found = true;
+			}
+		}
+		
+		return u;
+	}
 
 	/**
 	 * 
 	 * @param path
 	 */
-	public Boolean addFile(String path) {
+	public Boolean addFile(String path, Boolean isDirectory) {
 
-		Boolean isDirectory = true;
-		Boolean added = false;
-		String[] pathElements = path.split("/");
-		String location = "";
+			Boolean added = false;
 
-		for (int i = 1; i < pathElements.length; i++) {
-
-			String parentLocation = location;
-
-			if (parentLocation.equals(""))
-				parentLocation = "/";
-
-			location = location.concat("/".concat(pathElements[i]));
-
-			if (!existFile(location)) {
-
-				if (i == pathElements.length - 1)
-					isDirectory = false;
-
+			if (!existFile(path)) {
+				
+				String parentLocation = path.substring(0, path.lastIndexOf("/"));
+				String name = path.substring(path.lastIndexOf("/")+1);
+				
 				File file = MancoosiFactory.eINSTANCE.createFile();
 
-				file.setName(pathElements[i]);
+				file.setName(name);
 				file.setIsDirectory(isDirectory);
-				file.setLocation(location);
+				file.setLocation(path);
 				file.setParent(getFile(parentLocation));
 
+				User owner = getUserByName("root");
+				if (owner != null) {
+					file.setOwner(owner);
+				}
+				
+				Group group = getGroupByName("root");
+				if (group != null) {
+					file.setGroup(group);
+				}
+				
+				//if (isDirectory) {
+				//	file.setPermission("");
+				//} else {
+				//	file.setPermission("");
+				//}
+				
 				configuration.getFileSystem().getAllFiles().add(file);
 				added = true;
 			}
-		}
+
 		return added;
 	}
 }

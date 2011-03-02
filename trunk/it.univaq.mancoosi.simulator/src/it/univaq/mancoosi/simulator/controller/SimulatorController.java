@@ -300,7 +300,7 @@ public class SimulatorController {
 		FileManagement.copyFile(CurrentModelsFile.getInstance().getSystemModelCurrent(),
 				finalSystemModelFile);
 		
-		// Create tar.gz archive
+		// Create archive
 		createArchive(usedModels, finalSystemModelFile);
 		
 		end = System.currentTimeMillis();
