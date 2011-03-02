@@ -43,7 +43,7 @@ public class UnpackFilesState extends SimulatorState {
 			Iterator<File> listFilesPackage = pkgModel.getListfiles().iterator();
 			while (listFilesPackage.hasNext()) {
 				File file = listFilesPackage.next();
-				sysModel.addFile(file.getLocation());
+				sysModel.addFile(file.getLocation(), file.isIsDirectory());
 			}
 			sysModel.saveModel();
 		}
