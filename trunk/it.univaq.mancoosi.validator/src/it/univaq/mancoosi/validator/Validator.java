@@ -122,8 +122,9 @@ public abstract class Validator {
 		String workingDir = new File(config.getSysinjJarPath()).getParent();
 		
 		// Delete old configuration model
-		//File systemModelOldOld = new File(workingDir + File.separator + "model" + File.separator + "systemModel.mancoosimm");
-		//systemModelOldOld.delete();
+		File systemModelOldOld = new File(workingDir + File.separator + "model" + File.separator + "systemModel.mancoosimm");
+		System.gc();
+		systemModelOldOld.delete();
 		
 		launchInjector(config.getSysinjJarPath());
 
@@ -166,8 +167,9 @@ public abstract class Validator {
 		System.out.println("Injecting the system...");
 		
 		// Delete old configuration model
-		//File systemModelOld = new File(workingDir + File.separator + "model" + File.separator + "systemModel.mancoosimm");
-		//systemModelOld.delete();
+		File systemModelOld = new File(workingDir + File.separator + "model" + File.separator + "systemModel.mancoosimm");
+		System.gc();
+		systemModelOld.delete();
 		
 		launchInjector(config.getSysinjJarPath());
 		File systemModelPost = new File(workingDir + File.separator + "model"

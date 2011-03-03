@@ -2,7 +2,8 @@ package it.univaq.mancoosi.validator.helper;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -12,54 +13,94 @@ public class Helper {
 
 	
 	public static void main(String[] args) throws Exception {
-		
-		//Find remove upgrade plans
-		String correctPackageWithScriptFile = "../it.univaq.mancoosi.injectors.packages/correctPackageWithScriptFile2.txt";
-		//correctPackageNoScriptFile = "/home/mancoosi/Desktop/eclipseGanymede/eclipse/workspace/it.univaq.mancoosi.injectors.packages/correctPackageNoScriptFile.txt";
-		
-		FileReader file = new FileReader(correctPackageWithScriptFile);
-		BufferedReader input = new BufferedReader(file);
-		String line;
+
+		if (args[0].equals("all")) {
+			createRemovePlans();
+			System.out.println("\n###############################\n");
+			createInstallPlans();
+		} else if (args[0].equals("install")) {
+			createInstallPlans();
+		} else if (args[0].equals("remove")) {
+			createRemovePlans();
+		} else {
+			System.out.println("\nOptions:");
+			System.out.println("install --> generate install/upgrade plans");
+			System.out.println("remove --> generate remove plans");
+			System.out.println("all --> generate install/upgrade/remove plans");
+		}
+
+	}
+	
+	private static void createInstallPlans() throws Exception {
+
 		ArrayList<UpgradePlan> upgradePlans = new ArrayList<UpgradePlan>();
+		
 		UpgradePlan ap;
-		int maxLenght = 0;
-		
-		String aux;
-		String[] aux2;
-		
-		while((line = input.readLine()) != null) {
-			
-			aux2 = line.substring(4).replaceAll(".packagemm", "").split("_");
-			aux = aux2[0];
-			System.out.println("Calculating the upgrade plan for removing " + aux);
-			ap = new UpgradePlan("remove " + aux);
-			
-			if (ap.isCompletelyCovered()) {
+
+		String line;
+		String[] cmd = {"/bin/sh","-c"," aptitude -q -F %p search '!~i'"};
+		Process p = Runtime.getRuntime().exec(cmd);
+		BufferedReader input = new BufferedReader (new InputStreamReader(p.getInputStream()));
+
+		while ((line = input.readLine()) != null) {
+
+			System.out.println("\nCalculating the upgrade plan for installing " + line);
+			line = line.replaceAll(" ", "");
+			try {
+				ap = new UpgradePlan("install " + line);
+				if (ap.getSequence().size() > 0 && ap.isCompletelyCovered()) {
 					upgradePlans.add(ap);
-					writeXML(ap, "removePlans");
+					writeXML(ap, ap.getScriptsNum(), "plans");
+				} else {
+					System.out.println("Upgrade plan for " + line + " discarded since not completely covered");
+				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+				System.out.println("Upgrade plan for " + line + " discarded.");
 			}
-			else
-				System.out.println("Upgrade plan for " + aux + " discarded since not completely covered");
-				
 		}
 		
-		System.out.println("Remove plans calculated. They are " + upgradePlans.size() + " in total.");
-	//	System.out.println("Creating corresponding xml files....");
-	//	writeXML(upgradePlans,"removePlans");
+		System.out.println("Install plans calculated. They are " + upgradePlans.size() + " in total.");		
 		
 		
 	}
-	
-	public  static void writeXML(UpgradePlan up, String filePath) throws Exception {
+
+	private static void createRemovePlans() throws IOException {
+		ArrayList<UpgradePlan> upgradePlans = new ArrayList<UpgradePlan>();
+		
+		UpgradePlan ap;
 
 		String line;
+		String[] cmd = {"/bin/sh","-c"," dpkg -l | awk '/ii/' | awk '{print $2}'"};
+		Process p = Runtime.getRuntime().exec(cmd);
+		BufferedReader input = new BufferedReader (new InputStreamReader(p.getInputStream()));
 
-		XMLFileWriter xml;
+		while ((line = input.readLine()) != null) {
+
+			System.out.println("\nCalculating the upgrade plan for removing " + line);
+			try {
+				ap = new UpgradePlan("remove " + line);
+				if (ap.getSequence().size() > 0 && ap.isCompletelyCovered()) {
+					upgradePlans.add(ap);
+					writeXML(ap, ap.getScriptsNum(), "plans");
+				} else {
+					System.out.println("Upgrade plan for " + line + " discarded since not completely covered");
+				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+				System.out.println("Upgrade plan for " + line + " discarded.");
+			}
+		}
 		
-		int numUp = 0;
+		System.out.println("Remove plans calculated. They are " + upgradePlans.size() + " in total.");		
 		
+	}
+
+	public  static void writeXML(UpgradePlan up, Integer numScript, String filePath) throws Exception {
+
+		XMLFileWriter xml;		
 	
-		File upgradePlanFile = new File(filePath + File.separator + "upgradePlan_" + up.getOperation() + "_" + up.getPackageName() + ".xml");
+		File upgradePlanFile = new File(filePath + File.separator + "upgradePlan_numScript-"+numScript+"_" + up.getOperation() + "_" + up.getPackageName() + ".xml");
 		xml = new XMLFileWriter(upgradePlanFile.getPath());
 
 		ArrayList<Operation> sequence = up.getSequence();
@@ -85,11 +126,7 @@ public class Helper {
 	
 	public  static void writeXML(ArrayList<UpgradePlan> upgradePlans, String filePath) throws Exception {
 
-		String line;
-
 		XMLFileWriter xml;
-		
-		int numUp = 0;
 		
 		Iterator<UpgradePlan> upgradePlansIterator = upgradePlans.iterator();
 		while (upgradePlansIterator.hasNext()) {
