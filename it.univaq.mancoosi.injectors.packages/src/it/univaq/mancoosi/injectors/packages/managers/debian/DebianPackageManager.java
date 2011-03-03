@@ -522,12 +522,12 @@ public class DebianPackageManager extends PackageManager {
 			
 			// check if file is a directory
 			Boolean isDirectory = false;
-			int i=0; 
-			while (i<listAllFiles.size() && !isDirectory) {
+			int i=listAllFiles.size()-1; 
+			while (i>j && !isDirectory) {
 				if (listAllFiles.get(i).startsWith(listAllFiles.get(j)+"/")) {
 					isDirectory = true;
 				}
-				i++;
+				i--;
 			}
 
 			if (isDirectory) {

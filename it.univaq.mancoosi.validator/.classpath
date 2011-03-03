@@ -11,6 +11,6 @@
 	<classpathentry kind="lib" path="lib/org.eclipse.emf.ecore.xmi_2.5.0.v20100521-1846.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/it.univaq.mancoosi.mancoosimm"/>
 	<classpathentry kind="lib" path="lib/wax_1.0.4.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/it.univaq.mancoosi.simulator"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/it.univaq.mancoosi.packagemm"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

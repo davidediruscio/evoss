@@ -1,6 +1,7 @@
 package it.univaq.mancoosi.validator.debian;
 
 import it.univaq.mancoosi.validator.Validator;
+import it.univaq.mancoosi.validator.exceptions.ValidatorException;
 import it.univaq.mancoosi.validator.util.XMLFileWriter;
 
 import java.io.BufferedReader;
@@ -38,51 +39,32 @@ public class DebianValidator extends Validator {
 			System.out.println(" --> "+line);
 
 			if (elements[0].equals("Inst")) {
-				if (elements.length > 5) {
-					xml.createInstallSelection(elements[1], elements[3].substring(1), 
-							elements[5].substring(1, elements[5].length()-2));
-				} else if (elements.length < 5) {
-					String name = elements[1];
-					String version = elements[2].substring(1);
-					String architecture = getArchitecture(name, version);
-					xml.createInstallSelection(name, version, architecture);
+				String name = elements[1];
+				String version = null;
+				if (elements[2].startsWith("[")) {
+					version = elements[3].substring(1);
 				} else {
-					if (elements[2].startsWith("[")) {
-						String name = elements[1];
-						String version = elements[3].substring(1);
-						String architecture = getArchitecture(name, version);
-						xml.createInstallSelection(name, version, architecture);
-					} else {
-						String name = elements[1];
-						String version = elements[2].substring(1);
-						String architecture = getArchitecture(name, version);
-						xml.createInstallSelection(name, version, architecture);
-					}
+					version = elements[2].substring(1);
 				}
+				
+				if (version == null) throw new ValidatorException("Version not found. Package: "+ name);
+				
+				String architecture = getArchitecture(name, version);
+				xml.createInstallSelection(name, version, architecture);
 			}
 
 			if (elements[0].equals("Purg")) {
 				String name = elements[1];
 				String version = elements[2].substring(1, elements[2].length()-1);
 				String architecture = getArchitecture(name, version);
-				
-				//if (architecture != null) {
-					xml.createPurgeSelection(name, version, architecture);
-				//} else {
-				//	xml.createPurgeSelection(name, version);
-				//}
+				xml.createPurgeSelection(name, version, architecture);
 			}
 
 			if (elements[0].equals("Remv")) {
 				String name = elements[1];
 				String version = elements[2].substring(1, elements[2].length()-1);
 				String architecture = getArchitecture(name, version);
-				
-				//if (architecture != null) {
-					xml.createRemoveSelection(name, version, architecture);
-				//} else {
-				//	xml.createRemoveSelection(name, version);
-				//}
+				xml.createRemoveSelection(name, version, architecture);
 			}
 		}
 		p.waitFor();
