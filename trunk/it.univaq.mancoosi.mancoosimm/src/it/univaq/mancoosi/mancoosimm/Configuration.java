@@ -26,6 +26,8 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link it.univaq.mancoosi.mancoosimm.Configuration#getUnpackedPackages <em>Unpacked Packages</em>}</li>
  *   <li>{@link it.univaq.mancoosi.mancoosimm.Configuration#getHalfConfiguredPackages <em>Half Configured Packages</em>}</li>
  *   <li>{@link it.univaq.mancoosi.mancoosimm.Configuration#getHalfInstalledPackages <em>Half Installed Packages</em>}</li>
+ *   <li>{@link it.univaq.mancoosi.mancoosimm.Configuration#getHalfConfiguredReinstRequiredPackages <em>Half Configured Reinst Required Packages</em>}</li>
+ *   <li>{@link it.univaq.mancoosi.mancoosimm.Configuration#getHalfInstalledReinstRequiredPackages <em>Half Installed Reinst Required Packages</em>}</li>
  * </ul>
  * </p>
  *
@@ -237,5 +239,37 @@ public interface Configuration extends NamedElement {
 	 * @generated
 	 */
 	EList<HalfInstalledPackage> getHalfInstalledPackages();
+
+	/**
+	 * Returns the value of the '<em><b>Half Configured Reinst Required Packages</b></em>' containment reference list.
+	 * The list contents are of type {@link it.univaq.mancoosi.mancoosimm.HalfConfiguredReinstRequiredPackage}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Half Configured Reinst Required Packages</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Half Configured Reinst Required Packages</em>' containment reference list.
+	 * @see it.univaq.mancoosi.mancoosimm.MancoosiPackage#getConfiguration_HalfConfiguredReinstRequiredPackages()
+	 * @model containment="true" ordered="false"
+	 * @generated
+	 */
+	EList<HalfConfiguredReinstRequiredPackage> getHalfConfiguredReinstRequiredPackages();
+
+	/**
+	 * Returns the value of the '<em><b>Half Installed Reinst Required Packages</b></em>' containment reference list.
+	 * The list contents are of type {@link it.univaq.mancoosi.mancoosimm.HalfInstalledReinstRequiredPackage}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Half Installed Reinst Required Packages</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Half Installed Reinst Required Packages</em>' containment reference list.
+	 * @see it.univaq.mancoosi.mancoosimm.MancoosiPackage#getConfiguration_HalfInstalledReinstRequiredPackages()
+	 * @model containment="true" ordered="false"
+	 * @generated
+	 */
+	EList<HalfInstalledReinstRequiredPackage> getHalfInstalledReinstRequiredPackages();
 
 } // Configuration

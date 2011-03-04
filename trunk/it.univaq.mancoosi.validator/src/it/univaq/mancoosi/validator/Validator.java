@@ -160,9 +160,13 @@ public abstract class Validator {
 		System.out.println("                                                       done.");
 		// Real Upgrade
 		System.out.println("Upgrading...");
+		long start = System.currentTimeMillis();
 		realUpgrade(params);
-
+		long end = System.currentTimeMillis();
+		double tot = (end-start)/1000.0;
+		System.out.println("Time: "+tot+" seconds.");
 		System.out.println("                                                       done.");
+		
 		// Injector system - post-upgrade
 		System.out.println("Injecting the system...");
 		

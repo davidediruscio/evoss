@@ -11,16 +11,20 @@ import it.univaq.mancoosi.validator.util.XMLFileWriter;
 
 public class Helper {
 
-	
 	public static void main(String[] args) throws Exception {
+		
+		//if (!System.getProperty("user.name").equals("root")) {
+			//System.out.println("Permission denied. You must have root privileges.");
+			//System.exit(1);
+		//}
 
-		if (args[0].equals("all")) {
+		if (args.length > 0 && args[0].equals("all")) {
 			createRemovePlans();
 			System.out.println("\n###############################\n");
 			createInstallPlans();
-		} else if (args[0].equals("install")) {
+		} else if (args.length > 0 && args[0].equals("install")) {
 			createInstallPlans();
-		} else if (args[0].equals("remove")) {
+		} else if (args.length > 0 && args[0].equals("remove")) {
 			createRemovePlans();
 		} else {
 			System.out.println("\nOptions:");

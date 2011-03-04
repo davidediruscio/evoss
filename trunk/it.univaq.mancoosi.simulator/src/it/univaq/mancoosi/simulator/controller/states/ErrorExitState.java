@@ -42,7 +42,7 @@ public class ErrorExitState extends SimulatorState {
 		
 		SystemModelManager sysModel = new SystemModelManager();
 
-		sysModel.setFailedConfigPackage(fsm.pkgModel.getName(),
+		sysModel.setHalfConfiguredPackage(fsm.pkgModel.getName(),
 				fsm.pkgModel.getVersion(), fsm.pkgModel.getConfFiles(),
 				fsm.pkgModel.getMaintainer(),
 				fsm.pkgModel.getArchitecture(), fsm.pkgModel.getSection(),

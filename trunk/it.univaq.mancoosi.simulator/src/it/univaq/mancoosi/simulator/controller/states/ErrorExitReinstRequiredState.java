@@ -12,7 +12,7 @@ public class ErrorExitReinstRequiredState extends SimulatorState {
 		
 		SystemModelManager sysModel = new SystemModelManager();
 
-		sysModel.setHalfInstalledPackage(fsm.pkgModel.getName(), fsm.pkgModel.getVersion(), fsm.pkgModel.getArchitecture());
+		sysModel.setHalfInstalledReinstRequiredPackage(fsm.pkgModel.getName(), fsm.pkgModel.getVersion(), fsm.pkgModel.getArchitecture());
 		sysModel.saveModel();
 		
 		throw new ErrorModelFoundException();
@@ -25,7 +25,7 @@ public class ErrorExitReinstRequiredState extends SimulatorState {
 		
 		SystemModelManager sysModel = new SystemModelManager();
 
-		sysModel.setHalfInstalledPackage(installedPkgModel.getName(), installedPkgModel.getVersion(), installedPkgModel.getArchitecture());
+		sysModel.setHalfInstalledReinstRequiredPackage(installedPkgModel.getName(), installedPkgModel.getVersion(), installedPkgModel.getArchitecture());
 		sysModel.saveModel();
 		
 		throw new ErrorModelFoundException();
@@ -38,7 +38,7 @@ public class ErrorExitReinstRequiredState extends SimulatorState {
 
 		SystemModelManager sysModel = new SystemModelManager();
 
-		sysModel.setFailedConfigPackage(installedPkgModel.getName(),
+		sysModel.setHalfConfiguredReinstRequiredPackage(installedPkgModel.getName(),
 				installedPkgModel.getVersion(), installedPkgModel.getConfFiles(),
 				installedPkgModel.getMaintainer(),
 				installedPkgModel.getArchitecture(), installedPkgModel.getSection(),

@@ -25,7 +25,9 @@ import it.univaq.mancoosi.mancoosimm.FileSystem;
 import it.univaq.mancoosi.mancoosimm.GConf;
 import it.univaq.mancoosi.mancoosimm.Group;
 import it.univaq.mancoosi.mancoosimm.HalfConfiguredPackage;
+import it.univaq.mancoosi.mancoosimm.HalfConfiguredReinstRequiredPackage;
 import it.univaq.mancoosi.mancoosimm.HalfInstalledPackage;
+import it.univaq.mancoosi.mancoosimm.HalfInstalledReinstRequiredPackage;
 import it.univaq.mancoosi.mancoosimm.IconCache;
 import it.univaq.mancoosi.mancoosimm.InformationFile;
 import it.univaq.mancoosi.mancoosimm.InstalledPackage;
@@ -123,7 +125,9 @@ public class MancoosiFactoryImpl extends EFactoryImpl implements MancoosiFactory
 			case MancoosiPackage.CONFIG_FILES_PACKAGE: return createConfigFilesPackage();
 			case MancoosiPackage.UNPACKED_PACKAGE: return createUnpackedPackage();
 			case MancoosiPackage.HALF_CONFIGURED_PACKAGE: return createHalfConfiguredPackage();
+			case MancoosiPackage.HALF_CONFIGURED_REINST_REQUIRED_PACKAGE: return createHalfConfiguredReinstRequiredPackage();
 			case MancoosiPackage.HALF_INSTALLED_PACKAGE: return createHalfInstalledPackage();
+			case MancoosiPackage.HALF_INSTALLED_REINST_REQUIRED_PACKAGE: return createHalfInstalledReinstRequiredPackage();
 			case MancoosiPackage.SRC_PACKAGE: return createSrcPackage();
 			case MancoosiPackage.BIN_PACKAGE: return createBinPackage();
 			case MancoosiPackage.VIRTUAL_PACKAGE: return createVirtualPackage();
@@ -277,9 +281,29 @@ public class MancoosiFactoryImpl extends EFactoryImpl implements MancoosiFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public HalfConfiguredReinstRequiredPackage createHalfConfiguredReinstRequiredPackage() {
+		HalfConfiguredReinstRequiredPackageImpl halfConfiguredReinstRequiredPackage = new HalfConfiguredReinstRequiredPackageImpl();
+		return halfConfiguredReinstRequiredPackage;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public HalfInstalledPackage createHalfInstalledPackage() {
 		HalfInstalledPackageImpl halfInstalledPackage = new HalfInstalledPackageImpl();
 		return halfInstalledPackage;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public HalfInstalledReinstRequiredPackage createHalfInstalledReinstRequiredPackage() {
+		HalfInstalledReinstRequiredPackageImpl halfInstalledReinstRequiredPackage = new HalfInstalledReinstRequiredPackageImpl();
+		return halfInstalledReinstRequiredPackage;
 	}
 
 	/**

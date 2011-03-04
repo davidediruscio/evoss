@@ -11,7 +11,9 @@ import it.univaq.mancoosi.mancoosimm.Configuration;
 import it.univaq.mancoosi.mancoosimm.Environment;
 import it.univaq.mancoosi.mancoosimm.FileSystem;
 import it.univaq.mancoosi.mancoosimm.HalfConfiguredPackage;
+import it.univaq.mancoosi.mancoosimm.HalfConfiguredReinstRequiredPackage;
 import it.univaq.mancoosi.mancoosimm.HalfInstalledPackage;
+import it.univaq.mancoosi.mancoosimm.HalfInstalledReinstRequiredPackage;
 import it.univaq.mancoosi.mancoosimm.InstalledPackage;
 import it.univaq.mancoosi.mancoosimm.MancoosiPackage;
 import it.univaq.mancoosi.mancoosimm.NotInstalledPackage;
@@ -49,6 +51,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link it.univaq.mancoosi.mancoosimm.impl.ConfigurationImpl#getUnpackedPackages <em>Unpacked Packages</em>}</li>
  *   <li>{@link it.univaq.mancoosi.mancoosimm.impl.ConfigurationImpl#getHalfConfiguredPackages <em>Half Configured Packages</em>}</li>
  *   <li>{@link it.univaq.mancoosi.mancoosimm.impl.ConfigurationImpl#getHalfInstalledPackages <em>Half Installed Packages</em>}</li>
+ *   <li>{@link it.univaq.mancoosi.mancoosimm.impl.ConfigurationImpl#getHalfConfiguredReinstRequiredPackages <em>Half Configured Reinst Required Packages</em>}</li>
+ *   <li>{@link it.univaq.mancoosi.mancoosimm.impl.ConfigurationImpl#getHalfInstalledReinstRequiredPackages <em>Half Installed Reinst Required Packages</em>}</li>
  * </ul>
  * </p>
  *
@@ -174,6 +178,26 @@ public class ConfigurationImpl extends NamedElementImpl implements Configuration
 	 * @ordered
 	 */
 	protected EList<HalfInstalledPackage> halfInstalledPackages;
+
+	/**
+	 * The cached value of the '{@link #getHalfConfiguredReinstRequiredPackages() <em>Half Configured Reinst Required Packages</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getHalfConfiguredReinstRequiredPackages()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<HalfConfiguredReinstRequiredPackage> halfConfiguredReinstRequiredPackages;
+
+	/**
+	 * The cached value of the '{@link #getHalfInstalledReinstRequiredPackages() <em>Half Installed Reinst Required Packages</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getHalfInstalledReinstRequiredPackages()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<HalfInstalledReinstRequiredPackage> halfInstalledReinstRequiredPackages;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -399,6 +423,30 @@ public class ConfigurationImpl extends NamedElementImpl implements Configuration
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<HalfConfiguredReinstRequiredPackage> getHalfConfiguredReinstRequiredPackages() {
+		if (halfConfiguredReinstRequiredPackages == null) {
+			halfConfiguredReinstRequiredPackages = new EObjectContainmentEList<HalfConfiguredReinstRequiredPackage>(HalfConfiguredReinstRequiredPackage.class, this, MancoosiPackage.CONFIGURATION__HALF_CONFIGURED_REINST_REQUIRED_PACKAGES);
+		}
+		return halfConfiguredReinstRequiredPackages;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<HalfInstalledReinstRequiredPackage> getHalfInstalledReinstRequiredPackages() {
+		if (halfInstalledReinstRequiredPackages == null) {
+			halfInstalledReinstRequiredPackages = new EObjectContainmentEList<HalfInstalledReinstRequiredPackage>(HalfInstalledReinstRequiredPackage.class, this, MancoosiPackage.CONFIGURATION__HALF_INSTALLED_REINST_REQUIRED_PACKAGES);
+		}
+		return halfInstalledReinstRequiredPackages;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -438,6 +486,10 @@ public class ConfigurationImpl extends NamedElementImpl implements Configuration
 				return ((InternalEList<?>)getHalfConfiguredPackages()).basicRemove(otherEnd, msgs);
 			case MancoosiPackage.CONFIGURATION__HALF_INSTALLED_PACKAGES:
 				return ((InternalEList<?>)getHalfInstalledPackages()).basicRemove(otherEnd, msgs);
+			case MancoosiPackage.CONFIGURATION__HALF_CONFIGURED_REINST_REQUIRED_PACKAGES:
+				return ((InternalEList<?>)getHalfConfiguredReinstRequiredPackages()).basicRemove(otherEnd, msgs);
+			case MancoosiPackage.CONFIGURATION__HALF_INSTALLED_REINST_REQUIRED_PACKAGES:
+				return ((InternalEList<?>)getHalfInstalledReinstRequiredPackages()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -470,6 +522,10 @@ public class ConfigurationImpl extends NamedElementImpl implements Configuration
 				return getHalfConfiguredPackages();
 			case MancoosiPackage.CONFIGURATION__HALF_INSTALLED_PACKAGES:
 				return getHalfInstalledPackages();
+			case MancoosiPackage.CONFIGURATION__HALF_CONFIGURED_REINST_REQUIRED_PACKAGES:
+				return getHalfConfiguredReinstRequiredPackages();
+			case MancoosiPackage.CONFIGURATION__HALF_INSTALLED_REINST_REQUIRED_PACKAGES:
+				return getHalfInstalledReinstRequiredPackages();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -519,6 +575,14 @@ public class ConfigurationImpl extends NamedElementImpl implements Configuration
 				getHalfInstalledPackages().clear();
 				getHalfInstalledPackages().addAll((Collection<? extends HalfInstalledPackage>)newValue);
 				return;
+			case MancoosiPackage.CONFIGURATION__HALF_CONFIGURED_REINST_REQUIRED_PACKAGES:
+				getHalfConfiguredReinstRequiredPackages().clear();
+				getHalfConfiguredReinstRequiredPackages().addAll((Collection<? extends HalfConfiguredReinstRequiredPackage>)newValue);
+				return;
+			case MancoosiPackage.CONFIGURATION__HALF_INSTALLED_REINST_REQUIRED_PACKAGES:
+				getHalfInstalledReinstRequiredPackages().clear();
+				getHalfInstalledReinstRequiredPackages().addAll((Collection<? extends HalfInstalledReinstRequiredPackage>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -561,6 +625,12 @@ public class ConfigurationImpl extends NamedElementImpl implements Configuration
 			case MancoosiPackage.CONFIGURATION__HALF_INSTALLED_PACKAGES:
 				getHalfInstalledPackages().clear();
 				return;
+			case MancoosiPackage.CONFIGURATION__HALF_CONFIGURED_REINST_REQUIRED_PACKAGES:
+				getHalfConfiguredReinstRequiredPackages().clear();
+				return;
+			case MancoosiPackage.CONFIGURATION__HALF_INSTALLED_REINST_REQUIRED_PACKAGES:
+				getHalfInstalledReinstRequiredPackages().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -593,6 +663,10 @@ public class ConfigurationImpl extends NamedElementImpl implements Configuration
 				return halfConfiguredPackages != null && !halfConfiguredPackages.isEmpty();
 			case MancoosiPackage.CONFIGURATION__HALF_INSTALLED_PACKAGES:
 				return halfInstalledPackages != null && !halfInstalledPackages.isEmpty();
+			case MancoosiPackage.CONFIGURATION__HALF_CONFIGURED_REINST_REQUIRED_PACKAGES:
+				return halfConfiguredReinstRequiredPackages != null && !halfConfiguredReinstRequiredPackages.isEmpty();
+			case MancoosiPackage.CONFIGURATION__HALF_INSTALLED_REINST_REQUIRED_PACKAGES:
+				return halfInstalledReinstRequiredPackages != null && !halfInstalledReinstRequiredPackages.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

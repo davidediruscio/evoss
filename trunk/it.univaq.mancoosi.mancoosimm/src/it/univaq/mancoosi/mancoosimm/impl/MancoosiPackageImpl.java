@@ -27,7 +27,9 @@ import it.univaq.mancoosi.mancoosimm.FileSystem;
 import it.univaq.mancoosi.mancoosimm.GConf;
 import it.univaq.mancoosi.mancoosimm.Group;
 import it.univaq.mancoosi.mancoosimm.HalfConfiguredPackage;
+import it.univaq.mancoosi.mancoosimm.HalfConfiguredReinstRequiredPackage;
 import it.univaq.mancoosi.mancoosimm.HalfInstalledPackage;
+import it.univaq.mancoosi.mancoosimm.HalfInstalledReinstRequiredPackage;
 import it.univaq.mancoosi.mancoosimm.IconCache;
 import it.univaq.mancoosi.mancoosimm.InformationFile;
 import it.univaq.mancoosi.mancoosimm.InstalledPackage;
@@ -143,7 +145,21 @@ public class MancoosiPackageImpl extends EPackageImpl implements MancoosiPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass halfConfiguredReinstRequiredPackageEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass halfInstalledPackageEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass halfInstalledReinstRequiredPackageEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -678,6 +694,24 @@ public class MancoosiPackageImpl extends EPackageImpl implements MancoosiPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getConfiguration_HalfConfiguredReinstRequiredPackages() {
+		return (EReference)configurationEClass.getEStructuralFeatures().get(10);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getConfiguration_HalfInstalledReinstRequiredPackages() {
+		return (EReference)configurationEClass.getEStructuralFeatures().get(11);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getPackage() {
 		return packageEClass;
 	}
@@ -1083,6 +1117,15 @@ public class MancoosiPackageImpl extends EPackageImpl implements MancoosiPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getHalfConfiguredReinstRequiredPackage() {
+		return halfConfiguredReinstRequiredPackageEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getHalfInstalledPackage() {
 		return halfInstalledPackageEClass;
 	}
@@ -1148,6 +1191,78 @@ public class MancoosiPackageImpl extends EPackageImpl implements MancoosiPackage
 	 */
 	public EAttribute getHalfInstalledPackage_Uploaders() {
 		return (EAttribute)halfInstalledPackageEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getHalfInstalledReinstRequiredPackage() {
+		return halfInstalledReinstRequiredPackageEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getHalfInstalledReinstRequiredPackage_Maintainer() {
+		return (EAttribute)halfInstalledReinstRequiredPackageEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getHalfInstalledReinstRequiredPackage_CheckSum() {
+		return (EAttribute)halfInstalledReinstRequiredPackageEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getHalfInstalledReinstRequiredPackage_Description() {
+		return (EAttribute)halfInstalledReinstRequiredPackageEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getHalfInstalledReinstRequiredPackage_Section() {
+		return (EAttribute)halfInstalledReinstRequiredPackageEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getHalfInstalledReinstRequiredPackage_Tag() {
+		return (EAttribute)halfInstalledReinstRequiredPackageEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getHalfInstalledReinstRequiredPackage_Priority() {
+		return (EAttribute)halfInstalledReinstRequiredPackageEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getHalfInstalledReinstRequiredPackage_Uploaders() {
+		return (EAttribute)halfInstalledReinstRequiredPackageEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -2884,6 +2999,8 @@ public class MancoosiPackageImpl extends EPackageImpl implements MancoosiPackage
 		createEReference(configurationEClass, CONFIGURATION__UNPACKED_PACKAGES);
 		createEReference(configurationEClass, CONFIGURATION__HALF_CONFIGURED_PACKAGES);
 		createEReference(configurationEClass, CONFIGURATION__HALF_INSTALLED_PACKAGES);
+		createEReference(configurationEClass, CONFIGURATION__HALF_CONFIGURED_REINST_REQUIRED_PACKAGES);
+		createEReference(configurationEClass, CONFIGURATION__HALF_INSTALLED_REINST_REQUIRED_PACKAGES);
 
 		packageEClass = createEClass(PACKAGE);
 		createEAttribute(packageEClass, PACKAGE__VERSION);
@@ -2936,6 +3053,8 @@ public class MancoosiPackageImpl extends EPackageImpl implements MancoosiPackage
 
 		halfConfiguredPackageEClass = createEClass(HALF_CONFIGURED_PACKAGE);
 
+		halfConfiguredReinstRequiredPackageEClass = createEClass(HALF_CONFIGURED_REINST_REQUIRED_PACKAGE);
+
 		halfInstalledPackageEClass = createEClass(HALF_INSTALLED_PACKAGE);
 		createEAttribute(halfInstalledPackageEClass, HALF_INSTALLED_PACKAGE__MAINTAINER);
 		createEAttribute(halfInstalledPackageEClass, HALF_INSTALLED_PACKAGE__CHECK_SUM);
@@ -2944,6 +3063,15 @@ public class MancoosiPackageImpl extends EPackageImpl implements MancoosiPackage
 		createEAttribute(halfInstalledPackageEClass, HALF_INSTALLED_PACKAGE__TAG);
 		createEAttribute(halfInstalledPackageEClass, HALF_INSTALLED_PACKAGE__PRIORITY);
 		createEAttribute(halfInstalledPackageEClass, HALF_INSTALLED_PACKAGE__UPLOADERS);
+
+		halfInstalledReinstRequiredPackageEClass = createEClass(HALF_INSTALLED_REINST_REQUIRED_PACKAGE);
+		createEAttribute(halfInstalledReinstRequiredPackageEClass, HALF_INSTALLED_REINST_REQUIRED_PACKAGE__MAINTAINER);
+		createEAttribute(halfInstalledReinstRequiredPackageEClass, HALF_INSTALLED_REINST_REQUIRED_PACKAGE__CHECK_SUM);
+		createEAttribute(halfInstalledReinstRequiredPackageEClass, HALF_INSTALLED_REINST_REQUIRED_PACKAGE__DESCRIPTION);
+		createEAttribute(halfInstalledReinstRequiredPackageEClass, HALF_INSTALLED_REINST_REQUIRED_PACKAGE__SECTION);
+		createEAttribute(halfInstalledReinstRequiredPackageEClass, HALF_INSTALLED_REINST_REQUIRED_PACKAGE__TAG);
+		createEAttribute(halfInstalledReinstRequiredPackageEClass, HALF_INSTALLED_REINST_REQUIRED_PACKAGE__PRIORITY);
+		createEAttribute(halfInstalledReinstRequiredPackageEClass, HALF_INSTALLED_REINST_REQUIRED_PACKAGE__UPLOADERS);
 
 		srcPackageEClass = createEClass(SRC_PACKAGE);
 		createEReference(srcPackageEClass, SRC_PACKAGE__BUILD_DEPENDS);
@@ -3218,7 +3346,9 @@ public class MancoosiPackageImpl extends EPackageImpl implements MancoosiPackage
 		configFilesPackageEClass.getESuperTypes().add(this.getPackage());
 		unpackedPackageEClass.getESuperTypes().add(this.getPackage());
 		halfConfiguredPackageEClass.getESuperTypes().add(this.getUnpackedPackage());
+		halfConfiguredReinstRequiredPackageEClass.getESuperTypes().add(this.getUnpackedPackage());
 		halfInstalledPackageEClass.getESuperTypes().add(this.getPackage());
+		halfInstalledReinstRequiredPackageEClass.getESuperTypes().add(this.getPackage());
 		srcPackageEClass.getESuperTypes().add(this.getInstalledPackage());
 		binPackageEClass.getESuperTypes().add(this.getInstalledPackage());
 		virtualPackageEClass.getESuperTypes().add(this.getInstalledPackage());
@@ -3265,6 +3395,8 @@ public class MancoosiPackageImpl extends EPackageImpl implements MancoosiPackage
 		initEReference(getConfiguration_UnpackedPackages(), this.getUnpackedPackage(), null, "unpackedPackages", null, 0, -1, Configuration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getConfiguration_HalfConfiguredPackages(), this.getHalfConfiguredPackage(), null, "halfConfiguredPackages", null, 0, -1, Configuration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getConfiguration_HalfInstalledPackages(), this.getHalfInstalledPackage(), null, "halfInstalledPackages", null, 0, -1, Configuration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getConfiguration_HalfConfiguredReinstRequiredPackages(), this.getHalfConfiguredReinstRequiredPackage(), null, "halfConfiguredReinstRequiredPackages", null, 0, -1, Configuration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getConfiguration_HalfInstalledReinstRequiredPackages(), this.getHalfInstalledReinstRequiredPackage(), null, "halfInstalledReinstRequiredPackages", null, 0, -1, Configuration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(packageEClass, it.univaq.mancoosi.mancoosimm.Package.class, "Package", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPackage_Version(), ecorePackage.getEString(), "version", null, 1, 1, it.univaq.mancoosi.mancoosimm.Package.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
@@ -3317,6 +3449,8 @@ public class MancoosiPackageImpl extends EPackageImpl implements MancoosiPackage
 
 		initEClass(halfConfiguredPackageEClass, HalfConfiguredPackage.class, "HalfConfiguredPackage", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
+		initEClass(halfConfiguredReinstRequiredPackageEClass, HalfConfiguredReinstRequiredPackage.class, "HalfConfiguredReinstRequiredPackage", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
 		initEClass(halfInstalledPackageEClass, HalfInstalledPackage.class, "HalfInstalledPackage", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getHalfInstalledPackage_Maintainer(), ecorePackage.getEString(), "maintainer", null, 1, 1, HalfInstalledPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEAttribute(getHalfInstalledPackage_CheckSum(), ecorePackage.getEString(), "checkSum", null, 1, 1, HalfInstalledPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
@@ -3325,6 +3459,15 @@ public class MancoosiPackageImpl extends EPackageImpl implements MancoosiPackage
 		initEAttribute(getHalfInstalledPackage_Tag(), ecorePackage.getEString(), "tag", null, 1, 1, HalfInstalledPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEAttribute(getHalfInstalledPackage_Priority(), this.getPriorityType(), "priority", null, 1, 1, HalfInstalledPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEAttribute(getHalfInstalledPackage_Uploaders(), ecorePackage.getEString(), "uploaders", null, 1, 1, HalfInstalledPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+
+		initEClass(halfInstalledReinstRequiredPackageEClass, HalfInstalledReinstRequiredPackage.class, "HalfInstalledReinstRequiredPackage", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getHalfInstalledReinstRequiredPackage_Maintainer(), ecorePackage.getEString(), "maintainer", null, 1, 1, HalfInstalledReinstRequiredPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getHalfInstalledReinstRequiredPackage_CheckSum(), ecorePackage.getEString(), "checkSum", null, 1, 1, HalfInstalledReinstRequiredPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getHalfInstalledReinstRequiredPackage_Description(), ecorePackage.getEString(), "description", null, 1, 1, HalfInstalledReinstRequiredPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getHalfInstalledReinstRequiredPackage_Section(), ecorePackage.getEString(), "section", null, 1, 1, HalfInstalledReinstRequiredPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getHalfInstalledReinstRequiredPackage_Tag(), ecorePackage.getEString(), "tag", null, 1, 1, HalfInstalledReinstRequiredPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getHalfInstalledReinstRequiredPackage_Priority(), this.getPriorityType(), "priority", null, 1, 1, HalfInstalledReinstRequiredPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getHalfInstalledReinstRequiredPackage_Uploaders(), ecorePackage.getEString(), "uploaders", null, 1, 1, HalfInstalledReinstRequiredPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(srcPackageEClass, SrcPackage.class, "SrcPackage", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSrcPackage_BuildDepends(), this.getBinPackage(), null, "buildDepends", null, 0, -1, SrcPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
