@@ -26,6 +26,12 @@
         ordered="false" upperBound="-1" eType="#//HalfConfiguredPackage" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="halfInstalledPackages"
         ordered="false" upperBound="-1" eType="#//HalfInstalledPackage" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="halfConfiguredReinstRequiredPackages"
+        ordered="false" upperBound="-1" eType="#//HalfConfiguredReinstRequiredPackage"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="halfInstalledReinstRequiredPackages"
+        ordered="false" upperBound="-1" eType="#//HalfInstalledReinstRequiredPackage"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Package" abstract="true" eSuperTypes="#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" ordered="false"
@@ -115,7 +121,26 @@
         upperBound="-1" eType="#//File"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="HalfConfiguredPackage" eSuperTypes="#//UnpackedPackage"/>
+  <eClassifiers xsi:type="ecore:EClass" name="HalfConfiguredReinstRequiredPackage"
+      eSuperTypes="#//UnpackedPackage"/>
   <eClassifiers xsi:type="ecore:EClass" name="HalfInstalledPackage" eSuperTypes="#//Package">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maintainer" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="checkSum" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="section" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tag" ordered="false" unique="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="priority" ordered="false"
+        unique="false" lowerBound="1" eType="#//PriorityType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="uploaders" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HalfInstalledReinstRequiredPackage"
+      eSuperTypes="#//Package">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="maintainer" ordered="false"
         unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="checkSum" ordered="false"

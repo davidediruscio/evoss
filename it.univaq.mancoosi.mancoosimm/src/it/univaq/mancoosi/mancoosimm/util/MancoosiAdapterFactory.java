@@ -27,7 +27,9 @@ import it.univaq.mancoosi.mancoosimm.FileSystem;
 import it.univaq.mancoosi.mancoosimm.GConf;
 import it.univaq.mancoosi.mancoosimm.Group;
 import it.univaq.mancoosi.mancoosimm.HalfConfiguredPackage;
+import it.univaq.mancoosi.mancoosimm.HalfConfiguredReinstRequiredPackage;
 import it.univaq.mancoosi.mancoosimm.HalfInstalledPackage;
+import it.univaq.mancoosi.mancoosimm.HalfInstalledReinstRequiredPackage;
 import it.univaq.mancoosi.mancoosimm.IconCache;
 import it.univaq.mancoosi.mancoosimm.InformationFile;
 import it.univaq.mancoosi.mancoosimm.InstalledPackage;
@@ -159,8 +161,16 @@ public class MancoosiAdapterFactory extends AdapterFactoryImpl {
 				return createHalfConfiguredPackageAdapter();
 			}
 			@Override
+			public Adapter caseHalfConfiguredReinstRequiredPackage(HalfConfiguredReinstRequiredPackage object) {
+				return createHalfConfiguredReinstRequiredPackageAdapter();
+			}
+			@Override
 			public Adapter caseHalfInstalledPackage(HalfInstalledPackage object) {
 				return createHalfInstalledPackageAdapter();
+			}
+			@Override
+			public Adapter caseHalfInstalledReinstRequiredPackage(HalfInstalledReinstRequiredPackage object) {
+				return createHalfInstalledReinstRequiredPackageAdapter();
 			}
 			@Override
 			public Adapter caseSrcPackage(SrcPackage object) {
@@ -483,6 +493,20 @@ public class MancoosiAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link it.univaq.mancoosi.mancoosimm.HalfConfiguredReinstRequiredPackage <em>Half Configured Reinst Required Package</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see it.univaq.mancoosi.mancoosimm.HalfConfiguredReinstRequiredPackage
+	 * @generated
+	 */
+	public Adapter createHalfConfiguredReinstRequiredPackageAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link it.univaq.mancoosi.mancoosimm.HalfInstalledPackage <em>Half Installed Package</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -493,6 +517,20 @@ public class MancoosiAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createHalfInstalledPackageAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link it.univaq.mancoosi.mancoosimm.HalfInstalledReinstRequiredPackage <em>Half Installed Reinst Required Package</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see it.univaq.mancoosi.mancoosimm.HalfInstalledReinstRequiredPackage
+	 * @generated
+	 */
+	public Adapter createHalfInstalledReinstRequiredPackageAdapter() {
 		return null;
 	}
 

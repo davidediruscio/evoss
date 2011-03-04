@@ -27,7 +27,9 @@ import it.univaq.mancoosi.mancoosimm.FileSystem;
 import it.univaq.mancoosi.mancoosimm.GConf;
 import it.univaq.mancoosi.mancoosimm.Group;
 import it.univaq.mancoosi.mancoosimm.HalfConfiguredPackage;
+import it.univaq.mancoosi.mancoosimm.HalfConfiguredReinstRequiredPackage;
 import it.univaq.mancoosi.mancoosimm.HalfInstalledPackage;
+import it.univaq.mancoosi.mancoosimm.HalfInstalledReinstRequiredPackage;
 import it.univaq.mancoosi.mancoosimm.IconCache;
 import it.univaq.mancoosi.mancoosimm.InformationFile;
 import it.univaq.mancoosi.mancoosimm.InstalledPackage;
@@ -203,11 +205,28 @@ public class MancoosiSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case MancoosiPackage.HALF_CONFIGURED_REINST_REQUIRED_PACKAGE: {
+				HalfConfiguredReinstRequiredPackage halfConfiguredReinstRequiredPackage = (HalfConfiguredReinstRequiredPackage)theEObject;
+				T result = caseHalfConfiguredReinstRequiredPackage(halfConfiguredReinstRequiredPackage);
+				if (result == null) result = caseUnpackedPackage(halfConfiguredReinstRequiredPackage);
+				if (result == null) result = casePackage(halfConfiguredReinstRequiredPackage);
+				if (result == null) result = caseNamedElement(halfConfiguredReinstRequiredPackage);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case MancoosiPackage.HALF_INSTALLED_PACKAGE: {
 				HalfInstalledPackage halfInstalledPackage = (HalfInstalledPackage)theEObject;
 				T result = caseHalfInstalledPackage(halfInstalledPackage);
 				if (result == null) result = casePackage(halfInstalledPackage);
 				if (result == null) result = caseNamedElement(halfInstalledPackage);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case MancoosiPackage.HALF_INSTALLED_REINST_REQUIRED_PACKAGE: {
+				HalfInstalledReinstRequiredPackage halfInstalledReinstRequiredPackage = (HalfInstalledReinstRequiredPackage)theEObject;
+				T result = caseHalfInstalledReinstRequiredPackage(halfInstalledReinstRequiredPackage);
+				if (result == null) result = casePackage(halfInstalledReinstRequiredPackage);
+				if (result == null) result = caseNamedElement(halfInstalledReinstRequiredPackage);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -656,6 +675,21 @@ public class MancoosiSwitch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Half Configured Reinst Required Package</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Half Configured Reinst Required Package</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseHalfConfiguredReinstRequiredPackage(HalfConfiguredReinstRequiredPackage object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Half Installed Package</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -667,6 +701,21 @@ public class MancoosiSwitch<T> {
 	 * @generated
 	 */
 	public T caseHalfInstalledPackage(HalfInstalledPackage object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Half Installed Reinst Required Package</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Half Installed Reinst Required Package</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseHalfInstalledReinstRequiredPackage(HalfInstalledReinstRequiredPackage object) {
 		return null;
 	}
 

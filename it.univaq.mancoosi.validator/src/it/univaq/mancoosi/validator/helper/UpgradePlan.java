@@ -117,21 +117,23 @@ public class UpgradePlan {
 
 		if (!(new File(pathPackageModel)).exists()) {
 
-			String[] cmd = { "/bin/sh", "-c", "apt-get -d -y -q " + name };
+			String[] cmd = { "/bin/sh", "-c", " apt-get -d -y -q " + name };
 			Process ps = Runtime.getRuntime().exec(cmd);
 
+
 			ps.waitFor();
-			if (ps.exitValue() != 0) {
-				throw new Exception(
-						"An error has occurred during the download of the "+name+" package.");
-			}
+			//	System.out.println(ps.exitValue());
+			//	throw new Exception("An error has occurred during the download of the "+name+" package.");
+			//}
 			ps.destroy();
 
 			File jarFile = new File(
 					"../it.univaq.mancoosi.injectors.packages/pkginj.jar");
+			
+			System.gc();
 
 			if (!jarFile.exists()) {
-				throw new Exception("File"
+				throw new Exception("File "
 						+ "../it.univaq.mancoosi.injectors.packages/pkginj.jar"
 						+ " not found");
 			}
@@ -167,6 +169,8 @@ public class UpgradePlan {
 				throw new Exception(" <-- Model generation failed.");
 			}
 
+			System.gc();
+			
 			if ((new File(pathPackageModel)).exists()) {
 				System.out
 						.println(" <-- Model generation completed successfully.");
@@ -268,25 +272,28 @@ public class UpgradePlan {
 			Boolean correctNoScript = false;
 			Boolean correctWithScript = false;
 
-			FileReader file = new FileReader(correctPackageWithScriptFile);
-			BufferedReader input = new BufferedReader(file);
-			String line;
-
-			while ((line = input.readLine()) != null) {
-				if (line.contains(operation.getName()))
-					correctWithScript = true;
-			}
-
-			if (!correctWithScript) {
-
-				file = new FileReader(correctPackageNoScriptFile);
-				input = new BufferedReader(file);
+			if (new File(correctPackageWithScriptFile).exists()) {
+				FileReader file = new FileReader(correctPackageWithScriptFile);
+				BufferedReader input = new BufferedReader(file);
+				String line;
 
 				while ((line = input.readLine()) != null) {
 					if (line.contains(operation.getName()))
-						correctNoScript = true;
+						correctWithScript = true;
 				}
+			}
 
+			if (!correctWithScript) {
+				if (new File(correctPackageNoScriptFile).exists()) {
+					FileReader file = new FileReader(correctPackageNoScriptFile);
+					BufferedReader input = new BufferedReader(file);
+					String line;
+
+					while ((line = input.readLine()) != null) {
+						if (line.contains(operation.getName()))
+							correctNoScript = true;
+					}
+				}
 			}
 
 			packageModelPath = packageModelPath.concat(operation.getName()

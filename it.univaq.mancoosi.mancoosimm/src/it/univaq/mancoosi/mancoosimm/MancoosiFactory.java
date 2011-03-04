@@ -80,6 +80,15 @@ public interface MancoosiFactory extends EFactory {
 	HalfConfiguredPackage createHalfConfiguredPackage();
 
 	/**
+	 * Returns a new object of class '<em>Half Configured Reinst Required Package</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Half Configured Reinst Required Package</em>'.
+	 * @generated
+	 */
+	HalfConfiguredReinstRequiredPackage createHalfConfiguredReinstRequiredPackage();
+
+	/**
 	 * Returns a new object of class '<em>Half Installed Package</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -87,6 +96,15 @@ public interface MancoosiFactory extends EFactory {
 	 * @generated
 	 */
 	HalfInstalledPackage createHalfInstalledPackage();
+
+	/**
+	 * Returns a new object of class '<em>Half Installed Reinst Required Package</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Half Installed Reinst Required Package</em>'.
+	 * @generated
+	 */
+	HalfInstalledReinstRequiredPackage createHalfInstalledReinstRequiredPackage();
 
 	/**
 	 * Returns a new object of class '<em>Src Package</em>'.

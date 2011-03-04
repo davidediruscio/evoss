@@ -2,9 +2,12 @@
 package it.univaq.mancoosi.simulator.controller;
 
 import java.io.File;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 import it.univaq.mancoosi.mancoosimm.ConfigFilesPackage;
+import it.univaq.mancoosi.mancoosimm.HalfConfiguredReinstRequiredPackage;
+import it.univaq.mancoosi.mancoosimm.HalfInstalledReinstRequiredPackage;
 import it.univaq.mancoosi.mancoosimm.InstalledPackage;
 import it.univaq.mancoosi.simulator.controller.managers.ErrorModelManager;
 import it.univaq.mancoosi.simulator.controller.managers.PackageModelManager;
@@ -52,22 +55,28 @@ public class SimulatorController {
 	private SimulatorController() throws Exception {
 		
 		config = SimulatorConfig.getInstance();
-		
+
 		// delete archives older than N days
 		FileManagement.deleteFilesOlderThanNdays(config.getDeleteFilesOlderThanNdays(),
 				config.getDirBackup());
-		
         // remove the output of a previous simulation.
         this.deleteOldModel();
-		
 	}
 
 	
 	/**
 	 * 
 	 * @param args
+	 * @throws URISyntaxException 
 	 */
 	public void setArgs(String[] args) {
+		
+		if(args.length > 0 && (args[0].equals("--help") || args[0].equals("-h"))) {
+			System.out.println("Arguments: ");
+			System.out.println(" [path_upgradePlan] [path_inputConfigurationModel] [path_outputConfigurationModel] [path_outputReportModel]\n");
+			System.exit(0);
+		}
+		
 		for (int i = 0; i < args.length; i++) {		
 			if (args[i].endsWith(".xml")) {
 				config.setFilePackageSequence(args[i]);
@@ -153,9 +162,75 @@ public class SimulatorController {
 						p = new SimulatorContext(newPkgManager);
 						p.install(old.getVersion());
 	
+					} else if (sysModel.isHalfInstalledReinstRequiredPackage((sequencePkg.getPackageName(i)))) { 
+						// reinstall from half-installed state (Reinst-Required)
+						
+						HalfInstalledReinstRequiredPackage old = sysModel.getHalfInstalledReinstRequiredPackage(sequencePkg.getPackageName(i));
+						System.out.println("Reinstallation of "+old.getName()+" "+old.getVersion()
+											+" (HalfInstalled - ReinstRequired)");
+						
+						String pathPackageOldModel = PackageModelRetrieval.getPath(config, old.getName(), old.getVersion(), old.getArchitecture());
+						
+						usedModels.add(pathPackageOldModel);
+						
+						PackageModelManager pkgManagerOld = new PackageModelManager(pathPackageOldModel);
+						p = new SimulatorContext(pkgManagerOld);
+						// reinstall
+						p.install();
+						
+						if (!old.getVersion().equals(sequencePkg.getPackageVersion(i))) {
+							// possible upgrade
+							System.out.println("Upgrade of "+sequencePkg.getPackageName(i)+" "
+									+old.getVersion()+" to "+sequencePkg.getPackageVersion(i));
+							
+							String pathPackageModel = PackageModelRetrieval.getPath(config, sequencePkg.getPackageName(i),
+									  sequencePkg.getPackageVersion(i),
+									  sequencePkg.getPackageArchitecture(i));
+							
+							usedModels.add(pathPackageModel);
+							
+							PackageModelManager newPkgManager = new PackageModelManager(pathPackageModel);
+							p = new SimulatorContext(newPkgManager);
+							p.upgrade(pkgManagerOld);
+							
+						}
+	
+					} else if (sysModel.isHalfConfiguredReinstRequiredPackage((sequencePkg.getPackageName(i)))) { 
+						// reinstall from half-configured (= Config-failed) state (Reinst-Required)
+						
+						HalfConfiguredReinstRequiredPackage old = sysModel.getHalfConfiguredReinstRequiredPackage(sequencePkg.getPackageName(i));
+						System.out.println("Reinstallation of "+old.getName()+" "+old.getVersion()
+											+" (HalfInstalled - ReinstRequired)");
+						
+						String pathPackageOldModel = PackageModelRetrieval.getPath(config, old.getName(), old.getVersion(), old.getArchitecture());
+						
+						usedModels.add(pathPackageOldModel);
+						
+						PackageModelManager pkgManagerOld = new PackageModelManager(pathPackageOldModel);
+						p = new SimulatorContext(pkgManagerOld);
+						// reinstall
+						p.install();
+						
+						if (!old.getVersion().equals(sequencePkg.getPackageVersion(i))) {
+							// possible upgrade
+							System.out.println("Upgrade of "+sequencePkg.getPackageName(i)+" "
+									+old.getVersion()+" to "+sequencePkg.getPackageVersion(i));
+							
+							String pathPackageModel = PackageModelRetrieval.getPath(config, sequencePkg.getPackageName(i),
+									  sequencePkg.getPackageVersion(i),
+									  sequencePkg.getPackageArchitecture(i));
+							
+							usedModels.add(pathPackageModel);
+							
+							PackageModelManager newPkgManager = new PackageModelManager(pathPackageModel);
+							p = new SimulatorContext(newPkgManager);
+							p.upgrade(pkgManagerOld);
+							
+						}
+	
 					} else if (!(sysModel.isHalfConfiguredPackage(sequencePkg.getPackageName(i))
-								|| sysModel.isHalfInstalledPackage(sequencePkg.getPackageName(i))
-								|| sysModel.isUnpackedPackage(sequencePkg.getPackageName(i)))) {
+							|| sysModel.isHalfInstalledPackage(sequencePkg.getPackageName(i))
+							|| sysModel.isUnpackedPackage(sequencePkg.getPackageName(i)))) {
 						
 						// simple case: install from NotInstalledState
 						System.out.println("Installation of "+sequencePkg.getPackageName(i)+" "
@@ -169,7 +244,8 @@ public class SimulatorController {
 						
 						PackageModelManager newPkgManager = new PackageModelManager(pathPackageModel);
 						p = new SimulatorContext(newPkgManager);
-						p.install();	
+						p.install();
+						
 					} else {
 						throw new SelectionStateNotPermittedException("The requested selection-state '"+action
 								+"' is not allowed on the current status of the package "+sequencePkg.getPackageName(i)
@@ -184,10 +260,7 @@ public class SimulatorController {
 						
 						String name = sequencePkg.getPackageName(i);
 						String version = sequencePkg.getPackageVersion(i);
-						String architecture = sequencePkg.getPackageArchitecture(i);						
-						if (architecture == null) {
-							architecture = sysModel.getInstalledPackage(name, version).getArchitecture();
-						}
+						String architecture = sequencePkg.getPackageArchitecture(i);
 
 						String pathPackageModel = PackageModelRetrieval.getPath(config, name, version, architecture);
 						usedModels.add(pathPackageModel);
@@ -195,6 +268,25 @@ public class SimulatorController {
 						PackageModelManager newPkgManager = new PackageModelManager(pathPackageModel);
 						p = new SimulatorContext(newPkgManager);
 						p.remove();
+						
+					} else if (sysModel.isHalfInstalledReinstRequiredPackage((sequencePkg.getPackageName(i)))
+							|| sysModel.isHalfConfiguredReinstRequiredPackage((sequencePkg.getPackageName(i)))) { 
+							// reinstall from half-installed/half-configured  state + remove (Reinst-Required)
+						
+						String name = sequencePkg.getPackageName(i);
+						String version = sequencePkg.getPackageVersion(i);
+						String architecture = sequencePkg.getPackageArchitecture(i);
+
+						String pathPackageModel = PackageModelRetrieval.getPath(config, name, version, architecture);
+						usedModels.add(pathPackageModel);
+						
+						PackageModelManager newPkgManager = new PackageModelManager(pathPackageModel);
+						p = new SimulatorContext(newPkgManager);
+						// "reinstall"
+						p.install();
+						// remove
+						p.remove();
+	
 					} else {
 						throw new SelectionStateNotPermittedException("The requested selection-state '"+action
 								+"' is not allowed on the current status of the package "+sequencePkg.getPackageName(i)
@@ -212,10 +304,7 @@ public class SimulatorController {
 						String name = sequencePkg.getPackageName(i);
 						String version = sequencePkg.getPackageVersion(i);
 						String architecture = sequencePkg.getPackageArchitecture(i);						
-						if (architecture == null) {
-							architecture = sysModel.getInstalledPackage(name, version).getArchitecture();
-						}
-
+						
 						String pathPackageModel = PackageModelRetrieval.getPath(config, name, version, architecture);
 						usedModels.add(pathPackageModel);
 						
@@ -242,6 +331,24 @@ public class SimulatorController {
 						p = new SimulatorContext(newPkgManager);
 						p.purgeConfFiles();
 						
+					} else if (sysModel.isHalfInstalledReinstRequiredPackage((sequencePkg.getPackageName(i)))
+							|| sysModel.isHalfConfiguredReinstRequiredPackage((sequencePkg.getPackageName(i)))) { 
+						     // reinstall from half-installed/half-configured  state + purge (Reinst-Required)
+						
+						String name = sequencePkg.getPackageName(i);
+						String version = sequencePkg.getPackageVersion(i);
+						String architecture = sequencePkg.getPackageArchitecture(i);
+
+						String pathPackageModel = PackageModelRetrieval.getPath(config, name, version, architecture);
+						usedModels.add(pathPackageModel);
+						
+						PackageModelManager newPkgManager = new PackageModelManager(pathPackageModel);
+						p = new SimulatorContext(newPkgManager);
+						// "reinstall"
+						p.install();
+						// purge
+						p.purge();
+	
 					} else {
 						throw new SelectionStateNotPermittedException("The requested selection-state '"+action
 								+"' is not allowed on the current status of the package "+sequencePkg.getPackageName(i)
