@@ -8,10 +8,9 @@ import it.univaq.mancoosi.validator.util.ValidatorConfig;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
-
-import javax.xml.bind.ValidationException;
 
 public abstract class Validator {
 
@@ -30,7 +29,7 @@ public abstract class Validator {
 			System.exit(1);
 		}
 
-		if (args == null || args.length == 0 || !options.containsKey(args[0])) {
+		if (args == null || args.length < 2 || !options.containsKey(args[0])) {
 			printHelpCommand();
 			System.exit(1);
 		}
@@ -200,7 +199,7 @@ public abstract class Validator {
 
 	
 	private void launchSimulator(String pathJarFile, String arg1,
-			String arg2, String arg3, String arg4) throws Exception {
+			String arg2, String arg3, String arg4) throws ValidatorException, IOException {
 
 		File jarFile = new File(pathJarFile);
 		if (!jarFile.exists()) {
@@ -221,23 +220,19 @@ public abstract class Validator {
 		  System.out.println(" --> "+resultLine);
 		  resultLine = in.readLine();
 		}
-		proc.waitFor();
-		
-		if (proc.exitValue() != 0) {
-			throw new ValidationException("An error occurred during the simulation.");
+		try {
+			proc.waitFor();
+		} catch (InterruptedException e) {
+			throw new ValidatorException("An error occurred during the simulation.", e);
 		}
 		
 		proc.destroy();
 
 	}
 
-	protected abstract void createXML(String params, String filePath) throws Exception;
 
-	protected abstract void realUpgrade(String params) throws Exception;
-	
-	protected abstract void downloadingPackages(String params) throws Exception;
 
-	private static void launchInjector(String pathJarFile) throws Exception {
+	private static void launchInjector(String pathJarFile) throws ValidatorException, IOException {
 
 		File jarFile = new File(pathJarFile);
 		if (!jarFile.exists()) {
@@ -259,13 +254,18 @@ public abstract class Validator {
 		  resultLine = in.readLine();
 		}
 
-		proc.waitFor();
-		
-		if (proc.exitValue() != 0) {
-			throw new ValidationException("An error occurred during the injection.");
+		try {
+			proc.waitFor();
+		} catch (InterruptedException e) {
+			throw new ValidatorException("An error occurred during the injection.", e);
 		}
 
-		proc.destroy();
-		
+		proc.destroy();	
 	 }
+	
+	protected abstract void createXML(String params, String filePath) throws Exception;
+
+	protected abstract void realUpgrade(String params) throws Exception;
+	
+	protected abstract void downloadingPackages(String params) throws Exception;
 }

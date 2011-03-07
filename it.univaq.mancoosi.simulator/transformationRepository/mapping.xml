@@ -1,21 +1,68 @@
 <?xml version="1.0"?>
 <config>
-	<mapping elementModel="PostinstDesktop" transformationFile="update_desktopdb.atl"/>
-	<mapping elementModel="PostinstEmacsen" transformationFile="inst_emacs_package.atl"/>
-	<mapping elementModel="PostinstGconf" transformationFile="postinst_gconf.atl"/>
-	<mapping elementModel="PostinstModules" transformationFile="update_modules.atl"/>
+	<!--<mapping elementModel="PostinstDesktop" transformationFile="update_desktopdb.atl"/>-->
+	<!--<mapping elementModel="PostinstEmacsen" transformationFile="inst_emacs_package.atl"/>-->
+	<!--<mapping elementModel="PostinstGconf" transformationFile="postinst_gconf.atl"/>-->
+	<!--<mapping elementModel="PostinstModules" transformationFile="update_modules.atl"/>-->
 	<mapping elementModel="PostinstAddAlternative" transformationFile="add_alternative_deb.atl"/>
 	
-	<mapping elementModel="PostrmDesktop" transformationFile="update_desktopdb.atl"/>
-	<mapping elementModel="PostrmGconf" transformationFile="postrm_gconf.atl"/>
-	<mapping elementModel="PostrmModules" transformationFile="update_modules.atl"/>
+	<!--<mapping elementModel="PostrmDesktop" transformationFile="update_desktopdb.atl"/>-->
+	<!--<mapping elementModel="PostrmGconf" transformationFile="postrm_gconf.atl"/>-->
+	<!--<mapping elementModel="PostrmModules" transformationFile="update_modules.atl"/>-->
 	
-	<mapping elementModel="PrermDocBase" transformationFile="rm_doc.atl"/>
-	<mapping elementModel="PrermEmacsen" transformationFile="rm_emacs_package.atl"/>
-	<mapping elementModel="PrermGconf" transformationFile="prerm_gconf.atl"/>
+	<!--<mapping elementModel="PrermDocBase" transformationFile="rm_doc.atl"/>-->
+	<!--<mapping elementModel="PrermEmacsen" transformationFile="rm_emacs_package.atl"/>-->
+	<!--<mapping elementModel="PrermGconf" transformationFile="prerm_gconf.atl"/>-->
 	
 	<mapping elementModel="Message" transformationFile="default_copy.atl"/>
 	
 	<!--<mapping elementModel="If" transformationFile="conditionHOT.atl"/>-->
 	<!--<mapping elementModel="Return" transformationFile="exit.atl"/>-->
+	
+	<mapping elementModel="PostinstDesktop" transformationFile="default_copy.atl"/>
+	<mapping elementModel="PostinstEmacsen" transformationFile="default_copy.atl"/>
+	<mapping elementModel="PostinstGconf" transformationFile="default_copy.atl"/>
+	<mapping elementModel="PostinstModules" transformationFile="default_copy.atl"/>
+	<mapping elementModel="PostrmDesktop" transformationFile="default_copy.atl"/>
+	<mapping elementModel="PostrmGconf" transformationFile="default_copy.atl"/>
+	<mapping elementModel="PostrmModules" transformationFile="default_copy.atl"/>
+	<mapping elementModel="PrermDocBase" transformationFile="default_copy.atl"/>
+	<mapping elementModel="PrermEmacsen" transformationFile="default_copy.atl"/>
+	<mapping elementModel="PrermGconf" transformationFile="default_copy.atl"/>
+	
+	
+	<mapping elementModel="PostinstMenu" transformationFile="default_copy.atl"/>
+	<mapping elementModel="PostinstGconfDefaults" transformationFile="default_copy.atl"/>
+	<mapping elementModel="PostinstMenuMethod" transformationFile="default_copy.atl"/>
+	<mapping elementModel="PostinstDocBase" transformationFile="default_copy.atl"/>
+	<mapping elementModel="PostinstInfo" transformationFile="default_copy.atl"/>
+	<mapping elementModel="PostinstInit" transformationFile="default_copy.atl"/>
+	<mapping elementModel="PostinstInitRestart" transformationFile="default_copy.atl"/>
+	<mapping elementModel="PostinstInitNostart" transformationFile="default_copy.atl"/>
+	<mapping elementModel="PostinstMakeshlibs" transformationFile="default_copy.atl"/>
+	<mapping elementModel="PostinstPython" transformationFile="default_copy.atl"/>
+	<mapping elementModel="PostinstScrollkeeper" transformationFile="default_copy.atl"/>
+	<mapping elementModel="PostinstSgmlcatalog" transformationFile="default_copy.atl"/>
+	<mapping elementModel="PostinstUsrlocal" transformationFile="default_copy.atl"/>
+	<mapping elementModel="PostinstSuid" transformationFile="default_copy.atl"/>
+	<mapping elementModel="PostinstUdev" transformationFile="default_copy.atl"/>
+	<mapping elementModel="UpdatePythonModules" transformationFile="default_copy.atl"/>
+	<mapping elementModel="PostinstXfonts" transformationFile="default_copy.atl"/>
+	<mapping elementModel="PreinstUdev" transformationFile="default_copy.atl"/>
+	<mapping elementModel="PostrmGconfDefaults" transformationFile="default_copy.atl"/>
+	<mapping elementModel="PostrmMenu" transformationFile="default_copy.atl"/>
+	<mapping elementModel="PostrmMakeshlibs" transformationFile="default_copy.atl"/>
+	<mapping elementModel="PostrmIcons" transformationFile="default_copy.atl"/>
+	<mapping elementModel="PostrmInit" transformationFile="default_copy.atl"/>
+	<mapping elementModel="PostrmMenuMethod" transformationFile="default_copy.atl"/>
+	<mapping elementModel="PostrmScrollkeeper" transformationFile="default_copy.atl"/>
+	<mapping elementModel="PostrmSgmlcatalog" transformationFile="default_copy.atl"/>
+	<mapping elementModel="PostrmSuid" transformationFile="default_copy.atl"/>
+	<mapping elementModel="PostrmXfonts" transformationFile="default_copy.atl"/>
+	<mapping elementModel="PrermInfo" transformationFile="default_copy.atl"/>
+	<mapping elementModel="PrermInit" transformationFile="default_copy.atl"/>
+	<mapping elementModel="PrermInitNorestart" transformationFile="default_copy.atl"/>
+	<mapping elementModel="PrermPython" transformationFile="default_copy.atl"/>
+	<mapping elementModel="PrermSgmlcatalog" transformationFile="default_copy.atl"/>
+	<mapping elementModel="PrermUsrlocal" transformationFile="default_copy.atl"/>
 </config>

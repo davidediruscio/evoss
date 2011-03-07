@@ -7,60 +7,81 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import it.univaq.mancoosi.validator.exceptions.ValidatorException;
 import it.univaq.mancoosi.validator.util.XMLFileWriter;
 
 public class Helper {
 
-	public static void main(String[] args) throws Exception {
-		
-		//if (!System.getProperty("user.name").equals("root")) {
-			//System.out.println("Permission denied. You must have root privileges.");
-			//System.exit(1);
-		//}
+	public static void main(String[] args) {
+		try {
+			if (!System.getProperty("user.name").equals("root")) {
+				System.out.println("Permission denied. You must have root privileges.");
+				System.exit(1);
+			}
 
-		if (args.length > 0 && args[0].equals("all")) {
-			createRemovePlans();
-			System.out.println("\n###############################\n");
-			createInstallPlans();
-		} else if (args.length > 0 && args[0].equals("install")) {
-			createInstallPlans();
-		} else if (args.length > 0 && args[0].equals("remove")) {
-			createRemovePlans();
-		} else {
-			System.out.println("\nOptions:");
-			System.out.println("install --> generate install/upgrade plans");
-			System.out.println("remove --> generate remove plans");
-			System.out.println("all --> generate install/upgrade/remove plans");
+			if (args.length > 0 && args[0].equals("all")) {
+
+				createRemovePlans();
+				System.out.println("\n###############################\n");
+				createInstallPlans();
+			} else if (args.length > 0 && args[0].equals("install")) {
+				createInstallPlans();
+			} else if (args.length > 0 && args[0].equals("remove")) {
+				createRemovePlans();
+			} else {
+				System.out.println("\nOptions:");
+				System.out.println("install --> generate install/upgrade plans");
+				System.out.println("remove --> generate remove plans");
+				System.out.println("all --> generate install/upgrade/remove plans");
+			}
+		} catch (Exception e) {
+			e.printStackTrace(System.out);
 		}
-
 	}
 	
-	private static void createInstallPlans() throws Exception {
+	private static void createInstallPlans() throws ValidatorException, IOException {
 
 		ArrayList<UpgradePlan> upgradePlans = new ArrayList<UpgradePlan>();
-		
+		ArrayList<String> packages = new ArrayList<String>();
 		UpgradePlan ap;
-
+		
 		String line;
-		String[] cmd = {"/bin/sh","-c"," aptitude -q -F %p search '!~i'"};
+		String[] cmd = {"/bin/sh","-c"," aptitude -q --disable-columns -F %p search '!~i!~v'"};
 		Process p = Runtime.getRuntime().exec(cmd);
 		BufferedReader input = new BufferedReader (new InputStreamReader(p.getInputStream()));
 
 		while ((line = input.readLine()) != null) {
+			packages.add(line);
+		}
+		try {
+			p.waitFor();
+		} catch (InterruptedException e) {
+			throw new ValidatorException("Error aptitude command", e);
+		}
+		
+		if (p.exitValue()!=0) {
+			throw new ValidatorException("Error aptitude command");
+		}
 
-			System.out.println("\nCalculating the upgrade plan for installing " + line);
-			line = line.replaceAll(" ", "");
+		p.destroy();
+		
+
+
+		
+		for (String pkg : packages) {
+			System.out.println("\nCalculating the upgrade plan for installing " + pkg);
+
 			try {
-				ap = new UpgradePlan("install " + line);
+				ap = new UpgradePlan("install " + pkg);
 				if (ap.getSequence().size() > 0 && ap.isCompletelyCovered()) {
 					upgradePlans.add(ap);
 					writeXML(ap, ap.getScriptsNum(), "plans");
 				} else {
-					System.out.println("Upgrade plan for " + line + " discarded since not completely covered");
+					System.out.println("Upgrade plan for " + pkg + " discarded since not completely covered");
 				}
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
-				System.out.println("Upgrade plan for " + line + " discarded.");
+				System.out.println("Upgrade plan for " + pkg + " discarded.");
 			}
 		}
 		
@@ -69,8 +90,10 @@ public class Helper {
 		
 	}
 
-	private static void createRemovePlans() throws IOException {
+	private static void createRemovePlans() throws IOException, ValidatorException {
+		
 		ArrayList<UpgradePlan> upgradePlans = new ArrayList<UpgradePlan>();
+		ArrayList<String> packages = new ArrayList<String>();
 		
 		UpgradePlan ap;
 
@@ -80,19 +103,34 @@ public class Helper {
 		BufferedReader input = new BufferedReader (new InputStreamReader(p.getInputStream()));
 
 		while ((line = input.readLine()) != null) {
+			packages.add(line);
+		}
+		try {
+			p.waitFor();
+		} catch (InterruptedException e) {
+			throw new ValidatorException("Error 'dpkg -l' command", e);
+		}
 
-			System.out.println("\nCalculating the upgrade plan for removing " + line);
+		if (p.exitValue()!=0) {
+			throw new ValidatorException("Error 'dpkg -l' command");
+		}
+		
+		p.destroy();
+		
+		
+		for (String pkg : packages) {
+			System.out.println("\nCalculating the upgrade plan for removing " + pkg);
 			try {
-				ap = new UpgradePlan("remove " + line);
+				ap = new UpgradePlan("remove " + pkg);
 				if (ap.getSequence().size() > 0 && ap.isCompletelyCovered()) {
 					upgradePlans.add(ap);
 					writeXML(ap, ap.getScriptsNum(), "plans");
 				} else {
-					System.out.println("Upgrade plan for " + line + " discarded since not completely covered");
+					System.out.println("Upgrade plan for " + pkg + " discarded since not completely covered");
 				}
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
-				System.out.println("Upgrade plan for " + line + " discarded.");
+				System.out.println("Upgrade plan for " + pkg + " discarded.");
 			}
 		}
 		

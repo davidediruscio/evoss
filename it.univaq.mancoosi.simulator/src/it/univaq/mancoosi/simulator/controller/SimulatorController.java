@@ -347,7 +347,7 @@ public class SimulatorController {
 						// "reinstall"
 						p.install();
 						// purge
-						p.purge();
+						p.purgeInstalled();
 	
 					} else {
 						throw new SelectionStateNotPermittedException("The requested selection-state '"+action
@@ -361,7 +361,7 @@ public class SimulatorController {
 				}
 			}
 			
-			// Generate final error model
+			// Generate final error model (only possible warnings)
 			ArrayList<File> errorModels = CurrentModelsFile.getInstance().getErrorModels();
 			
 			ErrorModelManager errorManager = new ErrorModelManager();

@@ -103,10 +103,8 @@ public class SystemModelManager {
 	 */
 	public void saveModel() throws Exception {
 		try {
-			String inputSystemModel = config.getFileInputSystemModel();
 
-			String nameFileModel = inputSystemModel.substring(inputSystemModel
-					.lastIndexOf(java.io.File.separator) + 1, inputSystemModel.length());
+			String nameFileModel = (new java.io.File(config.getFileInputSystemModel())).getName();
 
 			java.io.File newTempFile = FileManagement.createTempFile(nameFileModel
 					.substring(0, nameFileModel.lastIndexOf(".")),
@@ -1790,8 +1788,9 @@ public class SystemModelManager {
 	public void setNotInstalledPackage(String packageName, String version, String architecture) {
 
 		InstalledPackage pkgElem = getInstalledPackage(packageName, version, architecture);
-		
 		ConfigFilesPackage pkgConfElem = getConfigFilesPackage(packageName, version, architecture);
+		HalfConfiguredReinstRequiredPackage pkgHalfConfReinstElem = getHalfConfiguredReinstRequiredPackage(packageName, version, architecture);
+		HalfInstalledReinstRequiredPackage pkgHalfInstReinstElem = getHalfInstalledReinstRequiredPackage(packageName, version, architecture);
 		
 		NotInstalledPackage pkgNotInst = MancoosiFactory.eINSTANCE.createNotInstalledPackage();
 		
@@ -1837,6 +1836,16 @@ public class SystemModelManager {
 
 			EcoreUtil.delete(pkgConfElem, true);
 		}
+		
+		if (pkgHalfConfReinstElem != null) {
+			this.findReferenceAndSetNewStatus(pkgHalfConfReinstElem, pkgNotInst);
+			EcoreUtil.delete(pkgHalfConfReinstElem, true);
+		}
+		
+		if (pkgHalfInstReinstElem != null) {
+			this.findReferenceAndSetNewStatus(pkgHalfInstReinstElem, pkgNotInst);
+			EcoreUtil.delete(pkgHalfInstReinstElem, true);
+		}
 
 		configuration.getNotInstalledPackages().add(pkgNotInst);	
 	}
@@ -1862,9 +1871,6 @@ public class SystemModelManager {
 		NotInstalledPackage pkgNotInstElem = getNotInstalledPackage(packageName, version, architecture);
 		HalfConfiguredReinstRequiredPackage pkgHalfConfReinstElem = getHalfConfiguredReinstRequiredPackage(packageName, version, architecture);
 		HalfInstalledReinstRequiredPackage pkgHalfInstReinstElem = getHalfInstalledReinstRequiredPackage(packageName, version, architecture);
-		HalfConfiguredPackage pkgHalfConfElem = getHalfConfiguredPackage(packageName, version, architecture);
-		HalfInstalledPackage pkgHalfInstElem = getHalfInstalledPackage(packageName, version, architecture);
-
 		InstalledPackage pkgInstElem = getInstalledPackage(packageName);
 		
 		ConfigFilesPackage pkgConfElem = getConfigFilesPackage(packageName);
@@ -1900,19 +1906,9 @@ public class SystemModelManager {
 			EcoreUtil.delete(pkgConfElem, true);
 		}
 		
-		if (pkgHalfConfElem != null) {
-			this.findReferenceAndSetNewStatus(pkgHalfConfElem, pkgInst);
-			EcoreUtil.delete(pkgHalfConfElem, true);
-		}
-		
 		if (pkgHalfConfReinstElem != null) {
 			this.findReferenceAndSetNewStatus(pkgHalfConfReinstElem, pkgInst);
 			EcoreUtil.delete(pkgHalfConfReinstElem, true);
-		}
-		
-		if (pkgHalfInstElem != null) {
-			this.findReferenceAndSetNewStatus(pkgHalfInstElem, pkgInst);
-			EcoreUtil.delete(pkgHalfInstElem, true);
 		}
 		
 		if (pkgHalfInstReinstElem != null) {
@@ -1942,6 +1938,10 @@ public class SystemModelManager {
 
 		NotInstalledPackage pkgNotInstElem = getNotInstalledPackage(packageName, version, architecture);
 		InstalledPackage pkgInstElem = getInstalledPackage(packageName, version, architecture);
+		
+		HalfConfiguredReinstRequiredPackage pkgHalfConfReinstElem = getHalfConfiguredReinstRequiredPackage(packageName, version, architecture);
+		HalfInstalledReinstRequiredPackage pkgHalfInstReinstElem = getHalfInstalledReinstRequiredPackage(packageName, version, architecture);
+		
 
 		HalfConfiguredPackage pkgHalfConf = MancoosiFactory.eINSTANCE.createHalfConfiguredPackage();
 		
@@ -1964,6 +1964,16 @@ public class SystemModelManager {
 		if (pkgNotInstElem != null) {
 			this.findReferenceAndSetNewStatus(pkgNotInstElem, pkgHalfConf);
 			EcoreUtil.delete(pkgNotInstElem, true);
+		}
+		
+		if (pkgHalfConfReinstElem != null) {
+			this.findReferenceAndSetNewStatus(pkgHalfConfReinstElem, pkgHalfConf);
+			EcoreUtil.delete(pkgHalfConfReinstElem, true);
+		}
+		
+		if (pkgHalfInstReinstElem != null) {
+			this.findReferenceAndSetNewStatus(pkgHalfInstReinstElem, pkgHalfConf);
+			EcoreUtil.delete(pkgHalfInstReinstElem, true);
 		}
 		
 		configuration.getHalfConfiguredPackages().add(pkgHalfConf);
@@ -2096,7 +2106,10 @@ public class SystemModelManager {
 		
 		NotInstalledPackage pkgNotInstElem = getNotInstalledPackage(packageName, version, architecture);
 
-		InstalledPackage pkgInstElem = getInstalledPackage(packageName);
+		InstalledPackage pkgInstElem = getInstalledPackage(packageName, version, architecture);
+		HalfConfiguredReinstRequiredPackage pkgHalfConfReinstElem = getHalfConfiguredReinstRequiredPackage(packageName, version, architecture);
+		HalfInstalledReinstRequiredPackage pkgHalfInstReinstElem = getHalfInstalledReinstRequiredPackage(packageName, version, architecture);
+		
 
 		HalfInstalledReinstRequiredPackage pkgHalfInstReinst = MancoosiFactory.eINSTANCE.createHalfInstalledReinstRequiredPackage();
 		pkgHalfInstReinst.setName(packageName);
@@ -2112,6 +2125,16 @@ public class SystemModelManager {
 		if (pkgInstElem != null) {
 			this.findReferenceAndSetNewStatus(pkgInstElem, pkgHalfInstReinst);
 			EcoreUtil.delete(pkgInstElem, true);
+		}
+		
+		if (pkgHalfConfReinstElem != null) {
+			this.findReferenceAndSetNewStatus(pkgHalfConfReinstElem, pkgHalfInstReinst);
+			EcoreUtil.delete(pkgHalfConfReinstElem, true);
+		}
+		
+		if (pkgHalfInstReinstElem != null) {
+			this.findReferenceAndSetNewStatus(pkgHalfInstReinstElem, pkgHalfInstReinst);
+			EcoreUtil.delete(pkgHalfInstReinstElem, true);
 		}
 		
 		configuration.getHalfInstalledReinstRequiredPackages().add(pkgHalfInstReinst);
