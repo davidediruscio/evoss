@@ -31,37 +31,77 @@ public class UpgradePlan {
 	
 	public UpgradePlan(String params) throws Exception {
 		
+		this.setMissingStatements();
+
+		String[] ps = params.split(" ");
+		
+		operation = ps[0];
+		packageName = ps[1];
+		scriptsNum = 0;
+		this.sequence = new ArrayList<Operation>();
+		
+		this.getUpgradePlan(params);
+	}
+	
+	
+	private void setMissingStatements() throws IOException {
+		
 		missingStatements = new Hashtable<String, Integer>();
-		scriptsNum=0;
+
 		
 		FileReader f = new FileReader("../it.univaq.mancoosi.simulator/transformationRepository/missingStatements.txt");
 		BufferedReader i = new BufferedReader(f);
 		String l;
 		
 		while((l = i.readLine()) != null) {
-			missingStatements.put(l, 0);
+			if (!l.startsWith("#")) {
+				missingStatements.put(l, 0);
+			}
 		}
-		
-		i.close();
-		f.close();
-		String[] ps = params.split(" ");
-		
-		operation = ps[0];
-		packageName = ps[1];
 
+		f.close();
+	}
+	
+	
+	private void getUpgradePlan(String params) throws IOException, ValidatorException {
+		
+		ArrayList<String> actions = new ArrayList<String>();
 		
 		String line;
-		String[] cmd = {"/bin/sh","-c","apt-get -s "+params+" | awk '/Inst/ || /Purg/ || /Remv/'"};
+		int numPkg = 0;
+		String[] cmd = {"/bin/sh","-c","apt-get -q -y -s "+params};
 		Process p = Runtime.getRuntime().exec(cmd);
 		BufferedReader input = new BufferedReader (new InputStreamReader(p.getInputStream()));
-
-		this.sequence = new ArrayList<Operation>();
 		
 		while ((line = input.readLine()) != null) {
-			
-			String[] elements = line.split(" ");
-			
-			System.out.println(" --> "+line);
+			if(line.startsWith("Remv ") || line.startsWith("Inst ") || line.startsWith("Purg ")) {
+				numPkg += 1;
+				System.out.println(" --> "+line);
+				actions.add(line);
+			}
+		}
+		try {
+			p.waitFor();
+		} catch (InterruptedException e) {
+			throw new ValidatorException("Error in apt-get --simulate.", e);
+		}
+		input.close();
+
+		if (p.exitValue()!=0) {
+			throw new ValidatorException("Error in apt-get --simulate.");
+		}
+		
+		p.destroy();
+		
+		if (numPkg == 0) {
+			throw new ValidatorException("None of the requested operations is feasible.");
+		}
+		
+		this.downloadPackage(params);
+		
+		for (String action : actions) {
+
+			String[] elements = action.split(" ");
 
 			if (elements[0].equals("Inst")) {
 				String name = elements[1];
@@ -72,10 +112,16 @@ public class UpgradePlan {
 					version = elements[2].substring(1);
 				}
 				
-				if (version == null) throw new Exception("Version not found. Package: "+ name);
+				if (version == null) throw new ValidatorException("Version not found. Package: "+ name);
 				String architecture = getArchitecture(name, version);
 				
-				this.createPackageModel(name, version, architecture);
+				String pathPackageModel = "../it.univaq.mancoosi.simulator/packageModels/"
+					+ name + "_" + version + "_" + architecture + ".packagemm";
+
+				if (!(new File(pathPackageModel)).exists()) {
+					this.createPackageModel(name, version, architecture);
+				}	
+				
 				this.createInstallSelection(name, version, architecture);
 			}
 
@@ -84,7 +130,13 @@ public class UpgradePlan {
 				String version = elements[2].substring(1, elements[2].length()-1);
 				String architecture = getArchitecture(name, version);
 				
-				this.createPackageModel(name, version, architecture);
+				String pathPackageModel = "../it.univaq.mancoosi.simulator/packageModels/"
+					+ name + "_" + version + "_" + architecture + ".packagemm";
+
+				if (!(new File(pathPackageModel)).exists()) {
+					this.createPackageModel(name, version, architecture);
+				}
+				
 				this.createPurgeSelection(name, version, architecture);
 			}
 
@@ -93,59 +145,39 @@ public class UpgradePlan {
 				String version = elements[2].substring(1, elements[2].length()-1);
 				String architecture = getArchitecture(name, version);
 				
-				this.createPackageModel(name, version, architecture);
+				String pathPackageModel = "../it.univaq.mancoosi.simulator/packageModels/"
+					+ name + "_" + version + "_" + architecture + ".packagemm";
+
+				if (!(new File(pathPackageModel)).exists()) {
+					this.createPackageModel(name, version, architecture);
+				}
+				
 				this.createRemoveSelection(name, version, architecture);
 			}
-			
-		}
-		p.waitFor();
-		input.close();
-		if (p.exitValue() != 0) {
-			throw new ValidatorException("Error in apt-get --simulate.");
-		}
-		
-		p.destroy();
 
-		
+		}
 	}
 	
 	
-	private void createPackageModel(String name, String version, String architecture) throws Exception {
+	private void createPackageModel(String name, String version, String architecture) throws ValidatorException {
 
 		String pathPackageModel = "../it.univaq.mancoosi.simulator/packageModels/"
-				+ name + "_" + version + "_" + architecture + ".packagemm";
-
-		if (!(new File(pathPackageModel)).exists()) {
-
-			String[] cmd = { "/bin/sh", "-c", " apt-get -d -y -q " + name };
-			Process ps = Runtime.getRuntime().exec(cmd);
-
-
-			ps.waitFor();
-			//	System.out.println(ps.exitValue());
-			//	throw new Exception("An error has occurred during the download of the "+name+" package.");
-			//}
-			ps.destroy();
-
-			File jarFile = new File(
-					"../it.univaq.mancoosi.injectors.packages/pkginj.jar");
+			+ name + "_" + version + "_" + architecture + ".packagemm";
+		
+			File jarFile = new File("../it.univaq.mancoosi.injectors.packages/pkginj.jar");
 			
-			System.gc();
-
 			if (!jarFile.exists()) {
-				throw new Exception("File "
-						+ "../it.univaq.mancoosi.injectors.packages/pkginj.jar"
+				throw new ValidatorException("File ../it.univaq.mancoosi.injectors.packages/pkginj.jar"
 						+ " not found");
 			}
 
 			String nameComponent = jarFile.getName();
 			String pathWorkDir = jarFile.getParent();
 
-			ProcessBuilder pb = new ProcessBuilder("java", "-jar",
-					nameComponent, "--package", name, version, architecture);
+			ProcessBuilder pb = new ProcessBuilder("java", "-jar", nameComponent, "--package", name, version, architecture);
 			pb.directory(new File(pathWorkDir));
 
-			System.out.println(" The package model '" + pathPackageModel
+			System.out.println(" The package model '" + new File(pathPackageModel).getName()
 					+ "' has not been generated yet.");
 			System.out.println(" --> Generating the package model ...");
 
@@ -153,58 +185,92 @@ public class UpgradePlan {
 			try {
 				p = pb.start();
 				String line;
-				BufferedReader input = new BufferedReader(
-						new InputStreamReader(p.getInputStream()));
+				BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
+				
 				while ((line = input.readLine()) != null) {
 					System.out.println(" --> " + line);
 				}
+				p.waitFor();
 				input.close();
 
-				p.waitFor();
-
 			} catch (IOException e) {
-				throw new Exception(
-						" <-- Invocation of package injector failed.");
+				throw new ValidatorException(" <-- Invocation of package injector failed.");
 			} catch (InterruptedException e) {
-				throw new Exception(" <-- Model generation failed.");
+				throw new ValidatorException(" <-- Model generation failed.");
 			}
-
-			System.gc();
+			
+			p.destroy();
 			
 			if ((new File(pathPackageModel)).exists()) {
-				System.out
-						.println(" <-- Model generation completed successfully.");
+				System.out.println(" <-- Model generation completed successfully.");
 			} else {
-				throw new Exception(" <-- Model generation failed.");
+				throw new ValidatorException(" <-- Model generation failed.");
 			}
-		}
 	}
 
-	private String getArchitecture(String name, String version) throws IOException {
-		String linePkg;
-		String ver="";
-		String arch="";
+	
+	
+	private void downloadPackage(String params) throws IOException, ValidatorException {
 
-		String[] cmdPkg = {"/bin/sh","-c"," apt-cache show " + name};
+		String[] cmd = {"/bin/sh","-c","apt-get -d -y -q "+params};
+		Process p = Runtime.getRuntime().exec(cmd);
+
+		try {
+			p.waitFor();
+		} catch (InterruptedException e) {
+			throw new ValidatorException("An error has occurred during the download.", e);
+		}
+		
+		if (p.exitValue()!=0) {
+			throw new ValidatorException("An error has occurred during the download.");
+		}
+		
+		p.destroy();
+	}
+
+	
+	private String getArchitecture(String name, String version) throws ValidatorException, IOException {
+		String linePkg;
+
+		ArrayList<String> values = new ArrayList<String>();
+		String[] cmdPkg = {"/bin/sh","-c","apt-cache -q show " + name};
 		Process pPkg = Runtime.getRuntime().exec(cmdPkg);
 		BufferedReader info = new BufferedReader (new InputStreamReader(pPkg.getInputStream()));
 		while ((linePkg = info.readLine()) != null) {
 			String[] lin = linePkg.split(": ");
-
 			if (lin[0].equals("Version")) {
-				ver = lin[1].trim();
+				values.add(lin[1].trim());
 			}
 
 			if (lin[0].equals("Architecture")) {
-				arch = lin[1];
+				values.add(lin[1]);
 			}
 		}
-		info.close();
-		pPkg.destroy();
+		try {
+			pPkg.waitFor();
+		} catch (InterruptedException e) {
+			throw new ValidatorException("Error 'apt-cache show' command", e);
+		}
 		
-		if (ver.equals(version)) {
-			return arch;
-		} else return null;
+		if (pPkg.exitValue()!=0) {
+			throw new ValidatorException("Error 'apt-cache show' command");
+		}
+		
+		pPkg.destroy();
+		info.close();
+		
+		String arch="";
+		Boolean found = false;
+		for (int i=0; i<values.size() && !found; i++) {
+			if (i>0 && values.get(i).equals(version)) {
+				found = true;
+				arch = values.get(i-1);
+			}
+		}
+		if (arch.equals("")) {
+			throw new ValidatorException("Architecture field not found for package "+name+" "+version);
+		}
+		return arch;
 	}
 	
 
@@ -253,6 +319,7 @@ public class UpgradePlan {
 			StatementScript statement = allStatementsIterator.next();
 			
 			if (missingStatements.containsKey(statement.getType())){
+				System.out.println("First missing statement found: "+ statement.getType());
 				return false;
 			}
 		}
@@ -300,8 +367,14 @@ public class UpgradePlan {
 					+ "_" + operation.getVersion() + "_"
 					+ operation.getArchitecture() + ".packagemm");
 			
-			if (this.isSemanticallyCovered(packageModelPath) && (correctNoScript || correctWithScript)) {
-				return true;
+			if (correctNoScript || correctWithScript) {
+				if (this.isSemanticallyCovered(packageModelPath)) {
+					return true;
+				} else {
+					System.out.println("The package '"+operation.getName()+"' is not semantically covered.");
+				}
+			} else {
+				System.out.println("The scripts of the package '"+operation.getName()+"' are not correctly parsed.");
 			}
 
 		} catch (Exception e1) {

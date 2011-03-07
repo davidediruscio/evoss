@@ -44,13 +44,16 @@ rule Configuration {
         name <- s.name,
         creationTime <- s.creationTime,
         systemType <- s.systemType,
-        installedPackages <- s.installedPackages,
         fileSystem <- s.fileSystem,
         environment <- s.environment,
-        notInstalledPackages <- s.notInstalledPackages)
---	do {
-	--	('Execution: add_alternative_deb.atl').println();
-	--}
+        installedPackages <- s.installedPackages,
+        notInstalledPackages <- s.notInstalledPackages,
+        configFilesPackages <- s.configFilesPackages,
+        unpackedPackages <- s.unpackedPackages,
+        halfConfiguredPackages <- s.halfConfiguredPackages,
+        halfInstalledPackages <- s.halfInstalledPackages,
+        halfConfiguredReinstRequiredPackages <- s.halfConfiguredReinstRequiredPackages,
+        halfInstalledReinstRequiredPackages <- s.halfInstalledReinstRequiredPackages)
 }
 
 rule InstalledPackage {
@@ -88,6 +91,7 @@ rule NotInstalledPackage {
     to t : OUTConfiguration!NotInstalledPackage (
         name <- s.name,
         version <- s.version,
+        architecture <- s.architecture,
         configuration <- s.configuration,
         packageSettings <- s.packageSettings)
 }
@@ -163,6 +167,41 @@ rule HalfInstalledPackage {
         packageSettings <- s.packageSettings)
 }
 
+rule HalfConfiguredReinstRequiredPackage {
+    from s : INConfiguration!HalfConfiguredReinstRequiredPackage
+    to t : OUTConfiguration!HalfConfiguredReinstRequiredPackage (
+        name <- s.name,
+        version <- s.version,
+        architecture <- s.architecture,
+        maintainer <- s.maintainer,
+        checkSum <- s.checkSum,
+        description <- s.description,
+        section <- s.section,
+        tag <- s.tag,
+        priority <- s.priority,
+        uploaders <- s.uploaders,
+        configuration <- s.configuration,
+        packageSettings <- s.packageSettings,
+        files <- s.files)
+}
+
+rule HalfInstalledReinstRequiredPackage {
+    from s : INConfiguration!HalfInstalledReinstRequiredPackage
+    to t : OUTConfiguration!HalfInstalledReinstRequiredPackage (
+        name <- s.name,
+        version <- s.version,
+        architecture <- s.architecture,
+        maintainer <- s.maintainer,
+        checkSum <- s.checkSum,
+        description <- s.description,
+        section <- s.section,
+        tag <- s.tag,
+        priority <- s.priority,
+        uploaders <- s.uploaders,
+        configuration <- s.configuration,
+        packageSettings <- s.packageSettings)
+}
+
 
 rule SrcPackage {
     from s : INConfiguration!SrcPackage
@@ -178,7 +217,6 @@ rule SrcPackage {
         section <- s.section,
         tag <- s.tag,
         priority <- s.priority,
-        status <- s.status,
         uploaders <- s.uploaders,
         configuration <- s.configuration,
         packageSettings <- s.packageSettings,
@@ -211,7 +249,6 @@ rule BinPackage {
         section <- s.section,
         tag <- s.tag,
         priority <- s.priority,
-        status <- s.status,
         uploaders <- s.uploaders,
         configuration <- s.configuration,
         packageSettings <- s.packageSettings,
@@ -243,7 +280,6 @@ rule VirtualPackage {
         section <- s.section,
         tag <- s.tag,
         priority <- s.priority,
-        status <- s.status,
         uploaders <- s.uploaders,
         configuration <- s.configuration,
         packageSettings <- s.packageSettings,

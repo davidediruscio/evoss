@@ -266,15 +266,21 @@ public class DebianPackageManager extends PackageManager {
 	public void createModelFromInstalledPackages() throws Exception {
 
 		String line;
+		ArrayList<String> list = new ArrayList<String>();
 		String[] cmd = {"/bin/sh","-c"," dpkg -l | awk '/ii/' | awk '{print $2}'"};
 		Process p = Runtime.getRuntime().exec(cmd);
 		BufferedReader input = new BufferedReader (new InputStreamReader(p.getInputStream()));
 
 		while ((line = input.readLine()) != null) {
-			createModelFromInstalledPackage (line);
+			list.add(line);
 		}
-		input.close();			
+		input.close();
+		p.waitFor();
 		p.destroy();
+		
+		for (String inst : list) {
+			createModelFromInstalledPackage (inst);
+		}
 
 	}
 
@@ -398,6 +404,8 @@ public class DebianPackageManager extends PackageManager {
 			}
 		}
 
+		pPkg.waitFor();
+		
 		info.close();
 		pPkg.destroy();
 
@@ -657,14 +665,21 @@ public class DebianPackageManager extends PackageManager {
 					status = lin[1];
 				}
 			}
+			pPkg.waitFor();
 			info.close();
-			pPkg.destroy();
-
-			if (status.startsWith("install ok") && version.equals(ver) && architecture.equals(arch)) {
-				createModelFromInstalledPackage(name);
 			
+			if (status.startsWith("install ok")) {
+				if (ver.equals(version)) {
+					if (arch.equals(architecture)) {
+						createModelFromInstalledPackage(name);
+					} else {
+						throw new InjectorException("Package model creation failed. The package '"+name+"' has a different architecture field.");
+					}
+				} else {
+					throw new InjectorException("Package model creation failed. The package '"+name+"' has a different version field.");
+				}
 			} else {
-				throw new InjectorException("Package model creation failed.");
+				throw new InjectorException("Package model creation failed. The package '"+name+"' is not installed");
 			}
 		}
 	}
