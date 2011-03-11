@@ -61,7 +61,7 @@ public class PackageModelRetrieval {
 				throw new SimulatorException(" <-- Model generation failed.");
 			}
 
-			if ((new File(pathPackageModel)).exists()) {
+			if ((p.exitValue() == 0) && (new File(pathPackageModel)).exists()) {
 				System.out.println(" <-- Model generation completed successfully.");
 			} else {
 				throw new SimulatorException(" <-- Model generation failed.");

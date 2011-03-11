@@ -200,7 +200,7 @@ public class SimulatorController {
 						
 						HalfConfiguredReinstRequiredPackage old = sysModel.getHalfConfiguredReinstRequiredPackage(sequencePkg.getPackageName(i));
 						System.out.println("Reinstallation of "+old.getName()+" "+old.getVersion()
-											+" (HalfInstalled - ReinstRequired)");
+											+" (HalfConfigured - ReinstRequired)");
 						
 						String pathPackageOldModel = PackageModelRetrieval.getPath(config, old.getName(), old.getVersion(), old.getArchitecture());
 						
@@ -273,6 +273,14 @@ public class SimulatorController {
 							|| sysModel.isHalfConfiguredReinstRequiredPackage((sequencePkg.getPackageName(i)))) { 
 							// reinstall from half-installed/half-configured  state + remove (Reinst-Required)
 						
+						if (sysModel.isHalfInstalledReinstRequiredPackage((sequencePkg.getPackageName(i)))) {
+							System.out.println("Remove of "+sequencePkg.getPackageName(i)+" "
+								+sequencePkg.getPackageVersion(i)+" (HalfInstalled - ReinstRequired)");
+						} else {
+							System.out.println("Remove of "+sequencePkg.getPackageName(i)+" "
+									+sequencePkg.getPackageVersion(i)+" (HalfConfigured - ReinstRequired)");
+						}
+						
 						String name = sequencePkg.getPackageName(i);
 						String version = sequencePkg.getPackageVersion(i);
 						String architecture = sequencePkg.getPackageArchitecture(i);
@@ -285,6 +293,7 @@ public class SimulatorController {
 						// "reinstall"
 						p.install();
 						// remove
+						p.setState(0);
 						p.remove();
 	
 					} else {
@@ -335,6 +344,14 @@ public class SimulatorController {
 							|| sysModel.isHalfConfiguredReinstRequiredPackage((sequencePkg.getPackageName(i)))) { 
 						     // reinstall from half-installed/half-configured  state + purge (Reinst-Required)
 						
+						if (sysModel.isHalfInstalledReinstRequiredPackage((sequencePkg.getPackageName(i)))) {
+							System.out.println("Purge of "+sequencePkg.getPackageName(i)+" "
+								+sequencePkg.getPackageVersion(i)+" (HalfInstalled - ReinstRequired)");
+						} else {
+							System.out.println("Purge of "+sequencePkg.getPackageName(i)+" "
+									+sequencePkg.getPackageVersion(i)+" (HalfConfigured - ReinstRequired)");
+						}
+						
 						String name = sequencePkg.getPackageName(i);
 						String version = sequencePkg.getPackageVersion(i);
 						String architecture = sequencePkg.getPackageArchitecture(i);
@@ -347,6 +364,7 @@ public class SimulatorController {
 						// "reinstall"
 						p.install();
 						// purge
+						p.setState(0);
 						p.purgeInstalled();
 	
 					} else {

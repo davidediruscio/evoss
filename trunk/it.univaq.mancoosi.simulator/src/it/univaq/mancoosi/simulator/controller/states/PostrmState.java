@@ -93,7 +93,7 @@ public class PostrmState extends SimulatorState {
 		if (!errorExist) {
 			if (fsm.DELETE_CONFFILES == fsm.getPreviousState()) {
 				fsm.setState(fsm.SUCCESSFUL_EXIT);
-				fsm.notInstalled();
+				fsm.purge();
 			} else {
 				fsm.setState(fsm.DELETE_CONFFILES);
 				fsm.purge();
