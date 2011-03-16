@@ -23,6 +23,7 @@ import it.univaq.mancoosi.mancoosimm.PriorityType;
 import it.univaq.mancoosi.mancoosimm.SingleConflict;
 import it.univaq.mancoosi.mancoosimm.SingleDep;
 import it.univaq.mancoosi.mancoosimm.VersionType;
+import it.univaq.mancoosi.mancoosimm.impl.InstalledPackageImpl;
 import it.univaq.mancoosi.injectors.systemconfiguration.managers.ConfigurationManager;
 import it.univaq.mancoosi.injectors.systemconfiguration.managers.PackageManager;
 
@@ -357,6 +358,7 @@ public class UbuntuPackageManager extends PackageManager {
     	setFeaturesOfInstalledPackages();		  
 	}
 	
+	//mirco
 	public void synchronize() throws IOException {
 		String packageName;
 		
@@ -368,10 +370,29 @@ public class UbuntuPackageManager extends PackageManager {
 			(new InputStreamReader(p.getInputStream()));
 	      	      
     	while ((packageName = input.readLine()) != null) {
-    		if ( ! existsPackage(packageName) ){
+    		
+    		//create a temp InstalledPackage instance
+    		InstalledPackage pkgTemp = factory.createInstalledPackage();
+    		pkgTemp.setName(packageName);
+    		
+    		String cmd2 = "dpkg -s " + pkgTemp.getName();	
+    		Process p2 = Runtime.getRuntime().exec(cmd2);
+    		BufferedReader pkgInfo =
+    			new BufferedReader
+    			(new InputStreamReader(p2.getInputStream()));
+    		
+    		System.out.println("Processing the package " + packageName);  
+    		
+    		//set to the temp InstalledPackage instance the relative metadata
+    		processPackageMetadata(pkgInfo, pkgTemp);
+    		
+    		pkgInfo.close();
+    		p2.destroy();
+    		
+    		if ( ! existsPackageComplete(pkgTemp) ){
     			System.out.println("Found the new package " + packageName);    			
     			pkgFromSyncMap.put(packageName, createPackage(packageName));
-    		};
+    		}
     	}	
     	input.close();			
     	p.destroy();
