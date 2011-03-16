@@ -1131,5 +1131,10 @@ public class InstalledPackageImpl extends PackageImpl implements InstalledPackag
 		result.append(')');
 		return result.toString();
 	}
+	
+	//mirco
+	public boolean equals (InstalledPackage installPackage) {
+		return this.getName().equals(installPackage.getName());
+	}
 
 } //InstalledPackageImpl
