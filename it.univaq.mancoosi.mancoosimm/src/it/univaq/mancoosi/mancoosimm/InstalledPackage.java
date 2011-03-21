@@ -498,8 +498,5 @@ public interface InstalledPackage extends it.univaq.mancoosi.mancoosimm.Package 
 	 * @generated
 	 */
 	void setConflict(Conflict value);
-	
-	//mirco
-	boolean equals(InstalledPackage installedPackage);
 
 } // InstalledPackage
