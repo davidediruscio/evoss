@@ -163,8 +163,7 @@ import it.univaq.mancoosi.mancoosimm.PackageSetting;
 		
 		while ( installedPackagesIterator.hasNext() && !found ) {
 			installedPackageElement = installedPackagesIterator.next();
-			//use the redefined 'equals' method
-			if ( installedPackageElement.equals(pack) ) {
+			if ( isPackageEquals (pack, installedPackageElement) ) {
 				found = true;
 				pkgMap.put(pack.getName(),installedPackageElement);
 			}
@@ -172,6 +171,10 @@ import it.univaq.mancoosi.mancoosimm.PackageSetting;
 		}
 		
 		return found;
+	}
+	
+	protected boolean isPackageEquals (InstalledPackage pack, InstalledPackage installedPackage) {
+		return pack.getName().equals(installedPackage.getName());
 	}
 
 
