@@ -5,6 +5,7 @@ import it.univaq.mancoosi.injectors.systemconfiguration.managers.ubuntu.UbuntuAl
 import it.univaq.mancoosi.injectors.systemconfiguration.managers.ubuntu.UbuntuConfigurationManager;
 import it.univaq.mancoosi.injectors.systemconfiguration.managers.ubuntu.UbuntuEnvironmentManager;
 import it.univaq.mancoosi.injectors.systemconfiguration.managers.ubuntu.UbuntuFileSystemManager;
+import it.univaq.mancoosi.injectors.systemconfiguration.managers.ubuntu.UbuntuIconCacheManager;
 import it.univaq.mancoosi.injectors.systemconfiguration.managers.ubuntu.UbuntuMimeTypeHandlerCacheManager;
 import it.univaq.mancoosi.injectors.systemconfiguration.managers.ubuntu.UbuntuPackageManager;
 import it.univaq.mancoosi.injectors.systemconfiguration.managers.ubuntu.UbuntuPackageSettingDependenciesManager;
@@ -49,6 +50,7 @@ public class Injector {
 		Resource resource = new XMIResourceFactoryImpl().createResource(fileURI);
 
 		if (systemModel.exists()) {
+			
 			resource.load(null);
 			UbuntuConfigurationManager.getInstance().setConfiguration( (Configuration) resource.getContents().get(0) );
 
@@ -107,6 +109,12 @@ public class Injector {
 			UbuntuAlternativesManager.getInstance().createAlternativesFromSystem();
 			out.println((new GregorianCalendar()).getTime());
 			out.println("* Alternatives retrieved !");
+			
+			out.println("* Retrieving IconCache...");
+			out.println((new GregorianCalendar()).getTime());
+			UbuntuIconCacheManager.getInstance().createIconCacheFromSystem();
+			out.println((new GregorianCalendar()).getTime());
+			out.println("* IconCache retrieved !");
 			
 			out.println((new GregorianCalendar()).getTime());
 			configuration.setCreationTime((new GregorianCalendar()).getTime().toString());
