@@ -61,6 +61,7 @@ public class Injector {
 			//UbuntuPackageManager.getInstance().removePackage("yelp");
 			
 			UbuntuPackageManager.getInstance().synchronize();
+			UbuntuIconCacheManager.getInstance().synchronize();
 			
 			System.out.println("Synchronization completed !");		
 			
