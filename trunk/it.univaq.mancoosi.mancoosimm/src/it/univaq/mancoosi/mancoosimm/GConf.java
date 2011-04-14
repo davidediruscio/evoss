@@ -46,20 +46,22 @@ public interface GConf extends EObject {
 	EList<File> getConfFiles();
 
 	/**
-	 * Returns the value of the '<em><b>Schemas</b></em>' reference list.
-	 * The list contents are of type {@link it.univaq.mancoosi.mancoosimm.File}.
+	 * Returns the value of the '<em><b>Schemas</b></em>' containment reference list.
+	 * The list contents are of type {@link it.univaq.mancoosi.mancoosimm.Schema}.
+	 * It is bidirectional and its opposite is '{@link it.univaq.mancoosi.mancoosimm.Schema#getGconf <em>Gconf</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Schemas</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Schemas</em>' reference list.
+	 * @return the value of the '<em>Schemas</em>' containment reference list.
 	 * @see it.univaq.mancoosi.mancoosimm.MancoosiPackage#getGConf_Schemas()
-	 * @model ordered="false"
+	 * @see it.univaq.mancoosi.mancoosimm.Schema#getGconf
+	 * @model opposite="gconf" containment="true" ordered="false"
 	 * @generated
 	 */
-	EList<File> getSchemas();
+	EList<Schema> getSchemas();
 
 	/**
 	 * Returns the value of the '<em><b>Env</b></em>' container reference.

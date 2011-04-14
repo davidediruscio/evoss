@@ -2877,7 +2877,7 @@ public interface MancoosiPackage extends EPackage {
 	int GCONF__CONF_FILES = 0;
 
 	/**
-	 * The feature id for the '<em><b>Schemas</b></em>' reference list.
+	 * The feature id for the '<em><b>Schemas</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -4889,6 +4889,187 @@ public interface MancoosiPackage extends EPackage {
 	int OR_CONFLICT_FEATURE_COUNT = CONFLICT_FEATURE_COUNT + 2;
 
 	/**
+	 * The meta object id for the '{@link it.univaq.mancoosi.mancoosimm.impl.SchemaImpl <em>Schema</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see it.univaq.mancoosi.mancoosimm.impl.SchemaImpl
+	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getSchema()
+	 * @generated
+	 */
+	int SCHEMA = 58;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEMA__NAME = FILE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Extension</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEMA__EXTENSION = FILE__EXTENSION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEMA__DESCRIPTION = FILE__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Size</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEMA__SIZE = FILE__SIZE;
+
+	/**
+	 * The feature id for the '<em><b>Check Sum</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEMA__CHECK_SUM = FILE__CHECK_SUM;
+
+	/**
+	 * The feature id for the '<em><b>Is Directory</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEMA__IS_DIRECTORY = FILE__IS_DIRECTORY;
+
+	/**
+	 * The feature id for the '<em><b>Suid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEMA__SUID = FILE__SUID;
+
+	/**
+	 * The feature id for the '<em><b>Guid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEMA__GUID = FILE__GUID;
+
+	/**
+	 * The feature id for the '<em><b>Permission</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEMA__PERMISSION = FILE__PERMISSION;
+
+	/**
+	 * The feature id for the '<em><b>Location</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEMA__LOCATION = FILE__LOCATION;
+
+	/**
+	 * The feature id for the '<em><b>Fs</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEMA__FS = FILE__FS;
+
+	/**
+	 * The feature id for the '<em><b>Childs</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEMA__CHILDS = FILE__CHILDS;
+
+	/**
+	 * The feature id for the '<em><b>Parent</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEMA__PARENT = FILE__PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Owner</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEMA__OWNER = FILE__OWNER;
+
+	/**
+	 * The feature id for the '<em><b>Group</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEMA__GROUP = FILE__GROUP;
+
+	/**
+	 * The feature id for the '<em><b>Is Missing</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEMA__IS_MISSING = FILE__IS_MISSING;
+
+	/**
+	 * The feature id for the '<em><b>Pkg Settings</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEMA__PKG_SETTINGS = FILE__PKG_SETTINGS;
+
+	/**
+	 * The feature id for the '<em><b>Gconf</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEMA__GCONF = FILE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Schema</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEMA_FEATURE_COUNT = FILE_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link it.univaq.mancoosi.mancoosimm.PriorityType <em>Priority Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4896,7 +5077,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getPriorityType()
 	 * @generated
 	 */
-	int PRIORITY_TYPE = 58;
+	int PRIORITY_TYPE = 59;
 
 	/**
 	 * The meta object id for the '{@link it.univaq.mancoosi.mancoosimm.StatusType <em>Status Type</em>}' enum.
@@ -4906,7 +5087,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getStatusType()
 	 * @generated
 	 */
-	int STATUS_TYPE = 59;
+	int STATUS_TYPE = 60;
 
 	/**
 	 * The meta object id for the '{@link it.univaq.mancoosi.mancoosimm.VersionType <em>Version Type</em>}' enum.
@@ -4916,7 +5097,7 @@ public interface MancoosiPackage extends EPackage {
 	 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getVersionType()
 	 * @generated
 	 */
-	int VERSION_TYPE = 60;
+	int VERSION_TYPE = 61;
 
 
 	/**
@@ -6390,10 +6571,10 @@ public interface MancoosiPackage extends EPackage {
 	EReference getGConf_ConfFiles();
 
 	/**
-	 * Returns the meta object for the reference list '{@link it.univaq.mancoosi.mancoosimm.GConf#getSchemas <em>Schemas</em>}'.
+	 * Returns the meta object for the containment reference list '{@link it.univaq.mancoosi.mancoosimm.GConf#getSchemas <em>Schemas</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Schemas</em>'.
+	 * @return the meta object for the containment reference list '<em>Schemas</em>'.
 	 * @see it.univaq.mancoosi.mancoosimm.GConf#getSchemas()
 	 * @see #getGConf()
 	 * @generated
@@ -7744,6 +7925,27 @@ public interface MancoosiPackage extends EPackage {
 	EReference getOrConflict_Conflict();
 
 	/**
+	 * Returns the meta object for class '{@link it.univaq.mancoosi.mancoosimm.Schema <em>Schema</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Schema</em>'.
+	 * @see it.univaq.mancoosi.mancoosimm.Schema
+	 * @generated
+	 */
+	EClass getSchema();
+
+	/**
+	 * Returns the meta object for the container reference '{@link it.univaq.mancoosi.mancoosimm.Schema#getGconf <em>Gconf</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Gconf</em>'.
+	 * @see it.univaq.mancoosi.mancoosimm.Schema#getGconf()
+	 * @see #getSchema()
+	 * @generated
+	 */
+	EReference getSchema_Gconf();
+
+	/**
 	 * Returns the meta object for enum '{@link it.univaq.mancoosi.mancoosimm.PriorityType <em>Priority Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8936,7 +9138,7 @@ public interface MancoosiPackage extends EPackage {
 		EReference GCONF__CONF_FILES = eINSTANCE.getGConf_ConfFiles();
 
 		/**
-		 * The meta object literal for the '<em><b>Schemas</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Schemas</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -10006,6 +10208,24 @@ public interface MancoosiPackage extends EPackage {
 		 * @generated
 		 */
 		EReference OR_CONFLICT__CONFLICT = eINSTANCE.getOrConflict_Conflict();
+
+		/**
+		 * The meta object literal for the '{@link it.univaq.mancoosi.mancoosimm.impl.SchemaImpl <em>Schema</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see it.univaq.mancoosi.mancoosimm.impl.SchemaImpl
+		 * @see it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl#getSchema()
+		 * @generated
+		 */
+		EClass SCHEMA = eINSTANCE.getSchema();
+
+		/**
+		 * The meta object literal for the '<em><b>Gconf</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SCHEMA__GCONF = eINSTANCE.getSchema_Gconf();
 
 		/**
 		 * The meta object literal for the '{@link it.univaq.mancoosi.mancoosimm.PriorityType <em>Priority Type</em>}' enum.
