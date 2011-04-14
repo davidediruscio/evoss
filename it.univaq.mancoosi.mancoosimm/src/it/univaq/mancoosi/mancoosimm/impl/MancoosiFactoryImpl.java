@@ -51,6 +51,7 @@ import it.univaq.mancoosi.mancoosimm.PackageSetting;
 import it.univaq.mancoosi.mancoosimm.PriorityType;
 import it.univaq.mancoosi.mancoosimm.SGMLCatalog;
 import it.univaq.mancoosi.mancoosimm.SGMLDocument;
+import it.univaq.mancoosi.mancoosimm.Schema;
 import it.univaq.mancoosi.mancoosimm.Service;
 import it.univaq.mancoosi.mancoosimm.SharedLibrary;
 import it.univaq.mancoosi.mancoosimm.SingleConflict;
@@ -173,6 +174,7 @@ public class MancoosiFactoryImpl extends EFactoryImpl implements MancoosiFactory
 			case MancoosiPackage.SINGLE_CONFLICT: return createSingleConflict();
 			case MancoosiPackage.AND_CONFLICT: return createAndConflict();
 			case MancoosiPackage.OR_CONFLICT: return createOrConflict();
+			case MancoosiPackage.SCHEMA: return createSchema();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -754,6 +756,16 @@ public class MancoosiFactoryImpl extends EFactoryImpl implements MancoosiFactory
 	public OrConflict createOrConflict() {
 		OrConflictImpl orConflict = new OrConflictImpl();
 		return orConflict;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Schema createSchema() {
+		SchemaImpl schema = new SchemaImpl();
+		return schema;
 	}
 
 	/**

@@ -52,6 +52,7 @@ import it.univaq.mancoosi.mancoosimm.OrInv;
 import it.univaq.mancoosi.mancoosimm.PackageSetting;
 import it.univaq.mancoosi.mancoosimm.SGMLCatalog;
 import it.univaq.mancoosi.mancoosimm.SGMLDocument;
+import it.univaq.mancoosi.mancoosimm.Schema;
 import it.univaq.mancoosi.mancoosimm.Service;
 import it.univaq.mancoosi.mancoosimm.SharedLibrary;
 import it.univaq.mancoosi.mancoosimm.SingleConflict;
@@ -359,6 +360,10 @@ public class MancoosiAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseOrConflict(OrConflict object) {
 				return createOrConflictAdapter();
+			}
+			@Override
+			public Adapter caseSchema(Schema object) {
+				return createSchemaAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -1189,6 +1194,20 @@ public class MancoosiAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createOrConflictAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link it.univaq.mancoosi.mancoosimm.Schema <em>Schema</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see it.univaq.mancoosi.mancoosimm.Schema
+	 * @generated
+	 */
+	public Adapter createSchemaAdapter() {
 		return null;
 	}
 

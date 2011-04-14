@@ -4,7 +4,7 @@
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/it.univaq.mancoosi.mancoosimm/src"
     modelPluginID="it.univaq.mancoosi.mancoosimm" modelName="Mancoosimm" importerID="org.eclipse.emf.importer.ecore"
     complianceLevel="6.0" copyrightFields="false">
-  <foreignModel>../../it.univaq.mancoosi.errormm/model/mancoosimm.ecore</foreignModel>
+  <foreignModel>mancoosimm.ecore</foreignModel>
   <genPackages prefix="Mancoosi" basePackage="it.univaq.mancoosi" disposableProviderFactory="true"
       fileExtensions="mancoosimm" ecorePackage="mancoosimm.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="mancoosimm.ecore#//PriorityType">
@@ -16,7 +16,11 @@
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="mancoosimm.ecore#//StatusType">
       <genEnumLiterals ecoreEnumLiteral="mancoosimm.ecore#//StatusType/installed"/>
-      <genEnumLiterals ecoreEnumLiteral="mancoosimm.ecore#//StatusType/none"/>
+      <genEnumLiterals ecoreEnumLiteral="mancoosimm.ecore#//StatusType/not_installed"/>
+      <genEnumLiterals ecoreEnumLiteral="mancoosimm.ecore#//StatusType/half_configured"/>
+      <genEnumLiterals ecoreEnumLiteral="mancoosimm.ecore#//StatusType/half_installed"/>
+      <genEnumLiterals ecoreEnumLiteral="mancoosimm.ecore#//StatusType/config_files"/>
+      <genEnumLiterals ecoreEnumLiteral="mancoosimm.ecore#//StatusType/unpacked"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="mancoosimm.ecore#//VersionType">
       <genEnumLiterals ecoreEnumLiteral="mancoosimm.ecore#//VersionType/eq"/>
@@ -31,24 +35,34 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//NamedElement/name"/>
     </genClasses>
     <genClasses ecoreClass="mancoosimm.ecore#//Configuration">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Configuration/installedPackages"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Configuration/fileSystem"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Configuration/environment"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Configuration/notInstalledPackages"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//Configuration/creationTime"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//Configuration/systemType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Configuration/fileSystem"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Configuration/environment"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Configuration/installedPackages"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Configuration/notInstalledPackages"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Configuration/configFilesPackages"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Configuration/unpackedPackages"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Configuration/halfConfiguredPackages"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Configuration/halfInstalledPackages"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Configuration/halfConfiguredReinstRequiredPackages"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Configuration/halfInstalledReinstRequiredPackages"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="mancoosimm.ecore#//Package">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//Package/version"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Package/configuration"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Package/packageSettings"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//Package/architecture"/>
     </genClasses>
     <genClasses ecoreClass="mancoosimm.ecore#//InstalledPackage">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//InstalledPackage/installedSize"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//InstalledPackage/maintainer"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//InstalledPackage/architecture"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//InstalledPackage/fileSize"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//InstalledPackage/checkSum"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//InstalledPackage/description"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//InstalledPackage/section"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//InstalledPackage/tag"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//InstalledPackage/priority"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//InstalledPackage/status"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//InstalledPackage/uploaders"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//InstalledPackage/sourcePackage"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//InstalledPackage/depends"/>
@@ -63,6 +77,45 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//InstalledPackage/conflict"/>
     </genClasses>
     <genClasses ecoreClass="mancoosimm.ecore#//NotInstalledPackage"/>
+    <genClasses ecoreClass="mancoosimm.ecore#//ConfigFilesPackage">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//ConfigFilesPackage/maintainer"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//ConfigFilesPackage/checkSum"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//ConfigFilesPackage/description"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//ConfigFilesPackage/section"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//ConfigFilesPackage/tag"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//ConfigFilesPackage/priority"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//ConfigFilesPackage/uploaders"/>
+    </genClasses>
+    <genClasses ecoreClass="mancoosimm.ecore#//UnpackedPackage">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//UnpackedPackage/maintainer"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//UnpackedPackage/checkSum"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//UnpackedPackage/description"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//UnpackedPackage/section"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//UnpackedPackage/tag"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//UnpackedPackage/priority"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//UnpackedPackage/uploaders"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//UnpackedPackage/files"/>
+    </genClasses>
+    <genClasses ecoreClass="mancoosimm.ecore#//HalfConfiguredPackage"/>
+    <genClasses ecoreClass="mancoosimm.ecore#//HalfConfiguredReinstRequiredPackage"/>
+    <genClasses ecoreClass="mancoosimm.ecore#//HalfInstalledPackage">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//HalfInstalledPackage/maintainer"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//HalfInstalledPackage/checkSum"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//HalfInstalledPackage/description"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//HalfInstalledPackage/section"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//HalfInstalledPackage/tag"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//HalfInstalledPackage/priority"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//HalfInstalledPackage/uploaders"/>
+    </genClasses>
+    <genClasses ecoreClass="mancoosimm.ecore#//HalfInstalledReinstRequiredPackage">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//HalfInstalledReinstRequiredPackage/maintainer"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//HalfInstalledReinstRequiredPackage/checkSum"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//HalfInstalledReinstRequiredPackage/description"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//HalfInstalledReinstRequiredPackage/section"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//HalfInstalledReinstRequiredPackage/tag"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//HalfInstalledReinstRequiredPackage/priority"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//HalfInstalledReinstRequiredPackage/uploaders"/>
+    </genClasses>
     <genClasses ecoreClass="mancoosimm.ecore#//SrcPackage">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//SrcPackage/buildDepends"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//SrcPackage/buildConflicts"/>
@@ -135,7 +188,7 @@
     </genClasses>
     <genClasses ecoreClass="mancoosimm.ecore#//GConf">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//GConf/confFiles"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//GConf/schemas"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//GConf/schemas"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference mancoosimm.ecore#//GConf/env"/>
     </genClasses>
     <genClasses ecoreClass="mancoosimm.ecore#//ApplicationMenuCatalog">
@@ -293,10 +346,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//OrConflict/ops"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference mancoosimm.ecore#//OrConflict/conflict"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="mancoosimm.ecore#//Package">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mancoosimm.ecore#//Package/version"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Package/configuration"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Package/packageSettings"/>
+    <genClasses ecoreClass="mancoosimm.ecore#//Schema">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mancoosimm.ecore#//Schema/gconf"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

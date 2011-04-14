@@ -5,6 +5,7 @@ import it.univaq.mancoosi.injectors.systemconfiguration.managers.ubuntu.UbuntuAl
 import it.univaq.mancoosi.injectors.systemconfiguration.managers.ubuntu.UbuntuConfigurationManager;
 import it.univaq.mancoosi.injectors.systemconfiguration.managers.ubuntu.UbuntuEnvironmentManager;
 import it.univaq.mancoosi.injectors.systemconfiguration.managers.ubuntu.UbuntuFileSystemManager;
+import it.univaq.mancoosi.injectors.systemconfiguration.managers.ubuntu.UbuntuGConfManager;
 import it.univaq.mancoosi.injectors.systemconfiguration.managers.ubuntu.UbuntuIconCacheManager;
 import it.univaq.mancoosi.injectors.systemconfiguration.managers.ubuntu.UbuntuMimeTypeHandlerCacheManager;
 import it.univaq.mancoosi.injectors.systemconfiguration.managers.ubuntu.UbuntuPackageManager;
@@ -21,6 +22,7 @@ import java.util.GregorianCalendar;
 import it.univaq.mancoosi.mancoosimm.Configuration;
 import it.univaq.mancoosi.mancoosimm.Environment;
 import it.univaq.mancoosi.mancoosimm.FileSystem;
+import it.univaq.mancoosi.mancoosimm.GConf;
 import it.univaq.mancoosi.mancoosimm.MimeTypeHandlerCache;
 import it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl;
 
@@ -75,8 +77,14 @@ public class Injector {
 			FileSystem fileSystem = UbuntuFileSystemManager.getInstance().getFileSystem();
 			MimeTypeHandlerCache mimeTypeHandlerCache = UbuntuMimeTypeHandlerCacheManager.getInstance().getMimeTypeHandlerCache();
 			environment.setMimeTypeHandlerCache(mimeTypeHandlerCache);
+			
+			GConf gconf = UbuntuGConfManager.getInstance().getGconf();
+			environment.setGconf(gconf);			
+			
 			configuration.setEnvironment(environment);
 			configuration.setFileSystem(fileSystem);
+								
+			
 			
 			// System users are added in the model
 			out.println("* Retrieving users and groups...");
@@ -111,6 +119,12 @@ public class Injector {
 			out.println((new GregorianCalendar()).getTime());
 			out.println("* Alternatives retrieved !");
 			
+			out.println("* Retrieving GConf...");
+			out.println((new GregorianCalendar()).getTime());
+			UbuntuGConfManager.getInstance().createGConfFromSystem();
+			out.println((new GregorianCalendar()).getTime());
+			out.println("* GConf retrieved !");
+			
 			out.println("* Retrieving IconCache...");
 			out.println((new GregorianCalendar()).getTime());
 			UbuntuIconCacheManager.getInstance().createIconCacheFromSystem();
@@ -123,13 +137,10 @@ public class Injector {
 			out.println("Model injection completed !");
 		}
 		
-		out.close();
-		
- 
+		out.close(); 
 
 		resource.save(Collections.EMPTY_MAP);
 		
 	}
-
 
 }
