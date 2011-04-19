@@ -15,7 +15,8 @@ public class UbuntuGroupManager extends GroupManager {
 	@Override
 	public void synchronize() throws IOException {
 		// TODO Auto-generated method stub
-		
+		//Mirco: we don't need to implement this method cause UserManager synchronize() provides
+		//this sinchronize() by itself
 	}
-	
+
 }
