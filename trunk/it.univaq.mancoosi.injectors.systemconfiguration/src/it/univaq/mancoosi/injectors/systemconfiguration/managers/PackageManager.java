@@ -151,31 +151,6 @@ import it.univaq.mancoosi.mancoosimm.PackageSetting;
 		
 		return found;
 	}
-	
-	//mirco: check the existence of the input package in the model
-	public Boolean existsPackageComplete(InstalledPackage pack) {
-		
-		EList<InstalledPackage> installedPackages = ConfigurationManager.getInstance().getConfiguration().getInstalledPackages();
-		
-		Iterator<InstalledPackage> installedPackagesIterator = installedPackages.iterator();
-		InstalledPackage installedPackageElement = null;
-		Boolean found = false;
-		
-		while ( installedPackagesIterator.hasNext() && !found ) {
-			installedPackageElement = installedPackagesIterator.next();
-			if ( isPackageEquals (pack, installedPackageElement) ) {
-				found = true;
-				pkgMap.put(pack.getName(),installedPackageElement);
-			}
-			
-		}
-		
-		return found;
-	}
-	
-	protected boolean isPackageEquals (InstalledPackage pack, InstalledPackage installedPackage) {
-		return pack.getName().equals(installedPackage.getName());
-	}
 
 
 	public List<File> getConfFiles(InstalledPackage installedPackage) {

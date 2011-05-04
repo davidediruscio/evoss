@@ -52,7 +52,6 @@ import it.univaq.mancoosi.mancoosimm.OrInv;
 import it.univaq.mancoosi.mancoosimm.PackageSetting;
 import it.univaq.mancoosi.mancoosimm.SGMLCatalog;
 import it.univaq.mancoosi.mancoosimm.SGMLDocument;
-import it.univaq.mancoosi.mancoosimm.Schema;
 import it.univaq.mancoosi.mancoosimm.Service;
 import it.univaq.mancoosi.mancoosimm.SharedLibrary;
 import it.univaq.mancoosi.mancoosimm.SingleConflict;
@@ -548,14 +547,6 @@ public class MancoosiSwitch<T> {
 				OrConflict orConflict = (OrConflict)theEObject;
 				T result = caseOrConflict(orConflict);
 				if (result == null) result = caseConflict(orConflict);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case MancoosiPackage.SCHEMA: {
-				Schema schema = (Schema)theEObject;
-				T result = caseSchema(schema);
-				if (result == null) result = caseFile(schema);
-				if (result == null) result = caseNamedElement(schema);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1430,21 +1421,6 @@ public class MancoosiSwitch<T> {
 	 * @generated
 	 */
 	public T caseOrConflict(OrConflict object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Schema</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Schema</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseSchema(Schema object) {
 		return null;
 	}
 

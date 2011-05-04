@@ -5,8 +5,6 @@ import it.univaq.mancoosi.injectors.systemconfiguration.managers.ubuntu.UbuntuAl
 import it.univaq.mancoosi.injectors.systemconfiguration.managers.ubuntu.UbuntuConfigurationManager;
 import it.univaq.mancoosi.injectors.systemconfiguration.managers.ubuntu.UbuntuEnvironmentManager;
 import it.univaq.mancoosi.injectors.systemconfiguration.managers.ubuntu.UbuntuFileSystemManager;
-import it.univaq.mancoosi.injectors.systemconfiguration.managers.ubuntu.UbuntuGConfManager;
-import it.univaq.mancoosi.injectors.systemconfiguration.managers.ubuntu.UbuntuIconCacheManager;
 import it.univaq.mancoosi.injectors.systemconfiguration.managers.ubuntu.UbuntuMimeTypeHandlerCacheManager;
 import it.univaq.mancoosi.injectors.systemconfiguration.managers.ubuntu.UbuntuPackageManager;
 import it.univaq.mancoosi.injectors.systemconfiguration.managers.ubuntu.UbuntuPackageSettingDependenciesManager;
@@ -22,7 +20,6 @@ import java.util.GregorianCalendar;
 import it.univaq.mancoosi.mancoosimm.Configuration;
 import it.univaq.mancoosi.mancoosimm.Environment;
 import it.univaq.mancoosi.mancoosimm.FileSystem;
-import it.univaq.mancoosi.mancoosimm.GConf;
 import it.univaq.mancoosi.mancoosimm.MimeTypeHandlerCache;
 import it.univaq.mancoosi.mancoosimm.impl.MancoosiPackageImpl;
 
@@ -52,7 +49,6 @@ public class Injector {
 		Resource resource = new XMIResourceFactoryImpl().createResource(fileURI);
 
 		if (systemModel.exists()) {
-			
 			resource.load(null);
 			UbuntuConfigurationManager.getInstance().setConfiguration( (Configuration) resource.getContents().get(0) );
 
@@ -63,7 +59,6 @@ public class Injector {
 			//UbuntuPackageManager.getInstance().removePackage("yelp");
 			
 			UbuntuPackageManager.getInstance().synchronize();
-			UbuntuIconCacheManager.getInstance().synchronize();
 			
 			System.out.println("Synchronization completed !");		
 			
@@ -77,14 +72,8 @@ public class Injector {
 			FileSystem fileSystem = UbuntuFileSystemManager.getInstance().getFileSystem();
 			MimeTypeHandlerCache mimeTypeHandlerCache = UbuntuMimeTypeHandlerCacheManager.getInstance().getMimeTypeHandlerCache();
 			environment.setMimeTypeHandlerCache(mimeTypeHandlerCache);
-			
-			GConf gconf = UbuntuGConfManager.getInstance().getGconf();
-			environment.setGconf(gconf);			
-			
 			configuration.setEnvironment(environment);
 			configuration.setFileSystem(fileSystem);
-								
-			
 			
 			// System users are added in the model
 			out.println("* Retrieving users and groups...");
@@ -119,28 +108,19 @@ public class Injector {
 			out.println((new GregorianCalendar()).getTime());
 			out.println("* Alternatives retrieved !");
 			
-			out.println("* Retrieving GConf...");
-			out.println((new GregorianCalendar()).getTime());
-			UbuntuGConfManager.getInstance().createGConfFromSystem();
-			out.println((new GregorianCalendar()).getTime());
-			out.println("* GConf retrieved !");
-			
-			out.println("* Retrieving IconCache...");
-			out.println((new GregorianCalendar()).getTime());
-			UbuntuIconCacheManager.getInstance().createIconCacheFromSystem();
-			out.println((new GregorianCalendar()).getTime());
-			out.println("* IconCache retrieved !");
-			
 			out.println((new GregorianCalendar()).getTime());
 			configuration.setCreationTime((new GregorianCalendar()).getTime().toString());
 			configuration.setSystemType("Ubuntu");	
 			out.println("Model injection completed !");
 		}
 		
-		out.close(); 
+		out.close();
+		
+ 
 
 		resource.save(Collections.EMPTY_MAP);
 		
 	}
+
 
 }

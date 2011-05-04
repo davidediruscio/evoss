@@ -512,15 +512,6 @@ public interface MancoosiFactory extends EFactory {
 	OrConflict createOrConflict();
 
 	/**
-	 * Returns a new object of class '<em>Schema</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Schema</em>'.
-	 * @generated
-	 */
-	Schema createSchema();
-
-	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -54,7 +54,6 @@ import it.univaq.mancoosi.mancoosimm.PackageSetting;
 import it.univaq.mancoosi.mancoosimm.PriorityType;
 import it.univaq.mancoosi.mancoosimm.SGMLCatalog;
 import it.univaq.mancoosi.mancoosimm.SGMLDocument;
-import it.univaq.mancoosi.mancoosimm.Schema;
 import it.univaq.mancoosi.mancoosimm.Service;
 import it.univaq.mancoosi.mancoosimm.SharedLibrary;
 import it.univaq.mancoosi.mancoosimm.SingleConflict;
@@ -490,13 +489,6 @@ public class MancoosiPackageImpl extends EPackageImpl implements MancoosiPackage
 	 * @generated
 	 */
 	private EClass orConflictEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass schemaEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -2943,24 +2935,6 @@ public class MancoosiPackageImpl extends EPackageImpl implements MancoosiPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getSchema() {
-		return schemaEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getSchema_Gconf() {
-		return (EReference)schemaEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EEnum getPriorityType() {
 		return priorityTypeEEnum;
 	}
@@ -3331,9 +3305,6 @@ public class MancoosiPackageImpl extends EPackageImpl implements MancoosiPackage
 		createEReference(orConflictEClass, OR_CONFLICT__OPS);
 		createEReference(orConflictEClass, OR_CONFLICT__CONFLICT);
 
-		schemaEClass = createEClass(SCHEMA);
-		createEReference(schemaEClass, SCHEMA__GCONF);
-
 		// Create enums
 		priorityTypeEEnum = createEEnum(PRIORITY_TYPE);
 		statusTypeEEnum = createEEnum(STATUS_TYPE);
@@ -3408,7 +3379,6 @@ public class MancoosiPackageImpl extends EPackageImpl implements MancoosiPackage
 		singleConflictEClass.getESuperTypes().add(this.getConflict());
 		andConflictEClass.getESuperTypes().add(this.getConflict());
 		orConflictEClass.getESuperTypes().add(this.getConflict());
-		schemaEClass.getESuperTypes().add(this.getFile());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(namedElementEClass, NamedElement.class, "NamedElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -3572,7 +3542,7 @@ public class MancoosiPackageImpl extends EPackageImpl implements MancoosiPackage
 
 		initEClass(gConfEClass, GConf.class, "GConf", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getGConf_ConfFiles(), this.getFile(), null, "confFiles", null, 0, -1, GConf.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getGConf_Schemas(), this.getSchema(), this.getSchema_Gconf(), "schemas", null, 0, -1, GConf.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getGConf_Schemas(), this.getFile(), null, "schemas", null, 0, -1, GConf.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getGConf_Env(), this.getEnvironment(), this.getEnvironment_Gconf(), "env", null, 1, 1, GConf.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(applicationMenuCatalogEClass, ApplicationMenuCatalog.class, "ApplicationMenuCatalog", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -3730,9 +3700,6 @@ public class MancoosiPackageImpl extends EPackageImpl implements MancoosiPackage
 		initEClass(orConflictEClass, OrConflict.class, "OrConflict", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getOrConflict_Ops(), this.getConflict(), null, "ops", null, 2, -1, OrConflict.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getOrConflict_Conflict(), this.getConflict(), this.getConflict_OrConflict(), "conflict", null, 1, 1, OrConflict.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(schemaEClass, Schema.class, "Schema", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getSchema_Gconf(), this.getGConf(), this.getGConf_Schemas(), "gconf", null, 1, 1, Schema.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(priorityTypeEEnum, PriorityType.class, "PriorityType");

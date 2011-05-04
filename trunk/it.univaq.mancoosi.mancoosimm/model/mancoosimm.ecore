@@ -270,7 +270,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="confFiles" ordered="false"
         upperBound="-1" eType="#//File"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="schemas" ordered="false"
-        upperBound="-1" eType="#//Schema" containment="true" eOpposite="#//Schema/gconf"/>
+        upperBound="-1" eType="#//File"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="env" ordered="false" lowerBound="1"
         eType="#//Environment" eOpposite="#//Environment/gconf"/>
   </eClassifiers>
@@ -537,9 +537,5 @@
         eType="#//Conflict" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="conflict" lowerBound="1"
         eType="#//Conflict" eOpposite="#//Conflict/orConflict"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Schema" eSuperTypes="#//File">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="gconf" lowerBound="1" eType="#//GConf"
-        eOpposite="#//GConf/schemas"/>
   </eClassifiers>
 </ecore:EPackage>
