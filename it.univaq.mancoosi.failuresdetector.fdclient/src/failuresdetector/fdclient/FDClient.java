@@ -692,8 +692,15 @@ System.out.println("AGGIORNO I JAR IN " + getTmpDir() + pathSep + getJarsListFil
     }
 	
 	//This method detects if the executed OCL query result given in input produced a failure.
+	private static boolean detectError(String queryResult) {
+		if ( queryResult.equals("[true]") || queryResult.equals("[false]") )
+			return false;
+		return true;
+	}
+	
+	//This method detects if the executed OCL query result given in input produced a failure.
 	private static boolean detectFailure(String queryResult) {
-		if(queryResult.equals("[false]"))
+		if(queryResult.equals("[true]"))
 			return true;
 		return false;
 	}
@@ -755,10 +762,15 @@ System.out.println("AGGIORNO I JAR IN " + getTmpDir() + pathSep + getJarsListFil
 						Object[] results = QueryExecutor.executeQueries(fd.getEcoreModelDir() + pathSep + fd.getEcoreModelFileName(), localQueriesLS);
 						System.out.println("\nFAILURES DETECTION");
 						for(int i = 0; i < results.length; i++) {
-							if(detectFailure(results[i].toString())) {
-								System.out.println("Failure detected for the query " + localQueriesLS[i] + "!");
-							} else {
-								System.out.println("No failures detected for the query " + localQueriesLS[i] + ".");
+							if(detectError(results[i].toString())) {
+								System.out.println("ERROR: Your query " + localQueriesLS[i] + " must have a boolean value as return !");
+
+							} else {						
+								if(detectFailure(results[i].toString())) {
+									System.out.println("Failure detected for the query " + localQueriesLS[i] + "!");
+								} else {
+									System.out.println("No failures detected for the query " + localQueriesLS[i] + ".");
+								}
 							}
 						}
 						
@@ -872,12 +884,18 @@ System.out.println("AGGIORNO I JAR IN " + getTmpDir() + pathSep + getJarsListFil
 						Object[] results = QueryExecutor.executeQueries(fd.getEcoreModelDir() + pathSep + fd.getEcoreModelFileName(), localQueriesOS);
 						System.out.println("\nFAILURES DETECTION");
 						for(int i = 0; i < results.length; i++) {
-							if(detectFailure(results[i].toString())) {
-								System.out.println("Failure detected for the query " + localQueriesOS[i] + "!");
-							} else {
-								System.out.println("No failures detected for the query " + localQueriesOS[i] + ".");
+							if(detectError(results[i].toString())) {
+								System.out.println("ERROR: Your query " + localQueriesOS[i] + " must have a boolean value as return !");
+
+							} else {						
+								if(detectFailure(results[i].toString())) {
+									System.out.println("Failure detected for the query " + localQueriesOS[i] + "!");
+								} else {
+									System.out.println("No failures detected for the query " + localQueriesOS[i] + ".");
+								}
 							}
 						}
+						
 					} else
 						System.out.println("No queries to execute.");
 					
