@@ -179,6 +179,9 @@
         lowerBound="1" eType="#//SingleDep" containment="true" eOpposite="#//SingleDep/dependence"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="pkg" ordered="false" lowerBound="1"
         eType="#//Package"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owner" eType="#//Dependence"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownerPkg" lowerBound="1"
+        eType="#//Package"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AndDep" eSuperTypes="#//Dependence">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ops" ordered="false" lowerBound="2"
@@ -525,6 +528,10 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="singleConflict" eType="#//SingleConflict"
         containment="true" eOpposite="#//SingleConflict/conflict"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="pkg" lowerBound="1" eType="#//Package"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owner" ordered="false"
+        eType="#//Conflict"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownerPkg" lowerBound="1"
+        eType="#//Package"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AndConflict" eSuperTypes="#//Conflict">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ops" lowerBound="2" upperBound="-1"
