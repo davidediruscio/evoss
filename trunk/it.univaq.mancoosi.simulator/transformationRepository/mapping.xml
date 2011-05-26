@@ -16,7 +16,7 @@
 	
 	<mapping elementModel="Message" transformationFile="default_copy.atl"/>
 	
-	<!--<mapping elementModel="If" transformationFile="conditionHOT.atl"/>-->
+	<mapping elementModel="If" transformationFile="conditionHOT.atl"/>
 	<!--<mapping elementModel="Return" transformationFile="exit.atl"/>-->
 	
 	<mapping elementModel="PostinstDesktop" transformationFile="default_copy.atl"/>
