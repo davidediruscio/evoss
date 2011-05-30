@@ -42,7 +42,7 @@ public class MissingMimeTypeHandlers {
 	public static void main(String[] args) throws IOException{
 		MancoosiPackageImpl.init();
 		
-		URI fileURI = URI.createFileURI("model/systemModel.ecore");
+		URI fileURI = URI.createFileURI(args[0]);
 		Resource resource = new XMIResourceFactoryImpl().createResource(fileURI);
 		resource.load(null);
 		UbuntuConfigurationManager.getInstance().setConfiguration( (Configuration) resource.getContents().get(0) );

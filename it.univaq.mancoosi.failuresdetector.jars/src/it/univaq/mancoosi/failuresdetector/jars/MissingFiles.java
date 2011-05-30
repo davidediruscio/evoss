@@ -80,10 +80,10 @@ public class MissingFiles {
 					
 		Configuration configuration = null;
 	
-		URI fileURI = URI.createFileURI("model/systemModel.ecore");
-		java.io.File systemModel = new java.io.File("model/systemModel.ecore");
+		URI fileURI = URI.createFileURI(args[0]);
+		java.io.File systemModel = new java.io.File(args[0]);
 		
-		PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("model/data.txt")));
+	//	PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("model/data.txt")));
 		
 		Resource resource = new XMIResourceFactoryImpl().createResource(fileURI);
 		resource.load(null);
