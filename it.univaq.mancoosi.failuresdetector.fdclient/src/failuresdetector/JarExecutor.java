@@ -22,9 +22,13 @@ public class JarExecutor {
 				name = cl.getMainClassName();
 				if (name != null) {
 					// Get arguments for the application
-				    String[] newArgs = new String[url.length - 1];
-				    System.arraycopy(url, 1, newArgs, 0, newArgs.length);
+				    //String[] newArgs = new String[url.length - 1];
+				    //System.arraycopy(url, 1, newArgs, 0, newArgs.length);
 				    // Invoke application's main class
+				        
+					String[] newArgs = new String[1];
+					newArgs[0] = ecoreModelPath;
+					
 				    System.out.println(jarFilePath + " execution started...");
 				    cl.invokeClass(name, newArgs);
 				    System.out.println(jarFilePath + " execution terminated!");
