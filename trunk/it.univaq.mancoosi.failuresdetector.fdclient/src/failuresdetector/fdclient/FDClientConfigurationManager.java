@@ -93,10 +93,10 @@ public class FDClientConfigurationManager {
 				
 				try {
 					String ecoreModelFileName = getConfigurationParameter(configurationFilePath, ECORE_MODEL_FILENAME_PARAMETER);
-					if(ecoreModelFileName.endsWith(".ecore"))
-						fd.setEcoreModelFileName(ecoreModelFileName);
-					else
-						throw new LoadConfigurationException("");
+					//if(ecoreModelFileName.endsWith(".ecore"))
+					fd.setEcoreModelFileName(ecoreModelFileName);
+					//else
+					//	throw new LoadConfigurationException("");
 				} catch (LoadConfigurationException e) {
 					fd.setEcoreModelFileName(DEFAULT_ECORE_MODEL_FILENAME);
 					e.setMessage(e.getMessage() + " It will have the default value " + DEFAULT_ECORE_MODEL_FILENAME + ".");
