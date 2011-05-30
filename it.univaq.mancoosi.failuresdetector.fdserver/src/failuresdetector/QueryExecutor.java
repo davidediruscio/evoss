@@ -33,7 +33,7 @@ public class QueryExecutor {
 			modelUri = URI.createFileURI(new File(ecoreModelPath).getAbsolutePath());
 			
 			EcoreResourceFactoryImpl ecoreFactory = new EcoreResourceFactoryImpl();		
-			resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore", ecoreFactory);
+			resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("mancoosimm", ecoreFactory);
 			
 			// Register the package to ensure it is available during loading.
 			resourceSet.getPackageRegistry().put
