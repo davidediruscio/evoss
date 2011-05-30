@@ -440,7 +440,7 @@ public class FDServerThread extends Thread {
     			System.out.println("Receiving mancoosi model from the client " + connectionSocket.getInetAddress().toString().substring(1) + "...");
     			outToClient.writeBytes("SEND_ECORE_FILENAME\n");
     			String ecoreFileName = inFromClient.readLine(); 
-    			//if(ecoreFileName.endsWith(".ecore")) {
+    			if(ecoreFileName.endsWith(".mancoosimm")) {
     				outToClient.writeBytes("SEND_ECORE_FILENAME_ACK\n");
     				//ServerSocket appSs = new ServerSocket(FDServerConfigurationManager.FILE_PORT);
         	    	//Socket appConnectionSocket = appSs.accept();
@@ -520,10 +520,10 @@ public class FDServerThread extends Thread {
     					System.out.println(e.getMessage());
     					System.out.println("Error in remote OCL queries execution process!");
     				}
-    			//} else {
-    			//	outToClient.writeBytes("INVALID_FILENAME\n");
-    			//	System.out.println("Invalid ecore filename!");
-    			//}
+    			} else {
+    				outToClient.writeBytes("INVALID_FILENAME\n");
+    				System.out.println("Invalid system configuration model extension!");
+    			}
     		} else {
     			System.out.println("Could not execute queries for the client" + connectionSocket.getInetAddress().toString().substring(1) + " .");
     		}
@@ -550,7 +550,7 @@ public class FDServerThread extends Thread {
     			System.out.println("Receiving mancoosi model from the client " + connSocket.getInetAddress().toString().substring(1) + "...");
     			outToClient.writeBytes("SEND_ECORE_FILENAME\n");
     			String ecoreFileName = inFromClient.readLine(); 
-    			//if(ecoreFileName.endsWith(".ecore")) {
+    			if(ecoreFileName.endsWith(".mancoosimm")) {
     				outToClient.writeBytes("SEND_ECORE_FILENAME_ACK\n");
     				//ServerSocket appSs = new ServerSocket(FDServerConfigurationManager.FILE_PORT);
         	    	//Socket appConnectionSocket = appSs.accept();
@@ -630,10 +630,10 @@ public class FDServerThread extends Thread {
 						System.out.println("Error in remote OCL queries execution process!");
 					}
     				deleteFile(getTmpDir() + pathSep + fileName);
-    			//} else {
-    			//	outToClient.writeBytes("INVALID_FILENAME\n");
-    			//	System.out.println("Invalid ecore filename!");
-    			//}
+    			} else {
+    				outToClient.writeBytes("INVALID_FILENAME\n");
+    				System.out.println("Invalid system configuration model extension!");
+    			}
     		} else {
     			System.out.println("Could not execute queries for the client" + connectionSocket.getInetAddress().toString().substring(1) + " .");
     		}
