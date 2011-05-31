@@ -349,7 +349,7 @@ public class FDServer {
 							System.err.println("Timed out waiting for the socket.");
 							//ste.printStackTrace();
 							protocolSocketConnected = false;
-							System.exit(1);
+					//		System.exit(1);
 						}             
 	                }
 	               
