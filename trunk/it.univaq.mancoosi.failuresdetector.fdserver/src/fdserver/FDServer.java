@@ -17,8 +17,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ConnectException;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketAddress;
+import java.net.SocketTimeoutException;
 
 import failuresdetector.exceptions.LoadConfigurationException;
 
@@ -327,11 +331,26 @@ public class FDServer {
 	                
 	                while ( ! protocolSocketConnected ) {
 	                	try {
-	                		protocolSocket = new Socket(connectionSocket.getInetAddress(), FDServerConfigurationManager.CONTROL_PORT);
+	                		InetAddress inteAddress = connectionSocket.getInetAddress();
+	                	    SocketAddress socketAddress = new InetSocketAddress(inteAddress,  FDServerConfigurationManager.CONTROL_PORT);
+	                	  
+	                	    // create a socket
+	                	    protocolSocket = new Socket();
+	                	  
+	                	    //this method will block no more than timeout ms.
+	                	    int timeoutInMs = 10*1000;   // 10 seconds
+	                	    protocolSocket.connect(socketAddress, timeoutInMs);
+	                		
+	               // 		protocolSocket = new Socket(connectionSocket.getInetAddress(), FDServerConfigurationManager.CONTROL_PORT);
 	                		protocolSocketConnected = true;
 						} catch (ConnectException e) {
 							// TODO: handle exception
-						}	             
+						}	catch (SocketTimeoutException ste) {
+							System.err.println("Timed out waiting for the socket.");
+							//ste.printStackTrace();
+							protocolSocketConnected = false;
+							System.exit(1);
+						}             
 	                }
 	               
 	    	    	    			
