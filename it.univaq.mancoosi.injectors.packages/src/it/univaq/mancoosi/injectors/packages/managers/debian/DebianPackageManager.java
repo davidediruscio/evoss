@@ -680,7 +680,7 @@ public class DebianPackageManager extends PackageManager {
 				}
 			} else {
 				System.out.println("The package '"+name+"' is not installed. Downloading all the required .deb files");
-				String[] cmdDownloadPkg = {"/bin/sh","-c"," apt-get --download-only install --yes " + name};
+				String[] cmdDownloadPkg = {"/bin/sh","-c"," apt-get --download-only install --yes --force-yes" + name};
 				Process pDownloadPkg = Runtime.getRuntime().exec(cmdPkg);
 				pDownloadPkg.waitFor();
 				if ((new File(path)).exists()) {
