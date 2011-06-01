@@ -679,7 +679,16 @@ public class DebianPackageManager extends PackageManager {
 					throw new InjectorException("Package model creation failed. The package '"+name+"' has a different version field.");
 				}
 			} else {
-				throw new InjectorException("Package model creation failed. The package '"+name+"' is not installed");
+				System.out.println("The package '"+name+"' is not installed. Downloading all the required .deb files");
+				String[] cmdDownloadPkg = {"/bin/sh","-c"," apt-get --download-only install --yes " + name};
+				Process pDownloadPkg = Runtime.getRuntime().exec(cmdPkg);
+				pDownloadPkg.waitFor();
+				if ((new File(path)).exists()) {
+					createModelFromPackageFile(path);
+				} else {
+					throw new InjectorException("Package injection of the downloaded files failed.");
+				}
+					
 			}
 		}
 	}
