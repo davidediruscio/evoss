@@ -134,6 +134,11 @@ public class DebianValidator extends Validator {
 				arch = values.get(i-1);
 			}
 		}
+		
+		if (arch.equals("")){
+			arch = "all";
+		}
+		
 		if (arch.equals("")) {
 			throw new ValidatorException("Architecture field not found for package "+name+" "+version);
 		}
