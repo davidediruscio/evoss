@@ -14,7 +14,7 @@
 #<<parameter>>=<<value>>
 fdServerUri=localhost
 ecoreModelDir=model
-ecoreModelFileName=systemModel.ecore
+ecoreModelFileName=systemModel.mancoosimm
 jarsDir=jars
 jarsListFile=jarsListFile.txt
 tmpDir=tmp
