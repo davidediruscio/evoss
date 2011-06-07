@@ -215,7 +215,7 @@ public class FDServerThread extends Thread {
             }
             if(dbConnected()) {
             	Statement stmt = dbConnection.createStatement();
-            	rs = stmt.executeQuery("SELECT * from oclqueries");
+            	rs = stmt.executeQuery("SELECT * from oclquery");
             	rs.beforeFirst();           
             	queries = getQueriesTextFromResultSet(rs);
         	} else {
@@ -237,7 +237,7 @@ public class FDServerThread extends Thread {
             }
             if(dbConnected()) {
             	Statement stmt = dbConnection.createStatement();
-            	rs = stmt.executeQuery("SELECT * from oclqueries");
+            	rs = stmt.executeQuery("SELECT * from oclquery");
             	rs.beforeFirst();            
             	queries = getQueriesIDFromResultSet(rs);
             } else {
@@ -259,7 +259,7 @@ public class FDServerThread extends Thread {
             }
             if(dbConnected()) {
             	Statement stmt = dbConnection.createStatement();
-            	String dbQuery = "SELECT * from oclqueries WHERE query = " + "\"" + query + "\"";
+            	String dbQuery = "SELECT * from oclquery WHERE query = " + "\"" + query + "\"";
             	rs = stmt.executeQuery(dbQuery);
             	rs.beforeFirst();
             	queryID = getQueryIDFromResultSet(rs);
@@ -354,9 +354,9 @@ public class FDServerThread extends Thread {
             }
             if(dbConnected()) {
             	Statement stmt = dbConnection.createStatement();
-            	rs = stmt.executeQuery("SELECT text FROM solutions WHERE ID = " +
-            			"ANY (SELECT idfirst FROM ass_solutions2failures WHERE idsecond = " +
-            			"ANY (SELECT idsecond FROM ass_oclqueries2failures WHERE idfirst = (SELECT ID FROM oclqueries WHERE ID = " + "\"" + queryID + "\")))");
+            	rs = stmt.executeQuery("SELECT text FROM solution WHERE ID = " +
+            			"ANY (SELECT idfirst FROM ass_solution2fault WHERE idsecond = " +
+            			"ANY (SELECT idsecond FROM ass_oclquery2fault WHERE idfirst = (SELECT ID FROM oclquery WHERE ID = " + "\"" + queryID + "\")))");
             	rs.beforeFirst();           
             	solutions = getSolutionsFromResultSet(rs);
         	} else {
@@ -440,6 +440,9 @@ public class FDServerThread extends Thread {
     			System.out.println("Receiving mancoosi model from the client " + connectionSocket.getInetAddress().toString().substring(1) + "...");
     			outToClient.writeBytes("SEND_ECORE_FILENAME\n");
     			String ecoreFileName = inFromClient.readLine(); 
+    			
+   System.out.println("**** " + ecoreFileName); 			
+    			
     			if(ecoreFileName.endsWith(".mancoosimm")) {
     				outToClient.writeBytes("SEND_ECORE_FILENAME_ACK\n");
     				//ServerSocket appSs = new ServerSocket(FDServerConfigurationManager.FILE_PORT);
@@ -648,9 +651,9 @@ public class FDServerThread extends Thread {
     
     //This method detects if the executed OCL query result given in input produced a failure.
     private static boolean detectFailure(String queryResult) {
-		if(queryResult.equals("[false]"))
-			return true;		
-		return false;
+    	if (  queryResult.equals("[false]") )
+			return false;
+		return true;
 	}    
   
     //This method updates the server jars list file, retrieving the jars from the database.
@@ -694,7 +697,7 @@ public class FDServerThread extends Thread {
             }
             if(dbConnected()) {
             	Statement stmt = dbConnection.createStatement();
-            	rs = stmt.executeQuery("SELECT * from jars");
+            	rs = stmt.executeQuery("SELECT * from jarquery");
             	rs.beforeFirst();            
             	jars = getJarFilesFromResultSet(rs);
         	} else {

@@ -348,7 +348,8 @@ public class FDServer {
 						}	catch (SocketTimeoutException ste) {
 							System.err.println("Timed out waiting for the socket.");
 							//ste.printStackTrace();
-							protocolSocketConnected = false;
+							protocolSocket = null;
+							protocolSocketConnected = true;
 					//		System.exit(1);
 						}             
 	                }
