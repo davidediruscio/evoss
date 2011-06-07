@@ -389,9 +389,9 @@ System.out.println("AGGIORNO I JAR IN " + getTmpDir() + pathSep + getJarsListFil
 	//asks to the server the execution of some specific OCL queries
 	private void remoteQueriesExecution(Socket connectionSocket, Socket protocolSocket, String[] queriesToExecute) throws IOException {
 		
-		System.out.println("Estabilishing connection over port " + FDClientConfigurationManager.CONTROL_PORT + " for executing queries...");
+		System.out.println("Establishing connection over port " + FDClientConfigurationManager.CONTROL_PORT + " for executing queries...");
 	
-		System.out.println("Connection over port " + FDClientConfigurationManager.CONTROL_PORT + " estabilished...");
+		System.out.println("Connection over port " + FDClientConfigurationManager.CONTROL_PORT + " established...");
 		DataOutputStream outToServer = new DataOutputStream(protocolSocket.getOutputStream());
 		BufferedReader inFromServer = new BufferedReader(new InputStreamReader(protocolSocket.getInputStream()));
 		outToServer.writeBytes("EXEC_QUERIES\n");
@@ -401,7 +401,7 @@ System.out.println("AGGIORNO I JAR IN " + getTmpDir() + pathSep + getJarsListFil
 				outToServer.writeBytes(getEcoreModelFileName() + "\n");
 				if(inFromServer.readLine().equals("SEND_ECORE_FILENAME_ACK")) {
 					//Socket appConnectionSocket = new Socket(getOclServerUri(), FDClientConfigurationManager.FILE_PORT);
-					System.out.println("Estabilishing connection over port " + FDClientConfigurationManager.FILE_PORT + " for sending mancoosi ecore model...");
+					System.out.println("Establishing connection over port " + FDClientConfigurationManager.FILE_PORT + " for sending mancoosi ecore model...");
 					new FileSenderManager(connectionSocket, getEcoreModelDir(), getEcoreModelFileName()).run();
 					//appConnectionSocket.close();
 					if(inFromServer.readLine().equals("MANCOOSI_MODEL_ACK")) {
@@ -466,9 +466,9 @@ System.out.println("AGGIORNO I JAR IN " + getTmpDir() + pathSep + getJarsListFil
 	//This method implements a remote OCL queries execution procedure in which the client itself  
 	//asks to the server the execution of all the OCL queries in the database
 	private void remoteQueriesInDbExecution(Socket connSocket) throws IOException {
-		System.out.println("Estabilishing connection over port " + FDClientConfigurationManager.CONTROL_PORT + " for executing queries...");
+		System.out.println("Establishing connection over port " + FDClientConfigurationManager.CONTROL_PORT + " for executing queries...");
 		Socket connectionSocket = connSocket; //new Socket(getOclServerUri(), FDClientConfigurationManager.CONTROL_PORT);
-		System.out.println("Connection over port " + FDClientConfigurationManager.CONTROL_PORT + " estabilished...");
+		System.out.println("Connection over port " + FDClientConfigurationManager.CONTROL_PORT + " established...");
 		DataOutputStream outToServer = new DataOutputStream(connectionSocket.getOutputStream());
 		BufferedReader inFromServer = new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
 		outToServer.writeBytes("EXEC_QUERIES\n");
@@ -478,7 +478,7 @@ System.out.println("AGGIORNO I JAR IN " + getTmpDir() + pathSep + getJarsListFil
 				outToServer.writeBytes(getEcoreModelFileName() + "\n");
 				if(inFromServer.readLine().equals("SEND_ECORE_FILENAME_ACK")) {
 					//Socket appConnectionSocket = new Socket(getOclServerUri(), FDClientConfigurationManager.FILE_PORT);
-					System.out.println("Estabilishing connection over port " + FDClientConfigurationManager.FILE_PORT + " for sending mancoosi ecore model...");
+					System.out.println("Establishing connection over port " + FDClientConfigurationManager.FILE_PORT + " for sending mancoosi ecore model...");
 					new FileSenderManager(connectionSocket, getEcoreModelDir(), getEcoreModelFileName()).run();///////////////
 					//appConnectionSocket.close();
 					if(inFromServer.readLine().equals("MANCOOSI_MODEL_ACK")) {
@@ -693,16 +693,19 @@ System.out.println("AGGIORNO I JAR IN " + getTmpDir() + pathSep + getJarsListFil
 	
 	//This method detects if the executed OCL query result given in input produced a failure.
 	private static boolean detectError(String queryResult) {
-		if ( queryResult.equals("[true]") || queryResult.equals("[false]") )
+	//	if ( queryResult.equals("[false]") || queryResult.equals("[true]"))
+			
+			//System.out.println(queryResult);
+			
 			return false;
-		return true;
+	//	return true;
 	}
 	
 	//This method detects if the executed OCL query result given in input produced a failure.
 	private static boolean detectFailure(String queryResult) {
-		if(queryResult.equals("[true]"))
-			return true;
-		return false;
+		if( queryResult.equals("[false]") )
+			return false;
+		return true;
 	}
 	
 	//This method is used for disconnecting the client from the server

@@ -1,0 +1,10 @@
+mancoosimm::Alternative.allInstances()->exists(e | e.current.oclIsUndefined())
+mancoosimm::Service.allInstances()->exists(e | e.executable.oclIsUndefined())
+mancoosimm::MenuEntry.allInstances()->exists(e | e.executable.oclIsUndefined())
+mancoosimm::MimeTypeHandler.allInstances()->exists(h | h.handler.oclIsUndefined())
+mancoosimm::HalfConfiguredReinstRequiredPackage.allInstances()->size() > 0
+mancoosimm::HalfInstalledReinstRequiredPackage.allInstances()->size() > 0
+mancoosimm::HalfConfiguredPackage.allInstances()->size() > 0
+mancoosimm::HalfInstalledPackage.allInstances()->size() > 0
+mancoosimm::PackageSetting.allInstances()->exists(e | e.files->exists(f | (f.owner.name <> 'root')) )
+mancoosimm::PackageSetting.allInstances()->select(e | e.files->exists(f | (f.owner.name <> 'root')))->collect(g | g.files->select(h| h.owner.name <> 'root')->collect(i | i.location) ) 

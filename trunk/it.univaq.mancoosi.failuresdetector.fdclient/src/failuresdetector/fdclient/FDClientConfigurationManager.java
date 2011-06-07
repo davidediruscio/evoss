@@ -25,7 +25,7 @@ public class FDClientConfigurationManager {
 	//default values for configuration parameters
 	private static final String DEFAULT_FDSERVER_URI = "localhost";
 	private static final String DEFAULT_ECORE_MODEL_DIR = "model";
-	private static final String DEFAULT_ECORE_MODEL_FILENAME = "systemModel.ecore";
+	private static final String DEFAULT_ECORE_MODEL_FILENAME = "systemModel.mancoosimm";
 	public static final String DEFAULT_TMP_DIR = "tmp";
 	public static final String DEFAULT_JARS_DIR = "jars";
 	public static final String DEFAULT_JARS_LIST_FILENAME = "jarsList.txt";
