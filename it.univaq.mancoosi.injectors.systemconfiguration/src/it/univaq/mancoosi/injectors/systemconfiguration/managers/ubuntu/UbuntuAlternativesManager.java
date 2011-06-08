@@ -33,7 +33,7 @@ public class UbuntuAlternativesManager extends AlternativesManager{
 		
 	   public void createAlternativesFromSystem() {
 		   Alternative newAlternative;
-		   String line;
+		   String line,line2;
 			
 			try {
 			      String[] cmd = {"/bin/sh","-c","ls --time-style=long-iso -l /etc/alternatives | awk '{print $8 \" -> \"  $10}'"};
@@ -42,13 +42,24 @@ public class UbuntuAlternativesManager extends AlternativesManager{
 			        new BufferedReader
 			          (new InputStreamReader(p.getInputStream()));
 			      
-			      line = input.readLine(); //This is to do not consider the first line which is something like "total 32"
+			    //  line = input.readLine(); //This is to do not consider the first line which is something like "total 32"
 			      while ((line = input.readLine()) != null) {
 			    	  String[] elements = line.split(" -> ");
 			    	  if  (elements.length > 1) {
 				    	  newAlternative = factory.createAlternative();
 				    	  newAlternative.setName(elements[0]);
 				    	  newAlternative.setCurrent(UbuntuFileSystemManager.getInstance().createFile(elements[1]));
+				    	  
+				    	  String[] cmd2 = {"/bin/sh","-c","which " + elements[0]};
+						  Process p2 = Runtime.getRuntime().exec(cmd2);
+					      BufferedReader input2 =
+					        new BufferedReader
+					          (new InputStreamReader(p2.getInputStream()));
+				    	  line2 = input2.readLine();
+				    	  
+				    	  if (line2 != null)
+				    	  	newAlternative.setLocation(UbuntuFileSystemManager.getInstance().createFile(line2));
+				    	  
 				    	  UbuntuEnvironmentManager.getInstance().getEnvironment().getAlternatives().add(newAlternative);
 			    	  }
 			      }
