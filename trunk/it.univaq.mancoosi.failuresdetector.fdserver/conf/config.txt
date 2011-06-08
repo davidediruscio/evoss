@@ -13,7 +13,7 @@
 #The pattern for defining a parameter is
 #<<parameter>>=<<value>>
 dbDriverName=com.mysql.jdbc.Driver
-dbUri=jdbc:mysql://localhost/failuresdetector
+dbUri=jdbc:mysql://localhost/faultdetector
 dbUser=root
 dbPassword=
 jarsDir=jars
