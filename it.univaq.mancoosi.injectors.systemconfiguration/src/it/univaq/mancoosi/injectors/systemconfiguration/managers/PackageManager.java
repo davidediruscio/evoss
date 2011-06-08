@@ -159,9 +159,9 @@ import it.univaq.mancoosi.mancoosimm.PackageSetting;
 		
 	}
 	
-	protected abstract void createSingleDeps(String[] singleDeps, Dependence owner);
+	protected abstract void createSingleDeps(String[] singleDeps, Dependence owner, it.univaq.mancoosi.mancoosimm.Package ownerPkg);
 	
-	protected abstract void createSingleConflicts(String[] singleConflicts, Conflict owner);
+	protected abstract void createSingleConflicts(String[] singleConflicts, Conflict owner, it.univaq.mancoosi.mancoosimm.Package ownerPkg);
 	
 	protected abstract void processPackageMetadataLine(String aLine, InstalledPackage pkg);
 

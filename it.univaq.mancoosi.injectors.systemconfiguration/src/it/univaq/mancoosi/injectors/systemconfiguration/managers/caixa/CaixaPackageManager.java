@@ -35,10 +35,11 @@ public class CaixaPackageManager extends PackageManager {
 		return INSTANCE;
 	}
 	
-	protected void createSingleDeps(String[] singleDeps, Dependence owner){
+	protected void createSingleDeps(String[] singleDeps, Dependence owner, Package ownerPkg){
 		
 		SingleDep singleDep = factory.createSingleDep();
 		singleDep.setPkg(pkgMap.get(singleDeps[0]));
+		singleDep.setOwnerPkg(ownerPkg);
 		
 		if (singleDeps.length != 1) {
 				singleDep.setValue(singleDeps[2].substring(0, singleDeps[2].length()-1));
@@ -56,9 +57,10 @@ public class CaixaPackageManager extends PackageManager {
 	}
 
 	
-	protected void createSingleConflicts(String[] singleConflicts, Conflict owner){
+	protected void createSingleConflicts(String[] singleConflicts, Conflict owner, Package ownerPkg){
 		
 		SingleConflict singleConflict = factory.createSingleConflict();
+		singleConflict.setOwnerPkg(ownerPkg);
 		
 		Package aux = pkgMap.get(singleConflicts[0]);
 		if (aux == null) {
@@ -150,12 +152,12 @@ public class CaixaPackageManager extends PackageManager {
 		    				AndDep andDep = factory.createAndDep();
 		    				for (int j=0; j < andDependences.length; j++) {	    				
 		    					String[] singleDeps = andDependences[j].split(" ");    					
-		    					createSingleDeps(singleDeps,andDep);	    					
+		    					createSingleDeps(singleDeps,andDep,pkg);	    					
 		    				}	    				
 		    				orDep.getOps().add(andDep);
 		    			} else {	    		
 		    				String[] singleDeps = andDependences[0].split(" ");				
-		    				createSingleDeps(singleDeps,orDep);	    				
+		    				createSingleDeps(singleDeps,orDep,pkg);	    				
 		    			}    			
 		    		}
 		    		pkg.setDepends(orDep);
@@ -170,7 +172,7 @@ public class CaixaPackageManager extends PackageManager {
 	    						if (k ==(singleDeps.length-1))
 	    							System.out.println("");
 	    					}
-	    					createSingleDeps(singleDeps,andDep);
+	    					createSingleDeps(singleDeps,andDep,pkg);
 	    				}
 	    				pkg.setDepends(andDep);			
 	    			} else {
@@ -203,12 +205,12 @@ public class CaixaPackageManager extends PackageManager {
 		    				AndConflict andConflict = factory.createAndConflict();
 		    				for (int j=0; j < andConflicts.length; j++) {	    				
 		    					String[] singleConflicts = andConflicts[j].split(" ");    					
-		    					createSingleConflicts(singleConflicts,andConflict);	    					
+		    					createSingleConflicts(singleConflicts,andConflict,pkg);	    					
 		    				}	    				
 		    				orConflict.getOps().add(andConflict);
 		    			} else {	    		
 		    				String[] singleConflicts = andConflicts[0].split(" ");				
-		    				createSingleConflicts(singleConflicts,orConflict);	    				
+		    				createSingleConflicts(singleConflicts,orConflict,pkg);	    				
 		    			}    			
 		    		}
 		    		pkg.setConflict(orConflict);
@@ -223,7 +225,7 @@ public class CaixaPackageManager extends PackageManager {
 	    						if (k ==(singleConflicts.length-1))
 	    							System.out.println("");
 	    					}
-	    					createSingleConflicts(singleConflicts,andConflict);
+	    					createSingleConflicts(singleConflicts,andConflict,pkg);
 	    				}
 	    				pkg.setConflict(andConflict);   				
 	    			} else {		
