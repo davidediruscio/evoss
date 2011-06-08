@@ -1,6 +1,3 @@
-helloworld2.jar
-helloworld.jar
-queryExecFromJar.jar
 missingFiles.jar
 MissingConfigurationFiles.jar
 MissingMimeTypeHandlers.jar
