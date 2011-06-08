@@ -34,9 +34,12 @@ public class UbuntuPackageManager extends PackageManager {
 		return INSTANCE;
 	}
 	
-	protected void createSingleDeps(String[] singleDeps, Dependence owner){
+	protected void createSingleDeps(String[] singleDeps, Dependence owner, Package ownerPkg){
 		
 		SingleDep singleDep = factory.createSingleDep();
+		singleDep.setOwner(owner);
+		singleDep.setOwnerPkg(ownerPkg);
+		
 		singleDep.setPkg(pkgMap.get(singleDeps[0]));
 		
 		if (singleDeps.length != 1) {
@@ -47,6 +50,7 @@ public class UbuntuPackageManager extends PackageManager {
 
 		if (owner instanceof AndDep){
 			((AndDep) owner).getOps().add(singleDep);
+
 		}
 		
 		if (owner instanceof OrDep){
@@ -55,9 +59,11 @@ public class UbuntuPackageManager extends PackageManager {
 	}
 
 	
-	protected void createSingleConflicts(String[] singleConflicts, Conflict owner){
+	protected void createSingleConflicts(String[] singleConflicts, Conflict owner, Package ownerPkg){
 		
 		SingleConflict singleConflict = factory.createSingleConflict();
+		singleConflict.setOwner(owner);
+		singleConflict.setOwnerPkg(ownerPkg);
 		
 		Package aux = pkgMap.get(singleConflicts[0]);
 		if (aux == null) {
@@ -131,12 +137,12 @@ public class UbuntuPackageManager extends PackageManager {
 	    				AndDep andDep = factory.createAndDep();
 	    				for (int j=0; j < andDependences.length; j++) {	    				
 	    					String[] singleDeps = andDependences[j].split(" ");    					
-	    					createSingleDeps(singleDeps,andDep);	    					
+	    					createSingleDeps(singleDeps,andDep,pkg);	    					
 	    				}	    				
 	    				orDep.getOps().add(andDep);
 	    			} else {	    		
 	    				String[] singleDeps = andDependences[0].split(" ");				
-	    				createSingleDeps(singleDeps,orDep);	    				
+	    				createSingleDeps(singleDeps,orDep,pkg);	    				
 	    			}    			
 	    		}
 	    		pkg.setDepends(orDep);
@@ -146,7 +152,7 @@ public class UbuntuPackageManager extends PackageManager {
     				AndDep andDep = factory.createAndDep();
     				for (int j=0; j < andDependences.length; j++) {
     					String[] singleDeps = andDependences[j].split(" ");					
-    					createSingleDeps(singleDeps,andDep);
+    					createSingleDeps(singleDeps,andDep,pkg);
     				}
     				pkg.setDepends(andDep);			
     			} else {
@@ -175,12 +181,12 @@ public class UbuntuPackageManager extends PackageManager {
 	    				AndConflict andConflict = factory.createAndConflict();
 	    				for (int j=0; j < andConflicts.length; j++) {	    				
 	    					String[] singleConflicts = andConflicts[j].split(" ");    					
-	    					createSingleConflicts(singleConflicts,andConflict);	    					
+	    					createSingleConflicts(singleConflicts,andConflict,pkg);	    					
 	    				}	    				
 	    				orConflict.getOps().add(andConflict);
 	    			} else {	    		
 	    				String[] singleConflicts = andConflicts[0].split(" ");				
-	    				createSingleConflicts(singleConflicts,orConflict);	    				
+	    				createSingleConflicts(singleConflicts,orConflict,pkg);	    				
 	    			}    			
 	    		}
 	    		pkg.setConflict(orConflict);
@@ -190,7 +196,7 @@ public class UbuntuPackageManager extends PackageManager {
     				AndConflict andConflict = factory.createAndConflict();
     				for (int j=0; j < andConflicts.length; j++) {
     					String[] singleConflicts = andConflicts[j].split(" ");					
-    					createSingleConflicts(singleConflicts,andConflict);
+    					createSingleConflicts(singleConflicts,andConflict,pkg);
     				}
     				pkg.setConflict(andConflict);   				
     			} else {		
@@ -379,5 +385,6 @@ public class UbuntuPackageManager extends PackageManager {
     	setFeaturesOfInstalledPackagesFoundBySync();
 		
 	}
+
 	
 }
