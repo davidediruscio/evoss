@@ -1,5 +1,5 @@
 server = localhost
-dbname = failuresdetector
+dbname = faultdetector
 username = root
 password = 
 

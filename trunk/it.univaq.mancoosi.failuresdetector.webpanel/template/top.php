@@ -16,8 +16,8 @@
 			<div class="art-header-png"></div>
                 <div class="art-header">
                     <div class="art-logo">
-                        <h1 id="name-text" class="art-logo-name"><a href="panel.php">Failures Detector</a></h1>
-                        <div id="slogan-text" class="art-logo-text">Administration Board</div>
+                        <h1 id="name-text" class="art-logo-name"><a href="panel.php"></a></h1>
+                        <div id="slogan-text" class="art-logo-text"></div>
                     </div>
                 </div>
                 <div class="art-content-layout">
