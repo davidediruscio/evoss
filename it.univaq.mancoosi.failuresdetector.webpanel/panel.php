@@ -39,18 +39,18 @@ include("template/top.php");
 							
                                             <div class="art-postmetadataheader">
                                                 <h2 class="art-postheader">
-                                                    Welcome to the Board!
+                                                    Fault Detector Web Portal
                                                 </h2>
                                             </div>
 
 											<br/>
 											<b>Instructions</b><br/>
-											With this panel you can administrate the Failures Control. To do it, you can use the right menu.<br/>
-											You can edit:<br/><br/>
-											
+											This is the WebPortal component of the Fault Detector. By means of the the right menu, you can edit:<br/>
+											<br/>
 											<b> 
 											- THE LIST OF OCL QUERIES<br/>
-											- THE LIST OF KNOWN FAILURES<br/>
+											- THE LIST OF JAR QUERIES<br/>
+											- THE LIST OF KNOWN FAULTS<br/>
 											- THE LIST OF POSSIBLE SOLUTIONS<br/>
 											- THE LIST OF USERS THAT CAN ACCESS TO THE PANEL
 											</b>

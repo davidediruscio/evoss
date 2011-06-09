@@ -44,6 +44,7 @@ $cont++;
 
 		$connection = mysql_connect($q[0],$q[2],$q[3]);
 
+
 if ($connection) {			
 	if (mysql_select_db($q[1])) {
 		
@@ -184,11 +185,11 @@ function webmaster_email($mittente,$oggetto,$corpo){
    
   $email_to->isSMTP(); 
   $email_to->SMTPAuth = true; 
-  $email_to->Host     = "mail.tin.it";   
-  $email_to->Username = "apocanow84@tin.it"; 
-  $email_to->Password = "qwertyx"; 
+  $email_to->Host     = "";   
+  $email_to->Username = ""; 
+  $email_to->Password = ""; 
   $email_to->Mailer   = "smtp"; 
-  $email_to->replyTo  = "noreply@apocanow.it"; 
+  $email_to->replyTo  = ""; 
    
 
   $email_to->AddAddress($destinatario);   
@@ -285,26 +286,6 @@ return $eta;
 // Questa funzione sostituisce gli smiles al testo del messaggio in entrata
 function censura($messaggio){
 $messaggio = str_replace("cazz","[badword]",$messaggio);
-$messaggio = str_replace("merd","[badword]",$messaggio);
-$messaggio = str_replace("stronz","[badword]",$messaggio);
-$messaggio = str_replace("porc","[badword]",$messaggio);
-$messaggio = str_replace("vaffan","[badword]",$messaggio);
-$messaggio = str_replace("culo","[badword]",$messaggio);
-$messaggio = str_replace("incul","[badword]",$messaggio);
-$messaggio = str_replace("coglion","[badword]",$messaggio);
-$messaggio = str_replace("froc","[badword]",$messaggio);
-$messaggio = str_replace("fott","[badword]",$messaggio);
-$messaggio = str_replace("mannaggia","[badword]",$messaggio);
-$messaggio = str_replace("trombat","[badword]",$messaggio);
-$messaggio = str_replace("trombar","[badword]",$messaggio);
-$messaggio = str_replace("scopat","[badword]",$messaggio);
-$messaggio = str_replace("scopar","[badword]",$messaggio);
-$messaggio = str_replace("troia","[badword]",$messaggio);
-$messaggio = str_replace("troie","[badword]",$messaggio);
-$messaggio = str_replace("puttan","[badword]",$messaggio);
-$messaggio = str_replace("baldracc","[badword]",$messaggio);
-$messaggio = str_replace("schifos","[badword]",$messaggio);
-$messaggio = str_replace("nazi","[badword]",$messaggio);
 return $messaggio;
 }
 
@@ -386,6 +367,7 @@ $messaggio = str_replace("[/spoiler]","",$messaggio);
 
 return $messaggio;
 }
+
 
 // Questa funzione taglia le parole troppo lunghe
 function antishock($messaggio,$caratteri){

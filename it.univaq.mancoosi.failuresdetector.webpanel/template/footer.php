@@ -1,2 +1,2 @@
-                            <p><a href="mailto:apocanow@hotmail.it">Contact Us</a> | <a href="logout.php">Logout</a><br />
-                                Copyright &copy; 2010 --- All Rights Reserved.</p>
+                            <p><a href="http://evoss.di.univaq.it/?page_id=99">Contact Us</a> | <a href="logout.php">Logout</a><br />
+                                Copyright &copy; 2011 - All Rights Reserved.</p>

@@ -39,7 +39,7 @@ include("include/php_index.php"); // Contiene il codice PHP della Pagina Inizial
 
 <span id="box" class="box">
 
-<span id="titletext" class="titletext">Welcome</span>
+<span id="titletext" class="titletext">EVOSS FD</span>
 <span id="sottotitolo1" class="sottotitolo" style="display: block;">User:</span>
 <span id="descrizione1" class="descrizione" style="display: block;">Insert your username</span>
 <span id="sottotitolo2" class="sottotitolo2" style="display: none;">Pass:</span>

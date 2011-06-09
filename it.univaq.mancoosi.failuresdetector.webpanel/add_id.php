@@ -12,6 +12,9 @@ $error = 0;
 if (strpos($query,"ancoosi::") == 1 && strpos($query,"->") > 0){ 
 
 $oclquery = $query;
+
+
+
 $rows = explode("->",$oclquery);
 
 $k = str_replace("mancoosi::", "",$rows[0]);
@@ -104,29 +107,33 @@ $ok = 1;
 
 if(isset($_FILES["file"])){
 
+$upload_dir = $_SERVER["DOCUMENT_ROOT"]."/jars";
 
 
-$upload_dir = $_SERVER["DOCUMENT_ROOT"]."/failuresdetector/".$_GET['t'];
+
 $file_name  = $_FILES["file"]["name"];
 $fn = explode(".",$file_name);
 $file_name = $fn[0].".jar";
 $_FILES["file"]["name"] = $file_name;
 
+
+
+
 if (!file_exists($upload_dir."/".$file_name)){
 
 if(is_uploaded_file($_FILES["file"]["tmp_name"])) {
-move_uploaded_file($_FILES["file"]["tmp_name"], "$upload_dir/$file_name");
+	move_uploaded_file($_FILES["file"]["tmp_name"], "$upload_dir/$file_name");
 }
 
-} else { $ok = 2; }
+} else { 
+	echo "Error";
+	$ok = 2; 
+
+}
 
 }
 
 if ($ok == 1){
-
-
-
-
 
   foreach ($_POST as $key => $value) {
     $k[] = $key;
