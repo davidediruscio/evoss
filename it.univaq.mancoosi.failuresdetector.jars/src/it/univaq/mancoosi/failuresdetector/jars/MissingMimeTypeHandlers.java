@@ -30,7 +30,7 @@ public class MissingMimeTypeHandlers {
 			mth = mthit.next();
 			aux = new java.io.File(mth.getHandler().getLocation());
 			if ( ! aux.exists() ) {
-				System.out.println("WARNING: L'handler " +mth.getHandler().getLocation() + " is missing and it is necessary to manage the "  + mth.getType().getName() + " MimeType");
+				System.out.println("WARNING: The handler " +mth.getHandler().getLocation() + " is missing and it is necessary to manage the "  + mth.getType().getName() + " MimeType");
 			}
 			
 		}
