@@ -1,4 +1,5 @@
-# mancoosi-uda
+# EVOSS
+
 EVOSS implements a model-based approach to support the upgrade of FOSS
 systems. The approach promotes the simulation of upgrades to predict failures before
 affecting the real system. Both fine-grained static aspects (e.g. configuration incoher-
@@ -15,4 +16,4 @@ otherwise an Incoherences Report is produced. The new System Configuration Model
 queried and analyzed by the Failure Detector component. When Failure Detector discovers inconsistencies they are collected in the Incoherences Report. The real upgrade is
 performed on the system only if the new system configuration model is coherent.
 
-For more information please refer to http://dx.doi.org/10.1016/j.scico.2010.11.001 or http://mancoosi-uda.googlecode.com/files/scp_draft.pdf
+For more information please refer to http://dx.doi.org/10.1016/j.scico.2010.11.001 or http://mancoosi-uda.googlecode.com/files/scp_draft.pdf or http://evoss.di.univaq.it/
